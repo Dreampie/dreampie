@@ -1,12 +1,64 @@
+.settings
+.classpath
+.project
+*.iml
+*.ipr
+*.iws
+dist/
+lib_managed/
+project/activator*
+project/boot/
+project/plugins/project/
+target/
+
+# use glob syntax.
+syntax: glob
+*.ser
 *.class
+*~
+*.bak
+#*.off
+*.old
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# eclipse conf file
+.settings
+.classpath
+.project
+.manager
+.scala_dependencies
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# idea
+.idea
+*.iml
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# building
+target
+build
+null
+tmp*
+temp*
+dist
+test-output
+build.log
+
+# other scm
+.svn
+.CVS
+.hg*
+
+# switch to regexp syntax.
+#  syntax: regexp
+#  ^\.pc/
+
+#SHITTY output not in target directory
+build.log
+.DS_Store
+derby.log
+
+*.db
+
+.lib
+sbt
+
+logs
+db
