@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+    <sqlGroup name="state">
+        <sql id="findAll">SELECT `state`.* FROM com_state `state`</sql>
+        <sql id="findBy">SELECT `state`.* FROM com_state `state` WHERE</sql>
+        <sql id="findBySelect">SELECT `state`.*</sql>
+        <sql id="findByExceptSelect">FROM com_state `state` WHERE</sql>
+    </sqlGroup>
+
+    <sqlGroup name="area">
+        <sql id="findAll">SELECT `area`.* FROM com_area `area`</sql>
+        <sql id="findBy">SELECT `area`.* FROM com_area `area` WHERE</sql>
+        <sql id="findBySelect">SELECT `area`.*</sql>
+        <sql id="findByExceptSelect">FROM com_area `area` WHERE</sql>
+    </sqlGroup>
+</sqlRoot>

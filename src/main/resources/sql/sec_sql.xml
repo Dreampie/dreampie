@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+
+    <sqlGroup name="user">
+        <sql id="findAll">SELECT `user`.* FROM sec_user `user`</sql>
+        <sql id="findBy">SELECT `user`.* FROM sec_user `user` WHERE</sql>
+        <sql id="findBySelect">SELECT `user`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_user `user` WHERE</sql>
+    </sqlGroup>
+
+    <sqlGroup name="role">
+        <sql id="findAll">select `role`.* from sec_role `role`</sql>
+        <sql id="findBy">SELECT `role`.* FROM sec_role `role` WHERE</sql>
+        <sql id="findBySelect">SELECT `role`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_role `role` WHERE</sql>
+        <sql id="findByAccountExceptSelect">FROM sec_role `role` WHERE `role`.id IN (SELECT `user_role`.role_id FROM
+            sec_user_role `user_role` WHERE
+            `user_role`.account_id=?)
+        </sql>
+    </sqlGroup>
+
+    <sqlGroup name="permission">
+        <sql id="findAll">select `permission`.* from sec_permission `permission`</sql>
+        <sql id="findBy">SELECT `permission`.* FROM sec_permission `permission` WHERE</sql>
+        <sql id="findBySelect">SELECT `permission`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_permission `permission` WHERE</sql>
+        <sql id="findByRoleExceptSelect">FROM sec_permission `permission` WHERE `permission`.id IN (select
+            `role_permission`.permission_id FROM sec_role_permission
+            `role_permission` WHERE `role_permission`.role_id=?)
+        </sql>
+    </sqlGroup>
+
+
+</sqlRoot>
