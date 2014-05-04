@@ -55,10 +55,11 @@ build.log
 .DS_Store
 derby.log
 
-*.db
+# db
+#*.db
 
 .lib
 sbt
 
+log
 logs
-db

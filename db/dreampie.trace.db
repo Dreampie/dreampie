@@ -1,0 +1,27 @@
+04-19 23:45:20 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 00:50:53 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 00:52:19 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 00:54:54 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 00:56:08 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 01:02:52 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "COM_AREA" not found; SQL statement:
+select * from `com_area` where 1 = 2 [42102-177]
+04-20 01:15:41 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEC_AUTHORITY" not found; SQL statement:
+select * from `sec_authority` where 1 = 2 [42102-177]
+04-20 01:19:46 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEC_AUTHORITY" not found; SQL statement:
+select * from `sec_authority` where 1 = 2 [42102-177]
+04-20 01:30:02 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEC_AUTHORITY" not found; SQL statement:
+select * from `sec_authority` where 1 = 2 [42102-177]
