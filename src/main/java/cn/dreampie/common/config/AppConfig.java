@@ -1,5 +1,8 @@
 package cn.dreampie.common.config;
 
+import cn.dreampie.common.akka.AkkaPlugin;
+import cn.dreampie.common.db.FlywayPlugin;
+import cn.dreampie.common.mail.MailerPlugin;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
@@ -51,7 +54,7 @@ public class AppConfig extends JFinalConfig {
    * 配置常量
    */
   public void configConstant(Constants constants) {
-    loadPropertyFile("app.properties");
+    loadPropertyFile("application.properties");
     constants.setDevMode(getPropertyToBoolean("devMode", false));
 //    constants.setEncoding("UTF-8");
     I18N.init("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
@@ -77,6 +80,15 @@ public class AppConfig extends JFinalConfig {
    * 配置插件
    */
   public void configPlugin(Plugins plugins) {
+
+    //akka异步执行插件
+    plugins.add(new AkkaPlugin());
+
+    //emailer插件
+    plugins.add(new MailerPlugin());
+
+    //数据库版本控制插件
+    plugins.add(new FlywayPlugin());
     //配置druid连接池
     DruidPlugin druidDefault = new DruidPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
     // StatFilter提供JDBC层的统计信息
@@ -85,6 +97,10 @@ public class AppConfig extends JFinalConfig {
     WallFilter wallDefault = new WallFilter();
     wallDefault.setDbType("h2");
     druidDefault.addFilter(wallDefault);
+
+    druidDefault.setInitialSize(getPropertyToInt("db.default.poolInitialSize"));
+    druidDefault.setMaxPoolPreparedStatementPerConnectionSize(getPropertyToInt("db.default.poolMaxSize"));
+    druidDefault.setTimeBetweenConnectErrorMillis(getPropertyToInt("db.default.connectionTimeoutMillis"));
     plugins.add(druidDefault);
 
     //Model自动绑定表插件
@@ -109,6 +125,7 @@ public class AppConfig extends JFinalConfig {
 //    tableBindShop.addIncludePaths("cn.dreampie.function.shop");
 //    tableBindShop.setShowSql(true);
 //    plugins.add(tableBindShop);
+
 
     //sql语句plugin
     plugins.add(new SqlInXmlPlugin());

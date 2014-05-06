@@ -12,18 +12,18 @@ import java.util.List;
  */
 @TableBind(tableName = "sec_permission")
 public class Permission extends Model<Permission> {
-    public static Permission dao = new Permission();
+  public static Permission dao = new Permission();
 
-    public List<Permission> findBy(String where, Object... paras) {
-        List<Permission> result = (List<Permission>) dao.find(SqlKit.sql("permission.findBy") + " " + where, paras);
-        return result;
-    }
+  public List<Permission> findBy(String where, Object... paras) {
+    List<Permission> result = dao.find(SqlKit.sql("permission.findBy") + " " + where, paras);
+    return result;
+  }
 
-    public List<Permission> findByRole(String where, Object... paras) {
-        if (!ValidateUtils.me().isNullOrEmpty(where)) {
-            where = " AND " + where;
-        }
-        List<Permission> result = (List<Permission>) dao.find(SqlKit.sql("permission.findBySelect") + " " + SqlKit.sql("permission.findByRoleExceptSelect") + where, paras);
-        return result;
+  public List<Permission> findByRole(String where, Object... paras) {
+    if (!ValidateUtils.me().isNullOrEmpty(where)) {
+      where = " AND " + where;
     }
+    List<Permission> result = dao.find(SqlKit.sql("permission.findBySelect") + " " + SqlKit.sql("permission.findByRoleExceptSelect") + where, paras);
+    return result;
+  }
 }

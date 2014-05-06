@@ -10,7 +10,7 @@ $(function () {
     $(this).parents(".btn-group").find('input.selection').val($(this).attr("value"));
   });
   //长度限制
-  $("form input[type='text']").maxlength({
+  $("form input[type!='button'][type!='submit']").maxlength({
     alwaysShow: true
   });
   //时间控件
@@ -24,6 +24,15 @@ $(function () {
       startView: 2,
       forceParse: 0,
       showMeridian: 1
+    });
+  }
+  //验证码
+  if ($('.patchca').length > 0) {
+    $('.patchca').click(function () {
+      var src = $(this).attr("src");
+      if (src.indexOf("?") > 0)
+        $(this).attr("src", src.split("?")[0] + "?"
+            + new Date().getTime());
     });
   }
 })

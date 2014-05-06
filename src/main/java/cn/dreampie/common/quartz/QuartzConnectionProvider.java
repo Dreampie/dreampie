@@ -16,7 +16,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
  */
 public class QuartzConnectionProvider implements ConnectionProvider {
 
-  private static final String DB_CONFIG = "app.properties";
+  private static final String DB_CONFIG = "application.properties";
   private DruidPlugin druidPlugin;
 
   @Override

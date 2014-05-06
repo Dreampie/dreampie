@@ -55,7 +55,7 @@
         <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <#--<li><a href="#">Link</a></li>-->
+      <li><a href="/toregister">${i18n.getText("user.register")}</a></li>
         <li class="divider-vertical"></li>
         <@shiro.notAuthenticated>
           <li class="<#if activebar == 'tologin'> active </#if>"><a href="/tologin">${i18n.getText("user.login")}</a></li>

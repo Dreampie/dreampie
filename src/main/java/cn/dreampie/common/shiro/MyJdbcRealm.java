@@ -37,7 +37,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //      PasswordService passwordService = new DefaultPasswordService();
 //      return new SimpleAuthenticationInfo(MyAnonymousFilter.getUsername(), passwordService.encryptPassword(MyAnonymousFilter.getPassword()), getName());
 //    } else {
-    user = User.dao.findByUserName(userToken.getUsername());
+    user = User.dao.findByFirst(" `user`.username =?", userToken.getUsername());
     if (user != null) {
       Session session = SecurityUtils.getSubject().getSession();
       session.setAttribute(CommonAttrs.TEMP_USER, user);
@@ -66,7 +66,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //      //遍历角色
 //      roles = Role.dao.findByRoleKey(MyAnonymousFilter.getRole());
 //    } else {
-    User user = User.dao.findByUserName(loginName);
+    User user = User.dao.findByFirst(" `user`.username =?", loginName);
     if (user != null) {
       //判断用户是否可用
       if (user.getDate("deleted_at") == null) {

@@ -12,24 +12,42 @@ import java.util.List;
  */
 @TableBind(tableName = "sec_role")
 public class Role extends Model<Role> {
-    public static Role dao = new Role();
+  public static Role dao = new Role();
 
 
-    public List<Role> findBy(String where, Object... paras) {
-        List<Role> result = (List<Role>) dao.find(SqlKit.sql("role.findBy") + " " + where, paras);
-        return result;
+  public Role addPermission(Permission permission) {
+    if (ValidateUtils.me().isNullOrEmpty(permission)) {
+      throw new NullPointerException("操作权限不存在");
     }
+    RolePermission rolePermission = new RolePermission();
+    rolePermission.set("role_id", this.get("id"));
+    rolePermission.set("permission_id", permission.get("id"));
+    rolePermission.save();
 
-    public List<Role> findByUser(String where, Object... paras) {
-        if (!ValidateUtils.me().isNullOrEmpty(where)) {
-            where = " AND " + where;
-        }
-        List<Role> result = (List<Role>) dao.find(SqlKit.sql("role.findBySelect") + " " + SqlKit.sql("role.findByUserExceptSelect") + " AND " + where, paras);
-        return result;
-    }
+    return this;
+  }
 
-    public List<Role> findAll() {
-        List<Role> result = (List<Role>) dao.find(SqlKit.sql("role.findAll"));
-        return result;
+  public Role findByFirst(String where, Object... paras) {
+    Role result = dao.findFirst(SqlKit.sql("role.findBy") + " " + where, paras);
+    return result;
+  }
+
+  public List<Role> findBy(String where, Object... paras) {
+    List<Role> result = dao.find(SqlKit.sql("role.findBy") + " " + where, paras);
+    return result;
+  }
+
+
+  public List<Role> findByUser(String where, Object... paras) {
+    if (!ValidateUtils.me().isNullOrEmpty(where)) {
+      where = " AND " + where;
     }
+    List<Role> result = dao.find(SqlKit.sql("role.findBySelect") + " " + SqlKit.sql("role.findByUserExceptSelect") + " AND " + where, paras);
+    return result;
+  }
+
+  public List<Role> findAll() {
+    List<Role> result = dao.find(SqlKit.sql("role.findAll"));
+    return result;
+  }
 }

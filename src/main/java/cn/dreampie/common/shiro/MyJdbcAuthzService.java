@@ -30,7 +30,7 @@ public class MyJdbcAuthzService implements JdbcAuthzService {
     for (Role role : roles) {
       //角色可用
       if (role.getDate("daleted_at") == null) {
-        permissions = Permission.dao.findByRole("", role.getInt("id"));
+        permissions = Permission.dao.findByRole("", role.get("id"));
         //遍历权限
         for (Permission permission : permissions) {
           //权限可用

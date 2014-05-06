@@ -1,5 +1,5 @@
 <#include "/page/layout/_layout.ftl"/>
-<@layout activebar="tologin" html_title="登录">
+<@layout activebar="tologin" html_title=i18n.getText("login.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/login.css"/>
 <script type="text/javascript" src="<@resource.static/>/js/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/js/layout/_valid.js"></script>

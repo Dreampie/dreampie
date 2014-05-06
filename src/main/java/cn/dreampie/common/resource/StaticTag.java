@@ -27,7 +27,7 @@ public class StaticTag extends DefaultTag {
   private static String res_static = "";
 
   public StaticTag() {
-    PropertiesUtils.me().loadPropertyFile("app.properties");
+    PropertiesUtils.me().loadPropertyFile("application.properties");
     res_static = PropertiesUtils.me().getProperty("resource.static", "");
   }
 

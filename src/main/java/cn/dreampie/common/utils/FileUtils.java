@@ -105,9 +105,10 @@ public class FileUtils {
    */
   public boolean exist(File file) {
     if (file != null) {
-      if (file.exists()) {
+      if (file.isDirectory()) {
         return true;
-      }
+      } else
+        return file.exists();
     }
     return false;
   }
@@ -121,7 +122,7 @@ public class FileUtils {
   public boolean existChild(File file) {
     if (file.isDirectory()) {
       for (File f : file.listFiles()) {
-        if (f.exists()) {
+        if (f.isDirectory() || f.exists()) {
           return true;
         }
       }
@@ -140,7 +141,10 @@ public class FileUtils {
   public boolean exist(String path) {
     if (!ValidateUtils.me().isNullOrEmpty(path)) {
       File file = new File(path);
-      return exist(file);
+      if (file.isDirectory()) {
+        return true;
+      } else
+        return exist(file);
     }
     return false;
   }

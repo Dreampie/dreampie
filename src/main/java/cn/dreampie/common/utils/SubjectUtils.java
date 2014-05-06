@@ -2,9 +2,15 @@ package cn.dreampie.common.utils;
 
 
 import cn.dreampie.common.config.CommonAttrs;
+import cn.dreampie.common.shiro.CaptchaUsernamePasswordToken;
+import cn.dreampie.common.utils.security.EncriptionUtils;
 import cn.dreampie.function.user.User;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.subject.Subject;
 
 /**
@@ -27,7 +33,12 @@ public class SubjectUtils {
 
   public Session getSession() {
     Subject subject = SecurityUtils.getSubject();
-    return subject.getSession();
+    Session session = subject.getSession();
+    if (session == null) {
+      throw new UnknownSessionException("Unable found required Session");
+    } else {
+      return session;
+    }
   }
 
   public User getUser() {
@@ -37,5 +48,30 @@ public class SubjectUtils {
       return null;
     else
       return (User) user;
+  }
+
+  public boolean login(String username, String password) {
+    AuthenticationToken token = new UsernamePasswordToken(username, password);
+    Subject currentUser = SecurityUtils.getSubject();
+    try {
+      currentUser.login(token);
+      Session session = getSession();
+      session.setAttribute(CommonAttrs.CURRENT_USER, User.dao.findBy("username=", username));
+      return true;
+    } catch (AuthenticationException e) {
+      return false;
+    }
+  }
+
+  public boolean doCaptcha(String captchaToken) {
+    Session session = getSession();
+    if (session.getAttribute(CommonAttrs.CAPTCHA_NAME) != null) {
+      String captcha = session.getAttribute(CommonAttrs.CAPTCHA_NAME).toString();
+      if (captchaToken != null &&
+          captcha.equalsIgnoreCase(EncriptionUtils.encrypt(captchaToken))) {
+        return true;
+      }
+    }
+    return false;
   }
 }

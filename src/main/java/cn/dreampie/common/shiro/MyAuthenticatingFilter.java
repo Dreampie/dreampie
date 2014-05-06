@@ -59,7 +59,7 @@ public abstract class MyAuthenticatingFilter extends MyAuthenticationFilter {
       throw new IllegalStateException(msg);
     }
     try {
-      doCaptchaValidate((HttpServletRequest) request, token);
+      doCaptchaValidate(token);
       Subject subject = getSubject(request, response);
       subject.login(token);
       return onLoginSuccess(token, subject, request, response);
@@ -182,8 +182,7 @@ public abstract class MyAuthenticatingFilter extends MyAuthenticationFilter {
   }
 
   // 验证码校验
-  protected void doCaptchaValidate(HttpServletRequest request
-      , CaptchaUsernamePasswordToken token) {
+  protected void doCaptchaValidate(CaptchaUsernamePasswordToken token) {
     Session session = SecurityUtils.getSubject().getSession();
     if (session == null) {
       throw new UnknownSessionException("Unable found required Session");
