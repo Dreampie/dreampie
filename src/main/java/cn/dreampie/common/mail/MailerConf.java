@@ -7,7 +7,7 @@ public class MailerConf {
   private String host;
   private String sslport;
   private int timeout;
-  private int port;
+  private String port;
   private boolean ssl;
   private boolean tls;
   private boolean debug;
@@ -17,7 +17,7 @@ public class MailerConf {
   private String from;
   private String encode;
 
-  public MailerConf(String host, String sslport, int timeout, int port, boolean ssl, boolean tls, boolean debug, String user, String password, String name, String from, String encode) {
+  public MailerConf(String host, String sslport, int timeout, String port, boolean ssl, boolean tls, boolean debug, String user, String password, String name, String from, String encode) {
     this.host = host;
     this.sslport = sslport;
     this.timeout = timeout;
@@ -56,11 +56,11 @@ public class MailerConf {
     this.sslport = sslport;
   }
 
-  public int getPort() {
+  public String getPort() {
     return port;
   }
 
-  public void setPort(int port) {
+  public void setPort(String port) {
     this.port = port;
   }
 

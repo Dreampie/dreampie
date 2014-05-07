@@ -53,7 +53,7 @@ public class MailerPlugin implements IPlugin {
     if (ValidateUtils.me().isNullOrEmpty(host)) {
       throw new ValidateException("email host has not found!");
     }
-    port = properties.getProperty("smtp.port", "25");
+    port = properties.getProperty("smtp.port", "");
 
     ssl = properties.getProperty("smtp.ssl", "false");
     sslport = properties.getProperty("smtp.sslport", "");
@@ -62,7 +62,7 @@ public class MailerPlugin implements IPlugin {
 //        throw new ValidateException("email ssl is true but sslport has not found!");
 //      }
 //    }
-    timeout = properties.getProperty("smtp.timeout", "100000");
+    timeout = properties.getProperty("smtp.timeout", "60000");
     tls = properties.getProperty("smtp.tls", "false");
     debug = properties.getProperty("smtp.debug", "false");
     user = properties.getProperty("smtp.user", "");
@@ -83,7 +83,7 @@ public class MailerPlugin implements IPlugin {
     }
 
     encode = properties.getProperty("smtp.encode", "UTF-8");
-    mailerConf = new MailerConf(host, sslport, Integer.parseInt(timeout), Integer.parseInt(port), Boolean.parseBoolean(ssl), Boolean.parseBoolean(tls), Boolean.parseBoolean(debug), user, password, name, from, encode);
+    mailerConf = new MailerConf(host, sslport, Integer.parseInt(timeout), port, Boolean.parseBoolean(ssl), Boolean.parseBoolean(tls), Boolean.parseBoolean(debug), user, password, name, from, encode);
 
     return true;
   }

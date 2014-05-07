@@ -59,7 +59,6 @@ public class FlywayPlugin implements IPlugin {
         checkState(dbName);
       }
     }
-    Mailer.me().sendHtml("测试","wangrenhui1990@hotmail.com","<a href='www.dreampie.cn'>Dreampie</a>");
     logger.info("flyway inited!");
     return true;
   }
