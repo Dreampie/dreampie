@@ -187,6 +187,7 @@ $(function () {
         theme: 'block'
       };
       var messenger;
+      var errormessenger;
       $(document).ajaxStart(function (e) {
         messenger = Messenger().post({
           message: '正在执行请求,请稍后...',
@@ -197,6 +198,17 @@ $(function () {
         messenger.hide();
       }).ajaxSuccess(function (e) {
         messenger.update("已完成请求,正在加载...");
+      }).ajaxError(function (event, xhr, options, exc) {
+          var msg = "";
+          if ($.trim(exc) == 'Unauthorized') msg = "没有权限访问或没有登录!";
+          if ($.trim(exc) == 'Not Found') msg = "访问内容找不到了!";
+          if ($.trim(exc) == 'Internal Server Error') msg = "服务异常!";
+          if ($.trim(exc) == 'Forbidden') msg = "拒绝访问!";
+          errormessenger = Messenger().post({
+              message: msg,
+              type: 'error',
+              showCloseButton: true
+          });
       });
 
     });
