@@ -21,8 +21,10 @@ public class UrlInterceptor implements Interceptor {
     controller.setAttr("webRootPath", request.getScheme() + "://"
         + request.getServerName() + ":" + request.getServerPort()
         + request.getContextPath());
-    //local 数据
-    controller.setAttr("localParas", request.getQueryString());
-    controller.setAttr("localUri", ai.getActionKey());
+      if (!ThreadLocalUtil.isAjax()) {
+          //local 数据
+          controller.setAttr("localParas", request.getQueryString());
+          controller.setAttr("localUri", ai.getActionKey());
+      }
   }
 }

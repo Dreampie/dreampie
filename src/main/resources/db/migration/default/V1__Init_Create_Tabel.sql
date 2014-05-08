@@ -76,10 +76,10 @@ CREATE TABLE sec_permission (
 );
 
 INSERT INTO sec_permission(id, name, value, url, intro, created_at)
-VALUES (1,'超级管理员目录','P_D_ADMIN','/admin**','',current_timestamp),
-        (2,'管理员目录','P_D_MANAGER','/manager**','',current_timestamp),
-        (3,'会员目录','P_D_MEMBER','/member**','',current_timestamp),
-        (4,'普通用户目录','P_D_USER','/user**','',current_timestamp);
+VALUES (1,'超级管理员目录','P_D_ADMIN','/admin/**','',current_timestamp),
+        (2,'管理员目录','P_D_MANAGER','/manager/**','',current_timestamp),
+        (3,'会员目录','P_D_MEMBER','/member/**','',current_timestamp),
+        (4,'普通用户目录','P_D_USER','/user/**','',current_timestamp);
 
 DROP TABLE IF EXISTS sec_role_permission;
 DROP SEQUENCE IF EXISTS sec_role_permission_id_seq;

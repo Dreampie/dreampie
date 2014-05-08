@@ -45,28 +45,28 @@ public class MyAnonymousFilter extends MyFormAuthenticationFilter {
   public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) {
     // Always return true since we allow access to anyone
     //验证是否成功登录的方法
-    if (!isLoginRequest(request, response)) {
-      Subject subject = SecurityUtils.getSubject();
-      if (!subject.isAuthenticated()) {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        //记录该令牌
-        token.setRememberMe(false);
-        subject.login(token);
-        if (log.isTraceEnabled()) {
-          log.trace("guest user:{} login.", username);
-        }
-      }
-    } else {
-      Subject subject = getSubject(request, response);
-      //try/catch added for SHIRO-298:
-      try {
-        if (subject != null && subject.getPrincipal() != null) {
-          subject.logout();
-        }
-      } catch (SessionException ise) {
-        log.debug("Encountered session exception during before user logout.  This can generally safely be ignored.", ise);
-      }
-    }
+//    if (!isLoginRequest(request, response)) {
+//      Subject subject = SecurityUtils.getSubject();
+//      if (!subject.isAuthenticated()) {
+//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+//        //记录该令牌
+//        token.setRememberMe(false);
+//        subject.login(token);
+//        if (log.isTraceEnabled()) {
+//          log.trace("guest user:{} login.", username);
+//        }
+//      }
+//    } else {
+//      Subject subject = getSubject(request, response);
+//      //try/catch added for SHIRO-298:
+//      try {
+//        if (subject != null && subject.getPrincipal() != null) {
+//          subject.logout();
+//        }
+//      } catch (SessionException ise) {
+//        log.debug("Encountered session exception during before user logout.  This can generally safely be ignored.", ise);
+//      }
+//    }
     return true;
   }
 

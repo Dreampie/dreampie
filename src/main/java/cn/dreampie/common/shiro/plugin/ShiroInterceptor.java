@@ -15,6 +15,7 @@
  */
 package cn.dreampie.common.shiro.plugin;
 
+import cn.dreampie.common.utils.SubjectUtils;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import org.apache.shiro.SecurityUtils;
@@ -22,6 +23,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,11 @@ public class ShiroInterceptor implements Interceptor {
   private boolean assertNoAuthorized(ActionInvocation ai, List<AuthzHandler> ahs) {
     // 存在访问控制处理器。
     if (ahs != null && ahs.size() > 0) {
+
+        // 登录前访问页面缓存
+        if (!SubjectUtils.me().wasLogin()) {
+            WebUtils.saveRequest(ai.getController().getRequest());
+        }
       try {
         // 执行权限检查。
         for (AuthzHandler ah : ahs) {
