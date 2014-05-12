@@ -181,11 +181,11 @@ $(function () {
         scrollText: '', // Text for element
         activeOverlay: false  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
       });
-      //消息插件
-      Messenger.options = {
-        extraClasses: 'messenger-fixed messenger-on-top',
-        theme: 'block'
-      };
+        //消息插件
+        Messenger.options = {
+            extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+            theme: 'block'
+        };
       var messenger;
       var errormessenger;
       $(document).ajaxStart(function (e) {
