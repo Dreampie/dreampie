@@ -1,6 +1,6 @@
 package cn.dreampie.common.shiro.freemarker;
 
-import cn.dreampie.common.config.CommonAttrs;
+import cn.dreampie.common.config.Constants;
 import cn.dreampie.function.user.User;
 import freemarker.core.Environment;
 import freemarker.log.Logger;
@@ -8,9 +8,6 @@ import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModelException;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.Map;
 
@@ -113,8 +110,8 @@ public class PrincipalTag extends SecureTag {
 //                    return String.valueOf(value);
 //                }
 //            }
-      if (getSubject().getSession().getAttribute(CommonAttrs.CURRENT_USER) != null) {
-        User user = (User) getSubject().getSession().getAttribute(CommonAttrs.CURRENT_USER);
+      if (getSubject().getSession().getAttribute(Constants.CURRENT_USER) != null) {
+        User user = (User) getSubject().getSession().getAttribute(Constants.CURRENT_USER);
         if (user != null && user.get(property) != null) {
           return String.valueOf(user.get(property));
         }

@@ -18,13 +18,10 @@
  */
 package cn.dreampie.common.shiro;
 
-import cn.dreampie.common.config.CommonAttrs;
-import cn.dreampie.common.config.ReTurnType;
-import cn.dreampie.common.thread.ThreadLocalUtil;
+import cn.dreampie.common.config.Constants;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
@@ -287,7 +284,7 @@ public class MyFormAuthenticationFilter extends MyAuthenticatingFilter {
 
   protected void setUserAttribute(ServletRequest request, ServletResponse response) {
     Session session = getSubject(request, response).getSession();
-    session.setAttribute(CommonAttrs.CURRENT_USER, session.getAttribute(CommonAttrs.TEMP_USER));
+    session.setAttribute(Constants.CURRENT_USER, session.getAttribute(Constants.TEMP_USER));
   }
 
   protected String getUsername(ServletRequest request) {

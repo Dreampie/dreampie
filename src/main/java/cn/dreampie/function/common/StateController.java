@@ -1,9 +1,8 @@
 package cn.dreampie.function.common;
 
+import cn.dreampie.common.config.Constants;
 import com.jfinal.plugin.ehcache.CacheName;
-import cn.dreampie.common.config.CommonAttrs;
 import cn.dreampie.common.controller.Controller;
-import cn.dreampie.common.ehcache.CacheNameRemove;
 import cn.dreampie.common.utils.ValidateUtils;
 
 /**
@@ -15,13 +14,13 @@ public class StateController extends Controller {
         dynaRender("/page/index.ftl");
     }
 
-    @CacheName(CommonAttrs.DEFAULT_CACHENAME)
+    @CacheName(Constants.DEFAULT_CACHENAME)
     public void own() {
         setAttr("states", State.dao.findBy("`state`.state=0"));
         dynaRender("/page/index.ftl");
     }
 
-    @CacheName(CommonAttrs.DEFAULT_CACHENAME)
+    @CacheName(Constants.DEFAULT_CACHENAME)
     public void one() {
         String type = getPara("state.type");
         String value = getPara("state.value");

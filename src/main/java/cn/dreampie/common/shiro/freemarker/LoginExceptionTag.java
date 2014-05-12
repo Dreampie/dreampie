@@ -1,13 +1,9 @@
 package cn.dreampie.common.shiro.freemarker;
 
-import cn.dreampie.common.config.CommonAttrs;
-import cn.dreampie.common.shiro.MyFormAuthenticationFilter;
-import cn.dreampie.function.user.User;
 import freemarker.core.Environment;
 import freemarker.log.Logger;
 import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateModelException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 

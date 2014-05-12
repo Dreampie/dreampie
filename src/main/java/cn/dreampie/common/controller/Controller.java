@@ -1,6 +1,6 @@
 package cn.dreampie.common.controller;
 
-import cn.dreampie.common.config.CommonAttrs;
+import cn.dreampie.common.config.Constants;
 import cn.dreampie.common.config.ReTurnType;
 import cn.dreampie.common.db.tx.AXTxConfig;
 import cn.dreampie.common.patchca.PatchcaRender;
@@ -12,10 +12,7 @@ import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.subject.Subject;
-import org.joda.time.DateTime;
 
 import java.util.Date;
 
@@ -43,7 +40,7 @@ public class Controller extends com.jfinal.core.Controller {
   /**
    * 登录页
    */
-  @AXTxConfig({CommonAttrs.DEFAULT_DATESOURCE,CommonAttrs.SHOP_DATESOURCE})
+  @AXTxConfig({Constants.DEFAULT_DATESOURCE, Constants.SHOP_DATESOURCE})
   public void tologin() {
     Subject subject = SecurityUtils.getSubject();
     if (subject != null && subject.getPrincipal() != null) {

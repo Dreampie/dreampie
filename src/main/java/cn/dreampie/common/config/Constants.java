@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by wangrenhui on 13-12-31.
  */
-public class CommonAttrs {
+public class Constants {
   //默认字符编码
   public static final String DEFAULT_ENCODING = "UTF-8";
   //数据源

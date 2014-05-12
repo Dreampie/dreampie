@@ -1,8 +1,7 @@
 package cn.dreampie.common.utils;
 
 
-import cn.dreampie.common.config.CommonAttrs;
-import cn.dreampie.common.shiro.CaptchaUsernamePasswordToken;
+import cn.dreampie.common.config.Constants;
 import cn.dreampie.common.utils.security.EncriptionUtils;
 import cn.dreampie.function.user.User;
 import org.apache.shiro.SecurityUtils;
@@ -43,7 +42,7 @@ public class SubjectUtils {
 
     public User getUser() {
         Session session = getSession();
-        Object user = session.getAttribute(CommonAttrs.CURRENT_USER);
+        Object user = session.getAttribute(Constants.CURRENT_USER);
         if (ValidateUtils.me().isNullOrEmpty(user))
             return null;
         else
@@ -56,7 +55,7 @@ public class SubjectUtils {
         try {
             currentUser.login(token);
             Session session = getSession();
-            session.setAttribute(CommonAttrs.CURRENT_USER, User.dao.findBy("username=", username));
+            session.setAttribute(Constants.CURRENT_USER, User.dao.findBy("username=", username));
             return true;
         } catch (AuthenticationException e) {
             return false;
@@ -65,8 +64,8 @@ public class SubjectUtils {
 
     public boolean doCaptcha(String captchaToken) {
         Session session = getSession();
-        if (session.getAttribute(CommonAttrs.CAPTCHA_NAME) != null) {
-            String captcha = session.getAttribute(CommonAttrs.CAPTCHA_NAME).toString();
+        if (session.getAttribute(Constants.CAPTCHA_NAME) != null) {
+            String captcha = session.getAttribute(Constants.CAPTCHA_NAME).toString();
             if (captchaToken != null &&
                     captcha.equalsIgnoreCase(EncriptionUtils.encrypt(captchaToken))) {
                 return true;

@@ -1,6 +1,6 @@
 package cn.dreampie.common.shiro;
 
-import cn.dreampie.common.config.CommonAttrs;
+import cn.dreampie.common.config.Constants;
 import cn.dreampie.function.user.Permission;
 import cn.dreampie.function.user.Role;
 import cn.dreampie.function.user.User;
@@ -40,7 +40,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
     user = User.dao.findByFirst(" `user`.username =?", userToken.getUsername());
     if (user != null) {
       Session session = SecurityUtils.getSubject().getSession();
-      session.setAttribute(CommonAttrs.TEMP_USER, user);
+      session.setAttribute(Constants.TEMP_USER, user);
       SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getStr("password"), getName());
       clearCachedAuthorizationInfo(info.getPrincipals());
       return info;

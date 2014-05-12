@@ -21,7 +21,7 @@ package cn.dreampie.common.shiro;
  * under the License.
  */
 
-import cn.dreampie.common.config.CommonAttrs;
+import cn.dreampie.common.config.Constants;
 import cn.dreampie.common.shiro.exception.IncorrectCaptchaException;
 import cn.dreampie.common.utils.security.EncriptionUtils;
 import org.apache.shiro.SecurityUtils;
@@ -36,7 +36,6 @@ import org.apache.shiro.web.util.WebUtils;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -168,7 +167,7 @@ public abstract class MyAuthenticatingFilter extends MyAuthenticationFilter {
   }
 
   protected String getCaptcha(ServletRequest request) {
-    return WebUtils.getCleanParam(request, CommonAttrs.CAPTCHA_NAME);
+    return WebUtils.getCleanParam(request, Constants.CAPTCHA_NAME);
   }
 
   // 创建 Token
@@ -187,8 +186,8 @@ public abstract class MyAuthenticatingFilter extends MyAuthenticationFilter {
     if (session == null) {
       throw new UnknownSessionException("Unable found required Session");
     } else {
-      if (session.getAttribute(CommonAttrs.CAPTCHA_NAME) != null) {
-        String captcha = session.getAttribute(CommonAttrs.CAPTCHA_NAME).toString();
+      if (session.getAttribute(Constants.CAPTCHA_NAME) != null) {
+        String captcha = session.getAttribute(Constants.CAPTCHA_NAME).toString();
         // String captcha = CookieUtils.getCookie(request, CommonAttrs.CAPTCHA_NAME);
         if (token.getCaptcha() != null &&
             captcha.equalsIgnoreCase(EncriptionUtils.encrypt(token.getCaptcha()))) {
