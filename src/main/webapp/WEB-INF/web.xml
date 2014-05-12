@@ -35,7 +35,22 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
     <!--权限过滤器 end-->
-
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <!--<init-param>-->
+            <!--<param-name>allow</param-name>-->
+            <!--<param-value>128.242.127.1/24,128.242.128.1</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>deny</param-name>-->
+            <!--<param-value>128.242.127.4</param-value>-->
+        <!--</init-param>-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
     <!--jfinal start-->
     <filter>
         <filter-name>jfinal</filter-name>

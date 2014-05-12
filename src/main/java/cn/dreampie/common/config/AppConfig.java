@@ -2,6 +2,7 @@ package cn.dreampie.common.config;
 
 import cn.dreampie.common.akka.AkkaPlugin;
 import cn.dreampie.common.db.FlywayPlugin;
+import cn.dreampie.common.db.druid.DruidXAPlugin;
 import cn.dreampie.common.mail.MailerPlugin;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
@@ -90,7 +91,7 @@ public class AppConfig extends JFinalConfig {
     //数据库版本控制插件
     plugins.add(new FlywayPlugin());
     //配置druid连接池
-    DruidPlugin druidDefault = new DruidPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
+    DruidXAPlugin druidDefault = new DruidXAPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
     // StatFilter提供JDBC层的统计信息
     druidDefault.addFilter(new StatFilter());
     // WallFilter的功能是防御SQL注入攻击

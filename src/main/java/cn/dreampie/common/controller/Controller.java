@@ -1,6 +1,8 @@
 package cn.dreampie.common.controller;
 
+import cn.dreampie.common.config.CommonAttrs;
 import cn.dreampie.common.config.ReTurnType;
+import cn.dreampie.common.db.tx.AXTxConfig;
 import cn.dreampie.common.patchca.PatchcaRender;
 import cn.dreampie.common.shiro.hasher.Hasher;
 import cn.dreampie.common.shiro.hasher.HasherInfo;
@@ -41,6 +43,7 @@ public class Controller extends com.jfinal.core.Controller {
   /**
    * 登录页
    */
+  @AXTxConfig({CommonAttrs.DEFAULT_DATESOURCE,CommonAttrs.SHOP_DATESOURCE})
   public void tologin() {
     Subject subject = SecurityUtils.getSubject();
     if (subject != null && subject.getPrincipal() != null) {
