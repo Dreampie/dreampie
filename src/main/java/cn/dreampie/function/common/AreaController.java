@@ -1,6 +1,6 @@
 package cn.dreampie.function.common;
 
-import cn.dreampie.common.config.Constants;
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.controller.Controller;
 import com.jfinal.plugin.ehcache.CacheName;
 
@@ -13,13 +13,13 @@ public class AreaController extends Controller {
         dynaRender("/page/index.ftl");
     }
 
-    @CacheName(Constants.DEFAULT_CACHENAME)
+    @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
         setAttr("areas", Area.dao.findBy(getParaToInt(0, 1), 15, "`area`.state=0"));
         dynaRender("/page/index.ftl");
     }
 
-    @CacheName(Constants.DEFAULT_CACHENAME)
+    @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void whole() {
         setAttr("areas", Area.dao.findBy("`area`.state=0"));
         dynaRender("/page/index.ftl");

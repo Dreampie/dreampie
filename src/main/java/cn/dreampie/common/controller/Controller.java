@@ -1,12 +1,12 @@
 package cn.dreampie.common.controller;
 
-import cn.dreampie.common.config.Constants;
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
-import cn.dreampie.common.db.tx.AXTxConfig;
+import cn.dreampie.common.plugin.db.tx.AXTxConfig;
 import cn.dreampie.common.patchca.PatchcaRender;
-import cn.dreampie.common.shiro.hasher.Hasher;
-import cn.dreampie.common.shiro.hasher.HasherInfo;
-import cn.dreampie.common.shiro.hasher.HasherUtils;
+import cn.dreampie.common.plugin.shiro.hasher.Hasher;
+import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
+import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.thread.ThreadLocalUtil;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.function.user.User;
@@ -40,7 +40,7 @@ public class Controller extends com.jfinal.core.Controller {
   /**
    * 登录页
    */
-  @AXTxConfig({Constants.DEFAULT_DATESOURCE, Constants.SHOP_DATESOURCE})
+  @AXTxConfig({AppConstants.DEFAULT_DATESOURCE, AppConstants.SHOP_DATESOURCE})
   public void tologin() {
     Subject subject = SecurityUtils.getSubject();
     if (subject != null && subject.getPrincipal() != null) {

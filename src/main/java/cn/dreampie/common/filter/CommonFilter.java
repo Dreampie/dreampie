@@ -1,6 +1,6 @@
 package cn.dreampie.common.filter;
 
-import cn.dreampie.common.config.Constants;
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.thread.ThreadLocalUtil;
 
 import javax.servlet.FilterChain;
@@ -22,8 +22,8 @@ public class CommonFilter extends HttpFilter {
    */
   public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-    request.setCharacterEncoding(Constants.DEFAULT_ENCODING);
-    response.setCharacterEncoding(Constants.DEFAULT_ENCODING);
+    request.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
+    response.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
 
 //    response.setHeader("Access-Control-Allow-Origin", "http://" + request.getServerName());
 //    response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");

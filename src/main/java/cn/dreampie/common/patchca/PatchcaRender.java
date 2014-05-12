@@ -1,6 +1,6 @@
 package cn.dreampie.common.patchca;
 
-import cn.dreampie.common.config.Constants;
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.patchca.color.ColorFactory;
 import cn.dreampie.common.patchca.filter.ConfigurableFilterFactory;
 import cn.dreampie.common.patchca.filter.library.WobbleImageOp;
@@ -137,7 +137,7 @@ public class PatchcaRender extends Render {
 
         //System.out.println(validationCode);
         Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute(Constants.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode));
+        session.setAttribute(AppConstants.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode));
 //    CookieUtils.addCookie(request, response, CommonAttrs.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode), -1);
         // 取得验证码图片并输出
         BufferedImage bufferedImage = captcha.getImage();
@@ -173,7 +173,7 @@ public class PatchcaRender extends Render {
             if (use_code) {
                 inputCode = inputCode.toUpperCase();
                 inputCode = EncriptionUtils.encrypt(inputCode);
-                return inputCode.equals(controller.getCookie(Constants.CAPTCHA_NAME));
+                return inputCode.equals(controller.getCookie(AppConstants.CAPTCHA_NAME));
             }
         } catch (Exception e) {
             e.printStackTrace();
