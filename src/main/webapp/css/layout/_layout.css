@@ -1,293 +1,297 @@
 @-ms-viewport {
-  width: device-width;
+    width: device-width;
 }
 
 body {
-  font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif position : relative; /* For scrollyspy */
-  padding-top: 50px; /* Account for fixed navbar */
+    font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif position : relative; /* For scrollyspy */
+    padding-top: 50px; /* Account for fixed navbar */
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
-  font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
+    font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
 .navbar-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20
 }
 
 @media screen and (min-width: 768px) {
-  .navbar-wrapper.affix {
-    position: fixed;
-    margin-top: 0
-  }
+    .navbar-wrapper.affix {
+        position: fixed;
+        margin-top: 0
+    }
 
-  .navbar-wrapper.affix > .container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0
-  }
+    .navbar-wrapper.affix > .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0
+    }
 
-  .navbar-wrapper.affix .navbar {
-    border-radius: 0
-  }
+    .navbar-wrapper.affix .navbar {
+        border-radius: 0
+    }
 }
 
 .navbar-wrapper .container {
-  padding-left: 0;
-  padding-right: 0
+    padding-left: 0;
+    padding-right: 0
 }
 
 .navbar-wrapper .navbar {
-  padding-left: 15px;
-  padding-right: 15px
+    padding-left: 15px;
+    padding-right: 15px
 }
 
 @media (min-width: 768px) {
-  .navbar {
-    min-height: 44px
-  }
+    .navbar {
+        min-height: 44px
+    }
 
-  .navbar .navbar-header {
-    float: right
-  }
+    .navbar .navbar-header {
+        float: right
+    }
 
-  .navbar .navbar-nav > li > a {
-    padding-top: 12px;
-    padding-bottom: 12px
-  }
+    .navbar .navbar-nav > li > a {
+        padding-top: 12px;
+        padding-bottom: 12px
+    }
 
-  .navbar .navbar-brand {
-    padding-top: 12px;
-    padding-bottom: 12px
-  }
+    .navbar .navbar-brand {
+        padding-top: 12px;
+        padding-bottom: 12px
+    }
 }
 
 .carousel-caption {
-  z-index: 10;
-  bottom: 40px;
-  left: 15%;
-  right: 15%
+    z-index: 10;
+    bottom: 40px;
+    left: 15%;
+    right: 15%
 }
 
 .carousel .item {
-  height: 460px;
-  background-color: #777
+    height: 460px;
+    background-color: #777
 }
 
 .carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 460px
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 460px
 }
 
 .carousel .masthead-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 460px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
-  background-repeat: repeat-x;
-  background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
-  background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
-  background-image: linear-gradient(45deg, #020031, #6d3353)
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 460px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+    background-repeat: repeat-x;
+    background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
+    background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+    background-image: linear-gradient(45deg, #020031, #6d3353)
 }
 
 .carousel .masthead-bg:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../../images/layout/bs-docs-masthead-pattern.png) repeat center center;
-  opacity: .4
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(../../images/layout/bs-docs-masthead-pattern.png) repeat center center;
+    opacity: .4
 }
 
 .masthead h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -2px;
-  font-weight: bold
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -2px;
+    font-weight: bold
 }
 
 .masthead h2 {
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 1.25
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.25
 }
 
 .masthead .bs3-link {
-  margin-top: 20px
+    margin-top: 20px
 }
 
 .masthead .bs2-link {
-  color: #fff;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out
+    color: #fff;
+    color: rgba(255, 255, 255, 0.5);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
 }
 
 .masthead .bs2-link:hover {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
 }
 
 .subhead {
-  padding-top: 80px;
-  padding-bottom: 20px;
-  color: #fff;
-  background-repeat: repeat-x;
-  background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
-  background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
-  background-image: linear-gradient(45deg, #020031, #6d3353)
+    padding-top: 80px;
+    padding-bottom: 20px;
+    color: #fff;
+    background-repeat: repeat-x;
+    background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
+    background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+    background-image: linear-gradient(45deg, #020031, #6d3353)
 }
 
 @media screen and (min-width: 768px) {
-  .masthead h1 {
-    font-size: 90px
-  }
+    .masthead h1 {
+        font-size: 90px
+    }
 
-  .masthead h2 {
-    font-size: 24px
-  }
+    .masthead h2 {
+        font-size: 24px
+    }
 }
 
 @media screen and (min-width: 992px) {
-  .masthead h1 {
-    font-size: 100px
-  }
+    .masthead h1 {
+        font-size: 100px
+    }
 
-  .masthead h2 {
-    font-size: 30px
-  }
+    .masthead h2 {
+        font-size: 30px
+    }
 }
 
 .bc-social {
-  padding: 15px 0;
-  text-align: center;
-  background-color: #f5f5f5;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #ddd
+    padding: 15px 0;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd
 }
 
 .bc-social-buttons {
-  margin-left: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none
+    margin-left: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none
 }
 
 .bc-social-buttons li {
-  display: inline-block;
-  padding: 5px 8px;
-  line-height: 1;
-  font-size: 16px
+    display: inline-block;
+    padding: 5px 8px;
+    line-height: 1;
+    font-size: 16px
 }
 
 @media (min-width: 768px) {
-  .navbar-wrapper {
-    margin-top: 20px
-  }
+    .navbar-wrapper {
+        margin-top: 20px
+    }
 
-  .navbar-wrapper .container {
-    padding-left: 15px;
-    padding-right: 15px
-  }
+    .navbar-wrapper .container {
+        padding-left: 15px;
+        padding-right: 15px
+    }
 
-  .navbar-wrapper .navbar {
-    padding-left: 0;
-    padding-right: 0
-  }
+    .navbar-wrapper .navbar {
+        padding-left: 0;
+        padding-right: 0
+    }
 
-  .navbar-wrapper .navbar {
-    border-radius: 4px
-  }
+    .navbar-wrapper .navbar {
+        border-radius: 4px
+    }
 
-  .carousel-caption p {
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: 1.4
-  }
+    .carousel-caption p {
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: 1.4
+    }
 }
 
 .container-main {
-  background-color: #fff;
-  border: 1px #ddd;
-  border-radius: 4px 4px 0 0;
-  box-shadow: none;
-  position: relative;
-  min-height: 300px;
-  padding: 30px 0;
+    background-color: #fff;
+    border: 1px #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    position: relative;
+    min-height: 300px;
+    padding: 30px 0;
 }
 
 .footer-main {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-  bottom: 0;
-  width: 100%;
-  color: #999;
-  text-align: center;
-  /*padding: 30px 0;*/
-  margin-top: 70px;
-  border-top: 1px solid #e5e5e5;
-  background-color: #f5f5f5
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    bottom: 0;
+    width: 100%;
+    color: #999;
+    text-align: center;
+    /*padding: 30px 0;*/
+    margin-top: 70px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5
 }
 
 .footer-main p {
-  margin: 2px 0;
+    margin: 2px 0;
 }
 
 #scrollUp {
-  bottom: 20px;
-  right: 20px;
-  height: 38px;
-  width: 38px;
-  background: url("../../images/layout/top.png") no-repeat
+    bottom: 20px;
+    right: 20px;
+    height: 38px;
+    width: 38px;
+    background: url("../../images/layout/top.png") no-repeat
 }
 
 .carousel-indicators li {
-  *display: inline; /* 只有ie6和ie7识别*/
-  zoom: 1; /* 触发ie6和ie7下的haslayout */
-  *text-indent: 0; /*解决ie6indent问题*/
-  filter: alpha(opacity=20);
+    *display: inline; /* 只有ie6和ie7识别*/
+    zoom: 1; /* 触发ie6和ie7下的haslayout */
+    *text-indent: 0; /*解决ie6indent问题*/
+    filter: alpha(opacity=20);
 }
 
 .dropdown-menu .divider {
-  *margin: 0px;
+    *margin: 0px;
 }
 
 .col-sm-6 {
-  *padding: 0px;
+    *padding: 0px;
 }
 
 .col-md-4 {
-  *padding: 0px;
+    *padding: 0px;
 }
 
 .error-box {
-  color: #d14;
+    color: #d14;
 }
 
 .error-box .form-control {
-  border: 1px solid #d14;
+    border: 1px solid #d14;
 }
 
 .error-border {
-  border: 1px solid #d14;
+    border: 1px solid #d14;
 }
 
 .dropdown-menu {
-  max-height: 400px;
-  overflow: auto;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.highcharts-container hr {
+    margin: 7px 2px;
 }
