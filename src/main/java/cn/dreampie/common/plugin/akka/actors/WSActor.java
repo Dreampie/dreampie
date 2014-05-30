@@ -22,17 +22,21 @@ import akka.actor.Actor.*;
  */
 public class WSActor extends UntypedActor {
 
-    // Default room.
-    static ActorRef wsActor = Akka.system().actorOf(Props.create(WSActor.class));
+    Map<String, ActorRef> wsMap = new HashMap<String, ActorRef>();
+    Map<ActorRef, String> wsRevMap = new HashMap<ActorRef, String>();
+
+    public WSActor(Map<String, ActorRef> wsMap, Map<ActorRef, String> wsRevMap) {
+        this.wsMap = wsMap;
+        this.wsRevMap = wsRevMap;
+    }
 
     /**
      * Join the default room.
      */
-    public static void join(final String username, WebSocket.In<String> in, WebSocket.Out<String> out) throws Exception {
-        Cancellable cancellable = null;
+    public void join(final String username, WebSocket.In<String> in, WebSocket.Out<String> out) throws Exception {
 
         // Send the Join message to the room
-        String result = (String) Await.result(ask(wsActor, new Join(username, out), 1000), Duration.create(1, SECONDS));
+        String result = (String) Await.result(ask(self(), new Join(username, out), 1000), Duration.create(1, SECONDS));
 
         if ("OK".equals(result)) {
 
@@ -41,7 +45,7 @@ public class WSActor extends UntypedActor {
                 public void invoke(String event) {
 
                     // Send a Talk message to the room.
-                    wsActor.tell(new Talk(username, event), null);
+                    self().tell(new Talk(username, event), null);
 
                 }
             });
@@ -51,7 +55,7 @@ public class WSActor extends UntypedActor {
                 public void invoke() {
 
                     // Send a Quit message to the room.
-                    wsActor.tell(new Quit(username), null);
+                    self().tell(new Quit(username), null);
 
                 }
             });

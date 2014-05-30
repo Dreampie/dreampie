@@ -1,5 +1,6 @@
 package cn.dreampie.common.config;
 
+import cn.dreampie.common.controller.SocketIOController;
 import cn.dreampie.common.plugin.akka.AkkaPlugin;
 import cn.dreampie.common.plugin.db.FlywayPlugin;
 import cn.dreampie.common.plugin.db.druid.DruidXAPlugin;
@@ -67,6 +68,7 @@ public class AppConfig extends JFinalConfig {
     public void configRoute(Routes routes) {
         this.routes = routes;
         routes.add(new AutoBindRoutes());
+        routes.add("/socket.io", SocketIOController.class);
     }
 
     /**
