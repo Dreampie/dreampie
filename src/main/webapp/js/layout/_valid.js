@@ -116,18 +116,23 @@
       }
     },
 
-    removeError: function (field_name) {
-      var self = this;
-      var $input = self.$form.find('[name="' + field_name + '"]');
-      if (!self.options.boxer.exist) {
-        $input.siblings('.error-box').html('');
-        if (self.options.wrapper !== null) {
-          $input.closest(self.options.wrapper).removeClass('error-box');
-        }
-      } else {
-        self.$form.find('.error-box').html('');
-      }
-    },
+      removeError: function (field_name) {
+          var self = this;
+          var $input = self.$form.find('[name="' + field_name + '"]');
+          if (self.options.wrapper !== null) {
+              $input.closest(self.options.wrapper).removeClass('error-boxer');
+          } else {
+              $input.removeClass('error-border');
+          }
+          if (!self.options.boxer.exist) {
+              $input.siblings('.error-box').html('');
+          } else {
+              if (self.options.boxer.selector) {
+                  self.$form.find(self.options.boxer.selector).html('');
+              } else
+                  self.$form.find('.error-box').html('');
+          }
+      },
     showError: function (errors) {
       var self = this;
       $.each(errors, function (k, v) {
