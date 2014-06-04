@@ -6,7 +6,8 @@ import com.jfinal.core.JFinal;
 import com.jfinal.handler.Handler;
 import com.jfinal.i18n.I18N;
 import com.jfinal.kit.PathKit;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.render.RenderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,38 +35,38 @@ public class FakeStaticHandler extends Handler {
   }
 
   public FakeStaticHandler(String viewPostfix) {
-    if (StringKit.isBlank(viewPostfix))
+    if (StrKit.isBlank(viewPostfix))
       throw new IllegalArgumentException("viewPostfix can not be blank.");
     this.viewPostfix = viewPostfix;
   }
 
   public FakeStaticHandler(String baseUrl, String viewPostfix) {
-    if (StringKit.isBlank(baseUrl))
+    if (StrKit.isBlank(baseUrl))
       throw new IllegalArgumentException("baseUrl can not be blank.");
     if (baseUrl.endsWith("/"))
       this.baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
     else
       this.baseUrl = baseUrl;
 
-    if (StringKit.isBlank(viewPostfix))
+    if (StrKit.isBlank(viewPostfix))
       throw new IllegalArgumentException("viewPostfix can not be blank.");
     this.viewPostfix = viewPostfix;
   }
 
   public FakeStaticHandler(String baseUrl, String viewPostfix, String accessDeniedFix, String[] resourceDir) {
-    if (StringKit.isBlank(baseUrl))
+    if (StrKit.isBlank(baseUrl))
       throw new IllegalArgumentException("baseUrl can not be blank.");
     if (baseUrl.endsWith("/"))
       this.baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
     else
       this.baseUrl = baseUrl;
 
-    if (StringKit.isBlank(viewPostfix))
+    if (StrKit.isBlank(viewPostfix))
       throw new IllegalArgumentException("viewPostfix can not be blank.");
     else
       this.viewPostfix = viewPostfix;
 
-    if (StringKit.isBlank(accessDeniedFix))
+    if (StrKit.isBlank(accessDeniedFix))
       throw new IllegalArgumentException("viewPostfix can not be blank.");
     else {
       if (!accessDeniedFix.endsWith("/"))
@@ -86,13 +87,13 @@ public class FakeStaticHandler extends Handler {
     //判断是否是资源文件
     if (!checkResource(target)) {
 
-      if ((!StringKit.isBlank(viewPostfix) && target.endsWith(viewPostfix)) || (!StringKit.isBlank(accessDeniedFix) && target.contains(accessDeniedFix))) {
+      if ((!StrKit.isBlank(viewPostfix) && target.endsWith(viewPostfix)) || (!StrKit.isBlank(accessDeniedFix) && target.contains(accessDeniedFix))) {
         isHandled[0] = true;
         RenderFactory.me().getErrorRender(403).setContext(request, response).render();
         return;
       }
 
-      if ((!StringKit.isBlank(baseUrl) && target.contains(baseUrl))) {
+      if ((!StrKit.isBlank(baseUrl) && target.contains(baseUrl))) {
         isHandled[0] = true;
         RenderFactory.me().getErrorRender(404).setContext(request, response).render();
         return;

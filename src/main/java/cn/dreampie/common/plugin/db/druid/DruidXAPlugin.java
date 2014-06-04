@@ -3,7 +3,7 @@ package cn.dreampie.common.plugin.db.druid;
 import cn.dreampie.common.plugin.db.tx.XAXid;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.xa.DruidXADataSource;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
 
@@ -141,7 +141,7 @@ public class DruidXAPlugin implements IPlugin, IDataSourceProvider {
         //只要maxPoolPreparedStatementPerConnectionSize>0,poolPreparedStatements就会被自动设定为true，参照druid的源码
         ds.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
 
-        if (StringKit.notBlank(filters))
+        if (StrKit.notBlank(filters))
             try {
                 ds.setFilters(filters);
             } catch (SQLException e) {
@@ -295,7 +295,7 @@ public class DruidXAPlugin implements IPlugin, IDataSourceProvider {
         //只要maxPoolPreparedStatementPerConnectionSize>0,poolPreparedStatements就会被自动设定为true，参照druid的源码
         ds.setMaxPoolPreparedStatementPerConnectionSize(plugin.maxPoolPreparedStatementPerConnectionSize);
 
-        if (StringKit.notBlank(plugin.filters))
+        if (StrKit.notBlank(plugin.filters))
             try {
                 ds.setFilters(plugin.filters);
             } catch (SQLException e) {

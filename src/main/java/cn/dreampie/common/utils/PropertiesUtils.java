@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.jfinal.kit.PathKit;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 
 /**
  * Created by wangrenhui on 14-4-10.
@@ -30,7 +30,7 @@ public class PropertiesUtils {
 
   public Properties loadPropertyFile(String file) {
     Properties properties = new Properties();
-    if (StringKit.isBlank(file))
+    if (StrKit.isBlank(file))
       throw new IllegalArgumentException("Parameter of file can not be blank");
     if (file.contains(".."))
       throw new IllegalArgumentException("Parameter of file can not contains \"..\"");

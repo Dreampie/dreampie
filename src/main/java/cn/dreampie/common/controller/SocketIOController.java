@@ -30,7 +30,7 @@ public class SocketIOController extends Controller {
         if (ValidateUtils.me().isNullOrEmpty(transport)) {
             init();
         } else if ("websocket".equals(transport)) {
-
+            wsHandler(sessionId);
         } else if ("xhr-polling".equals(transport)) {
 
         } else {

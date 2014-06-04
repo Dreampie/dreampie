@@ -39,27 +39,22 @@ public class Controller extends com.jfinal.core.Controller {
 //  @Before(EvictInterceptor.class)
 //  @CacheName("index")
     public void index() {
-        String para = getPara(0);
-        if (getPara() != null) {
-            render("/page/index.ftl");
-        }
-
+        dynaRender("/page/index.ftl");
     }
 
     /**
      * 登录页
      */
-    @AXTxConfig({AppConstants.DEFAULT_DATESOURCE, AppConstants.SHOP_DATESOURCE})
     public void tologin() {
         Subject subject = SecurityUtils.getSubject();
         if (subject != null && subject.getPrincipal() != null) {
             subject.logout();
         }
-        render("/page/login.ftl");
+        dynaRender("/page/login.ftl");
     }
 
     public void toregister() {
-        render("/page/register.ftl");
+        dynaRender("/page/register.ftl");
     }
 
     /**

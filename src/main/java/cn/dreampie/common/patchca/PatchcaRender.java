@@ -12,7 +12,7 @@ import cn.dreampie.common.patchca.text.renderer.TextRenderer;
 import cn.dreampie.common.patchca.word.RandomWordFactory;
 import cn.dreampie.common.utils.security.EncriptionUtils;
 import com.jfinal.core.Controller;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.render.Render;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -167,7 +167,7 @@ public class PatchcaRender extends Render {
      * @return
      */
     public static boolean validate(Controller controller, String inputCode) {
-        if (StringKit.isBlank(inputCode))
+        if (StrKit.isBlank(inputCode))
             return false;
         try {
             if (use_code) {

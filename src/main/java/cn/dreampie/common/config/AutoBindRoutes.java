@@ -6,7 +6,7 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.kit.ClassSearcher;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Logger;
 
 import java.util.List;
@@ -73,7 +73,7 @@ public class AutoBindRoutes extends Routes {
         }
         this.add(controllerKey(controller), controller);
         logger.debug("routes.add(" + controllerKey(controller) + ", " + controller.getName() + ")");
-      } else if (StringKit.isBlank(controllerBind.viewPath())) {
+      } else if (StrKit.isBlank(controllerBind.viewPath())) {
         this.add(controllerBind.controllerKey(), controller);
         logger.debug("routes.add(" + controllerBind.controllerKey() + ", " + controller.getName() + ")");
       } else {
@@ -90,7 +90,7 @@ public class AutoBindRoutes extends Routes {
     String simpleName = clazz.getSimpleName();
     String controllerKey = "/";
     if (!simpleName.equalsIgnoreCase(suffix)) {
-      controllerKey += StringKit.firstCharToLowerCase(simpleName.replace(suffix, ""));
+      controllerKey += StrKit.firstCharToLowerCase(simpleName.replace(suffix, ""));
     }
     return controllerKey;
   }

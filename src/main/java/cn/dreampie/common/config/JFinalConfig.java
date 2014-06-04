@@ -2,7 +2,7 @@ package cn.dreampie.common.config;
 
 import com.jfinal.config.*;
 import com.jfinal.kit.PathKit;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 
 import java.io.*;
 import java.util.Properties;
@@ -61,7 +61,7 @@ public abstract class JFinalConfig extends com.jfinal.config.JFinalConfig {
    * @param file the file in WEB-INF directory
    */
   public Properties loadPropertyFile(String file) {
-    if (StringKit.isBlank(file))
+    if (StrKit.isBlank(file))
       throw new IllegalArgumentException("Parameter of file can not be blank");
     if (file.contains(".."))
       throw new IllegalArgumentException("Parameter of file can not contains \"..\"");

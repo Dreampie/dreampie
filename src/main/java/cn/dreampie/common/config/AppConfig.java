@@ -68,7 +68,7 @@ public class AppConfig extends JFinalConfig {
     public void configRoute(Routes routes) {
         this.routes = routes;
         routes.add(new AutoBindRoutes());
-        routes.add("/socket.io", SocketIOController.class);
+//        routes.add("/socket.io", SocketIOController.class);
     }
 
     /**

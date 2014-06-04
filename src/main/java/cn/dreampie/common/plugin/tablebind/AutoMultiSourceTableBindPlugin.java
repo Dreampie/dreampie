@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.jfinal.ext.plugin.tablebind.INameStyle;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.ext.plugin.tablebind.TableBind;
-import com.jfinal.kit.StringKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
@@ -138,7 +138,7 @@ public class AutoMultiSourceTableBindPlugin extends ActiveRecordPlugin {
         log.debug("addMapping(" + tableName + ", " + modelClass.getName() + ")");
       } else {
         tableName = tb.tableName();
-        if (StringKit.notBlank(tb.pkName())) {
+        if (StrKit.notBlank(tb.pkName())) {
           this.addMapping(tableName, tb.pkName(), modelClass);
           log.debug("addMapping(" + tableName + ", " + tb.pkName() + "," + modelClass.getName() + ")");
         } else {
