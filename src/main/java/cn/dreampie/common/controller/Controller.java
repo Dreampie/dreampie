@@ -33,6 +33,8 @@ public class Controller extends com.jfinal.core.Controller {
             super.render(view);
     }
 
+
+
     /**
      * 根目录
      */

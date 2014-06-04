@@ -129,7 +129,7 @@ $(function () {
 <!--全局js-->
 <script type="text/javascript" src="/js/layout/_layout.js"></script>
 <!--i18n-->
-<script type="text/javascript" language="JavaScript" src="/js/jquery.i18n.properties-min-1.0.9.js"></script>
+<#--<script type="text/javascript" language="JavaScript" src="/js/jquery.i18n.properties-min-1.0.9.js"></script>-->
 <!--幕布实现的js-->
 <!-- <script type="text/javascript" src="/js/layout/holder.js"></script>-->
 <#--<script type="text/javascript" src="/js/layout/jquery.scrollHide.js"></script>-->
@@ -215,11 +215,11 @@ $(function () {
                 });
             });
 //jquery i18n
-            jQuery.i18n.properties({
-                name: 'messages',
-                path:'/',
-                callback: function(){ alert( $.i18n.prop('webapp.name') ); }
-            });
+//            jQuery.i18n.properties({
+//                name: 'messages',
+//                path:'/',
+//                callback: function(){ alert( $.i18n.prop('webapp.name') ); }
+//            });
 
         });
     }(jQuery)

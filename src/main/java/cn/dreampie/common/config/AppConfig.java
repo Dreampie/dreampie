@@ -1,33 +1,32 @@
 package cn.dreampie.common.config;
 
-import cn.dreampie.common.controller.SocketIOController;
-import cn.dreampie.common.plugin.akka.AkkaPlugin;
-import cn.dreampie.common.plugin.db.FlywayPlugin;
-import cn.dreampie.common.plugin.db.druid.DruidXAPlugin;
-import cn.dreampie.common.plugin.mail.MailerPlugin;
-import com.alibaba.druid.filter.stat.StatFilter;
-import com.alibaba.druid.wall.WallFilter;
 import cn.dreampie.common.handler.FakeStaticHandler;
 import cn.dreampie.common.interceptor.UrlInterceptor;
 import cn.dreampie.common.kit.sqlinxml.SqlInXmlPlugin;
 import cn.dreampie.common.log.Slf4jLogFactory;
-import cn.dreampie.common.render.JsonErrorRenderFactory;
-import cn.dreampie.common.resource.ResourceTags;
+import cn.dreampie.common.plugin.akka.AkkaPlugin;
+import cn.dreampie.common.plugin.db.FlywayPlugin;
+import cn.dreampie.common.plugin.db.druid.DruidXAPlugin;
+import cn.dreampie.common.plugin.mail.MailerPlugin;
 import cn.dreampie.common.plugin.shiro.MyJdbcAuthzService;
 import cn.dreampie.common.plugin.shiro.freemarker.ShiroTags;
 import cn.dreampie.common.plugin.shiro.plugin.ShiroInterceptor;
 import cn.dreampie.common.plugin.shiro.plugin.ShiroPlugin;
 import cn.dreampie.common.plugin.tablebind.AutoMultiSourceTableBindPlugin;
+import cn.dreampie.common.render.JsonErrorRenderFactory;
+import cn.dreampie.common.resource.ResourceTags;
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.*;
 import com.jfinal.core.Const;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
-import com.jfinal.i18n.I18N;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
+import com.jfinal.render.JsonRender;
 
 import java.util.Locale;
 
@@ -51,11 +50,12 @@ public class AppConfig extends JFinalConfig {
         loadPropertyFile("application.properties");
         constants.setDevMode(getPropertyToBoolean("devMode", false));
 //    constants.setEncoding("UTF-8");
-        I18N.init("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
+//        I18N.init("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
 
         //set log to slf4j
         Logger.setLoggerFactory(new Slf4jLogFactory());
         constants.setErrorRenderFactory(new JsonErrorRenderFactory());
+        constants.setI18n("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
         constants.setError401View("/page/login.ftl");
         constants.setError403View("/page/layout/403.ftl");
         constants.setError404View("/page/layout/404.ftl");
