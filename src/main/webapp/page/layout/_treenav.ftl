@@ -5,7 +5,7 @@
     <#list nodes as node>
       <li <#if depth==1>class="active"</#if>>
 
-        <a style="padding-left: ${15*depth}px" href="#nav_${node.id}"<#if attrs??><#list attrs?split(",") as attr>${attr}="${node[attr]}"</#list></#if>>
+        <a style="padding-left: ${15*depth}px" nodeid="${node.id}" href="#nav_${node.id}"<#if attrs??><#list attrs?split(",") as attr>${attr}="${(node[attr])!}"</#list></#if>>
         ${(node.name)!}
         </a>
         <#assign depth = depth + 1 />

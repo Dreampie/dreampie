@@ -16,7 +16,7 @@ public class StateController extends Controller {
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
-        setAttr("states", State.dao.findBy("`state`.state=0"));
+        setAttr("states", State.dao.findBy("`state`.deleted_at is NULL"));
         dynaRender("/page/index.ftl");
     }
 

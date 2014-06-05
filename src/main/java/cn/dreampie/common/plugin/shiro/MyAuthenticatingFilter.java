@@ -188,7 +188,7 @@ public abstract class MyAuthenticatingFilter extends MyAuthenticationFilter {
     } else {
       if (session.getAttribute(AppConstants.CAPTCHA_NAME) != null) {
         String captcha = session.getAttribute(AppConstants.CAPTCHA_NAME).toString();
-        // String captcha = CookieUtils.getCookie(request, CommonAttrs.CAPTCHA_NAME);
+        // String captcha = CookieUtils.getCookie(request, AppConstants.CAPTCHA_NAME);
         if (token.getCaptcha() != null &&
             captcha.equalsIgnoreCase(EncriptionUtils.encrypt(token.getCaptcha()))) {
           return;

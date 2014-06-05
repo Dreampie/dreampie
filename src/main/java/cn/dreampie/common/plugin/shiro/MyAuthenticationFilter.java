@@ -127,7 +127,7 @@ public abstract class MyAuthenticationFilter extends MyAccessControlFilter {
 
 
   protected void dynaRedirect(ServletRequest request, ServletResponse response, String url) throws Exception {
-    if (ThreadLocalUtil.returnType() == ReTurnType.JSON) {
+    if (ThreadLocalUtil.isJson()) {
       Map<String, String[]> parameterMap = request.getParameterMap();
       PrintWriter writer = null;
       try {

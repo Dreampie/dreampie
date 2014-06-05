@@ -138,7 +138,7 @@ public class PatchcaRender extends Render {
         //System.out.println(validationCode);
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute(AppConstants.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode));
-//    CookieUtils.addCookie(request, response, CommonAttrs.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode), -1);
+//    CookieUtils.addCookie(request, response, AppConstants.CAPTCHA_NAME, EncriptionUtils.encrypt(captchaCode), -1);
         // 取得验证码图片并输出
         BufferedImage bufferedImage = captcha.getImage();
 

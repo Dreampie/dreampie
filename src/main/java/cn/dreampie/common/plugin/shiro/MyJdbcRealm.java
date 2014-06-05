@@ -57,7 +57,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
    * @return
    */
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    String loginName = (String) principals.fromRealm(getName()).iterator().next();
+    String loginName = ((User) principals.fromRealm(getName()).iterator().next()).get("username");
     SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
     Set<String> roleSet = new LinkedHashSet<String>(); // 角色集合
     Set<String> permissionSet = new LinkedHashSet<String>();  // 权限集合
@@ -71,7 +71,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
       //判断用户是否可用
       if (user.getDate("deleted_at") == null) {
         //遍历角色
-        roles = Role.dao.findByUser("", user.getInt("id"));
+        roles = Role.dao.findByUser("", user.getLong("id"));
 //        }
       }
     }
@@ -93,7 +93,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
       //角色可用
       if (role.getDate("deleted_at") == null) {
         roleSet.add(role.getStr("value"));
-        permissions = Permission.dao.findByRole("", role.getInt("id"));
+        permissions = Permission.dao.findByRole("", role.getLong("id"));
         loadAuth(permissionSet, permissions);
       }
     }

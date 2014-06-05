@@ -115,7 +115,7 @@ public class AppConfig extends JFinalConfig {
 //    druidShop.addFilter(wallShop);
 //    plugins.add(druidShop);
 //
-//    AutoMultiSourceTableBindPlugin tableBindShop = new AutoMultiSourceTableBindPlugin(CommonAttrs.SHOP_DATESOURCE, druidShop, SimpleNameStyles.LOWER);
+//    AutoMultiSourceTableBindPlugin tableBindShop = new AutoMultiSourceTableBindPlugin(AppConstants.SHOP_DATESOURCE, druidShop, SimpleNameStyles.LOWER);
 //    tableBindShop.setContainerFactory(new CaseInsensitiveContainerFactory(true)); //忽略字段大小写
 //    tableBindShop.addIncludePaths("cn.dreampie.function.shop");
 //    tableBindShop.setShowSql(true);

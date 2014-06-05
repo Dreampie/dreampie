@@ -53,6 +53,11 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav active">
                 <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
+                <@shiro.hasPermission name="P_ROLE">
+                    <li class="<#if activebar == 'role'> active </#if>"><a
+                            href="/admin/role">${i18n.getText("role.name")}</a>
+                    </li>
+                </@shiro.hasPermission>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/toregister">${i18n.getText("user.register")}</a></li>
@@ -63,7 +68,7 @@
                 </@shiro.notAuthenticated>
                 <@shiro.authenticated>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><@shiro.principal property="name"/>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><@shiro.principal property="full_name"/>
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">${i18n.getText("user.center")}</a></li>

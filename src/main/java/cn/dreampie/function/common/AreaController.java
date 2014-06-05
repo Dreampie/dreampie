@@ -15,18 +15,18 @@ public class AreaController extends Controller {
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
-        setAttr("areas", Area.dao.findBy(getParaToInt(0, 1), 15, "`area`.state=0"));
+        setAttr("areas", Area.dao.findBy(getParaToInt(0, 1), 15, "`area`.deleted_at is NULL"));
         dynaRender("/page/index.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void whole() {
-        setAttr("areas", Area.dao.findBy("`area`.state=0"));
+        setAttr("areas", Area.dao.findBy("`area`.deleted_at is NULL"));
         dynaRender("/page/index.ftl");
     }
 
     public void children() {
-        setAttr("areas", Area.dao.findBy("`area`.state=0 AND `area`.pid =" + getParaToInt(0, 1)));
+        setAttr("areas", Area.dao.findBy("`area`.deleted_at is NULL AND `area`.pid =" + getParaToInt(0, 1)));
         dynaRender("/page/area/index.ftl");
     }
 }

@@ -13,10 +13,19 @@
         <sql id="findBy">SELECT `role`.* FROM sec_role `role` WHERE</sql>
         <sql id="findBySelect">SELECT `role`.*</sql>
         <sql id="findByExceptSelect">FROM sec_role `role` WHERE</sql>
-        <sql id="findByAccountExceptSelect">FROM sec_role `role` WHERE `role`.id IN (SELECT `user_role`.role_id FROM
+        <sql id="findByUserExceptSelect">FROM sec_role `role` WHERE `role`.id IN (SELECT `user_role`.role_id FROM
             sec_user_role `user_role` WHERE
-            `user_role`.account_id=?)
+            `user_role`.user_id=?)
         </sql>
+        <sql id="updateBy">UPDATE sec_role `role` SET</sql>
+        <sql id="countBy">SELECT COUNT(*) count FROM sec_role `role` WHERE</sql>
+    </sqlGroup>
+
+    <sqlGroup name="userRole">
+        <sql id="findAll">SELECT `userRole`.* FROM sec_user_role `userRole`</sql>
+        <sql id="findBy">SELECT `userRole`.* FROM sec_user_role `userRole` WHERE</sql>
+        <sql id="findByExceptSelect">FROM sec_user_role `userRole` WHERE</sql>
+        <sql id="deleteBy">DELETE FROM sec_user_role WHERE</sql>
     </sqlGroup>
 
     <sqlGroup name="permission">
@@ -28,7 +37,17 @@
             `role_permission`.permission_id FROM sec_role_permission
             `role_permission` WHERE `role_permission`.role_id=?)
         </sql>
+        <sql id="updateBy">UPDATE sec_permission `permission` SET</sql>
+        <sql id="countBy">SELECT COUNT(*) count FROM sec_permission `permission` WHERE</sql>
     </sqlGroup>
+    
+    <sqlGroup name="rolePermission">
+        <sql id="findAll">SELECT `rolePermission`.* FROM sec_role_permission `rolePermission`</sql>
+        <sql id="findBy">SELECT `rolePermission`.* FROM sec_role_permission `rolePermission` WHERE</sql>
+        <sql id="findByExceptSelect">FROM sec_role_permission `rolePermission` WHERE</sql>
+        <sql id="deleteBy">DELETE FROM sec_role_permission WHERE</sql>
+    </sqlGroup>
+
 
 
 </sqlRoot>
