@@ -54,9 +54,9 @@
         rules: {"user.username": [
           {regex: /^\w{5,18}$/}
         ], "user.first_name": [
-          {"max_length": 10}
+            'not_empty',{"max_length": 10}
         ], "user.last_name": [
-          {"max_length": 10}
+            'not_empty',{"max_length": 10}
         ], "user.password": [
           {regex: /^\w{5,18}$/}
         ], "repassword": [
@@ -68,8 +68,8 @@
         ]},
         messages: {
           "user.username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线'},
-          "user.first_name": {'max_length': '名字长度不能超过10位'},
-          "user.last_name": {'max_length': '姓氏长度不能超过10位'},
+          "user.first_name": {'not_empty': '名字不能为空','max_length': '名字长度不能超过10位'},
+          "user.last_name": {'not_empty': '姓氏不能为空','max_length': '姓氏长度不能超过10位'},
           "user.password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
           "repassword": {'matches': '重复密码不匹配'},
           "user.email": {'regex': '邮箱格式不正确'},

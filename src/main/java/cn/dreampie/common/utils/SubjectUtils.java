@@ -50,12 +50,11 @@ public class SubjectUtils {
     }
 
     public boolean login(String username, String password) {
-        AuthenticationToken token = new UsernamePasswordToken(username, password);
-        Subject currentUser = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
-            currentUser.login(token);
+            SecurityUtils.getSubject().login(token);
             Session session = getSession();
-            session.setAttribute(AppConstants.CURRENT_USER, User.dao.findBy("username=", username));
+            session.setAttribute(AppConstants.CURRENT_USER, User.dao.findBy("username=?", username));
             return true;
         } catch (AuthenticationException e) {
             return false;

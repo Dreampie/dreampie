@@ -11,8 +11,10 @@ import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.plugin.web.WebSocket;
 import cn.dreampie.common.thread.ThreadLocalUtil;
 import cn.dreampie.common.utils.SubjectUtils;
+import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.render.JsonRender;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -32,7 +34,6 @@ public class Controller extends com.jfinal.core.Controller {
         else
             super.render(view);
     }
-
 
 
     /**
@@ -79,26 +80,36 @@ public class Controller extends com.jfinal.core.Controller {
         render(new PatchcaRender(minnum, maxnum, width, height));
     }
 
-    @Before(RegisterValidator.class)
+    @Before({RegisterValidator.class, Tx.class})
     public void register() {
         User regUser = getModel(User.class);
         regUser.set("created_at", new Date());
         regUser.set("providername", "dreampie");
 
+        boolean autoLogin = getParaToBoolean("autoLogin");
+
+        if (!ValidateUtils.me().isNullOrEmpty(regUser.get("first_name")) || !ValidateUtils.me().isNullOrEmpty(regUser.get("last_name"))) {
+            regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
+        }
+
         HasherInfo passwordInfo = HasherUtils.me().hash(regUser.getStr("password"), Hasher.DEFAULT);
         regUser.set("password", passwordInfo.getHashResult());
-        regUser.set("hasher", passwordInfo.getHasher());
+        regUser.set("hasher", passwordInfo.getHasher().value());
         regUser.set("salt", passwordInfo.getSalt());
 
         if (regUser.save()) {
             regUser.addUserInfo(null).addRole(null);
             setAttr("state", "success");
-            if (SubjectUtils.me().login(regUser.getStr("username"), regUser.getStr("password"))) {
-                dynaRender("/page/user/index.ftl");
+            if (autoLogin) {
+                if (SubjectUtils.me().login(regUser.getStr("username"), passwordInfo.getHashText())) {
+                    dynaRender("/page/index.ftl");
+                } else
+                    dynaRender("/page/login.ftl");
             }
-        } else
+        } else {
             setAttr("state", "failure");
-        dynaRender("/page/register.ftl");
+            dynaRender("/page/register.ftl");
+        }
     }
 
 }

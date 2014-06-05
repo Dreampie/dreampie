@@ -72,7 +72,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.177</version>
+            <version>1.4.178</version>
         </dependency>
 
         <!--c3p0连接池驱动-->

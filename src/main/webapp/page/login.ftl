@@ -5,8 +5,8 @@
 <script type="text/javascript" src="<@resource.static/>/js/layout/_valid.js"></script>
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
   <h2 class="form-signin-heading">Please sign in</h2>
-  <input name="username" value="admin" type="text" maxlength="18" class="form-control username" placeholder="账户/邮箱" required autofocus>
-  <input name="password" value="admin" type="password" maxlength="18" class="form-control password" placeholder="密码" required>
+  <input name="username" value="" type="text" maxlength="18" class="form-control username" placeholder="账户/邮箱" required autofocus>
+  <input name="password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码" required>
   <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码" required><img
     class="captcha"
     src="/patchca?width=119&height=42">

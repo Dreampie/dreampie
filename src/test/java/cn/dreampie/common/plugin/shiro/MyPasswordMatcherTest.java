@@ -12,6 +12,6 @@ public class MyPasswordMatcherTest extends TestCase {
     @Test
     public void testEncryptPassword() {
         PasswordService passwordService = new DefaultPasswordService();
-        System.out.println("admin:" + passwordService.encryptPassword("admin"));
+        System.out.println("admin:" + passwordService.encryptPassword("dreampie"));
     }
 }
