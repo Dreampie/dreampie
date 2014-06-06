@@ -1,27 +1,20 @@
 package cn.dreampie.common.controller;
 
-import akka.util.Timeout;
-import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
-import cn.dreampie.common.plugin.db.tx.AXTxConfig;
 import cn.dreampie.common.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
 import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
-import cn.dreampie.common.plugin.web.WebSocket;
 import cn.dreampie.common.thread.ThreadLocalUtil;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.render.JsonRender;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import scala.concurrent.duration.Duration;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller

@@ -22,14 +22,28 @@ import java.io.File;
 public class FakeStaticHandler extends Handler {
 
     private static final Logger log = LoggerFactory.getLogger(FakeStaticHandler.class);
-
+    /**
+     * 基础文件目录
+     */
     private String baseUrl;
-
+    /**
+     * 禁止直接访问的动态文件后缀
+     */
     private String viewPostfix;
 
+    /**
+     * 拒绝访问的目录
+     */
     private String accessDeniedFix;
-
+    /**
+     * 资源文件目录
+     */
     private String[] resourceDir;
+
+    /**
+     * 跳过的url
+     */
+    private String[] skipUrls;
 
     public FakeStaticHandler() {
     }
@@ -41,6 +55,7 @@ public class FakeStaticHandler extends Handler {
     }
 
     public FakeStaticHandler(String baseUrl, String viewPostfix) {
+        this(viewPostfix);
         if (StrKit.isBlank(baseUrl))
             throw new IllegalArgumentException("baseUrl can not be blank.");
         if (baseUrl.endsWith("/"))
@@ -48,23 +63,10 @@ public class FakeStaticHandler extends Handler {
         else
             this.baseUrl = baseUrl;
 
-        if (StrKit.isBlank(viewPostfix))
-            throw new IllegalArgumentException("viewPostfix can not be blank.");
-        this.viewPostfix = viewPostfix;
     }
 
     public FakeStaticHandler(String baseUrl, String viewPostfix, String accessDeniedFix, String[] resourceDir) {
-        if (StrKit.isBlank(baseUrl))
-            throw new IllegalArgumentException("baseUrl can not be blank.");
-        if (baseUrl.endsWith("/"))
-            this.baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-        else
-            this.baseUrl = baseUrl;
-
-        if (StrKit.isBlank(viewPostfix))
-            throw new IllegalArgumentException("viewPostfix can not be blank.");
-        else
-            this.viewPostfix = viewPostfix;
+        this(baseUrl, viewPostfix);
 
         if (StrKit.isBlank(accessDeniedFix))
             throw new IllegalArgumentException("viewPostfix can not be blank.");
@@ -78,6 +80,11 @@ public class FakeStaticHandler extends Handler {
         this.resourceDir = resourceDir;
     }
 
+    public FakeStaticHandler(String baseUrl, String viewPostfix, String accessDeniedFix, String[] resourceDir, String[] skipUrls) {
+        this(baseUrl, viewPostfix, accessDeniedFix, resourceDir);
+        this.skipUrls = skipUrls;
+    }
+
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
         target = target.replace(";JESSIONID", "?JESSIONID");
 
@@ -87,6 +94,11 @@ public class FakeStaticHandler extends Handler {
 
         //判断是否是资源文件
         if (!checkResource(target)) {
+
+            if (checkSkip(target)) {
+                isHandled[0] = true;
+                return;
+            }
 
             if ((!StrKit.isBlank(viewPostfix) && target.endsWith(viewPostfix)) || (!StrKit.isBlank(accessDeniedFix) && target.contains(accessDeniedFix))) {
                 isHandled[0] = true;
@@ -124,6 +136,17 @@ public class FakeStaticHandler extends Handler {
         if (resourceDir != null && resourceDir.length > 0) {
             for (String dir : resourceDir) {
                 if (resouceUrl.contains(dir)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkSkip(String skipUrl) {
+        if (skipUrls != null && skipUrls.length > 0) {
+            for (String url : skipUrls) {
+                if (skipUrl.startsWith(url)) {
                     return true;
                 }
             }

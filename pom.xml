@@ -13,6 +13,7 @@
         <!-- For the Maven Jetty plugin (mvn jetty:run) -->
         <jetty.version>9.1.1.v20140108</jetty.version>
         <shiro.version>1.2.3</shiro.version>
+        <atmosphere-version>2.1.5</atmosphere-version>
     </properties>
 
     <licenses>
@@ -296,9 +297,32 @@
 
         <!--<dependency>-->
             <!--<groupId>org.eclipse.jetty</groupId>-->
-            <!--<artifactId>jetty-runner</artifactId>-->
-            <!--<version>9.2.0.v20140526</version>-->
+            <!--<artifactId>jetty-websocket</artifactId>-->
+            <!--<version>8.1.15.v20140411</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-runtime</artifactId>
+            <version>${atmosphere-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-socketio</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- This is ONLY required if you use Atmosphere's annotation. If you use
+                    atmosphere.xml, not required -->
+        <dependency>
+            <groupId>eu.infomas</groupId>
+            <artifactId>annotation-detector</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
 

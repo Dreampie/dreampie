@@ -1,6 +1,5 @@
 <#include "/page/layout/_layout.ftl"/>
 <@layout activebar="index" html_title=i18n.getText("index.name")>
-<script type="text/javascript" src="<@resource.static/>/libs/socket.io/socket.io.min.js"></script>
 <h1><@shiro.guest>Hello guest!</@shiro.guest>
 <@shiro.hasRole name="user">Hello user!</@shiro.hasRole>
 <@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>

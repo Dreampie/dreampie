@@ -1,6 +1,5 @@
 package cn.dreampie.common.config;
 
-import cn.dreampie.common.controller.SocketIOController;
 import cn.dreampie.common.handler.FakeStaticHandler;
 import cn.dreampie.common.interceptor.UrlInterceptor;
 import cn.dreampie.common.kit.sqlinxml.SqlInXmlPlugin;
@@ -27,7 +26,6 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
-import com.jfinal.render.JsonRender;
 
 import java.util.Locale;
 
@@ -149,7 +147,7 @@ public class AppConfig extends JFinalConfig {
      * 配置处理器
      */
     public void configHandler(Handlers handlers) {
-        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/js/", "/images/", "/css/", "/libs/"}));
+        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/js/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
     }
 
     @Override
