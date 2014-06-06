@@ -28,6 +28,25 @@ public class Parser {
         return PacketTypes.map.get(data.packetType) + ":" + data.msgId + ":" + data.endpoint + ":" + data.data;
     }
 
+    public static class SSession {
+        String sid = "";
+        String[] upgrades;
+        long pingInterval = 25000;
+        long pingTimeout = 60000;
+
+        public SSession(String sid, String[] upgrades) {
+            this.sid = sid;
+            this.upgrades = upgrades;
+        }
+
+        public SSession(String sid, String[] upgrades, long pingInterval, long pingTimeout) {
+            this.sid = sid;
+            this.upgrades = upgrades;
+            this.pingInterval = pingInterval;
+            this.pingTimeout = pingTimeout;
+        }
+    }
+
 
     public static class Packet {
         String packetType = "";

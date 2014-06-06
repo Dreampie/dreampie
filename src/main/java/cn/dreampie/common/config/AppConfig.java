@@ -1,5 +1,6 @@
 package cn.dreampie.common.config;
 
+import cn.dreampie.common.controller.SocketIOController;
 import cn.dreampie.common.handler.FakeStaticHandler;
 import cn.dreampie.common.interceptor.UrlInterceptor;
 import cn.dreampie.common.kit.sqlinxml.SqlInXmlPlugin;
@@ -67,8 +68,8 @@ public class AppConfig extends JFinalConfig {
      */
     public void configRoute(Routes routes) {
         this.routes = routes;
-        routes.add(new AutoBindRoutes());
-//        routes.add("/socket.io", SocketIOController.class);
+        AutoBindRoutes autoBindRoutes = new AutoBindRoutes();
+        routes.add(autoBindRoutes);
     }
 
     /**
@@ -148,7 +149,7 @@ public class AppConfig extends JFinalConfig {
      * 配置处理器
      */
     public void configHandler(Handlers handlers) {
-        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/js/", "/images/", "/css/"}));
+        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/js/", "/images/", "/css/", "/libs/"}));
     }
 
     @Override

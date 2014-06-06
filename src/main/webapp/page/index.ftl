@@ -1,5 +1,6 @@
 <#include "/page/layout/_layout.ftl"/>
 <@layout activebar="index" html_title=i18n.getText("index.name")>
+<script type="text/javascript" src="<@resource.static/>/libs/socket.io/socket.io.min.js"></script>
 <h1><@shiro.guest>Hello guest!</@shiro.guest>
 <@shiro.hasRole name="user">Hello user!</@shiro.hasRole>
 <@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>
@@ -53,6 +54,11 @@
     $('.carousel').carousel({
       interval: 2000
     })
+      var socket = io.connect ("http://localhost:9000/socketio") ;
+      socket.on ( 'news', function ( data ) {
+          console.log ( data ) ;
+          socket.emit ( 'my other event', { my : 'data' } ) ;
+      } ) ;
   });
 </script>
 </@layout>
