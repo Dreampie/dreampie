@@ -1,0 +1,7 @@
+#FileLock
+#Sat Jun 07 14:34:12 CST 2014
+id=1467508d7827460bb395ef7a62d1f68db00a785234b
+ipAddress=192.168.1.100
+method=socket
+port=53263
+server=192.168.1.100\:53264
