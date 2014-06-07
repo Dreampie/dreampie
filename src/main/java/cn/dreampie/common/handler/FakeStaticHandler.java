@@ -96,7 +96,6 @@ public class FakeStaticHandler extends Handler {
         if (!checkResource(target)) {
 
             if (checkSkip(target)) {
-                isHandled[0] = true;
                 return;
             }
 

@@ -1,8 +1,8 @@
 <#include "/page/layout/_layout.ftl"/>
 <@layout activebar="tologin" html_title=i18n.getText("login.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/login.css"/>
-<script type="text/javascript" src="<@resource.static/>/js/layout/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/_valid.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
   <h2 class="form-signin-heading">Please sign in</h2>
   <input name="username" value="" type="text" maxlength="18" class="form-control username" placeholder="账户/邮箱" required autofocus>

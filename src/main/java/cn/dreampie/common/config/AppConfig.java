@@ -147,7 +147,7 @@ public class AppConfig extends JFinalConfig {
      * 配置处理器
      */
     public void configHandler(Handlers handlers) {
-        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/js/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
+        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/javascript/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
     }
 
     @Override

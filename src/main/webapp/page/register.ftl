@@ -1,8 +1,8 @@
 <#include "/page/layout/_layout.ftl"/>
 <@layout activebar="register" html_title=i18n.getText("register.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/register.css"/>
-<script type="text/javascript" src="<@resource.static/>/js/layout/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/_valid.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <form class="form-horizontal form-register" id="register" role="form" method="post" action="/register" autocomplete="off">
   <h2 class="form-register-heading">Please register</h2>
 

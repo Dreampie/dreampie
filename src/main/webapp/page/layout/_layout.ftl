@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css" media="screen"/>
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
 <#-- base href="${CPATH}" / -->
     <title>${html_title}</title>
 </head>
@@ -132,28 +132,28 @@ $(function () {
 <!--maxlength-->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-maxlength.js"></script>
 <!--全局js-->
-<script type="text/javascript" src="<@resource.static/>/js/layout/_layout.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_layout.js"></script>
 <!--i18n-->
-<#--<script type="text/javascript" language="JavaScript" src="/js/jquery.i18n.properties-min-1.0.9.js"></script>-->
+<#--<script type="text/javascript" language="JavaScript" src="<@resource.static/>/javascript/jquery.i18n.properties-min-1.0.9.js"></script>-->
 <!--幕布实现的js-->
-<!-- <script type="text/javascript" src="/js/layout/holder.js"></script>-->
-<#--<script type="text/javascript" src="/js/layout/jquery.scrollHide.js"></script>-->
+<!-- <script type="text/javascript" src="<@resource.static/>/javascript/layout/holder.js"></script>-->
+<#--<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.scrollHide.js"></script>-->
 <!--回到头部js-->
-<script type="text/javascript" src="<@resource.static/>/js/layout/jquery.scrollUp.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.scrollUp.min.js"></script>
 <!--延迟加载图片-->
-<script type="text/javascript" src="<@resource.static/>/js/layout/jquery.unveil.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.unveil.min.js"></script>
 <!-- bsie js patch, it will only execute in IE6 -->
 <!--[if lte IE 7]>
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/selectivizr-min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
 <![endif]-->
 <!--[if lt IE 9]>
-<script type="text/javascript" src="<@resource.static/>/js/layout/ie8-responsive-file-warning.js"></script><![endif]-->
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script><![endif]-->
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-<script type="text/javascript" src="<@resource.static/>/js/layout/html5shiv.min.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/respond.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/html5shiv.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
     /**

@@ -2,9 +2,9 @@
 <#include "/page/layout/_treenav.ftl" />
 <@layout activebar="role" html_title=i18n.getText("role.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/layout/_treenav.css" type="text/css"/>
-<script type="text/javascript" src="<@resource.static/>/js/layout/_treenav.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/_pagination.js"></script>
-<script type="text/javascript" src="<@resource.static/>/js/layout/_valid.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_treenav.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_pagination.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="row">
     <div class="col-md-3">
         <div class="treenav">

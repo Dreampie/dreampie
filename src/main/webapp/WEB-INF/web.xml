@@ -10,10 +10,6 @@
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
 
-    <listener>
-        <listener-class>org.atmosphere.cpr.SessionSupport</listener-class>
-    </listener>
-
     <!--本地过滤器 start-->
     <filter>
         <filter-name>CommonFilter</filter-name>
@@ -38,55 +34,25 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    <!--socket.io-->
+    <!--atmoshere-->
     <servlet>
         <description>AtmosphereServlet</description>
         <servlet-name>AtmosphereServlet</servlet-name>
         <servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+        <!-- Use it with mvn jetty:run -->
         <init-param>
-            <param-name>socketio-transport</param-name>
-            <param-value>websocket,xhr-polling,jsonp-polling</param-value>
-        </init-param>
-        <init-param>
-            <param-name>socketio-timeout</param-name>
-            <param-value>25000</param-value>
-        </init-param>
-        <init-param>
-            <param-name>socketio-heartbeat</param-name>
-            <param-value>15000</param-value>
-        </init-param>
-        <init-param>
-            <param-name>socketio-suspendTime</param-name>
-            <param-value>30000</param-value>
-        </init-param>
-        <init-param>
-            <param-name>org.atmosphere.cpr.sessionSupport</param-name>
-            <param-value>true</param-value>
+            <param-name>org.atmosphere.cpr.packages</param-name>
+            <param-value>cn.dreampie.common.plugin.atmosphere</param-value>
         </init-param>
         <load-on-startup>0</load-on-startup>
+        <async-supported>true</async-supported>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>AtmosphereServlet</servlet-name>
         <url-pattern>/im/*</url-pattern>
     </servlet-mapping>
     <!--权限过滤器 end-->
-    <servlet>
-        <servlet-name>DruidStatView</servlet-name>
-        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-        <!--<init-param>-->
-        <!--<param-name>allow</param-name>-->
-        <!--<param-value>128.242.127.1/24,128.242.128.1</param-value>-->
-        <!--</init-param>-->
-        <!--<init-param>-->
-        <!--<param-name>deny</param-name>-->
-        <!--<param-value>128.242.127.4</param-value>-->
-        <!--</init-param>-->
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DruidStatView</servlet-name>
-        <url-pattern>/druid/*</url-pattern>
-    </servlet-mapping>
+
     <!--jfinal start-->
     <filter>
         <filter-name>jfinal</filter-name>
@@ -94,10 +60,6 @@
         <init-param>
             <param-name>configClass</param-name>
             <param-value>cn.dreampie.common.config.AppConfig</param-value>
-        </init-param>
-        <init-param>
-            <param-name>excludeURL</param-name>
-            <param-value>/Login</param-value>
         </init-param>
     </filter>
     <filter-mapping>

@@ -38,6 +38,10 @@ public class Controller extends com.jfinal.core.Controller {
         dynaRender("/page/index.ftl");
     }
 
+
+    public void chat() {
+        dynaRender("/page/demo/chat.ftl");
+    }
     /**
      * 登录页
      */
