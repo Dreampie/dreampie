@@ -39,6 +39,11 @@ public class Permission extends Model<Permission> implements TreeNode<Permission
         this.put("children", children);
     }
 
+    public Permission findByFirst(String where, Object... paras) {
+        Permission result = dao.findFirst(SqlKit.sql("permission.findBy") + " " + where, paras);
+        return result;
+    }
+
     public List<Permission> findBy(String where, Object... paras) {
         List<Permission> result = dao.find(SqlKit.sql("permission.findBy") + " " + where, paras);
         return result;

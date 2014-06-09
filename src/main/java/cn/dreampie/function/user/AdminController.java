@@ -48,7 +48,11 @@ public class AdminController extends Controller {
     @Before({RoleSaveValidator.class, Tx.class})
     public void saveRole() {
         Role role = getModel(Role.class);
-        Role parent = Role.dao.findById(role.getParentId());
+        Role parent = null;
+        if (role.getParentId() == 0) {
+            parent = Role.dao.findByFirst("`role`.pid=0 ORDER BY `role`.right_code DESC");
+        } else
+            parent = Role.dao.findById(role.getParentId());
         boolean result = false;
         if (!ValidateUtils.me().isNullOrEmpty(parent)) {
             Role.dao.updateBy("`role`.left_code=`role`.left_code+2", "`role`.left_code>=" + parent.get("right_code"));
@@ -112,7 +116,11 @@ public class AdminController extends Controller {
     @Before({PermSaveValidator.class, Tx.class})
     public void savePerm() {
         Permission permission = getModel(Permission.class);
-        Permission parent = Permission.dao.findById(permission.getParentId());
+        Permission parent = null;
+        if (permission.getParentId() == 0) {
+            parent = Permission.dao.findByFirst("`permission`.pid=0 ORDER BY `permission`.right_code DESC");
+        } else
+            parent = Permission.dao.findById(permission.getParentId());
         boolean result = false;
         if (!ValidateUtils.me().isNullOrEmpty(parent)) {
             Permission.dao.updateBy("`permission`.left_code=`permission`.left_code+2", "`permission`.left_code>=" + parent.get("right_code"));
