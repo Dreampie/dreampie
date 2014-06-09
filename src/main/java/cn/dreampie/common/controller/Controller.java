@@ -39,9 +39,6 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
 
-    public void chat() {
-        dynaRender("/page/demo/chat.ftl");
-    }
     /**
      * 登录页
      */
