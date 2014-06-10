@@ -1,6 +1,6 @@
 package cn.dreampie.function.common;
 
-import cn.dreampie.common.kit.sqlinxml.SqlKit;
+import cn.dreampie.common.plugin.sqlinxml.SqlKit;
 import cn.dreampie.common.utils.tree.TreeNode;
 import com.google.common.collect.Lists;
 import com.jfinal.ext.plugin.tablebind.TableBind;

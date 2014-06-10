@@ -1,6 +1,6 @@
 package cn.dreampie.function.user;
 
-import cn.dreampie.common.kit.sqlinxml.SqlKit;
+import cn.dreampie.common.plugin.sqlinxml.SqlKit;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeNode;
 import com.jfinal.ext.plugin.tablebind.TableBind;
@@ -37,6 +37,11 @@ public class Permission extends Model<Permission> implements TreeNode<Permission
     @Override
     public void setChildren(List<Permission> children) {
         this.put("children", children);
+    }
+
+    public Permission findByFirst(String where, Object... paras) {
+        Permission result = dao.findFirst(SqlKit.sql("permission.findBy") + " " + where, paras);
+        return result;
     }
 
     public List<Permission> findBy(String where, Object... paras) {

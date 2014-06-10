@@ -2,7 +2,7 @@ package cn.dreampie.function.common;
 
 import cn.dreampie.common.config.AppConstants;
 import com.jfinal.plugin.ehcache.CacheName;
-import cn.dreampie.common.controller.Controller;
+import cn.dreampie.common.web.controller.Controller;
 import cn.dreampie.common.utils.ValidateUtils;
 
 /**

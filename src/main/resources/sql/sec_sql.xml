@@ -9,7 +9,7 @@
     </sqlGroup>
 
     <sqlGroup name="role">
-        <sql id="findAll">select `role`.* from sec_role `role`</sql>
+        <sql id="findAll">SELECT `role`.* FROM sec_role `role`</sql>
         <sql id="findBy">SELECT `role`.* FROM sec_role `role` WHERE</sql>
         <sql id="findBySelect">SELECT `role`.*</sql>
         <sql id="findByExceptSelect">FROM sec_role `role` WHERE</sql>
@@ -29,11 +29,11 @@
     </sqlGroup>
 
     <sqlGroup name="permission">
-        <sql id="findAll">select `permission`.* from sec_permission `permission`</sql>
+        <sql id="findAll">SELECT `permission`.* FROM sec_permission `permission`</sql>
         <sql id="findBy">SELECT `permission`.* FROM sec_permission `permission` WHERE</sql>
         <sql id="findBySelect">SELECT `permission`.*</sql>
         <sql id="findByExceptSelect">FROM sec_permission `permission` WHERE</sql>
-        <sql id="findByRoleExceptSelect">FROM sec_permission `permission` WHERE `permission`.id IN (select
+        <sql id="findByRoleExceptSelect">FROM sec_permission `permission` WHERE `permission`.id IN (SELECT
             `role_permission`.permission_id FROM sec_role_permission
             `role_permission` WHERE `role_permission`.role_id=?)
         </sql>

@@ -1,28 +1,39 @@
 package cn.dreampie.common.plugin.shiro.hasher;
 
+import cn.dreampie.common.plugin.shiro.MyPasswordMatcher;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
+import org.apache.shiro.crypto.hash.Hash;
 
 /**
  * Created by wangrenhui on 14-5-5.
  */
 public class HasherUtils {
 
-  private static HasherUtils hasherUtils = new HasherUtils();
+    private static HasherUtils hasherUtils = new HasherUtils();
 
-  private HasherUtils() {
-  }
+    private static PasswordService passwordService = new DefaultPasswordService();
 
-  public static HasherUtils me() {
-    return hasherUtils;
-  }
-
-  public HasherInfo hash(String hashText, Hasher hasher) {
-    HasherInfo hasherInfo = null;
-    if (hasher == Hasher.DEFAULT) {
-      PasswordService passwordService = new DefaultPasswordService();
-      hasherInfo = new HasherInfo(hashText, passwordService.encryptPassword(hashText), hasher, "");
+    private HasherUtils() {
     }
-    return hasherInfo;
-  }
+
+    public static HasherUtils me() {
+        return hasherUtils;
+    }
+
+    public HasherInfo hash(String hashText, Hasher hasher) {
+        HasherInfo hasherInfo = null;
+        if (hasher == Hasher.DEFAULT) {
+            hasherInfo = new HasherInfo(hashText, passwordService.encryptPassword(hashText), hasher, "");
+        }
+        return hasherInfo;
+    }
+
+    public boolean match(Object submittedPlaintext, String encrypted, Hasher hasher) {
+        boolean result = false;
+        if (hasher == Hasher.DEFAULT) {
+            result = passwordService.passwordsMatch(submittedPlaintext, encrypted);
+        }
+        return result;
+    }
 }

@@ -1,6 +1,6 @@
 package cn.dreampie.function.user;
 
-import cn.dreampie.common.kit.sqlinxml.SqlKit;
+import cn.dreampie.common.plugin.sqlinxml.SqlKit;
 import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;

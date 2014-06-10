@@ -1,16 +1,16 @@
 package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
-import cn.dreampie.common.controller.Controller;
+import cn.dreampie.common.web.controller.Controller;
 import cn.dreampie.common.ehcache.CacheNameRemove;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeUtils;
-import cn.dreampie.function.common.State;
 import com.google.common.collect.Lists;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,17 +45,24 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleSaveValidator.class, Tx.class})
+    @Before({AdminValidator.RoleSaveValidator.class, Tx.class})
     public void saveRole() {
         Role role = getModel(Role.class);
-        Role parent = Role.dao.findById(role.getParentId());
+        Role parent = null;
+        if (role.getParentId() == 0) {
+            parent = Role.dao.findByFirst("`role`.pid=0 ORDER BY `role`.right_code DESC");
+        } else
+            parent = Role.dao.findById(role.getParentId());
         boolean result = false;
         if (!ValidateUtils.me().isNullOrEmpty(parent)) {
             Role.dao.updateBy("`role`.left_code=`role`.left_code+2", "`role`.left_code>=" + parent.get("right_code"));
             Role.dao.updateBy("`role`.right_code=`role`.right_code+2", "`role`.right_code>=" + parent.get("right_code"));
             role.set("left_code", parent.getLong("right_code"));
             role.set("right_code", parent.getLong("right_code") + 1);
-            role.set("state", 0);
+            role.set("created_at", new Date());
+            if (ValidateUtils.me().isNullOrEmpty(role.get("id"))) {
+                role.remove("id");
+            }
             result = role.save();
         }
 
@@ -68,13 +75,13 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleUpdateValidator.class, Tx.class})
+    @Before({AdminValidator.RoleUpdateValidator.class, Tx.class})
     public void updateRole() {
         Role role = getModel(Role.class);
         if (ValidateUtils.me().isNullOrEmpty(role.get("pid"))) {
             role.remove("pid");
         }
-
+        role.set("updated_at", new Date());
         if (role.update()) {
             setAttr("state", "success");
         } else {
@@ -84,7 +91,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleDeleteValidator.class, Tx.class})
+    @Before({AdminValidator.RoleDeleteValidator.class, Tx.class})
     public void dropRole() {
 
         Integer id = getParaToInt("role.id");
@@ -109,16 +116,21 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermSaveValidator.class, Tx.class})
+    @Before({AdminValidator.PermSaveValidator.class, Tx.class})
     public void savePerm() {
         Permission permission = getModel(Permission.class);
-        Permission parent = Permission.dao.findById(permission.getParentId());
+        Permission parent = null;
+        if (permission.getParentId() == 0) {
+            parent = Permission.dao.findByFirst("`permission`.pid=0 ORDER BY `permission`.right_code DESC");
+        } else
+            parent = Permission.dao.findById(permission.getParentId());
         boolean result = false;
         if (!ValidateUtils.me().isNullOrEmpty(parent)) {
             Permission.dao.updateBy("`permission`.left_code=`permission`.left_code+2", "`permission`.left_code>=" + parent.get("right_code"));
             Permission.dao.updateBy("`permission`.right_code=`permission`.right_code+2", "`permission`.right_code>=" + parent.get("right_code"));
             permission.set("left_code", parent.getLong("right_code"));
             permission.set("right_code", parent.getLong("right_code") + 1);
+            permission.set("created_at", new Date());
             if (ValidateUtils.me().isNullOrEmpty(permission.get("id"))) {
                 permission.remove("id");
             }
@@ -135,13 +147,13 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermUpdateValidator.class, Tx.class})
+    @Before({AdminValidator.PermUpdateValidator.class, Tx.class})
     public void updatePerm() {
         Permission permission = getModel(Permission.class);
         if (ValidateUtils.me().isNullOrEmpty(permission.get("pid"))) {
             permission.remove("pid");
         }
-
+        permission.set("updated_at", new Date());
         if (permission.update()) {
             setAttr("state", "success");
         } else {
@@ -151,7 +163,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermDeleteValidator.class, Tx.class})
+    @Before({AdminValidator.PermDeleteValidator.class, Tx.class})
     public void dropPerm() {
 
         Integer id = getParaToInt("permission.id");
@@ -174,7 +186,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RolePermsValidator.class, Tx.class})
+    @Before({AdminValidator.RolePermsValidator.class, Tx.class})
     public void addPerms() {
         String[] idsPara = getParaValues("permission.id");
         Integer roleId = getParaToInt("role.id");

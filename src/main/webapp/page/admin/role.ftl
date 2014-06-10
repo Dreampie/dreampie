@@ -394,7 +394,7 @@ $(function () {
                         "role.value": [
                             {regex: /^\w{2,20}$/}
                         ],
-                        "role.desciptions": [
+                        "role.intro": [
                             {regex: /^[\s\S]{3,240}$/}
                         ]
                     },
@@ -420,8 +420,8 @@ $(function () {
                         var errors = "";
                         errors = checkError(errors, data.role_pidMsg);
                         errors = checkError(errors, data.role_nameMsg);
-                        errors = checkError(errors, data.role_roleKeyMsg);
-                        errors = checkError(errors, data.role.introMsg);
+                        errors = checkError(errors, data.role_valueMsg);
+                        errors = checkError(errors, data.role_introMsg);
                         form.find("div.error-box").html(errors);
                         btn.button('reset');
                     }
@@ -439,8 +439,8 @@ $(function () {
                         var errors = "";
                         errors = checkError(errors, data.role_idMsg);
                         errors = checkError(errors, data.role_nameMsg);
-                        errors = checkError(errors, data.role_roleKeyMsg);
-                        errors = checkError(errors, data.role.introMsg);
+                        errors = checkError(errors, data.role_valueMsg);
+                        errors = checkError(errors, data.role_introMsg);
                         form.find("div.error-box").html(errors);
                         btn.button('reset');
                     }
@@ -494,7 +494,7 @@ $(function () {
                         "permission.url": [
                             {regex: /^[\w\/\*]+$/}
                         ],
-                        "permission.desciptions": [
+                        "permission.intro": [
                             {regex: /^[\s\S]{3,240}$/}
                         ]
                     },
