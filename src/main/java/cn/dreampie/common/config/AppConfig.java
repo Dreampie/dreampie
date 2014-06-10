@@ -1,8 +1,5 @@
 package cn.dreampie.common.config;
 
-import cn.dreampie.common.handler.FakeStaticHandler;
-import cn.dreampie.common.interceptor.UrlInterceptor;
-import cn.dreampie.common.kit.sqlinxml.SqlInXmlPlugin;
 import cn.dreampie.common.log.Slf4jLogFactory;
 import cn.dreampie.common.plugin.akka.AkkaPlugin;
 import cn.dreampie.common.plugin.db.FlywayPlugin;
@@ -12,9 +9,12 @@ import cn.dreampie.common.plugin.shiro.MyJdbcAuthzService;
 import cn.dreampie.common.plugin.shiro.freemarker.ShiroTags;
 import cn.dreampie.common.plugin.shiro.plugin.ShiroInterceptor;
 import cn.dreampie.common.plugin.shiro.plugin.ShiroPlugin;
+import cn.dreampie.common.plugin.sqlinxml.SqlInXmlPlugin;
 import cn.dreampie.common.plugin.tablebind.AutoMultiSourceTableBindPlugin;
-import cn.dreampie.common.render.JsonErrorRenderFactory;
-import cn.dreampie.common.resource.ResourceTags;
+import cn.dreampie.common.web.handler.FakeStaticHandler;
+import cn.dreampie.common.web.interceptor.UrlInterceptor;
+import cn.dreampie.common.web.render.JsonErrorRenderFactory;
+import cn.dreampie.common.web.resource.ResourceTags;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.*;
@@ -129,6 +129,7 @@ public class AppConfig extends JFinalConfig {
         plugins.add(new ShiroPlugin(routes, new MyJdbcAuthzService()));
         //quartz
 //    plugins.add(new QuartzPlugin());
+
     }
 
     /**

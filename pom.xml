@@ -306,9 +306,9 @@
             <version>${atmosphere-version}</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.atmosphere</groupId>-->
-            <!--<artifactId>atmosphere-socketio</artifactId>-->
-            <!--<version>${atmosphere-version}</version>-->
+        <!--<groupId>org.atmosphere</groupId>-->
+        <!--<artifactId>atmosphere-socketio</artifactId>-->
+        <!--<version>${atmosphere-version}</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.atmosphere.client</groupId>
@@ -328,6 +328,13 @@
             <groupId>eu.infomas</groupId>
             <artifactId>annotation-detector</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <!--workflow-->
+        <dependency>
+            <groupId>com.github.snakerflow</groupId>
+            <artifactId>snaker-core</artifactId>
+            <version>1.5.0</version>
         </dependency>
     </dependencies>
 

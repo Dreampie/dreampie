@@ -71,7 +71,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><@shiro.principal property="full_name"/>
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">${i18n.getText("user.center")}</a></li>
+                            <li><a href="/user/center">${i18n.getText("user.center")}</a></li>
                         <#--<li><a href="#">应用中心</a></li>
                         <li><a href="#">设置</a></li>-->
                             <li class="divider"></li>

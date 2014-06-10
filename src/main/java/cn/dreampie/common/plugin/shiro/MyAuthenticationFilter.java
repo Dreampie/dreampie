@@ -21,8 +21,7 @@ package cn.dreampie.common.plugin.shiro;
  * under the License.
  */
 
-import cn.dreampie.common.config.ReTurnType;
-import cn.dreampie.common.thread.ThreadLocalUtil;
+import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import com.jfinal.kit.JsonKit;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;

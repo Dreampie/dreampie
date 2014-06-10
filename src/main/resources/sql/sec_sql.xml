@@ -4,16 +4,16 @@
     <sqlGroup name="user">
         <sql id="findAll">SELECT `user`.* FROM sec_user `user`</sql>
         <sql id="findBy">SELECT `user`.* FROM sec_user `user` WHERE</sql>
-        <sql id="findBySELECT">SELECT `user`.*</sql>
-        <sql id="findByExceptSELECT">FROM sec_user `user` WHERE</sql>
+        <sql id="findBySelect">SELECT `user`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_user `user` WHERE</sql>
     </sqlGroup>
 
     <sqlGroup name="role">
         <sql id="findAll">SELECT `role`.* FROM sec_role `role`</sql>
         <sql id="findBy">SELECT `role`.* FROM sec_role `role` WHERE</sql>
-        <sql id="findBySELECT">SELECT `role`.*</sql>
-        <sql id="findByExceptSELECT">FROM sec_role `role` WHERE</sql>
-        <sql id="findByUserExceptSELECT">FROM sec_role `role` WHERE `role`.id IN (SELECT `user_role`.role_id FROM
+        <sql id="findBySelect">SELECT `role`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_role `role` WHERE</sql>
+        <sql id="findByUserExceptSelect">FROM sec_role `role` WHERE `role`.id IN (SELECT `user_role`.role_id FROM
             sec_user_role `user_role` WHERE
             `user_role`.user_id=?)
         </sql>
@@ -24,16 +24,16 @@
     <sqlGroup name="userRole">
         <sql id="findAll">SELECT `userRole`.* FROM sec_user_role `userRole`</sql>
         <sql id="findBy">SELECT `userRole`.* FROM sec_user_role `userRole` WHERE</sql>
-        <sql id="findByExceptSELECT">FROM sec_user_role `userRole` WHERE</sql>
+        <sql id="findByExceptSelect">FROM sec_user_role `userRole` WHERE</sql>
         <sql id="deleteBy">DELETE FROM sec_user_role WHERE</sql>
     </sqlGroup>
 
     <sqlGroup name="permission">
         <sql id="findAll">SELECT `permission`.* FROM sec_permission `permission`</sql>
         <sql id="findBy">SELECT `permission`.* FROM sec_permission `permission` WHERE</sql>
-        <sql id="findBySELECT">SELECT `permission`.*</sql>
-        <sql id="findByExceptSELECT">FROM sec_permission `permission` WHERE</sql>
-        <sql id="findByRoleExceptSELECT">FROM sec_permission `permission` WHERE `permission`.id IN (SELECT
+        <sql id="findBySelect">SELECT `permission`.*</sql>
+        <sql id="findByExceptSelect">FROM sec_permission `permission` WHERE</sql>
+        <sql id="findByRoleExceptSelect">FROM sec_permission `permission` WHERE `permission`.id IN (SELECT
             `role_permission`.permission_id FROM sec_role_permission
             `role_permission` WHERE `role_permission`.role_id=?)
         </sql>
@@ -44,7 +44,7 @@
     <sqlGroup name="rolePermission">
         <sql id="findAll">SELECT `rolePermission`.* FROM sec_role_permission `rolePermission`</sql>
         <sql id="findBy">SELECT `rolePermission`.* FROM sec_role_permission `rolePermission` WHERE</sql>
-        <sql id="findByExceptSELECT">FROM sec_role_permission `rolePermission` WHERE</sql>
+        <sql id="findByExceptSelect">FROM sec_role_permission `rolePermission` WHERE</sql>
         <sql id="deleteBy">DELETE FROM sec_role_permission WHERE</sql>
     </sqlGroup>
 

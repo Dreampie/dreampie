@@ -1,11 +1,10 @@
 package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
-import cn.dreampie.common.controller.Controller;
+import cn.dreampie.common.web.controller.Controller;
 import cn.dreampie.common.ehcache.CacheNameRemove;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeUtils;
-import cn.dreampie.function.common.State;
 import com.google.common.collect.Lists;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -45,7 +44,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleSaveValidator.class, Tx.class})
+    @Before({AdminValidator.RoleSaveValidator.class, Tx.class})
     public void saveRole() {
         Role role = getModel(Role.class);
         Role parent = null;
@@ -72,7 +71,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleUpdateValidator.class, Tx.class})
+    @Before({AdminValidator.RoleUpdateValidator.class, Tx.class})
     public void updateRole() {
         Role role = getModel(Role.class);
         if (ValidateUtils.me().isNullOrEmpty(role.get("pid"))) {
@@ -88,7 +87,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RoleDeleteValidator.class, Tx.class})
+    @Before({AdminValidator.RoleDeleteValidator.class, Tx.class})
     public void dropRole() {
 
         Integer id = getParaToInt("role.id");
@@ -113,7 +112,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermSaveValidator.class, Tx.class})
+    @Before({AdminValidator.PermSaveValidator.class, Tx.class})
     public void savePerm() {
         Permission permission = getModel(Permission.class);
         Permission parent = null;
@@ -143,7 +142,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermUpdateValidator.class, Tx.class})
+    @Before({AdminValidator.PermUpdateValidator.class, Tx.class})
     public void updatePerm() {
         Permission permission = getModel(Permission.class);
         if (ValidateUtils.me().isNullOrEmpty(permission.get("pid"))) {
@@ -159,7 +158,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({PermDeleteValidator.class, Tx.class})
+    @Before({AdminValidator.PermDeleteValidator.class, Tx.class})
     public void dropPerm() {
 
         Integer id = getParaToInt("permission.id");
@@ -182,7 +181,7 @@ public class AdminController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({RolePermsValidator.class, Tx.class})
+    @Before({AdminValidator.RolePermsValidator.class, Tx.class})
     public void addPerms() {
         String[] idsPara = getParaValues("permission.id");
         Integer roleId = getParaToInt("role.id");
