@@ -10,6 +10,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,7 +59,10 @@ public class AdminController extends Controller {
             Role.dao.updateBy("`role`.right_code=`role`.right_code+2", "`role`.right_code>=" + parent.get("right_code"));
             role.set("left_code", parent.getLong("right_code"));
             role.set("right_code", parent.getLong("right_code") + 1);
-            role.set("state", 0);
+            role.set("created_at", new Date());
+            if (ValidateUtils.me().isNullOrEmpty(role.get("id"))) {
+                role.remove("id");
+            }
             result = role.save();
         }
 
@@ -77,7 +81,7 @@ public class AdminController extends Controller {
         if (ValidateUtils.me().isNullOrEmpty(role.get("pid"))) {
             role.remove("pid");
         }
-
+        role.set("updated_at", new Date());
         if (role.update()) {
             setAttr("state", "success");
         } else {
@@ -126,6 +130,7 @@ public class AdminController extends Controller {
             Permission.dao.updateBy("`permission`.right_code=`permission`.right_code+2", "`permission`.right_code>=" + parent.get("right_code"));
             permission.set("left_code", parent.getLong("right_code"));
             permission.set("right_code", parent.getLong("right_code") + 1);
+            permission.set("created_at", new Date());
             if (ValidateUtils.me().isNullOrEmpty(permission.get("id"))) {
                 permission.remove("id");
             }
@@ -148,7 +153,7 @@ public class AdminController extends Controller {
         if (ValidateUtils.me().isNullOrEmpty(permission.get("pid"))) {
             permission.remove("pid");
         }
-
+        permission.set("updated_at", new Date());
         if (permission.update()) {
             setAttr("state", "success");
         } else {

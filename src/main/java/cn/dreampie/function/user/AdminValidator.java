@@ -1,6 +1,7 @@
 package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.ReTurnType;
+import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import com.jfinal.core.Controller;
@@ -29,6 +30,11 @@ public class AdminValidator {
             if (valueEmpty) addError("role_valueMsg", "角色名称不能为空");
             if (!valueEmpty && !ValidateUtils.me().isLength(c.getPara("role.value"), 2, 20))
                 addError("role_valueMsg", "角色名称长度2-20");
+
+            if (!valueEmpty) {
+                Role role = Role.dao.findByFirst("`role`.value='" + c.getPara("role.value") + "'");
+                if (role != null) addError("role_valueMsg", "角色标识已存在");
+            }
 
 
             boolean introEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.intro"));
@@ -65,7 +71,10 @@ public class AdminValidator {
             if (valueEmpty) addError("role_valueMsg", "角色名称不能为空");
             if (!valueEmpty && !ValidateUtils.me().isLength(c.getPara("role.value"), 2, 20))
                 addError("role_valueMsg", "角色名称长度2-20");
-
+            if (!valueEmpty) {
+                Role role = Role.dao.findByFirst("`role`.value='" + c.getPara("role.value") + "'");
+                if (role != null) addError("role_valueMsg", "角色标识已存在");
+            }
 
             boolean introEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.intro"));
             if (introEmpty) addError("role_introMsg", "角色描述不能为空");
@@ -120,16 +129,23 @@ public class AdminValidator {
             if (!idEmpty && !idNum) addError("role_idMsg", "角色id必须为正整数");
             if (!idEmpty && idNum) {
                 Role role = Role.dao.findById(c.getPara("role.id"));
-                if (ValidateUtils.me().isNullOrEmpty(role)) addError("role_idMsg", "角色不存在");
-                long childrenCount = Role.dao.countBy("`role`.pid=" + c.getPara("role.id"));
-                if (childrenCount > 0) addError("role_idMsg", "删除当前角色，必须先删除子角色");
+                boolean roleEmpty = ValidateUtils.me().isNullOrEmpty(role);
+                if (roleEmpty) addError("role_idMsg", "角色不存在");
+                if (!roleEmpty) {
 
-                List<String> accountIds = UserRole.dao.findUserIds("`userRole`.role_id=" + c.getPara("role.id"));
-                boolean accountIdsEmpty = ValidateUtils.me().isNullOrEmpty(accountIds);
-                if (!accountIdsEmpty) addError("role_idMsg", "该角色下有用户存在");
+                    if (SubjectUtils.me().wasBaseRole(role.getStr("value"))) {
+                        addError("role_idMsg", "基础角色不能删除");
+                    } else {
 
+                        long childrenCount = Role.dao.countBy("`role`.pid=" + c.getPara("role.id"));
+                        if (childrenCount > 0) addError("role_idMsg", "删除当前角色，必须先删除子角色");
+
+                        List<String> accountIds = UserRole.dao.findUserIds("`userRole`.role_id=" + c.getPara("role.id"));
+                        boolean accountIdsEmpty = ValidateUtils.me().isNullOrEmpty(accountIds);
+                        if (!accountIdsEmpty) addError("role_idMsg", "该角色下有用户存在");
+                    }
+                }
             }
-
         }
 
         protected void handleError(Controller c) {
@@ -183,10 +199,15 @@ public class AdminValidator {
             if (!nameEmpty && !ValidateUtils.me().isLength(c.getPara("permission.name"), 2, 10))
                 addError("permission_nameMsg", "权限名称长度2-10");
 
-            boolean authKeyEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.value"));
-            if (authKeyEmpty) addError("permission_valueMsg", "权限名称不能为空");
-            if (!authKeyEmpty && !ValidateUtils.me().isLength(c.getPara("permission.value"), 2, 20))
+            boolean valueEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.value"));
+            if (valueEmpty) addError("permission_valueMsg", "权限名称不能为空");
+            if (!valueEmpty && !ValidateUtils.me().isLength(c.getPara("permission.value"), 2, 20))
                 addError("permission_valueMsg", "权限名称长度2-20");
+
+            if (!valueEmpty) {
+                Permission permission = Permission.dao.findByFirst("`permission`.value='" + c.getPara("permission.value") + "'");
+                if (permission != null) addError("permission_valueMsg", "权限标识已存在");
+            }
 
             boolean urlEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.url"));
             if (urlEmpty) addError("permission_urlMsg", "权限url不能为空");
@@ -224,10 +245,15 @@ public class AdminValidator {
                 addError("permission_nameMsg", "权限名称长度2-10");
 
 
-            boolean authKeyEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.value"));
-            if (authKeyEmpty) addError("permission_valueMsg", "权限名称不能为空");
-            if (!authKeyEmpty && !ValidateUtils.me().isLength(c.getPara("permission.value"), 2, 20))
+            boolean valueEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.value"));
+            if (valueEmpty) addError("permission_valueMsg", "权限名称不能为空");
+            if (!valueEmpty && !ValidateUtils.me().isLength(c.getPara("permission.value"), 2, 20))
                 addError("permission_valueMsg", "权限名称长度2-20");
+
+            if (!valueEmpty) {
+                Permission permission = Permission.dao.findByFirst("`permission`.value='" + c.getPara("permission.value") + "'");
+                if (permission != null) addError("permission_valueMsg", "权限标识已存在");
+            }
 
             boolean urlEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("permission.url"));
             if (urlEmpty) addError("permission_urlMsg", "权限url不能为空");

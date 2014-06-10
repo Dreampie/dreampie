@@ -4,6 +4,7 @@ package cn.dreampie.common.utils;
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.utils.security.EncriptionUtils;
 import cn.dreampie.function.user.User;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,6 +19,8 @@ import org.apache.shiro.subject.Subject;
 public class SubjectUtils {
 
     private static SubjectUtils subjectUtils = new SubjectUtils();
+
+    private static String[] baseRole = new String[]{"R_ADMIN", "R_MANAGER", "R_MEMBER", "R_USER"};
 
     private SubjectUtils() {
     }
@@ -76,6 +79,14 @@ public class SubjectUtils {
     public boolean wasLogin() {
         Subject subject = getSubject();
         if (subject != null && subject.getPrincipal() != null && subject.isAuthenticated()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean wasBaseRole(String roleValue) {
+
+        if (ArrayUtils.contains(baseRole, roleValue)) {
             return true;
         }
         return false;
