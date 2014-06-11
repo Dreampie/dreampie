@@ -331,10 +331,21 @@
         </dependency>
 
         <!--workflow-->
+        <!--<dependency>-->
+        <!--<groupId>com.github.snakerflow</groupId>-->
+        <!--<artifactId>snaker-core</artifactId>-->
+        <!--<version>1.5.0</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.github.snakerflow</groupId>
-            <artifactId>snaker-core</artifactId>
-            <version>1.5.0</version>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm</artifactId>
+            <version>6.1.0.Beta4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-test</artifactId>
+            <version>6.1.0.CR1</version>
         </dependency>
     </dependencies>
 

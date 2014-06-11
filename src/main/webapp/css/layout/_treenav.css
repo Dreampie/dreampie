@@ -33,7 +33,7 @@
 }
 
 .treenav .nav .nav .nav {
-    display: none; /* Hide by default, but at >768px, show it */
+    /*display: none; *//* Hide by default, but at >768px, show it */
 }
 
 .treenav .nav .nav > li > a {
@@ -48,4 +48,9 @@
     .treenav .nav > .active > ul {
         display: block;
     }
+}
+
+.treenav .leave{
+    display: block;
+    position: relative;
 }
