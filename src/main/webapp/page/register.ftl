@@ -1,5 +1,5 @@
 <#include "/page/layout/_layout.ftl"/>
-<@layout activebar="register" html_title=i18n.getText("register.name")>
+<@layout activebar="toregister" html_title=i18n.getText("register.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/register.css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>

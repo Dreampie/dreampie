@@ -60,11 +60,12 @@
                 </@shiro.hasPermission>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/toregister">${i18n.getText("user.register")}</a></li>
+                <li class="<#if activebar == 'toregister'> active </#if>">
+                    <a  id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"  href="/toregister">${i18n.getText("user.register")}</a></li>
                 <li class="divider-vertical"></li>
                 <@shiro.notAuthenticated>
-                    <li class="<#if activebar == 'tologin'> active </#if>"><a
-                            href="/tologin">${i18n.getText("user.login")}</a></li>
+                    <li class="<#if activebar == 'tologin'> active </#if>">
+                        <a  id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"  href="/tologin">${i18n.getText("user.login")}</a></li>
                 </@shiro.notAuthenticated>
                 <@shiro.authenticated>
                     <li class="dropdown">
