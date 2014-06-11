@@ -230,7 +230,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 }
 
 .footer-main {
-    position: fixed;
+    position: relative;
     right: 0;
     left: 0;
     z-index: 1030;
@@ -239,13 +239,13 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     color: #999;
     text-align: center;
     /*padding: 30px 0;*/
-    margin-top: 70px;
+    margin-top: 30px;
     border-top: 1px solid #e5e5e5;
     background-color: #f5f5f5
 }
 
 .footer-main p {
-    margin: 2px 0;
+    margin: 2px 0 0;
 }
 
 #scrollUp {

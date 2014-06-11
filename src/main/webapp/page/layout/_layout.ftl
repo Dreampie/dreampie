@@ -35,6 +35,18 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
 <#-- base href="${CPATH}" / -->
+    <script type="text/javascript">
+        $(function () {
+            ~(function (window, document, $) {
+                var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+                h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
+                        _fn = function (h) {
+                            $(".container-main").eq(0).css("min-height", h + "px");
+                        };
+                _fn(height - h);
+            })(window, document, $);
+        });
+    </script>
     <title>${html_title}</title>
 </head>
 <body>
@@ -52,6 +64,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav active">
+            <#--<li><button type="button" class="navbar-toggle" style="display: block;min-height:44px;border-bottom: 0px;border-top:0px;border-radius:0px;margin: 0px;">-->
+            <#--<span class="icon-bar"></span>-->
+            <#--<span class="icon-bar"></span>-->
+            <#--<span class="icon-bar"></span>-->
+            <#--</button></li>-->
                 <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
                 <@shiro.hasPermission name="P_ROLE">
                     <li class="<#if activebar == 'role'> active </#if>"><a
@@ -61,15 +78,18 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="<#if activebar == 'toregister'> active </#if>">
-                    <a  id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"  href="/toregister">${i18n.getText("user.register")}</a></li>
+                    <a id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"
+                       href="/toregister">${i18n.getText("user.register")}</a></li>
                 <li class="divider-vertical"></li>
                 <@shiro.notAuthenticated>
                     <li class="<#if activebar == 'tologin'> active </#if>">
-                        <a  id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"  href="/tologin">${i18n.getText("user.login")}</a></li>
+                        <a id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"
+                           href="/tologin">${i18n.getText("user.login")}</a></li>
                 </@shiro.notAuthenticated>
                 <@shiro.authenticated>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><@shiro.principal property="full_name"/>
+                    <li class="<#if activebar == 'center'> active </#if> dropdown">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown"><@shiro.principal property="full_name"/>
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/center">${i18n.getText("user.center")}</a></li>
@@ -149,7 +169,8 @@ $(function () {
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
 <![endif]-->
 <!--[if lt IE 9]>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script><![endif]-->
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script>
+<![endif]-->
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -209,7 +230,7 @@ $(function () {
             }).ajaxSuccess(function (e) {
                 messenger.update("已完成请求,正在加载...");
             }).ajaxError(function (event, xhr, options, exc) {
-                var msg = "";
+                var msg = "服务器未响应!";
                 if ($.trim(exc) == 'Unauthorized') msg = "没有权限访问或没有登录!";
                 if ($.trim(exc) == 'Not Found') msg = "访问内容找不到了!";
                 if ($.trim(exc) == 'Server Error') msg = "服务异常!";
