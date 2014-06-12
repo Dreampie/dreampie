@@ -15,6 +15,12 @@ $(function () {
             }
             children.toggleClass("hide");
         }
-        event.stopPropagation();    //  阻止事件冒泡
+        if (event && event.stopPropagation) {
+            //W3C取消冒泡事件
+            event.stopPropagation();
+        } else {
+            //IE取消冒泡事件
+            window.event.cancelBubble = true;
+        }   //  阻止事件冒泡
     });
 })

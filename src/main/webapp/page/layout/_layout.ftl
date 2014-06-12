@@ -4,6 +4,7 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,7 +54,7 @@
 <!--http://www.cnblogs.com/steden/archive/2010/08/14/1799651.html-->
 <!--container-->
 <!--Site header-->
-<header class="navbar navbar-default navbar-fixed-top headroom header-main">
+<div class="navbar navbar-default navbar-fixed-top headroom header-main">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -104,7 +105,7 @@
         </div>
 
     </div>
-</header>
+</div>
 
 <!--页面内容-->
 <div class="container main container-main">
@@ -148,6 +149,11 @@ $(function () {
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap.min.js"></script>
+<!-- bsie js patch, it will only execute in IE6 -->
+<!--[if lte IE 7]>
+<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
+<![endif]-->
 <!--messager-->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/messenger.min.js"></script>
 <!--maxlength-->
@@ -163,11 +169,7 @@ $(function () {
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.scrollUp.min.js"></script>
 <!--延迟加载图片-->
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.unveil.min.js"></script>
-<!-- bsie js patch, it will only execute in IE6 -->
-<!--[if lte IE 7]>
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
-<![endif]-->
+
 <!--[if lt IE 9]>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script>
 <![endif]-->
