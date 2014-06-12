@@ -55,7 +55,7 @@
 <!--container-->
 <!--Site header-->
 <div class="navbar navbar-default navbar-fixed-top headroom header-main">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -108,13 +108,13 @@
 </div>
 
 <!--页面内容-->
-<div class="container main container-main">
+<div class="container-fluid main container-main">
     <#nested>
 </div>
 
 <!-- Site footer -->
 <div class="footer footer-main">
-    <div class="container">
+    <div class="container-fluid">
         <p>${i18n.getText("webapp.copyright")} - <a href="http://www.miibeian.gov.cn/"
                                                     target="_blank">${i18n.getText("webapp.gov")}</a>
         </p>

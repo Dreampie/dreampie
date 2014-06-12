@@ -18,7 +18,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 public class UserController extends Controller {
 
     public void index() {
-        dynaRender("/page/index.ftl");
+        dynaRender("/page/user/index.ftl");
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)

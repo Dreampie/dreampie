@@ -1,7 +1,7 @@
 <#assign depth = 1 />
 <#macro treenav nodes attrs>
     <#if nodes?? && nodes?size gt 0>
-    <ul class="nav <#if depth gt 2>hide</#if>">
+    <ul class="nav <#if depth gt 3>hide</#if>">
         <#list nodes as node>
             <li class="<#if depth==1>active</#if>">
                 <a  nodeid="${node.id}"

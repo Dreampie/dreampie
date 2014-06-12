@@ -14,7 +14,7 @@
     <div class="carousel-inner">
         <div class="item active masthead">
             <div class="masthead-bg"></div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="carousel-caption">
                     <h3>First slide label</h3>
 
@@ -24,7 +24,7 @@
         </div>
         <div class="item">
             <div class="masthead-bg"></div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="carousel-caption">
                     <h3>Second slide label</h3>
 
@@ -34,7 +34,7 @@
         </div>
         <div class="item">
             <div class="masthead-bg"></div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="carousel-caption">
                     <h3>Third slide label</h3>
 
