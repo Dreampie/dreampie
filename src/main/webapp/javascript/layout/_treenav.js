@@ -15,6 +15,7 @@ $(function () {
             }
             children.toggleClass("hide");
         }
+
         if (event && event.stopPropagation) {
             //W3C取消冒泡事件
             event.stopPropagation();

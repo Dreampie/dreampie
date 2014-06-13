@@ -53,6 +53,43 @@
 <body>
 <!--http://www.cnblogs.com/steden/archive/2010/08/14/1799651.html-->
 <!--container-->
+<div id="menunav" class="hide">
+    <div class="row menunav">
+        <div class="col-md-4 left">
+            <ul class="list-unstyled">
+                <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
+
+                <@shiro.hasPermission name="P_ROLE">
+                    <li class="<#if activebar == 'role'> active </#if>"><a
+                            href="/admin/role">${i18n.getText("role.name")}</a>
+                    </li>
+                </@shiro.hasPermission>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+            </ul>
+        </div>
+        <div class="col-md-8 right">
+            <ul class="list-inline">
+                <@shiro.hasPermission name="P_ROLE">
+                    <li class="<#if activebar == 'role'> active </#if>"><a
+                            href="/admin/role">${i18n.getText("role.name")}</a>
+                    </li>
+                </@shiro.hasPermission>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+                <li><a href="#">应用中心</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
 <!--Site header-->
 <div class="navbar navbar-default navbar-fixed-top headroom header-main">
     <div class="container-fluid">
@@ -64,18 +101,20 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav active">
-            <#--<li><button type="button" class="navbar-toggle" style="display: block;min-height:44px;border-bottom: 0px;border-top:0px;border-radius:0px;margin: 0px;">-->
-            <#--<span class="icon-bar"></span>-->
-            <#--<span class="icon-bar"></span>-->
-            <#--<span class="icon-bar"></span>-->
-            <#--</button></li>-->
-                <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
-                <@shiro.hasPermission name="P_ROLE">
-                    <li class="<#if activebar == 'role'> active </#if>"><a
-                            href="/admin/role">${i18n.getText("role.name")}</a>
-                    </li>
-                </@shiro.hasPermission>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style="padding: 0px" href="/">
+                        <img src="/images/logo.jpg" style="height: 44px;" alt=""/>
+                    </a>
+                </li>
+                <li>
+                    <a id="menubtn" class="menu-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <b class="triangle"></b>
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="<#if activebar == 'toregister'> active </#if>">
@@ -149,6 +188,7 @@ $(function () {
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrapx-clickover.js"></script>
 <!-- bsie js patch, it will only execute in IE6 -->
 <!--[if lte IE 7]>
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
@@ -249,6 +289,16 @@ $(function () {
 //                path:'/',
 //                callback: function(){ alert( $.i18n.prop('webapp.name') ); }
 //            });
+
+            $("#menubtn").clickover({
+                content: $("#menunav").html(),
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover',
+//                auto_close: 3 * 1000,
+                class_btn: 'menu-btn-hover',
+                container: 'body',
+                global_close: true });
 
         });
     }(jQuery)

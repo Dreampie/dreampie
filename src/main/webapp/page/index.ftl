@@ -62,10 +62,10 @@
 //            onEnd: function() {
 //                return $demo.removeClass("disabled", true);
 //            },
-            debug: true,
+            debug: false,
             template: "<div class='popover tour' style='max-width: 400px;'><div class='arrow'>" +
                     "</div><h3 class='popover-title'></h3><div class='popover-content'></div>" +
-                    "<div class='popover-navigation'><button class='btn btn-primary btn-sm' data-role='prev'>上一步</button>" +
+                    "<div class='popover-navigation' style='min-width: 260px;'><button class='btn btn-primary btn-sm' data-role='prev'>上一步</button>" +
                     "<span data-role='separator'>&nbsp;&nbsp;&nbsp;&nbsp;</span>" +
                     "<button class='btn btn-primary btn-sm' data-role='next'>下一步</button>" +
                     "<button class='btn btn-info btn-sm' data-role='end'>退出</button></div></div>",
