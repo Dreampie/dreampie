@@ -303,7 +303,7 @@
                 });
 
                 currentInput.blur(function() {
-                    maxLengthIndicator.remove();
+                    $(maxLengthIndicator).remove();
                 });
 
                 currentInput.keyup(function() {

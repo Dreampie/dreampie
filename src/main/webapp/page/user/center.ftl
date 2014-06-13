@@ -1,5 +1,5 @@
 <#include "/page/layout/_layout.ftl"/>
-<@layout activebar="user" html_title="个人中心">
+<@layout activebar="center" html_title="个人中心">
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="page-header">

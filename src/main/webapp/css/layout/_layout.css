@@ -19,6 +19,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     z-index: 20
 }
 
+.navbar-nav {
+    border-left: 1px solid #ddd;
+}
+
+.navbar-nav a {
+    border-right: 1px solid #ddd;
+}
+
+.navbar-right {
+    padding-right: 15px;
+}
+
 @media screen and (min-width: 768px) {
     .navbar-wrapper.affix {
         position: fixed;
@@ -226,26 +238,26 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     box-shadow: none;
     position: relative;
     min-height: 300px;
-    padding: 30px 0;
+    /*padding: 30px 0;*/
 }
 
 .footer-main {
-    position: fixed;
+    position: relative;
     right: 0;
     left: 0;
-    z-index: 1030;
+    /*z-index: 1030;*/
     bottom: 0;
     width: 100%;
     color: #999;
     text-align: center;
     /*padding: 30px 0;*/
-    margin-top: 70px;
+    margin-top: 30px;
     border-top: 1px solid #e5e5e5;
     background-color: #f5f5f5
 }
 
 .footer-main p {
-    margin: 2px 0;
+    margin: 2px 0 0;
 }
 
 #scrollUp {
@@ -265,6 +277,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 
 .dropdown-menu .divider {
     *margin: 0px;
+}
+
+.navbar-header {
+    padding: 0 15px;
+}
+
+.navbar-toggle-right {
+    margin: 0px;
+    padding: 18px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-radius: 0px;
 }
 
 .col-sm-6 {
@@ -294,4 +320,151 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 
 .highcharts-container hr {
     margin: 7px 2px;
+}
+
+.menu-btn {
+    vertical-align: middle;
+    display: block;
+    /*height: 44px;*/
+    border-radius: 0px;
+    margin: 0px;
+    position: relative;
+    padding-top: 18px !important;
+    *padding-bottom: 18px !important;
+    /*padding: 9px 10px;*/
+    background-color: transparent;
+    background-image: none;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+.menu-btn .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #888;
+}
+
+.menu-btn .icon-bar + .icon-bar {
+    margin-top: 4px;
+}
+
+.menu-btn:hover, .menu-btn:focus, .menu-btn-hover {
+    background-color: #f5f5f5 !important;
+    color: #555 !important;
+}
+
+.triangle {
+    border-right: 6px solid;
+    border-top: 6px solid rgba(0, 0, 0, 0);
+    bottom: 1px;
+    display: inline-block;
+    height: 0;
+    margin-left: 2px;
+    position: absolute;
+    right: 1px;
+    vertical-align: bottom;
+    width: 0;
+}
+
+.menumain {
+    display: none;
+}
+
+.menunav li > a {
+    color: #777;
+    position: relative;
+    display: block;
+    padding: 5px 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+}
+
+.menunav li.active > a {
+
+}
+
+.menunav .left {
+    font-size: 16px;
+}
+
+.menunav .right {
+    border-left: 1px solid #EDEDED;
+}
+
+@media (min-width: 768px) {
+
+    .menumain {
+        display: none;
+    }
+    .menunav .col-md-3, .menunav .col-md-9 {
+        float: left;
+    }
+
+    .menunav .col-md-3 {
+        width: 25%;
+    }
+
+    .menunav .col-md-9 {
+        width: 75%;
+    }
+
+    .logo-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .menunav {
+        padding-top: 10px;
+    }
+
+    .menunav .left li {
+        display: inline-block;
+    }
+
+    .nav-left {
+        display: none;
+    }
+
+    .navbar-nav, .navbar-nav a {
+        border: 0px !important;
+    }
+
+    .nav-menu {
+        display: block;
+    }
+}
+
+.logo-toggle {
+    position: relative;
+    float: left;
+    /* margin-right: 15px; */
+    padding: 0px;
+    background-color: transparent;
+    background-image: none;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+.menu-pop {
+    max-width: 500px !important;
+}
+
+.nav-menu {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+.nav-menu:hover, .nav-menu:focus, .nav-menu-bg {
+    background-color: #ddd;
+}
+
+.navbar-menu {
+    padding: 16px 23px 12px;
+    float: right;
 }

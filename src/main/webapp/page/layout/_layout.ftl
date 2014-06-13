@@ -4,6 +4,7 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,40 +36,69 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
 <#-- base href="${CPATH}" / -->
+    <script type="text/javascript">
+        $(function () {
+            ~(function (window, document, $) {
+                var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+                h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
+                        _fn = function (h) {
+                            $(".container-main").eq(0).css("min-height", h + "px");
+                        };
+                _fn(height - h);
+            })(window, document, $);
+        });
+    </script>
     <title>${html_title}</title>
 </head>
 <body>
 <!--http://www.cnblogs.com/steden/archive/2010/08/14/1799651.html-->
 <!--container-->
+
 <!--Site header-->
-<header class="navbar navbar-default navbar-fixed-top headroom header-main">
-    <div class="container">
+<div class="navbar navbar-default navbar-fixed-top headroom header-main">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <a class="logo-toggle" href="/">
+                <img src="/images/logo.jpg" style="height: 50px;" alt=""/>
+            </a>
+
+            <button type="button" class="navbar-toggle navbar-toggle-right" data-toggle="collapse"
+                    data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav active">
-                <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a></li>
-                <@shiro.hasPermission name="P_ROLE">
-                    <li class="<#if activebar == 'role'> active </#if>"><a
-                            href="/admin/role">${i18n.getText("role.name")}</a>
-                    </li>
-                </@shiro.hasPermission>
+            <ul class="nav navbar-nav nav-left">
+                <li>
+                    <a style="padding: 0px" href="/">
+                        <img src="/images/logo.jpg" style="height: 44px;*height:50px" alt=""/>
+                    </a>
+                </li>
+                <li>
+                    <a id="menubtn" class="menu-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <b class="triangle"></b>
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/toregister">${i18n.getText("user.register")}</a></li>
+                <li class="<#if activebar == 'toregister'> active </#if>">
+                    <a id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"
+                       href="/toregister">${i18n.getText("user.register")}</a></li>
                 <li class="divider-vertical"></li>
                 <@shiro.notAuthenticated>
-                    <li class="<#if activebar == 'tologin'> active </#if>"><a
-                            href="/tologin">${i18n.getText("user.login")}</a></li>
+                    <li class="<#if activebar == 'tologin'> active </#if>">
+                        <a id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"
+                           href="/tologin">${i18n.getText("user.login")}</a></li>
                 </@shiro.notAuthenticated>
                 <@shiro.authenticated>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><@shiro.principal property="full_name"/>
+                    <li class="<#if activebar == 'center'> active </#if> dropdown">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown"><@shiro.principal property="full_name"/>
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/center">${i18n.getText("user.center")}</a></li>
@@ -83,16 +113,65 @@
         </div>
 
     </div>
-</header>
+</div>
+<!--菜单内容-->
+<div id="nav-menu" class="nav-menu">
+    <div class="container-fluid" style="text-align: center;vertical-align: middle;">
+        <span style="padding: 12px;display: inline-block;font-size: 16px;">全部分类</span>
 
+        <div class="navbar-menu">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+    </div>
+</div>
+
+<div id="menunav" class="container-fluid menumain">
+    <div class="menunav">
+        <div class="row">
+            <div class="col-md-3 left">
+                <ul class="list-unstyled">
+                    <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a>
+                    </li>
+
+                    <@shiro.hasPermission name="P_ROLE">
+                        <li class="<#if activebar == 'role'> active </#if>"><a
+                                href="/admin/role">${i18n.getText("role.name")}</a>
+                        </li>
+                    </@shiro.hasPermission>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9 right">
+                <ul class="list-inline">
+                    <@shiro.hasPermission name="P_ROLE">
+                        <li class="<#if activebar == 'role'> active </#if>"><a
+                                href="/admin/role">${i18n.getText("role.name")}</a>
+                        </li>
+                    </@shiro.hasPermission>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                    <li><a href="#">应用中心</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <!--页面内容-->
-<div class="container main container-main">
+<div class="container-fluid main container-main">
     <#nested>
 </div>
 
 <!-- Site footer -->
 <div class="footer footer-main">
-    <div class="container">
+    <div class="container-fluid">
         <p>${i18n.getText("webapp.copyright")} - <a href="http://www.miibeian.gov.cn/"
                                                     target="_blank">${i18n.getText("webapp.gov")}</a>
         </p>
@@ -127,6 +206,12 @@ $(function () {
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrapx-clickover.js"></script>
+<!-- bsie js patch, it will only execute in IE6 -->
+<!--[if lte IE 7]>
+<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
+<![endif]-->
 <!--messager-->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/messenger.min.js"></script>
 <!--maxlength-->
@@ -142,13 +227,10 @@ $(function () {
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.scrollUp.min.js"></script>
 <!--延迟加载图片-->
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.unveil.min.js"></script>
-<!-- bsie js patch, it will only execute in IE6 -->
-<!--[if lte IE 7]>
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
-<![endif]-->
+
 <!--[if lt IE 9]>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script><![endif]-->
+<script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script>
+<![endif]-->
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -208,7 +290,7 @@ $(function () {
             }).ajaxSuccess(function (e) {
                 messenger.update("已完成请求,正在加载...");
             }).ajaxError(function (event, xhr, options, exc) {
-                var msg = "";
+                var msg = "服务器未响应!";
                 if ($.trim(exc) == 'Unauthorized') msg = "没有权限访问或没有登录!";
                 if ($.trim(exc) == 'Not Found') msg = "访问内容找不到了!";
                 if ($.trim(exc) == 'Server Error') msg = "服务异常!";
@@ -225,6 +307,30 @@ $(function () {
 //                path:'/',
 //                callback: function(){ alert( $.i18n.prop('webapp.name') ); }
 //            });
+
+            $("#menubtn").clickover({
+                content: $("#menunav").html(),
+                html: true,
+                placement: 'bottom',
+                trigger: 'hover',
+//                auto_close: 3 * 1000,
+                class_btn: 'menu-btn-hover',
+                class_pop: 'menu-pop',
+                container: 'body',
+                global_close: true });
+
+            $("#nav-menu").click(function () {
+                $(this).toggleClass("nav-menu-bg");
+                var gicon = $(this).find(".glyphicon");
+                gicon.toggleClass("glyphicon-chevron-down");
+                gicon.toggleClass("glyphicon-chevron-up");
+
+                if ($("#menunav").is(":visible")) {
+                    $("#menunav").slideUp();
+                } else {
+                    $("#menunav").slideDown();
+                }
+            });
 
         });
     }(jQuery)
