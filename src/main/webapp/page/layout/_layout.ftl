@@ -32,12 +32,16 @@
     <![endif]-->
     <!--自定义样式-->
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css" media="screen"/>
-
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/mmenu/css/jquery.mmenu.all.css"
+          media="screen"/>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.hammer.min.js"></script>
 <#-- base href="${CPATH}" / -->
     <script type="text/javascript">
         $(function () {
+            //初始化高度
             ~(function (window, document, $) {
                 var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
                 h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
@@ -46,6 +50,19 @@
                         };
                 _fn(height - h);
             })(window, document, $);
+
+            //初始化菜单
+            $('nav#menu-left').mmenu({classes: 'mm-slide',
+                dragOpen: true,
+                counters: true,
+                searchfield: true,
+                header: {add: true, update: true, title: 'Menu'}});
+
+            $('nav#menu-right').mmenu({offCanvas: {position: 'right'}, classes: 'mm-light',
+                dragOpen: true,
+                counters: true,
+                searchfield: true,
+                header: {add: true, update: true, title: '<@shiro.principal property="full_name"/>'}});
         });
     </script>
     <title>${html_title}</title>
@@ -53,119 +70,345 @@
 <body>
 <!--http://www.cnblogs.com/steden/archive/2010/08/14/1799651.html-->
 <!--container-->
-
+<div id="page">
 <!--Site header-->
-<div class="navbar navbar-default navbar-fixed-top headroom header-main">
+<div id="header" class="navbar navbar-default headroom header-main mm-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="logo-toggle" href="/">
-                <img src="/images/logo.jpg" style="height: 50px;" alt=""/>
+        <div class="header-sm">
+            <a style="padding: 0px" href="/">
+                <img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>
             </a>
-
-            <button type="button" class="navbar-toggle navbar-toggle-right" data-toggle="collapse"
-                    data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <ul class="nav fleft">
+                <li>
+                    <a class="menu-btn navbar-toggle navbar-btn" href="#menu-left">
+                        <span class="glyphicon glyphicon-th-large"></span>
+                    </a></li>
+            </ul>
+            <ul class="nav fright">
+                <li>
+                    <a class="menu-btn navbar-toggle navbar-btn" href="#menu-right">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a></li>
+            </ul>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav nav-left">
+        <div class="header-default">
+            <a style="padding: 0px" href="/">
+                <img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>
+            </a>
+            <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a style="padding: 0px" href="/">
-                        <img src="/images/logo.jpg" style="height: 44px;*height:50px" alt=""/>
+                    <a id="menubtn" class="menu-btn" href="#menu-left">
+                        <span class="glyphicon glyphicon-th-large"></span>
                     </a>
                 </li>
-                <li>
-                    <a id="menubtn" class="menu-btn">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <b class="triangle"></b>
-                    </a>
-                </li>
+                <#--<li>-->
+                    <#--<a style="padding: 0px" href="/">-->
+                        <#--<img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>-->
+                    <#--</a>-->
+                <#--</li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="<#if activebar == 'toregister'> active </#if>">
-                    <a id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"
-                       href="/toregister">${i18n.getText("user.register")}</a></li>
-                <li class="divider-vertical"></li>
-                <@shiro.notAuthenticated>
-                    <li class="<#if activebar == 'tologin'> active </#if>">
-                        <a id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"
-                           href="/tologin">${i18n.getText("user.login")}</a></li>
-                </@shiro.notAuthenticated>
-                <@shiro.authenticated>
-                    <li class="<#if activebar == 'center'> active </#if> dropdown">
-                        <a href="#" class="dropdown-toggle"
-                           data-toggle="dropdown"><@shiro.principal property="full_name"/>
-                            <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user/center">${i18n.getText("user.center")}</a></li>
-                        <#--<li><a href="#">应用中心</a></li>
-                        <li><a href="#">设置</a></li>-->
-                            <li class="divider"></li>
-                            <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
-                        </ul>
-                    </li>
-                </@shiro.authenticated>
+                <li>
+                    <a class="menu-btn" href="#menu-right">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </li>
             </ul>
         </div>
 
     </div>
 </div>
-<!--菜单内容-->
-<div id="nav-menu" class="nav-menu">
-    <div class="container-fluid" style="text-align: center;vertical-align: middle;">
-        <span style="padding: 12px;display: inline-block;font-size: 16px;">全部分类</span>
+<nav id="menu-left">
+    <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="horizontal-submenus.html">Horizontal submenus example</a></li>
+        <li><a href="vertical-submenus.html">Vertical submenus example</a></li>
+        <li><a href="positions.html">Positioning the menu</a></li>
+        <li><a href="colors.html">Coloring the menu</a></li>
+        <li class="Selected"><a href="advanced.html">Advanced example</a></li>
+        <li><a href="onepage.html">One page scrolling example</a></li>
+        <li><a href="photos.html">Photo's app</a></li>
+        <li><a href="jqmobile/index.html">jQuery Mobile example</a></li>
+    </ul>
+</nav>
+<nav id="menu-right">
+<ul>
+    <@shiro.notAuthenticated>
+    <li class="<#if activebar == 'toregister'> Selected </#if>">
+        <a id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"
+           href="/toregister">${i18n.getText("user.register")}</a></li>
+    <li class="<#if activebar == 'tologin'> Selected </#if>">
+        <a id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"
+           href="/tologin">${i18n.getText("user.login")}</a></li>
+    </@shiro.notAuthenticated>
+    <@shiro.authenticated>
+    <li class="<#if activebar == 'center'> Selected </#if>"><a href="/user/center">${i18n.getText("user.center")}</a>
+    </li>
+    <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
+    </@shiro.authenticated>
+<span>Friends</span>
+<ul>
+    <li class="Label">A</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/1/"/>
+            Alexa<br/>
+            <small>Johnson</small>
+        </a>
+    </li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/2/"/>
+            Alexander<br/>
+            <small>Brown</small>
+        </a>
+    </li>
 
-        <div class="navbar-menu">
-            <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-    </div>
-</div>
+    <li class="Label">F</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/3/"/>
+            Fred<br/>
+            <small>Smith</small>
+        </a>
+    </li>
 
-<div id="menunav" class="container-fluid menumain">
-    <div class="menunav">
-        <div class="row">
-            <div class="col-md-3 left">
-                <ul class="list-unstyled">
-                    <li class="<#if activebar == 'index'> active </#if>"><a href="/">${i18n.getText("index.name")}</a>
-                    </li>
+    <li class="Label">J</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/4/"/>
+            James<br/>
+            <small>Miller</small>
+        </a>
+    </li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/5/"/>
+            Jefferson<br/>
+            <small>Jackson</small>
+        </a>
+    </li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/6/"/>
+            Jordan<br/>
+            <small>Lee</small>
+        </a>
+    </li>
 
-                    <@shiro.hasPermission name="P_ROLE">
-                        <li class="<#if activebar == 'role'> active </#if>"><a
-                                href="/admin/role">${i18n.getText("role.name")}</a>
-                        </li>
-                    </@shiro.hasPermission>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                </ul>
-            </div>
-            <div class="col-md-9 right">
-                <ul class="list-inline">
-                    <@shiro.hasPermission name="P_ROLE">
-                        <li class="<#if activebar == 'role'> active </#if>"><a
-                                href="/admin/role">${i18n.getText("role.name")}</a>
-                        </li>
-                    </@shiro.hasPermission>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                    <li><a href="#">应用中心</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+    <li class="Label">K</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/7/"/>
+            Kim<br/>
+            <small>Adams</small>
+        </a>
+    </li>
+
+    <li class="Label">M</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/8/"/>
+            Meagan<br/>
+            <small>Miller</small>
+        </a>
+    </li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/9/"/>
+            Melissa<br/>
+            <small>Johnson</small>
+        </a>
+    </li>
+
+    <li class="Label">N</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/10/"/>
+            Nicole<br/>
+            <small>Smith</small>
+        </a>
+    </li>
+
+    <li class="Label">S</li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/1/"/>
+            Samantha<br/>
+            <small>Harris</small>
+        </a>
+    </li>
+    <li class="img">
+        <a href="#">
+            <img src="http://lorempixel.com/50/50/people/2/"/>
+            Scott<br/>
+            <small>Thompson</small>
+        </a>
+    </li>
+</ul>
+</li>
+
+<li>
+    <span>Family</span>
+    <ul>
+        <li class="Label">A</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/3/"/>
+                Adam<br/>
+                <small>White</small>
+            </a>
+        </li>
+
+        <li class="Label">B</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/4/"/>
+                Ben<br/>
+                <small>Robinson</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/5/"/>
+                Bruce<br/>
+                <small>Lee</small>
+            </a>
+        </li>
+
+        <li class="Label">E</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/6/"/>
+                Eddie<br/>
+                <small>Williams</small>
+            </a>
+        </li>
+
+        <li class="Label">J</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/7/"/>
+                Jack<br/>
+                <small>Johnson</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/8/"/>
+                John<br/>
+                <small>Jackman</small>
+            </a>
+        </li>
+
+        <li class="Label">M</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/9/"/>
+                Martina<br/>
+                <small>Thompson</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/10/"/>
+                Matthew<br/>
+                <small>Watson</small>
+            </a>
+        </li>
+
+        <li class="Label">O</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/1/"/>
+                Olivia<br/>
+                <small>Taylor</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/2/"/>
+                Owen<br/>
+                <small>Wilson</small>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li>
+    <span>Work colleagues</span>
+    <ul>
+        <li class="Label">D</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/3/"/>
+                David<br/>
+                <small>Harris</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/4/"/>
+                Dennis<br/>
+                <small>King</small>
+            </a>
+        </li>
+
+        <li class="Label">E</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/5/"/>
+                Eliza<br/>
+                <small>Walker</small>
+            </a>
+        </li>
+
+        <li class="Label">L</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/6/"/>
+                Larry<br/>
+                <small>Turner</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/7/"/>
+                Lisa<br/>
+                <small>Wilson</small>
+            </a>
+        </li>
+
+        <li class="Label">M</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/8/"/>
+                Michael<br/>
+                <small>Jordan</small>
+            </a>
+        </li>
+
+        <li class="Label">R</li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/9/"/>
+                Rachelle<br/>
+                <small>Cooper</small>
+            </a>
+        </li>
+        <li class="img">
+            <a href="#">
+                <img src="http://lorempixel.com/50/50/people/10/"/>
+                Rick<br/>
+                <small>James</small>
+            </a>
+        </li>
+    </ul>
+</li>
+</ul>
+</nav>
 <!--页面内容-->
-<div class="container-fluid main container-main">
+<div id="content" class="container-fluid main container-main">
     <#nested>
 </div>
 
@@ -176,6 +419,7 @@
                                                     target="_blank">${i18n.getText("webapp.gov")}</a>
         </p>
     </div>
+</div>
 </div>
 <!-- /container -->
 <!--[if lte IE 7]>
@@ -301,37 +545,6 @@ $(function () {
                     showCloseButton: true
                 });
             });
-//jquery i18n
-//            jQuery.i18n.properties({
-//                name: 'messages',
-//                path:'/',
-//                callback: function(){ alert( $.i18n.prop('webapp.name') ); }
-//            });
-
-            $("#menubtn").clickover({
-                content: $("#menunav").html(),
-                html: true,
-                placement: 'bottom',
-                trigger: 'hover',
-//                auto_close: 3 * 1000,
-                class_btn: 'menu-btn-hover',
-                class_pop: 'menu-pop',
-                container: 'body',
-                global_close: true });
-
-            $("#nav-menu").click(function () {
-                $(this).toggleClass("nav-menu-bg");
-                var gicon = $(this).find(".glyphicon");
-                gicon.toggleClass("glyphicon-chevron-down");
-                gicon.toggleClass("glyphicon-chevron-up");
-
-                if ($("#menunav").is(":visible")) {
-                    $("#menunav").slideUp();
-                } else {
-                    $("#menunav").slideDown();
-                }
-            });
-
         });
     }(jQuery)
 </script>
