@@ -120,7 +120,7 @@
 </div>
 <nav id="menu-left">
     <ul>
-        <li><a href="/">首页</a></li>
+        <li class="<#if activebar == 'index'> Selected </#if><a href="/">首页</a></li>
     </ul>
 </nav>
 <nav id="menu-right">
