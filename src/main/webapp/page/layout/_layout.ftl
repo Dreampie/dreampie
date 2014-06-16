@@ -118,12 +118,12 @@
 
     </div>
 </div>
-<nav id="menu-left">
+<nav id="menu-left" class="mm-menu mm-offcanvas">
     <ul>
         <li class="<#if activebar == 'index'> Selected </#if><a href="/">首页</a></li>
     </ul>
 </nav>
-<nav id="menu-right">
+<nav id="menu-right" class="mm-menu mm-offcanvas">
 <ul>
     <@shiro.notAuthenticated>
     <li class="<#if activebar == 'toregister'> Selected </#if>">
