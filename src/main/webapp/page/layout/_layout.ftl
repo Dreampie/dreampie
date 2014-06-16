@@ -120,15 +120,7 @@
 </div>
 <nav id="menu-left">
     <ul>
-        <li><a href="index.html">Introduction</a></li>
-        <li><a href="horizontal-submenus.html">Horizontal submenus example</a></li>
-        <li><a href="vertical-submenus.html">Vertical submenus example</a></li>
-        <li><a href="positions.html">Positioning the menu</a></li>
-        <li><a href="colors.html">Coloring the menu</a></li>
-        <li class="Selected"><a href="advanced.html">Advanced example</a></li>
-        <li><a href="onepage.html">One page scrolling example</a></li>
-        <li><a href="photos.html">Photo's app</a></li>
-        <li><a href="jqmobile/index.html">jQuery Mobile example</a></li>
+        <li><a href="/">首页</a></li>
     </ul>
 </nav>
 <nav id="menu-right">
@@ -146,266 +138,267 @@
     </li>
     <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
     </@shiro.authenticated>
-<span>Friends</span>
-<ul>
-    <li class="Label">A</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/1/"/>
-            Alexa<br/>
-            <small>Johnson</small>
-        </a>
-    </li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/2/"/>
-            Alexander<br/>
-            <small>Brown</small>
-        </a>
-    </li>
-
-    <li class="Label">F</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/3/"/>
-            Fred<br/>
-            <small>Smith</small>
-        </a>
-    </li>
-
-    <li class="Label">J</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/4/"/>
-            James<br/>
-            <small>Miller</small>
-        </a>
-    </li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/5/"/>
-            Jefferson<br/>
-            <small>Jackson</small>
-        </a>
-    </li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/6/"/>
-            Jordan<br/>
-            <small>Lee</small>
-        </a>
-    </li>
-
-    <li class="Label">K</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/7/"/>
-            Kim<br/>
-            <small>Adams</small>
-        </a>
-    </li>
-
-    <li class="Label">M</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/8/"/>
-            Meagan<br/>
-            <small>Miller</small>
-        </a>
-    </li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/9/"/>
-            Melissa<br/>
-            <small>Johnson</small>
-        </a>
-    </li>
-
-    <li class="Label">N</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/10/"/>
-            Nicole<br/>
-            <small>Smith</small>
-        </a>
-    </li>
-
-    <li class="Label">S</li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/1/"/>
-            Samantha<br/>
-            <small>Harris</small>
-        </a>
-    </li>
-    <li class="img">
-        <a href="#">
-            <img src="http://lorempixel.com/50/50/people/2/"/>
-            Scott<br/>
-            <small>Thompson</small>
-        </a>
-    </li>
 </ul>
-</li>
+<#--<span>Friends</span>-->
+<#--<ul>-->
+    <#--<li class="Label">A</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
+            <#--Alexa<br/>-->
+            <#--<small>Johnson</small>-->
+        <#--</a>-->
+    <#--</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
+            <#--Alexander<br/>-->
+            <#--<small>Brown</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-<li>
-    <span>Family</span>
-    <ul>
-        <li class="Label">A</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/3/"/>
-                Adam<br/>
-                <small>White</small>
-            </a>
-        </li>
+    <#--<li class="Label">F</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
+            <#--Fred<br/>-->
+            <#--<small>Smith</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-        <li class="Label">B</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/4/"/>
-                Ben<br/>
-                <small>Robinson</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/5/"/>
-                Bruce<br/>
-                <small>Lee</small>
-            </a>
-        </li>
+    <#--<li class="Label">J</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
+            <#--James<br/>-->
+            <#--<small>Miller</small>-->
+        <#--</a>-->
+    <#--</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
+            <#--Jefferson<br/>-->
+            <#--<small>Jackson</small>-->
+        <#--</a>-->
+    <#--</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
+            <#--Jordan<br/>-->
+            <#--<small>Lee</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-        <li class="Label">E</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/6/"/>
-                Eddie<br/>
-                <small>Williams</small>
-            </a>
-        </li>
+    <#--<li class="Label">K</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
+            <#--Kim<br/>-->
+            <#--<small>Adams</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-        <li class="Label">J</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/7/"/>
-                Jack<br/>
-                <small>Johnson</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/8/"/>
-                John<br/>
-                <small>Jackman</small>
-            </a>
-        </li>
+    <#--<li class="Label">M</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
+            <#--Meagan<br/>-->
+            <#--<small>Miller</small>-->
+        <#--</a>-->
+    <#--</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
+            <#--Melissa<br/>-->
+            <#--<small>Johnson</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-        <li class="Label">M</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/9/"/>
-                Martina<br/>
-                <small>Thompson</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/10/"/>
-                Matthew<br/>
-                <small>Watson</small>
-            </a>
-        </li>
+    <#--<li class="Label">N</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
+            <#--Nicole<br/>-->
+            <#--<small>Smith</small>-->
+        <#--</a>-->
+    <#--</li>-->
 
-        <li class="Label">O</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/1/"/>
-                Olivia<br/>
-                <small>Taylor</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/2/"/>
-                Owen<br/>
-                <small>Wilson</small>
-            </a>
-        </li>
-    </ul>
-</li>
+    <#--<li class="Label">S</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
+            <#--Samantha<br/>-->
+            <#--<small>Harris</small>-->
+        <#--</a>-->
+    <#--</li>-->
+    <#--<li class="img">-->
+        <#--<a href="#">-->
+            <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
+            <#--Scott<br/>-->
+            <#--<small>Thompson</small>-->
+        <#--</a>-->
+    <#--</li>-->
+<#--</ul>-->
+<#--</li>-->
 
-<li>
-    <span>Work colleagues</span>
-    <ul>
-        <li class="Label">D</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/3/"/>
-                David<br/>
-                <small>Harris</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/4/"/>
-                Dennis<br/>
-                <small>King</small>
-            </a>
-        </li>
+<#--<li>-->
+    <#--<span>Family</span>-->
+    <#--<ul>-->
+        <#--<li class="Label">A</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
+                <#--Adam<br/>-->
+                <#--<small>White</small>-->
+            <#--</a>-->
+        <#--</li>-->
 
-        <li class="Label">E</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/5/"/>
-                Eliza<br/>
-                <small>Walker</small>
-            </a>
-        </li>
+        <#--<li class="Label">B</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
+                <#--Ben<br/>-->
+                <#--<small>Robinson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
+                <#--Bruce<br/>-->
+                <#--<small>Lee</small>-->
+            <#--</a>-->
+        <#--</li>-->
 
-        <li class="Label">L</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/6/"/>
-                Larry<br/>
-                <small>Turner</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/7/"/>
-                Lisa<br/>
-                <small>Wilson</small>
-            </a>
-        </li>
+        <#--<li class="Label">E</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
+                <#--Eddie<br/>-->
+                <#--<small>Williams</small>-->
+            <#--</a>-->
+        <#--</li>-->
 
-        <li class="Label">M</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/8/"/>
-                Michael<br/>
-                <small>Jordan</small>
-            </a>
-        </li>
+        <#--<li class="Label">J</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
+                <#--Jack<br/>-->
+                <#--<small>Johnson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
+                <#--John<br/>-->
+                <#--<small>Jackman</small>-->
+            <#--</a>-->
+        <#--</li>-->
 
-        <li class="Label">R</li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/9/"/>
-                Rachelle<br/>
-                <small>Cooper</small>
-            </a>
-        </li>
-        <li class="img">
-            <a href="#">
-                <img src="http://lorempixel.com/50/50/people/10/"/>
-                Rick<br/>
-                <small>James</small>
-            </a>
-        </li>
-    </ul>
-</li>
-</ul>
+        <#--<li class="Label">M</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
+                <#--Martina<br/>-->
+                <#--<small>Thompson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
+                <#--Matthew<br/>-->
+                <#--<small>Watson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+
+        <#--<li class="Label">O</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
+                <#--Olivia<br/>-->
+                <#--<small>Taylor</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
+                <#--Owen<br/>-->
+                <#--<small>Wilson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+    <#--</ul>-->
+<#--</li>-->
+
+<#--<li>-->
+    <#--<span>Work colleagues</span>-->
+    <#--<ul>-->
+        <#--<li class="Label">D</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
+                <#--David<br/>-->
+                <#--<small>Harris</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
+                <#--Dennis<br/>-->
+                <#--<small>King</small>-->
+            <#--</a>-->
+        <#--</li>-->
+
+        <#--<li class="Label">E</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
+                <#--Eliza<br/>-->
+                <#--<small>Walker</small>-->
+            <#--</a>-->
+        <#--</li>-->
+
+        <#--<li class="Label">L</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
+                <#--Larry<br/>-->
+                <#--<small>Turner</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
+                <#--Lisa<br/>-->
+                <#--<small>Wilson</small>-->
+            <#--</a>-->
+        <#--</li>-->
+
+        <#--<li class="Label">M</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
+                <#--Michael<br/>-->
+                <#--<small>Jordan</small>-->
+            <#--</a>-->
+        <#--</li>-->
+
+        <#--<li class="Label">R</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
+                <#--Rachelle<br/>-->
+                <#--<small>Cooper</small>-->
+            <#--</a>-->
+        <#--</li>-->
+        <#--<li class="img">-->
+            <#--<a href="#">-->
+                <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
+                <#--Rick<br/>-->
+                <#--<small>James</small>-->
+            <#--</a>-->
+        <#--</li>-->
+    <#--</ul>-->
+<#--</li>-->
+<#--</ul>-->
 </nav>
 <!--页面内容-->
 <div id="content" class="container-fluid main container-main">
