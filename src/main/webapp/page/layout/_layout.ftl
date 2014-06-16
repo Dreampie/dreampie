@@ -53,7 +53,6 @@
 
             //初始化菜单
             $('nav#menu-left').mmenu({classes: 'mm-slide',
-                dragOpen: true,
                 counters: true,
                 searchfield: true,
                 header: {add: true, update: true, title: 'Menu'}});
@@ -120,7 +119,7 @@
 </div>
 <nav id="menu-left" class="mm-menu mm-offcanvas">
     <ul>
-        <li class="<#if activebar == 'index'> Selected </#if><a href="/">首页</a></li>
+        <li class="<#if activebar == 'index'> Selected </#if>"><a href="/">首页</a></li>
     </ul>
 </nav>
 <nav id="menu-right" class="mm-menu mm-offcanvas">
