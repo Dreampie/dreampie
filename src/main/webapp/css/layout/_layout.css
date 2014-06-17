@@ -342,10 +342,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     border-radius: 0px;
     margin: 0px;
     position: relative;
-    /*padding-top: 18px !important;*/
-    /*padding-bottom: 16px !important;*/
-    /**padding-bottom: 26px !important;*/
-    /*padding: 9px 10px;*/
+    *padding-bottom: 12px;
     background-color: transparent;
     background-image: none;
     border-left: 1px solid transparent;
@@ -407,15 +404,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     border-left: 1px solid #EDEDED;
 }
 
+.header-main {
+    border-left: 0px;
+    border-right: 0px;
+}
+
 .header-default, .header-sm {
     text-align: center
 }
 
-@media (min-width: 768px) {
+.header-sm {
+    display: none;
+}
 
-    .header-sm {
-        display: none;
-    }
+@media (min-width: 768px) {
 
     .menumain {
         display: none;

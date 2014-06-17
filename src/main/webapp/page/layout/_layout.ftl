@@ -4,11 +4,9 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<@resource.static/>/images/favicon.ico"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
     <!-- 最新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap.min.css" media="screen"/>
 
@@ -23,7 +21,6 @@
     <!--[if lte IE 7]>
     <link rel="stylesheet" href="a<@resource.static/>/libs/bootstrap/css/font-awesome-ie7.min.css">
     <![endif]-->
-
     <!-- bsie css 补丁文件 -->
     <!-- bsie 额外的 css 补丁文件 -->
     <!--[if lte IE 7]>
@@ -31,9 +28,8 @@
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/bootstrap/css/ie.css"/>
     <![endif]-->
     <!--自定义样式-->
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/mmenu/css/jquery.mmenu.all.css"
-          media="screen"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/mmenu/css/jquery.mmenu.all.css"/>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.mmenu.min.all.js"></script>
@@ -64,6 +60,7 @@
                 header: {add: true, update: true, title: '<@shiro.principal property="full_name"/>'}});
         });
     </script>
+    <link rel="shortcut icon" href="<@resource.static/>/images/favicon.ico"/>
     <title>${html_title}</title>
 </head>
 <body>
@@ -71,18 +68,18 @@
 <!--container-->
 <div id="page">
 <!--Site header-->
-<div id="header" class="navbar navbar-default headroom header-main mm-fixed-top">
+<div id="header" class="mm-fixed-top navbar navbar-default headroom header-main">
     <div class="container-fluid">
         <div class="header-sm">
-            <a style="padding: 0px" href="/">
-                <img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>
-            </a>
             <ul class="nav fleft">
                 <li>
                     <a class="menu-btn navbar-toggle navbar-btn" href="#menu-left">
                         <span class="glyphicon glyphicon-th-large"></span>
                     </a></li>
             </ul>
+            <a href="/">
+                <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+            </a>
             <ul class="nav fright">
                 <li>
                     <a class="menu-btn navbar-toggle navbar-btn" href="#menu-right">
@@ -90,23 +87,18 @@
                     </a></li>
             </ul>
         </div>
-        <div class="header-default">
-            <a style="padding: 0px" href="/">
-                <img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>
-            </a>
-            <ul class="nav navbar-nav navbar-left">
+        <div class="header-default" role="navigation">
+            <ul class=" navbar-left nav navbar-nav">
                 <li>
                     <a id="menubtn" class="menu-btn" href="#menu-left">
                         <span class="glyphicon glyphicon-th-large"></span>
                     </a>
                 </li>
-                <#--<li>-->
-                    <#--<a style="padding: 0px" href="/">-->
-                        <#--<img src="/images/logo.jpg" style="height: 48px;*height:50px" alt=""/>-->
-                    <#--</a>-->
-                <#--</li>-->
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <a style="padding: 0px" href="/">
+                <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+            </a>
+            <ul class="navbar-right nav navbar-nav">
                 <li>
                     <a class="menu-btn" href="#menu-right">
                         <span class="glyphicon glyphicon-user"></span>
