@@ -101,7 +101,7 @@
             <ul class="navbar-right nav navbar-nav">
                 <li>
                     <a class="menu-btn" href="#menu-right">
-                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="glyphicon glyphicon-user" style="<@shiro.notAuthenticated>color: lightgray;</@shiro.notAuthenticated>"></span>
                     </a>
                 </li>
             </ul>
