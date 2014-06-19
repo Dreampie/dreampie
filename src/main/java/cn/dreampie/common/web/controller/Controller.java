@@ -1,5 +1,6 @@
 package cn.dreampie.common.web.controller;
 
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
 import cn.dreampie.common.plugin.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
@@ -96,6 +97,8 @@ public class Controller extends com.jfinal.core.Controller {
             setAttr("state", "success");
             if (autoLogin) {
                 if (SubjectUtils.me().login(regUser.getStr("username"), passwordInfo.getHashText())) {
+                    //添加到session
+                    SubjectUtils.me().getSession().setAttribute(AppConstants.CURRENT_USER, regUser);
                     dynaRender("/page/index.ftl");
                 } else
                     dynaRender("/page/login.ftl");
