@@ -3,16 +3,18 @@
 <link rel="stylesheet" href="<@resource.static/>/css/login.css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
+<!--url param-->
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery.query.js"></script>
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input name="username" value="${(username)!}" type="text" maxlength="18" class="form-control username"
+    <input name="username" value="<@shiro.loginUsername/>" type="text" maxlength="18" class="form-control username"
            placeholder="账户/邮箱" required autofocus>
     <input name="password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码"
            required>
     <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码"
            required><img
         class="captcha"
-        src="/patchca?width=119&height=42">
+        src="/patchca?width=119&height=42&time=${.now?long}">
 
     <div class="error-box"></div>
     <label class="checkbox">

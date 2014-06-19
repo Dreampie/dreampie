@@ -27,12 +27,23 @@ $(function () {
         });
     }
     //验证码
-    if ($('.patchca').length > 0) {
-        $('.patchca').click(function () {
-            var src = $(this).attr("src");
-            if (src.indexOf("?") > 0)
-                $(this).attr("src", src.split("?")[0] + "?"
-                    + new Date().getTime());
+    if ($("img.captcha").length > 0) {
+        $("img.captcha").click(function () {
+            var img = $(this);
+            var query = $.query().load(img.attr("src"));
+            img.attr("src", query.set("time", new Date().getTime()));
+        });
+    }
+    if ($("input[name='captcha']").length > 0) {
+        $("input[name='captcha']").focus(function () {
+            var now = new Date().getTime();
+            var img = $("img.captcha");
+            var query = $.query().load(img.attr("src"));
+            var before = Number(query.get("time"));
+            before = before <= 0 ? now : before;
+            if (now - before > 300000) {
+                $("img.captcha").click();
+            }
         });
     }
 })
