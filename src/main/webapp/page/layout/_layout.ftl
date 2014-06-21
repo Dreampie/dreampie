@@ -49,6 +49,7 @@
 
             //初始化菜单
             $('nav#menu-left').mmenu({classes: 'mm-slide',
+                dragOpen: true,
                 counters: true,
                 searchfield: true,
                 header: {add: true, update: true, title: 'Menu'}});
