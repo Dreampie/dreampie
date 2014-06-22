@@ -72,19 +72,19 @@
             steps: [
                 {
                     path: "",
-                    element: "#tologin",
+                    element: "#menubtn",
                     placement: "bottom",
                     title: "欢迎来到Dreampie",
-                    content: "如果您已经有了账户请从这儿登录.",
+                    content: "点击该按钮访问菜单.",
                     backdrop: false,
                     reflex: true
                 },
                 {
                     path: "",
-                    element: "#toregister",
+                    element: "#userbtn",
                     placement: "bottom",
                     title: "欢迎来到Dreampie",
-                    content: "如果您还没有账户请在这儿注册.",
+                    content: "点击该按钮可以访问用户信息.",
                     backdrop: false,
                     reflex: true
                 }

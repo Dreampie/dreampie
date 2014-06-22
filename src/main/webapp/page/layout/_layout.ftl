@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- 最新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap.min.css" media="screen"/>
 
@@ -34,27 +34,36 @@
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.hammer.min.js"></script>
+
 <#-- base href="${CPATH}" / -->
     <script type="text/javascript">
         $(function () {
             //初始化高度
             ~(function (window, document, $) {
-                var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
-                h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
-                        _fn = function (h) {
-                            $(".container-main").eq(0).css("min-height", h + "px");
-                        };
-                _fn(height - h);
+                $.reHeight = function () {
+                    var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+//                    h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
+                    h =  $(".footer-main").outerHeight() + 35,
+                            _fn = function (h) {
+//                                console.log(h);
+                                $(".container-main").eq(0).css("min-height", h + "px");
+                            };
+                    _fn(height - h);
+                }
+                $.reHeight();
             })(window, document, $);
 
+            $(window).resize(function () {
+                $.reHeight();
+            });
             //初始化菜单
-            $('nav#menu-left').mmenu({classes: 'mm-slide',
-                dragOpen: true,
+            $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/},classes: 'mm-white',
+//                dragOpen: true,
                 counters: true,
                 searchfield: true,
                 header: {add: true, update: true, title: 'Menu'}});
 
-            $('nav#menu-right').mmenu({offCanvas: {position: 'right'}, classes: 'mm-light',
+            $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-white',
                 dragOpen: true,
                 counters: true,
                 searchfield: true,
@@ -66,50 +75,6 @@
 </head>
 <body>
 <!--http://www.cnblogs.com/steden/archive/2010/08/14/1799651.html-->
-<!--container-->
-<div id="page">
-<!--Site header-->
-<div id="header" class="mm-fixed-top navbar navbar-default headroom header-main">
-    <div class="container-fluid">
-        <div class="header-sm">
-            <ul class="nav fleft">
-                <li>
-                    <a class="menu-btn navbar-toggle navbar-btn" href="#menu-left">
-                        <span class="glyphicon glyphicon-th-large"></span>
-                    </a></li>
-            </ul>
-            <a href="/">
-                <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
-            </a>
-            <ul class="nav fright">
-                <li>
-                    <a class="menu-btn navbar-toggle navbar-btn" href="#menu-right">
-                        <span class="glyphicon glyphicon-user"></span>
-                    </a></li>
-            </ul>
-        </div>
-        <div class="header-default" role="navigation">
-            <ul class=" navbar-left nav navbar-nav">
-                <li>
-                    <a id="menubtn" class="menu-btn" href="#menu-left">
-                        <span class="glyphicon glyphicon-th-large"></span>
-                    </a>
-                </li>
-            </ul>
-            <a style="padding: 0px" href="/">
-                <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
-            </a>
-            <ul class="navbar-right nav navbar-nav">
-                <li>
-                    <a class="menu-btn" href="#menu-right">
-                        <span class="glyphicon glyphicon-user" style="<@shiro.notAuthenticated>color: lightgray;</@shiro.notAuthenticated>"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</div>
 <nav id="menu-left" class="mm-menu mm-offcanvas">
     <ul>
         <li class="<#if activebar == 'index'> Selected </#if>"><a href="/">首页</a></li>
@@ -118,293 +83,83 @@
 <nav id="menu-right" class="mm-menu mm-offcanvas">
 <ul>
     <@shiro.notAuthenticated>
-    <li class="<#if activebar == 'toregister'> Selected </#if>">
-        <a id="toregister" class="tour-tour-element tour-tour-1-element tour-step-backdrop"
-           href="/toregister">${i18n.getText("user.register")}</a></li>
-    <li class="<#if activebar == 'tologin'> Selected </#if>">
-        <a id="tologin" class="tour-tour-element tour-tour-0-element tour-step-backdrop"
-           href="/tologin">${i18n.getText("user.login")}</a></li>
+        <li class="<#if activebar == 'toregister'> Selected </#if>">
+            <a id="toregister" class=""
+               href="/toregister">${i18n.getText("user.register")}</a></li>
+        <li class="<#if activebar == 'tologin'> Selected </#if>">
+            <a id="tologin" class=""
+               href="/tologin">${i18n.getText("user.login")}</a></li>
     </@shiro.notAuthenticated>
     <@shiro.authenticated>
-    <li class="<#if activebar == 'center'> Selected </#if>"><a href="/user/center">${i18n.getText("user.center")}</a>
-    </li>
-    <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
+        <li class="<#if activebar == 'center'> Selected </#if>"><a
+                href="/user/center">${i18n.getText("user.center")}</a>
+        </li>
+        <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
     </@shiro.authenticated>
 </ul>
-<#--<span>Friends</span>-->
-<#--<ul>-->
-    <#--<li class="Label">A</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
-            <#--Alexa<br/>-->
-            <#--<small>Johnson</small>-->
-        <#--</a>-->
-    <#--</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
-            <#--Alexander<br/>-->
-            <#--<small>Brown</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">F</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
-            <#--Fred<br/>-->
-            <#--<small>Smith</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">J</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
-            <#--James<br/>-->
-            <#--<small>Miller</small>-->
-        <#--</a>-->
-    <#--</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
-            <#--Jefferson<br/>-->
-            <#--<small>Jackson</small>-->
-        <#--</a>-->
-    <#--</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
-            <#--Jordan<br/>-->
-            <#--<small>Lee</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">K</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
-            <#--Kim<br/>-->
-            <#--<small>Adams</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">M</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
-            <#--Meagan<br/>-->
-            <#--<small>Miller</small>-->
-        <#--</a>-->
-    <#--</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
-            <#--Melissa<br/>-->
-            <#--<small>Johnson</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">N</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
-            <#--Nicole<br/>-->
-            <#--<small>Smith</small>-->
-        <#--</a>-->
-    <#--</li>-->
-
-    <#--<li class="Label">S</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
-            <#--Samantha<br/>-->
-            <#--<small>Harris</small>-->
-        <#--</a>-->
-    <#--</li>-->
-    <#--<li class="img">-->
-        <#--<a href="#">-->
-            <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
-            <#--Scott<br/>-->
-            <#--<small>Thompson</small>-->
-        <#--</a>-->
-    <#--</li>-->
-<#--</ul>-->
-<#--</li>-->
-
-<#--<li>-->
-    <#--<span>Family</span>-->
-    <#--<ul>-->
-        <#--<li class="Label">A</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
-                <#--Adam<br/>-->
-                <#--<small>White</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">B</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
-                <#--Ben<br/>-->
-                <#--<small>Robinson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
-                <#--Bruce<br/>-->
-                <#--<small>Lee</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">E</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
-                <#--Eddie<br/>-->
-                <#--<small>Williams</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">J</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
-                <#--Jack<br/>-->
-                <#--<small>Johnson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
-                <#--John<br/>-->
-                <#--<small>Jackman</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">M</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
-                <#--Martina<br/>-->
-                <#--<small>Thompson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
-                <#--Matthew<br/>-->
-                <#--<small>Watson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">O</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/1/"/>-->
-                <#--Olivia<br/>-->
-                <#--<small>Taylor</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/2/"/>-->
-                <#--Owen<br/>-->
-                <#--<small>Wilson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-    <#--</ul>-->
-<#--</li>-->
-
-<#--<li>-->
-    <#--<span>Work colleagues</span>-->
-    <#--<ul>-->
-        <#--<li class="Label">D</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/3/"/>-->
-                <#--David<br/>-->
-                <#--<small>Harris</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/4/"/>-->
-                <#--Dennis<br/>-->
-                <#--<small>King</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">E</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/5/"/>-->
-                <#--Eliza<br/>-->
-                <#--<small>Walker</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">L</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/6/"/>-->
-                <#--Larry<br/>-->
-                <#--<small>Turner</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/7/"/>-->
-                <#--Lisa<br/>-->
-                <#--<small>Wilson</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">M</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/8/"/>-->
-                <#--Michael<br/>-->
-                <#--<small>Jordan</small>-->
-            <#--</a>-->
-        <#--</li>-->
-
-        <#--<li class="Label">R</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/9/"/>-->
-                <#--Rachelle<br/>-->
-                <#--<small>Cooper</small>-->
-            <#--</a>-->
-        <#--</li>-->
-        <#--<li class="img">-->
-            <#--<a href="#">-->
-                <#--<img src="http://lorempixel.com/50/50/people/10/"/>-->
-                <#--Rick<br/>-->
-                <#--<small>James</small>-->
-            <#--</a>-->
-        <#--</li>-->
-    <#--</ul>-->
-<#--</li>-->
-<#--</ul>-->
 </nav>
-<!--页面内容-->
-<div id="content" class="container-fluid main container-main">
-    <#nested>
-</div>
 
-<!-- Site footer -->
-<div class="footer footer-main">
-    <div class="container-fluid">
-        <p>${i18n.getText("webapp.copyright")} - <a href="http://www.miibeian.gov.cn/"
-                                                    target="_blank">${i18n.getText("webapp.gov")}</a>
-        </p>
+<!--container-->
+<div id="page">
+    <!--Site header-->
+    <div id="header" class="mm-fixed-top navbar navbar-default headroom header-main">
+        <div class="container-fluid">
+            <div class="header-sm">
+                <ul class="nav fleft">
+                    <li>
+                        <a class="menu-btn navbar-toggle navbar-btn" href="#menu-left">
+                            <span class="glyphicon glyphicon-th-large"></span>
+                        </a></li>
+                </ul>
+                <a href="/">
+                    <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+                </a>
+                <ul class="nav fright">
+                    <li>
+                        <a class="menu-btn navbar-toggle navbar-btn" href="#menu-right">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a></li>
+                </ul>
+            </div>
+            <div class="header-default" role="navigation">
+                <ul class=" navbar-left nav navbar-nav">
+                    <li>
+                        <a id="menubtn" class="menu-btn tour-tour-element tour-tour-0-element tour-step-backdrop" href="#menu-left">
+                            <span class="glyphicon glyphicon-th-large"></span>
+                        </a>
+                    </li>
+                </ul>
+                <a style="padding: 0px" href="/">
+                    <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+                </a>
+                <ul class="navbar-right nav navbar-nav">
+                    <li>
+                        <a id="userbtn" class="menu-btn tour-tour-element tour-tour-1-element tour-step-backdrop" href="#menu-right">
+                            <span class="glyphicon glyphicon-user"
+                                  style="<@shiro.notAuthenticated>color: lightgray;</@shiro.notAuthenticated>"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
-</div>
+
+    <!--页面内容-->
+    <div id="content" class="container-fluid main container-main">
+        <#nested>
+    </div>
+
+    <!-- Site footer -->
+    <div class="footer footer-main">
+        <div class="container-fluid">
+            <p>${i18n.getText("webapp.copyright")}</p>
+            <p>
+                <a href="http://www.miibeian.gov.cn/"
+                   target="_blank">${i18n.getText("webapp.gov")}</a>
+            </p>
+        </div>
+    </div>
 </div>
 <!-- /container -->
 <!--[if lte IE 7]>
@@ -432,7 +187,6 @@ $(function () {
 })
 </script>
 <![endif]-->
-
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrapx-clickover.js"></script>
@@ -465,6 +219,9 @@ $(function () {
 <!--[if lt IE 9]>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/html5shiv.min.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/respond.min.js"></script>
+<![endif]-->
+<!--[if lte IE 8]>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery.ba-resize.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
     /**

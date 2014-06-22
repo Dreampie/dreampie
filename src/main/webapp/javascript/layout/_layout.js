@@ -13,6 +13,9 @@ $(function () {
     $("form input[type!='button'][type!='submit']").maxlength({
         alwaysShow: true
     });
+    $("form textarea").maxlength({
+        alwaysShow: true
+    });
     //时间控件
     if ($('.form_datetime').length > 0) {
         $('.form_datetime').datetimepicker({

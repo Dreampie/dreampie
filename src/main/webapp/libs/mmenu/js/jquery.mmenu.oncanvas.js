@@ -1,5 +1,5 @@
 /*	
- * jQuery mmenu v4.3.1
+ * jQuery mmenu v4.3.2
  * @requires jQuery 1.7.0 or later
  *
  * mmenu.frebsite.nl
@@ -7,16 +7,15 @@
  * Copyright (c) Fred Heusschen
  * www.frebsite.nl
  *
- * Dual licensed under the MIT and GPL licenses.
+ * Dual licensed under the MIT license:
  * http://en.wikipedia.org/wiki/MIT_License
- * http://en.wikipedia.org/wiki/GNU_General_Public_License
  */
 
 
 (function( $ ) {
 
 	var _PLUGIN_	= 'mmenu',
-		_VERSION_	= '4.3.1';
+		_VERSION_	= '4.3.2';
 
 
 	//	Plugin already excists
