@@ -38,14 +38,14 @@
                 rules: {/*"username": [
                     {regex: /^\w{5,18}$/},'mobile','email'
                 ], */
-                    "username":['not_empty'] ,"password": [
-                    {regex: /^\w{5,18}$/}
-                ], "captcha": [
-                    {regex: /^\d{4}$/}
-                ]},
+                    "username": ['not_empty'], "password": [
+                        {regex: /^\w{5,18}$/}
+                    ], "captcha": [
+                        {regex: /^\d{4}$/}
+                    ]},
                 messages: {
-                   /* "username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线','mobile':'手机号格式不正确','email':'邮箱格式不正确'},*/
-                    "username":{'not_empty':'用户名不能为空'},
+                    /* "username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线','mobile':'手机号格式不正确','email':'邮箱格式不正确'},*/
+                    "username": {'not_empty': '用户名不能为空'},
                     "password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
                     "captcha": {'regex': '验证码必须为四位数字'}
                 }, boxer: {exist: true}});
