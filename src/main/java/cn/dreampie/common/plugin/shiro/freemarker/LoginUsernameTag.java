@@ -35,14 +35,14 @@ public class LoginUsernameTag extends SecureTag {
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
         String result = null;
         Session session = getSubject().getSession();
-        if (session != null && session.getAttribute(AppConstants.TEMP_USER) != null) {
+        if (session != null && session.getAttribute(AppConstants.LOGIN_USER_NAME) != null) {
             if (log.isDebugEnabled()) {
                 log.debug("tempUser is exsit.");
             }
 
-            User tempUser = (User) session.getAttribute(AppConstants.TEMP_USER);
-            if (tempUser.getStr("username") != null) {
-                result = String.valueOf(tempUser.getStr("username"));
+            String username = session.getAttribute(AppConstants.LOGIN_USER_NAME).toString();
+            if (username != null) {
+                result = username;
             }
         } else {
             if (log.isDebugEnabled()) {

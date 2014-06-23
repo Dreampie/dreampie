@@ -277,10 +277,13 @@ public class MyFormAuthenticationFilter extends MyAuthenticatingFilter {
         String className = ae.getClass().getSimpleName();
         Session session = getSubject(request, response).getSession();
         session.setAttribute(getFailureKeyAttribute(), className);
+        session.setAttribute(AppConstants.LOGIN_USER_NAME, getUsername(request));
     }
 
     protected void clearFailureAttribute(ServletRequest request, ServletResponse response) {
-        getSubject(request, response).getSession().removeAttribute(getFailureKeyAttribute());
+        Session session = getSubject(request, response).getSession();
+        session.removeAttribute(getFailureKeyAttribute());
+        session.removeAttribute(AppConstants.LOGIN_USER_NAME);
     }
 
     protected void setUserAttribute(ServletRequest request, ServletResponse response) {
