@@ -28,7 +28,7 @@ public class RootValidator {
 
             boolean lastnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.last_name"));
             if (lastnameEmpty) addError("lastnameMsg", "姓氏不能为空");
-            if (!lastnameEmpty && c.getPara("user.last_name").length() > 10) addError("lastnameMsg", "姓氏不能为空");
+            if (!lastnameEmpty && c.getPara("user.last_name").length() > 10) addError("lastnameMsg", "姓氏不能多于10位");
 
 
             boolean passwordEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.password"));

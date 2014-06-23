@@ -1,6 +1,7 @@
 package cn.dreampie.common.plugin.shiro;
 
 import cn.dreampie.common.config.AppConstants;
+import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.Permission;
 import cn.dreampie.function.user.Role;
 import cn.dreampie.function.user.User;
@@ -37,7 +38,14 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //      PasswordService passwordService = new DefaultPasswordService();
 //      return new SimpleAuthenticationInfo(MyAnonymousFilter.getUsername(), passwordService.encryptPassword(MyAnonymousFilter.getPassword()), getName());
 //    } else {
-        user = User.dao.findByFirst(" `user`.username =?", userToken.getUsername());
+        String username = userToken.getUsername();
+        if (ValidateUtils.me().isEmail(username)) {
+            user = User.dao.findByFirst(" `user`.email =?", username);
+        } else if (ValidateUtils.me().isMobile(username)) {
+            user = User.dao.findByFirst(" `user`.mobile =?", username);
+        } else {
+            user = User.dao.findByFirst(" `user`.username =?", username);
+        }
         if (user != null) {
             Session session = SecurityUtils.getSubject().getSession();
             session.setAttribute(AppConstants.TEMP_USER, user);
