@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="梦想,追梦,梦想派,追梦派,梦想派官方,梦想派官网,追梦派官方，追梦派官网">
+    <meta name="description" content="梦想派是一个开源集成框架，用户可以依赖该框架构建输入自己开源网站！">
     <!-- 最新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap.min.css" media="screen"/>
 

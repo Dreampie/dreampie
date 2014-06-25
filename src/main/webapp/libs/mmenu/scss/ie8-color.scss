@@ -1,0 +1,8 @@
+@import "inc/variables";
+//ie8 color
+mm_colors( "",      // additional classname
+  #333, none,     // background color and page shadow
+  #eee, #ccc,     // text color and dimmed text color
+  #444, #222,     // emphasize and highlight background colors
+  #555            // border color
+);
