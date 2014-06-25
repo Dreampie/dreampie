@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="copyright" content="Copyright 梦想派(追梦派)官方网站">
     <meta name="keywords" content="梦想,追梦,梦想派,追梦派,梦想派官方,梦想派官网,追梦派官方，追梦派官网">
-    <meta name="description" content="梦想派是一个开源集成框架，用户可以依赖该框架构建输入自己开源网站！">
+    <meta name="description" content="梦想派(追梦派)是一个开源集成框架，用户可以依赖该框架构建输入自己开源网站！">
     <!--百度站长验证-->
     <meta name="baidu-site-verification" content="ejR7RPMvau" />
     <!--google站长验证-->
@@ -67,7 +68,7 @@
 //                dragOpen: true,
                 counters: true,
                 searchfield: true,
-                header: {add: true, update: true, title: 'Menu'}});
+                header: {add: true, update: true, title: '菜单'}});
 
             $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-white',
                 dragOpen: true,

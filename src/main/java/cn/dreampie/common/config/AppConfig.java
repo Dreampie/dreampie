@@ -15,6 +15,7 @@ import cn.dreampie.common.web.handler.AccessDeniedHandler;
 import cn.dreampie.common.web.handler.FakeStaticHandler;
 import cn.dreampie.common.web.handler.ResourceHandler;
 import cn.dreampie.common.web.handler.SkipHandler;
+import cn.dreampie.common.web.handler.xss.AttackHandler;
 import cn.dreampie.common.web.interceptor.UrlInterceptor;
 import cn.dreampie.common.web.render.JsonErrorRenderFactory;
 import cn.dreampie.common.web.resource.ResourceTags;
@@ -154,8 +155,10 @@ public class AppConfig extends JFinalConfig {
 //        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/javascript/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
         handlers.add(new FakeStaticHandler());
         handlers.add(new AccessDeniedHandler("/**/*.ftl"));
-        handlers.add(new ResourceHandler("/javascript/**", "/images/**", "/css/**", "/libs/**","/**/*.html"));
+        handlers.add(new ResourceHandler("/javascript/**", "/images/**", "/css/**", "/libs/**", "/**/*.html"));
         handlers.add(new SkipHandler("/im/**"));
+        //防xss攻击
+        handlers.add(new AttackHandler());
     }
 
     @Override
