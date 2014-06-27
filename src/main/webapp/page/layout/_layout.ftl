@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css"/>
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/mmenu/css/jquery.mmenu.all.css"/>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script type="text/javascript" src="<@resource.static/>/javascript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.hammer.min.js"></script>
 

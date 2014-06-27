@@ -49,8 +49,21 @@ $(function () {
             }
         });
     }
-})
 
+    //输入金额
+    if ($('input.checkMoney').length > 0) {
+        $("input.checkMoney").each(function () {
+            onlyMoney($(this));
+        });
+    }
+
+    //输入数字
+    if ($('input.checkNum').length > 0) {
+        $("input.checkNum").each(function () {
+            onlyNum($(this));
+        });
+    }
+})
 /**
  * 格式化金额
  * @param number
@@ -68,8 +81,8 @@ function formatNumber(number, digit) {
     ;
     //参数说明：num 要格式化的数字 n 保留小数位
     number = String(Number(number).toFixed(digit));
-    var re = /(-?\d+)(\d{3})/;
-    /* while(re.test(number))
+    /* var re = /(-?\d+)(\d{3})/;
+     while(re.test(number))
      number = number.replace(re,"$1,$2");*/
     return number;
 }
@@ -79,16 +92,94 @@ function formatNumber(number, digit) {
  * @returns {Boolean}
  */
 function onlyNum(obj) {
-    obj.keydown(function (event) {
-        var keyCode = event.which;
-        if (keyCode == 46 || keyCode == 8 || keyCode == 37 || keyCode == 39 || (keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
-            return true;
+    var numval = /^\d+$/;
+    obj.keyup(function () {
+        var _value = $(this).val();
+        if (!(numval.test(_value) && _value > 0)) {
+            var v = Number(_value.replace(/[^0-9]/g, ''));
+            if (v > 0)
+                $(this).val(v);
+            else
+                $(this).val("");
+        } else {
+            $(this).val(Number(_value));
         }
-        else {
-            return false;
+    }).bind("paste", function () {  //CTR+V事件处理
+        var _value = $(this).val();
+        if (!(numval.test(_value) && _value > 0)) {
+            var v = Number(_value.replace(/[^0-9]/g, ''));
+            if (v > 0)
+                $(this).val(v);
+            else
+                $(this).val("");
+        } else {
+            $(this).val(Number(_value));
         }
     }).focus(function () {
             this.style.imeMode = 'disabled';
         }
     );
+}
+/**
+ * 限制文本框只能输入金额
+ * @param event
+ * @returns {Boolean}
+ */
+function onlyMoney(obj) {
+    var numma = /-?\d+\.?\d{0,2}/;
+    var numval = /^-?\d+\.?\d{0,2}$/;
+    obj.keyup(function () {
+        var _value = $(this).val();
+        if (_value.length >= 2 && !numval.test(_value)) {
+            var ma = _value.match(numma);
+            if (ma && ma.length >= 2)
+                $(this).val(ma[0]);
+            else {
+                if (_value.indexOf("-") == 0)
+                    $(this).val("-");
+                else
+                    $(this).val("");
+            }
+        } else {
+            $(this).val(_value.replace(/[^0-9.-]/g, ''));
+        }
+    }).bind("paste", function () {  //CTR+V事件处理
+        var _value = $(this).val();
+        if (_value.length >= 2 && !numval.test(_value)) {
+            var ma = _value.match(numma);
+            if (ma && ma.length >= 2)
+                $(this).val(ma[0]);
+            else {
+                if (_value.indexOf("-") == 0)
+                    $(this).val("-");
+                else
+                    $(this).val("");
+            }
+        } else {
+            $(this).val(_value.replace(/[^0-9.-]/g, ''));
+        }
+    }).focus(function () {
+            this.style.imeMode = 'disabled';
+        }
+    ); //CSS设置输入法不可用
+}
+
+
+function randomNum(digit) {
+    if (digit <= 1) {
+        return  Math.floor(Math.random() * 10);
+    }
+    var bitField = 0;
+    var chars = "";
+    for (var i = 0; i < digit; i++) {
+        while (true) {
+            var k = Math.floor(Math.random() * 10);
+            if ((bitField & (1 << k)) == 0) {
+                bitField |= 1 << k;
+                chars += k;
+                break;
+            }
+        }
+    }
+    return chars;
 }
