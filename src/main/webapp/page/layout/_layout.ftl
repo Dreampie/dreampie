@@ -4,7 +4,7 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no"/>
+    <meta name="viewport" content="minimal-ui,width=device-width, initial-scale=1.0, user-scalable = no"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1">
     <meta name="copyright" content="Copyright 梦想派(追梦派)官方网站">
