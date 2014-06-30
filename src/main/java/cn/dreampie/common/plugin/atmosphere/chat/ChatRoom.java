@@ -134,7 +134,7 @@ public class ChatRoom {
 
             if (r != null) {
                 ChatProtocol m = new ChatProtocol(user.getAuthor(), " sent you a private message: " + (user.getMessage().indexOf(":") > 0 ? user.getMessage().split(":")[1] : user.getMessage()), users.keySet(), getRooms(factory.lookupAll()));
-                if (!user.getAuthor().equalsIgnoreCase("all")) {
+                if (!user.getReceiver().equalsIgnoreCase("all")) {
                     factory.lookup(CHAT + chatroomName).broadcast(m, r);
                 }
             }

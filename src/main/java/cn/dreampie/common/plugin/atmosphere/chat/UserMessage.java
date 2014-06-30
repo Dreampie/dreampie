@@ -19,8 +19,9 @@ public class UserMessage {
 
     private String message;
     private String author;
+    private String receiver;
 
-    public UserMessage(){
+    public UserMessage() {
     }
 
     public String getMessage() {
@@ -37,5 +38,13 @@ public class UserMessage {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 }
