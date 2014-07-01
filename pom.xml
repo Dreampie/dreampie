@@ -8,14 +8,6 @@
     <artifactId>dreampie</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
-    <properties>
-        <!-- For the Maven Jetty plugin (mvn jetty:run) -->
-        <jetty.version>9.1.1.v20140108</jetty.version>
-        <shiro.version>1.2.3</shiro.version>
-        <atmosphere.version>2.2.0-RC3</atmosphere.version>
-    </properties>
-
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
@@ -39,12 +31,52 @@
         </repository>
     </repositories>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- For the Maven Jetty plugin (mvn jetty:run) -->
+        <jetty.version>9.1.1.v20140108</jetty.version>
+        <shiro.version>1.2.3</shiro.version>
+        <atmosphere.version>2.2.0-RC3</atmosphere.version>
+        <drools.version>6.1.0.CR1</drools.version>
+        <jbpm.version>6.1.0.CR1</jbpm.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <logback.version>1.0.13</logback.version>
+        <h2.version>1.4.178</h2.version>
+        <hibernate.version>4.2.0.Final</hibernate.version>
+        <hibernate.core.version>4.2.0.Final</hibernate.core.version>
+        <btm.version>2.1.4</btm.version>
+        <junit.version>4.10</junit.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- define drools BOM -->
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-bom</artifactId>
+                <type>pom</type>
+                <version>${drools.version}</version>
+                <scope>import</scope>
+            </dependency>
+            <!-- define drools BOM -->
+            <dependency>
+                <groupId>org.jbpm</groupId>
+                <artifactId>jbpm-bom</artifactId>
+                <type>pom</type>
+                <version>${jbpm.version}</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
     <dependencies>
         <!--junit测试-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -52,17 +84,17 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.0.13</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.0.13</version>
+            <version>${logback.version}</version>
         </dependency>
 
         <!--mysql数据库驱动-->
@@ -75,7 +107,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.178</version>
+            <version>${h2.version}</version>
         </dependency>
 
         <!--c3p0连接池驱动-->
@@ -346,27 +378,40 @@
 
         <!--workflow-->
         <!--<dependency>-->
-        <!--<groupId>com.github.snakerflow</groupId>-->
-        <!--<artifactId>snaker-core</artifactId>-->
-        <!--<version>1.5.0</version>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-flow</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-        <!--<groupId>org.jbpm</groupId>-->
-        <!--<artifactId>jbpm</artifactId>-->
-        <!--<version>6.1.0.Beta4</version>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-flow-builder</artifactId>-->
         <!--</dependency>-->
-
         <!--<dependency>-->
-        <!--<groupId>org.jbpm</groupId>-->
-        <!--<artifactId>jbpm-test</artifactId>-->
-        <!--<version>6.1.0.CR1</version>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-bpmn2</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-persistence-jpa</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-human-task-core</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-runtime-manager</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; test dependencies &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.jbpm</groupId>-->
+            <!--<artifactId>jbpm-test</artifactId>-->
         <!--</dependency>-->
 
         <!--jetty server-->
         <!--<dependency>-->
-            <!--<groupId>com.jfinal</groupId>-->
-            <!--<artifactId>jetty-server</artifactId>-->
-            <!--<version>${jetty.version}</version>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-server</artifactId>-->
+        <!--<version>${jetty.version}</version>-->
         <!--</dependency>-->
     </dependencies>
 
