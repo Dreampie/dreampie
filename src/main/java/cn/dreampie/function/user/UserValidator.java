@@ -5,7 +5,6 @@ import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.thread.ThreadLocalUtil;
-import cn.dreampie.function.user.User;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

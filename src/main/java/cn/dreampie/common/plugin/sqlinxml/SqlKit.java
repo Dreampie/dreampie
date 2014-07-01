@@ -27,74 +27,74 @@ import java.util.Map;
 
 public class SqlKit {
 
-  protected static final Logger LOG = Logger.getLogger(SqlKit.class);
+    protected static final Logger LOG = Logger.getLogger(SqlKit.class);
 
-  private static Map<String, String> sqlMap;
+    private static Map<String, String> sqlMap;
 
-  public static String sql(String groupNameAndsqlId) {
-    if (sqlMap == null) {
-      throw new NullPointerException("SqlInXmlPlugin not start");
+    public static String sql(String groupNameAndsqlId) {
+        if (sqlMap == null) {
+            throw new NullPointerException("SqlInXmlPlugin not start");
+        }
+        return sqlMap.get(groupNameAndsqlId);
     }
-    return sqlMap.get(groupNameAndsqlId);
-  }
 
-  static void clearSqlMap() {
-    sqlMap.clear();
-  }
-
-  static void init() {
-    sqlMap = new HashMap<String, String>();
-    //加载sql文件
-    loadFileList(SqlKit.class.getClassLoader().getResource("").getFile());
-    LOG.debug("sqlMap" + sqlMap);
-  }
-
-  public static void loadFileList(String strPath) {
-    List<File> files = new ArrayList<File>();
-    File dir = new File(strPath);
-    File[] dirs = dir.listFiles(new FileFilter() {
-      @Override
-      public boolean accept(File pathname) {
-        if (pathname.getName().endsWith("sql") || pathname.getName().endsWith("sql.xml")) {
-          return true;
-        }
-        return false;
-      }
-    });
-
-    if (dirs == null)
-      return;
-    for (int i = 0; i < dirs.length; i++) {
-      if (dirs[i].isDirectory()) {
-        loadFileList(dirs[i].getAbsolutePath());
-      } else {
-        if (dirs[i].getName().endsWith("sql.xml")) {
-          files.add(dirs[i]);
-        }
-      }
+    static void clearSqlMap() {
+        sqlMap.clear();
     }
-    //加载sql文件
-    loadFiles(files);
-  }
 
-  /**
-   * 加载xml文件
-   *
-   * @param files
-   */
-  private static void loadFiles(List<File> files) {
-    for (File xmlfile : files) {
-      SqlRoot root = JaxbKit.unmarshal(xmlfile, SqlRoot.class);
-      for (SqlGroup sqlGroup : root.sqlGroups) {
-
-        String name = sqlGroup.name;
-        if (name == null || name.trim().equals("")) {
-          name = xmlfile.getName();
-        }
-        for (SqlItem sqlItem : sqlGroup.sqlItems) {
-          sqlMap.put(name + "." + sqlItem.id, sqlItem.value);
-        }
-      }
+    static void init() {
+        sqlMap = new HashMap<String, String>();
+        //加载sql文件
+        loadFileList(SqlKit.class.getClassLoader().getResource("").getFile());
+        LOG.debug("sqlMap" + sqlMap);
     }
-  }
+
+    public static void loadFileList(String strPath) {
+        List<File> files = new ArrayList<File>();
+        File dir = new File(strPath);
+        File[] dirs = dir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                if (pathname.getName().endsWith("sql") || pathname.getName().endsWith("sql.xml")) {
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        if (dirs == null)
+            return;
+        for (int i = 0; i < dirs.length; i++) {
+            if (dirs[i].isDirectory()) {
+                loadFileList(dirs[i].getAbsolutePath());
+            } else {
+                if (dirs[i].getName().endsWith("sql.xml")) {
+                    files.add(dirs[i]);
+                }
+            }
+        }
+        //加载sql文件
+        loadFiles(files);
+    }
+
+    /**
+     * 加载xml文件
+     *
+     * @param files
+     */
+    private static void loadFiles(List<File> files) {
+        for (File xmlfile : files) {
+            SqlRoot root = JaxbKit.unmarshal(xmlfile, SqlRoot.class);
+            for (SqlGroup sqlGroup : root.sqlGroups) {
+
+                String name = sqlGroup.name;
+                if (name == null || name.trim().equals("")) {
+                    name = xmlfile.getName();
+                }
+                for (SqlItem sqlItem : sqlGroup.sqlItems) {
+                    sqlMap.put(name + "." + sqlItem.id, sqlItem.value);
+                }
+            }
+        }
+    }
 }

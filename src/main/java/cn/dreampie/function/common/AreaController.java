@@ -15,7 +15,7 @@ public class AreaController extends Controller {
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
-        setAttr("areas", Area.dao.findBy(getParaToInt(0, 1), 15, "`area`.deleted_at is NULL"));
+        setAttr("areas", Area.dao.paginateBy(getParaToInt(0, 1), 15, "`area`.deleted_at is NULL"));
         dynaRender("/page/index.ftl");
     }
 

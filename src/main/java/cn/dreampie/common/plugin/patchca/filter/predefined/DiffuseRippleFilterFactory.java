@@ -27,12 +27,12 @@ import java.util.List;
 
 public class DiffuseRippleFilterFactory extends RippleFilterFactory {
 
-	protected DiffuseImageOp diffuse = new DiffuseImageOp();
+    protected DiffuseImageOp diffuse = new DiffuseImageOp();
 
-	@Override
-	protected List<BufferedImageOp> getPreRippleFilters() {
-		List<BufferedImageOp> list = new ArrayList<BufferedImageOp>();
-		list.add(diffuse);
-		return list;
-	}
+    @Override
+    protected List<BufferedImageOp> getPreRippleFilters() {
+        List<BufferedImageOp> list = new ArrayList<BufferedImageOp>();
+        list.add(diffuse);
+        return list;
+    }
 }

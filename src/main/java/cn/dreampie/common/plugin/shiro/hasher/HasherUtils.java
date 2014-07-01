@@ -1,9 +1,7 @@
 package cn.dreampie.common.plugin.shiro.hasher;
 
-import cn.dreampie.common.plugin.shiro.MyPasswordMatcher;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
-import org.apache.shiro.crypto.hash.Hash;
 
 /**
  * Created by wangrenhui on 14-5-5.

@@ -26,17 +26,17 @@ import java.util.List;
  */
 class CompositeAuthzHandler implements AuthzHandler {
 
-  private final List<AuthzHandler> authzHandlers;
+    private final List<AuthzHandler> authzHandlers;
 
-  public CompositeAuthzHandler(List<AuthzHandler> authzHandlers) {
-    this.authzHandlers = authzHandlers;
-  }
-
-
-  @Override
-  public void assertAuthorized() throws AuthorizationException {
-    for (AuthzHandler authzHandler : authzHandlers) {
-      authzHandler.assertAuthorized();
+    public CompositeAuthzHandler(List<AuthzHandler> authzHandlers) {
+        this.authzHandlers = authzHandlers;
     }
-  }
+
+
+    @Override
+    public void assertAuthorized() throws AuthorizationException {
+        for (AuthzHandler authzHandler : authzHandlers) {
+            authzHandler.assertAuthorized();
+        }
+    }
 }

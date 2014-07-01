@@ -1,13 +1,11 @@
 package cn.dreampie.common.plugin.shiro.freemarker;
 
 import cn.dreampie.common.config.AppConstants;
-import cn.dreampie.function.user.User;
 import freemarker.core.Environment;
 import freemarker.log.Logger;
 import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateException;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 
 import java.io.IOException;
 import java.util.Map;

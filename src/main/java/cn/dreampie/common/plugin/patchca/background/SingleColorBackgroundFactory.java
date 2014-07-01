@@ -27,26 +27,26 @@ import java.awt.image.BufferedImage;
 
 public class SingleColorBackgroundFactory implements BackgroundFactory {
 
-  private ColorFactory colorFactory;
+    private ColorFactory colorFactory;
 
-  public SingleColorBackgroundFactory() {
-    SingleColorFactory scf = new SingleColorFactory(Color.WHITE);
-    colorFactory = scf;
-  }
+    public SingleColorBackgroundFactory() {
+        SingleColorFactory scf = new SingleColorFactory(Color.WHITE);
+        colorFactory = scf;
+    }
 
-  public SingleColorBackgroundFactory(Color color) {
-    colorFactory = new SingleColorFactory(color);
-  }
+    public SingleColorBackgroundFactory(Color color) {
+        colorFactory = new SingleColorFactory(color);
+    }
 
-  public void setColorFactory(ColorFactory colorFactory) {
-    this.colorFactory = colorFactory;
-  }
+    public void setColorFactory(ColorFactory colorFactory) {
+        this.colorFactory = colorFactory;
+    }
 
 
-  public void fillBackground(BufferedImage dest) {
-    Graphics g = dest.getGraphics();
-    g.setColor(colorFactory.getColor(0));
-    g.fillRect(0, 0, dest.getWidth(), dest.getHeight());
-  }
+    public void fillBackground(BufferedImage dest) {
+        Graphics g = dest.getGraphics();
+        g.setColor(colorFactory.getColor(0));
+        g.fillRect(0, 0, dest.getWidth(), dest.getHeight());
+    }
 
 }

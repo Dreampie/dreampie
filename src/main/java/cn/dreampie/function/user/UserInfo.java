@@ -8,6 +8,6 @@ import com.jfinal.plugin.activerecord.Model;
  */
 @TableBind(tableName = "sec_user_info")
 public class UserInfo extends Model<UserInfo> {
-  public static UserInfo dao = new UserInfo();
+    public static UserInfo dao = new UserInfo();
 
 }

@@ -12,45 +12,45 @@ import org.slf4j.LoggerFactory;
  */
 public class AkkaPlugin implements IPlugin {
 
-  private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private boolean applicationSystemEnabled = false;
-  static ActorSystem applicationSystem;
+    private boolean applicationSystemEnabled = false;
+    static ActorSystem applicationSystem;
 
-  /**
-   * no /
-   */
-  private String config = "akka.conf";
+    /**
+     * no /
+     */
+    private String config = "akka.conf";
 
-  public AkkaPlugin() {
+    public AkkaPlugin() {
 
-  }
-
-  public AkkaPlugin(String config) {
-    this.config = config;
-  }
-
-  private ActorSystem applicationSystem() {
-    applicationSystemEnabled = true;
-    Config akkaConf = ConfigFactory.load(config);
-    ActorSystem system = ActorSystem.create("application", akkaConf);
-    logger.info("Starting application default Akka system.");
-    return system;
-  }
-
-  @Override
-  public boolean start() {
-    applicationSystem = applicationSystem();
-    return true;
-  }
-
-  @Override
-  public boolean stop() {
-    if (applicationSystemEnabled) {
-      logger.info("Shutdown application default Akka system.");
-      applicationSystem.shutdown();
-      applicationSystem.awaitTermination();
     }
-    return true;
-  }
+
+    public AkkaPlugin(String config) {
+        this.config = config;
+    }
+
+    private ActorSystem applicationSystem() {
+        applicationSystemEnabled = true;
+        Config akkaConf = ConfigFactory.load(config);
+        ActorSystem system = ActorSystem.create("application", akkaConf);
+        logger.info("Starting application default Akka system.");
+        return system;
+    }
+
+    @Override
+    public boolean start() {
+        applicationSystem = applicationSystem();
+        return true;
+    }
+
+    @Override
+    public boolean stop() {
+        if (applicationSystemEnabled) {
+            logger.info("Shutdown application default Akka system.");
+            applicationSystem.shutdown();
+            applicationSystem.awaitTermination();
+        }
+        return true;
+    }
 }

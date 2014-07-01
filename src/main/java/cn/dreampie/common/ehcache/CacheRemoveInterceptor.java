@@ -1,9 +1,9 @@
 package cn.dreampie.common.ehcache;
 
+import cn.dreampie.common.utils.ValidateUtils;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.plugin.ehcache.CacheKit;
-import cn.dreampie.common.utils.ValidateUtils;
 
 import java.util.List;
 

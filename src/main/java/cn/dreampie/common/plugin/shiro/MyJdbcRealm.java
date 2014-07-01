@@ -40,11 +40,11 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //    } else {
         String username = userToken.getUsername();
         if (ValidateUtils.me().isEmail(username)) {
-            user = User.dao.findByFirst(" `user`.email =?", username);
+            user = User.dao.findFirstBy(" `user`.email =?", username);
         } else if (ValidateUtils.me().isMobile(username)) {
-            user = User.dao.findByFirst(" `user`.mobile =?", username);
+            user = User.dao.findFirstBy(" `user`.mobile =?", username);
         } else {
-            user = User.dao.findByFirst(" `user`.username =?", username);
+            user = User.dao.findFirstBy(" `user`.username =?", username);
         }
         if (user != null) {
             Session session = SecurityUtils.getSubject().getSession();
@@ -72,9 +72,9 @@ public class MyJdbcRealm extends AuthorizingRealm {
         List<Role> roles = null;
 //    if (loginName.equalsIgnoreCase(MyAnonymousFilter.getUsername())) {
 //      //遍历角色
-//      roles = Role.dao.findByRoleKey(MyAnonymousFilter.getRole());
+//      roles = Role.me().findByRoleKey(MyAnonymousFilter.getRole());
 //    } else {
-        User user = User.dao.findByFirst(" `user`.username =?", loginName);
+        User user = User.dao.findFirstBy(" `user`.username =?", loginName);
         if (user != null) {
             //判断用户是否可用
             if (user.getDate("deleted_at") == null) {

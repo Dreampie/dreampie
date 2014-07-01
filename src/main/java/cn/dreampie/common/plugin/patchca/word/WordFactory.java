@@ -20,5 +20,5 @@ package cn.dreampie.common.plugin.patchca.word;
 
 public interface WordFactory {
 
-	String getNextWord();
+    String getNextWord();
 }

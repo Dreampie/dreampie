@@ -25,4 +25,4 @@ public enum Hasher {
     public String value() {
         return this.value;
     }
-    }
+}

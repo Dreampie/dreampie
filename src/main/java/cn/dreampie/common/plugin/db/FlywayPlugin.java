@@ -1,16 +1,15 @@
 package cn.dreampie.common.plugin.db;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
+import com.jfinal.plugin.IPlugin;
 import org.apache.commons.lang3.StringUtils;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
-
-import com.jfinal.plugin.IPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangrenhui on 14-4-21.

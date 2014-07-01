@@ -28,54 +28,54 @@ import java.lang.annotation.Annotation;
  * @author dafei
  */
 class PermissionAuthzHandler extends AbstractAuthzHandler {
-  private final Annotation annotation;
-  private final String jdbcPermission;
+    private final Annotation annotation;
+    private final String jdbcPermission;
 
-  public PermissionAuthzHandler(Annotation annotation) {
-    this.annotation = annotation;
-    this.jdbcPermission = null;
-  }
-
-  public PermissionAuthzHandler(String jdbcPermission) {
-    this.annotation = null;
-    this.jdbcPermission = jdbcPermission;
-  }
-
-  @Override
-  public void assertAuthorized() throws AuthorizationException {
-    Subject subject = getSubject();
-    //数据库权限
-    if (jdbcPermission != null) {
-      subject.checkPermission(jdbcPermission);
-    }
-    if (!(annotation instanceof RequiresPermissions))
-      return;
-
-    RequiresPermissions rpAnnotation = (RequiresPermissions) annotation;
-    String[] perms = rpAnnotation.value();
-
-    if (perms.length == 1) {
-      subject.checkPermission(perms[0]);
-      return;
-    }
-    if (Logical.AND.equals(rpAnnotation.logical())) {
-      getSubject().checkPermissions(perms);
-      return;
-    }
-    if (Logical.OR.equals(rpAnnotation.logical())) {
-      // Avoid processing exceptions unnecessarily - "delay" throwing the
-      // exception by calling hasRole first
-      boolean hasAtLeastOnePermission = false;
-      for (String permission : perms)
-        if (subject.isPermitted(permission))
-          hasAtLeastOnePermission = true;
-      // Cause the exception if none of the role match, note that the
-      // exception message will be a bit misleading
-      if (!hasAtLeastOnePermission)
-        subject.checkPermission(perms[0]);
-
+    public PermissionAuthzHandler(Annotation annotation) {
+        this.annotation = annotation;
+        this.jdbcPermission = null;
     }
 
-  }
+    public PermissionAuthzHandler(String jdbcPermission) {
+        this.annotation = null;
+        this.jdbcPermission = jdbcPermission;
+    }
+
+    @Override
+    public void assertAuthorized() throws AuthorizationException {
+        Subject subject = getSubject();
+        //数据库权限
+        if (jdbcPermission != null) {
+            subject.checkPermission(jdbcPermission);
+        }
+        if (!(annotation instanceof RequiresPermissions))
+            return;
+
+        RequiresPermissions rpAnnotation = (RequiresPermissions) annotation;
+        String[] perms = rpAnnotation.value();
+
+        if (perms.length == 1) {
+            subject.checkPermission(perms[0]);
+            return;
+        }
+        if (Logical.AND.equals(rpAnnotation.logical())) {
+            getSubject().checkPermissions(perms);
+            return;
+        }
+        if (Logical.OR.equals(rpAnnotation.logical())) {
+            // Avoid processing exceptions unnecessarily - "delay" throwing the
+            // exception by calling hasRole first
+            boolean hasAtLeastOnePermission = false;
+            for (String permission : perms)
+                if (subject.isPermitted(permission))
+                    hasAtLeastOnePermission = true;
+            // Cause the exception if none of the role match, note that the
+            // exception message will be a bit misleading
+            if (!hasAtLeastOnePermission)
+                subject.checkPermission(perms[0]);
+
+        }
+
+    }
 
 }

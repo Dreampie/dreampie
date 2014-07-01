@@ -31,56 +31,56 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ShiroKit {
 
-  /**
-   * 用来记录那个action或者actionpath中是否有shiro认证注解。
-   */
-  private static ConcurrentMap<String, AuthzHandler> authzMaps = null;
+    /**
+     * 用来记录那个action或者actionpath中是否有shiro认证注解。
+     */
+    private static ConcurrentMap<String, AuthzHandler> authzMaps = null;
 
-  private static Map<String, AuthzHandler> authzJdbcMaps = null;
+    private static Map<String, AuthzHandler> authzJdbcMaps = null;
 
-  public static AntPathMatcher antPathMatcher = new AntPathMatcher();
+    public static AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-  /**
-   * 禁止初始化
-   */
-  private ShiroKit() {
-  }
+    /**
+     * 禁止初始化
+     */
+    private ShiroKit() {
+    }
 
-  static void init(ConcurrentMap<String, AuthzHandler> amaps, Map<String, AuthzHandler> jmaps) {
-    authzMaps = amaps;
-    authzJdbcMaps = jmaps;
-  }
+    static void init(ConcurrentMap<String, AuthzHandler> amaps, Map<String, AuthzHandler> jmaps) {
+        authzMaps = amaps;
+        authzJdbcMaps = jmaps;
+    }
 
 
-  static AuthzHandler getAuthzHandler(String actionKey) {
+    static AuthzHandler getAuthzHandler(String actionKey) {
     /*
     if(authzMaps.containsKey(controllerClassName)){
 			return true;
 		}*/
-    return authzMaps.get(actionKey);
-  }
+        return authzMaps.get(actionKey);
+    }
 
-  static List<AuthzHandler> getJdbcAuthzHandler(HttpServletRequest request) {
+    static List<AuthzHandler> getJdbcAuthzHandler(HttpServletRequest request) {
     /*
     if(authzMaps.containsKey(controllerClassName)){
 			return true;
 		}*/
-    List<AuthzHandler> result = new ArrayList<AuthzHandler>();
-    String url = WebUtils.getPathWithinApplication(request);
-    for (String key : authzJdbcMaps.keySet()) {
-      if (antPathMatcher.match(key, url)) {
-        result.add(authzJdbcMaps.get(key));
-      }
+        List<AuthzHandler> result = new ArrayList<AuthzHandler>();
+        String url = WebUtils.getPathWithinApplication(request);
+        for (String key : authzJdbcMaps.keySet()) {
+            if (antPathMatcher.match(key, url)) {
+                result.add(authzJdbcMaps.get(key));
+            }
+        }
+        return result;
     }
-    return result;
-  }
 
-  static List<AuthzHandler> getAuthzHandler(HttpServletRequest request, String actionKey) {
-    List<AuthzHandler> result = getJdbcAuthzHandler(request);
-    AuthzHandler ah = getAuthzHandler(actionKey);
-    if (ah != null) {
-      result.add(ah);
+    static List<AuthzHandler> getAuthzHandler(HttpServletRequest request, String actionKey) {
+        List<AuthzHandler> result = getJdbcAuthzHandler(request);
+        AuthzHandler ah = getAuthzHandler(actionKey);
+        if (ah != null) {
+            result.add(ah);
+        }
+        return result;
     }
-    return result;
-  }
 }

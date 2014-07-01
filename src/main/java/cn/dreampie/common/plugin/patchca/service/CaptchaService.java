@@ -20,5 +20,5 @@ package cn.dreampie.common.plugin.patchca.service;
 
 public interface CaptchaService {
 
-	Captcha getCaptcha();
+    Captcha getCaptcha();
 }

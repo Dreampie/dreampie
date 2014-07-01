@@ -22,19 +22,19 @@ import java.util.Map;
  * @since 0.9
  */
 public class StaticTag extends DefaultTag {
-  private static final Logger log = Logger.getLogger("StaticTag");
+    private static final Logger log = Logger.getLogger("StaticTag");
 
-  private static String res_static = "";
+    private static String res_static = "";
 
-  public StaticTag() {
-    PropertiesUtils.me().loadPropertyFile("application.properties");
-    res_static = PropertiesUtils.me().getProperty("resource.static", "");
-  }
+    public StaticTag() {
+        PropertiesUtils.me().loadPropertyFile("application.properties");
+        res_static = PropertiesUtils.me().getProperty("resource.static", "");
+    }
 
-  @Override
-  public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
+    @Override
+    public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
 //      renderBody(env, body);
-    env.getOut().write(res_static);
-  }
+        env.getOut().write(res_static);
+    }
 
 }

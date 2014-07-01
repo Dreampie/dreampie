@@ -38,7 +38,7 @@ class GuestAuthzHandler extends AbstractAuthzHandler {
     public void assertAuthorized() throws AuthorizationException {
         Subject subject = getSubject();
 
-        if ( subject.getPrincipal() == null) {
+        if (subject.getPrincipal() == null) {
             return;
         }
         throw new UnauthenticatedException("Attempting to perform a guest-only operation.  The current Subject is " +

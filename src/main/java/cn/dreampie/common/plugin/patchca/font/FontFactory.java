@@ -22,5 +22,5 @@ import java.awt.*;
 
 public interface FontFactory {
 
-	Font getFont(int index);
+    Font getFont(int index);
 }

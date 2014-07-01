@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidateUtils {
@@ -97,8 +96,8 @@ public class ValidateUtils {
         String telcheck = "^\\d{3,4}-?\\d{7,9}$";
         String mobilecheck = "^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\\d{8})$";
 
-        if (match(telcheck, Pattern.CASE_INSENSITIVE,value)
-                || match(mobilecheck, Pattern.CASE_INSENSITIVE,value)) {
+        if (match(telcheck, Pattern.CASE_INSENSITIVE, value)
+                || match(mobilecheck, Pattern.CASE_INSENSITIVE, value)) {
             return true;
         } else
             return false;

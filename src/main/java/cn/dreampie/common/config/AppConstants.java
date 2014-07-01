@@ -1,8 +1,5 @@
 package cn.dreampie.common.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by wangrenhui on 13-12-31.
  */

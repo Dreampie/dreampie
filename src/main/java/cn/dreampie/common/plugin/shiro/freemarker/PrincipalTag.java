@@ -1,6 +1,5 @@
 package cn.dreampie.common.plugin.shiro.freemarker;
 
-import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.function.user.User;
 import freemarker.core.Environment;
 import freemarker.log.Logger;

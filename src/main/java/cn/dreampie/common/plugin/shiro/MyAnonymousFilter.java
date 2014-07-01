@@ -11,36 +11,36 @@ import java.util.List;
  * Created by wangrenhui on 14-1-9.
  */
 public class MyAnonymousFilter extends MyFormAuthenticationFilter {
-  private static final Logger log = LoggerFactory.getLogger(MyAnonymousFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(MyAnonymousFilter.class);
 
-  private static final String DEFAULT_USER_NAME = "guest";
-  private static final String DEFAULT_PASSWORD = "guest";
-  private static final String DEFAULT_ROLE = "guest";
-  private static String username = DEFAULT_USER_NAME;
-  private static String password = DEFAULT_PASSWORD;
-  private static String role = DEFAULT_ROLE;
+    private static final String DEFAULT_USER_NAME = "guest";
+    private static final String DEFAULT_PASSWORD = "guest";
+    private static final String DEFAULT_ROLE = "guest";
+    private static String username = DEFAULT_USER_NAME;
+    private static String password = DEFAULT_PASSWORD;
+    private static String role = DEFAULT_ROLE;
 
-  public void setGuest(List<String> guestString) {
-    if (guestString == null && guestString.size() < 2) {
-      return;
+    public void setGuest(List<String> guestString) {
+        if (guestString == null && guestString.size() < 2) {
+            return;
+        }
+        String[] usernamepassword = guestString.get(0).split(":");
+        if (usernamepassword.length == 2) {
+            username = usernamepassword[0];
+            password = usernamepassword[1];
+        }
+        role = guestString.get(1);
     }
-    String[] usernamepassword = guestString.get(0).split(":");
-    if (usernamepassword.length == 2) {
-      username = usernamepassword[0];
-      password = usernamepassword[1];
-    }
-    role = guestString.get(1);
-  }
 
-  /**
-   * Always returns <code>true</code> allowing unchecked access to the underlying path or resource.
-   *
-   * @return <code>true</code> always, allowing unchecked access to the underlying path or resource.
-   */
-  @Override
-  public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) {
-    // Always return true since we allow access to anyone
-    //验证是否成功登录的方法
+    /**
+     * Always returns <code>true</code> allowing unchecked access to the underlying path or resource.
+     *
+     * @return <code>true</code> always, allowing unchecked access to the underlying path or resource.
+     */
+    @Override
+    public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) {
+        // Always return true since we allow access to anyone
+        //验证是否成功登录的方法
 //    if (!isLoginRequest(request, response)) {
 //      Subject subject = SecurityUtils.getSubject();
 //      if (!subject.isAuthenticated()) {
@@ -63,19 +63,19 @@ public class MyAnonymousFilter extends MyFormAuthenticationFilter {
 //        log.debug("Encountered session exception during before user logout.  This can generally safely be ignored.", ise);
 //      }
 //    }
-    return true;
-  }
+        return true;
+    }
 
-  public static String getPassword() {
-    return password;
-  }
+    public static String getPassword() {
+        return password;
+    }
 
-  public static String getRole() {
-    return role;
-  }
+    public static String getRole() {
+        return role;
+    }
 
-  public static String getUsername() {
-    return username;
-  }
+    public static String getUsername() {
+        return username;
+    }
 
 }

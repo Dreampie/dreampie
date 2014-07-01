@@ -32,7 +32,7 @@ public class AdminValidator {
                 addError("role_valueMsg", "角色名称长度2-20");
 
             if (!valueEmpty) {
-                Role role = Role.dao.findByFirst("`role`.value='" + c.getPara("role.value") + "'");
+                Role role = Role.dao.findFirstBy("`role`.value='" + c.getPara("role.value") + "'");
                 if (role != null) addError("role_valueMsg", "角色标识已存在");
             }
 
@@ -72,7 +72,7 @@ public class AdminValidator {
             if (!valueEmpty && !ValidateUtils.me().isLength(c.getPara("role.value"), 2, 20))
                 addError("role_valueMsg", "角色名称长度2-20");
             if (!valueEmpty) {
-                Role role = Role.dao.findByFirst("`role`.value='" + c.getPara("role.value") + "'");
+                Role role = Role.dao.findFirstBy("`role`.value='" + c.getPara("role.value") + "'");
                 if (role != null) addError("role_valueMsg", "角色标识已存在");
             }
 
@@ -205,7 +205,7 @@ public class AdminValidator {
                 addError("permission_valueMsg", "权限名称长度2-20");
 
             if (!valueEmpty) {
-                Permission permission = Permission.dao.findByFirst("`permission`.value='" + c.getPara("permission.value") + "'");
+                Permission permission = Permission.dao.findFirstBy("`permission`.value='" + c.getPara("permission.value") + "'");
                 if (permission != null) addError("permission_valueMsg", "权限标识已存在");
             }
 
@@ -251,7 +251,7 @@ public class AdminValidator {
                 addError("permission_valueMsg", "权限名称长度2-20");
 
             if (!valueEmpty) {
-                Permission permission = Permission.dao.findByFirst("`permission`.value='" + c.getPara("permission.value") + "'");
+                Permission permission = Permission.dao.findFirstBy("`permission`.value='" + c.getPara("permission.value") + "'");
                 if (permission != null) addError("permission_valueMsg", "权限标识已存在");
             }
 

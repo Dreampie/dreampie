@@ -306,7 +306,7 @@ public class DruidXAPlugin implements IPlugin, IDataSourceProvider {
     }
 
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException {
         //数据库表需要时innodb类型才支持分布式事务
         DruidXADataSource ds1 = getDruidXADataSource("jdbc:mysql://192.168.1.211/sm_card?useUnicode=true&characterEncoding=UTF-8", "dev", "dev1010");
         DruidXADataSource ds2 = getDruidXADataSource("jdbc:mysql://192.168.1.211/sm_shop_master?useUnicode=true&characterEncoding=UTF-8", "dev", "dev1010");

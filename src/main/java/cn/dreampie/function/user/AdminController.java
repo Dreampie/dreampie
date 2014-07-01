@@ -1,10 +1,10 @@
 package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
-import cn.dreampie.common.web.controller.Controller;
 import cn.dreampie.common.ehcache.CacheNameRemove;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeUtils;
+import cn.dreampie.common.web.controller.Controller;
 import com.google.common.collect.Lists;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -50,7 +50,7 @@ public class AdminController extends Controller {
         Role role = getModel(Role.class);
         Role parent = null;
         if (role.getParentId() == 0) {
-            parent = Role.dao.findByFirst("`role`.pid=0 ORDER BY `role`.right_code DESC");
+            parent = Role.dao.findFirstBy("`role`.pid=0 ORDER BY `role`.right_code DESC");
         } else
             parent = Role.dao.findById(role.getParentId());
         boolean result = false;
@@ -103,7 +103,7 @@ public class AdminController extends Controller {
 
             result = role.delete();
             if (result) {
-                RolePermission.dao.deleteBy("role_id=" + role.get("id"));
+                RolePermission.dao.dropBy("role_id=" + role.get("id"));
             }
         }
 
@@ -121,7 +121,7 @@ public class AdminController extends Controller {
         Permission permission = getModel(Permission.class);
         Permission parent = null;
         if (permission.getParentId() == 0) {
-            parent = Permission.dao.findByFirst("`permission`.pid=0 ORDER BY `permission`.right_code DESC");
+            parent = Permission.dao.findFirstBy("`permission`.pid=0 ORDER BY `permission`.right_code DESC");
         } else
             parent = Permission.dao.findById(permission.getParentId());
         boolean result = false;
@@ -137,7 +137,7 @@ public class AdminController extends Controller {
             result = permission.save();
         }
         if (result) {
-            Role admin = Role.dao.findByFirst("`role`.pid=0");
+            Role admin = Role.dao.findFirstBy("`role`.pid=0");
             admin.addPermission(permission);
             setAttr("state", "success");
         } else {
@@ -174,7 +174,7 @@ public class AdminController extends Controller {
             Permission.dao.updateBy("`permission`.right_code=`permission`.right_code-2", "`permission`.right_code>=" + permission.get("right_code"));
             result = permission.delete();
             if (result) {
-                RolePermission.dao.deleteBy("permission_id=" + permission.get("id"));
+                RolePermission.dao.dropBy("permission_id=" + permission.get("id"));
             }
         }
         if (result) {
@@ -216,7 +216,7 @@ public class AdminController extends Controller {
         //删除关系
 
         for (int i = 0; i < permIds.size(); i++) {
-            result = result && RolePermission.dao.deleteBy("role_id = ? AND permission_id = ?", roleId, permIds.get(i));
+            result = result && RolePermission.dao.dropBy("role_id = ? AND permission_id = ?", roleId, permIds.get(i));
         }
         if (result) {
             setAttr("state", "success");

@@ -15,9 +15,6 @@ package cn.dreampie.common.plugin.atmosphere.chat;
  * the License.
  */
 
-import org.atmosphere.cpr.AtmosphereResourceEventListener;
-
-
 import org.atmosphere.cpr.AtmosphereResourceEvent;
 import org.atmosphere.cpr.AtmosphereResourceEventListener;
 import org.slf4j.Logger;

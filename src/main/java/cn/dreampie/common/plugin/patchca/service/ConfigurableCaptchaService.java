@@ -27,17 +27,17 @@ import cn.dreampie.common.plugin.patchca.word.AdaptiveRandomWordFactory;
 
 public class ConfigurableCaptchaService extends AbstractCaptchaService {
 
-	public ConfigurableCaptchaService() {
-		backgroundFactory = new SingleColorBackgroundFactory();
-		wordFactory = new AdaptiveRandomWordFactory();
-		fontFactory = new RandomFontFactory();
-		textRenderer = new BestFitTextRenderer();
-		colorFactory = new SingleColorFactory();
-		filterFactory = new CurvesRippleFilterFactory(colorFactory);
-		textRenderer.setLeftMargin(10);
-		textRenderer.setRightMargin(10);
-		width = 160;
-		height = 70;
-	}
+    public ConfigurableCaptchaService() {
+        backgroundFactory = new SingleColorBackgroundFactory();
+        wordFactory = new AdaptiveRandomWordFactory();
+        fontFactory = new RandomFontFactory();
+        textRenderer = new BestFitTextRenderer();
+        colorFactory = new SingleColorFactory();
+        filterFactory = new CurvesRippleFilterFactory(colorFactory);
+        textRenderer.setLeftMargin(10);
+        textRenderer.setRightMargin(10);
+        width = 160;
+        height = 70;
+    }
 
 }

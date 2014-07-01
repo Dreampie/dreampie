@@ -2,7 +2,6 @@ package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.ehcache.CacheNameRemove;
-import cn.dreampie.common.plugin.shiro.MyPasswordMatcher;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
 import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
@@ -34,7 +33,7 @@ public class UserController extends Controller {
 
         if (upUser.update()) {
             SubjectUtils.me().getSubject().logout();
-            setAttr("username",upUser.get("username"));
+            setAttr("username", upUser.get("username"));
             setAttr("state", "success");
         } else
             setAttr("state", "failure");

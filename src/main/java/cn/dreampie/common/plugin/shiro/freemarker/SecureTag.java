@@ -4,6 +4,7 @@ import freemarker.core.Environment;
 import freemarker.template.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -22,9 +23,9 @@ public abstract class SecureTag implements TemplateDirectiveModel {
         Object value = params.get(name);
 
         if (value instanceof SimpleScalar) {
-            return ((SimpleScalar)value).getAsString();
+            return ((SimpleScalar) value).getAsString();
         }
-        
+
         return null;
     }
 

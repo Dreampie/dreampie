@@ -25,14 +25,14 @@ import java.awt.image.BufferedImage;
 
 public interface TextRenderer {
 
-	void setLeftMargin(int leftMargin);
+    void setLeftMargin(int leftMargin);
 
-	void setRightMargin(int rightMargin);
+    void setRightMargin(int rightMargin);
 
-	void setTopMargin(int topMargin);
+    void setTopMargin(int topMargin);
 
-	void setBottomMargin(int bottomMargin);
+    void setBottomMargin(int bottomMargin);
 
-	void draw(String text, BufferedImage canvas, FontFactory fontFactory, ColorFactory colorFactory);
+    void draw(String text, BufferedImage canvas, FontFactory fontFactory, ColorFactory colorFactory);
 
 }

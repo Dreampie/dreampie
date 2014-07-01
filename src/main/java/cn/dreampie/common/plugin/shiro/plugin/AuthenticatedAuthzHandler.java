@@ -23,22 +23,22 @@ import org.apache.shiro.authz.UnauthenticatedException;
  * 单例模式运行。
  *
  * @author dafei
- *
  */
 class AuthenticatedAuthzHandler extends AbstractAuthzHandler {
 
-	private static AuthenticatedAuthzHandler aah = new AuthenticatedAuthzHandler();
+    private static AuthenticatedAuthzHandler aah = new AuthenticatedAuthzHandler();
 
-	private AuthenticatedAuthzHandler(){}
+    private AuthenticatedAuthzHandler() {
+    }
 
-	public static  AuthenticatedAuthzHandler me(){
-		return aah;
-	}
+    public static AuthenticatedAuthzHandler me() {
+        return aah;
+    }
 
-	@Override
+    @Override
     public void assertAuthorized() throws AuthorizationException {
-		if (!getSubject().isAuthenticated() ) {
-            throw new UnauthenticatedException( "The current Subject is not authenticated.  Access denied." );
+        if (!getSubject().isAuthenticated()) {
+            throw new UnauthenticatedException("The current Subject is not authenticated.  Access denied.");
         }
-	}
+    }
 }

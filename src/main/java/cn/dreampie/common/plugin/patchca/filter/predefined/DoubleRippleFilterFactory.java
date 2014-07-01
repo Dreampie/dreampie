@@ -28,20 +28,20 @@ import java.util.List;
 
 public class DoubleRippleFilterFactory extends AbstractFilterFactory {
 
-	protected List<BufferedImageOp> filters;
-	protected DoubleRippleImageOp ripple;
-	
-	public DoubleRippleFilterFactory() {
-		ripple = new DoubleRippleImageOp();
-	}
+    protected List<BufferedImageOp> filters;
+    protected DoubleRippleImageOp ripple;
 
-	@Override
-	public List<BufferedImageOp> getFilters() {
-		if (filters == null) {
-			filters = new ArrayList<BufferedImageOp>();
-			filters.add(ripple);
-		}
-		return filters;
-	}
-	
+    public DoubleRippleFilterFactory() {
+        ripple = new DoubleRippleImageOp();
+    }
+
+    @Override
+    public List<BufferedImageOp> getFilters() {
+        if (filters == null) {
+            filters = new ArrayList<BufferedImageOp>();
+            filters.add(ripple);
+        }
+        return filters;
+    }
+
 }

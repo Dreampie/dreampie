@@ -18,8 +18,6 @@ package cn.dreampie.common.plugin.atmosphere.chat;
 import com.alibaba.fastjson.JSON;
 import org.atmosphere.config.managed.Decoder;
 
-import java.io.IOException;
-
 /**
  * Decode a String into a {@link cn.dreampie.common.plugin.atmosphere.chat.UserMessage}.
  */

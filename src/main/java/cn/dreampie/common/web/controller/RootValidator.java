@@ -1,9 +1,9 @@
 package cn.dreampie.common.web.controller;
 
 import cn.dreampie.common.config.ReTurnType;
-import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
+import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.User;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
@@ -19,7 +19,7 @@ public class RootValidator {
             if (!usernameEmpty && !ValidateUtils.me().isUsername(c.getPara("user.username")))
                 addError("usernameMsg", "用户名为5-18为字母,数字和下划线的组合");
 
-            User u = User.dao.findByFirst("`user`.username=?", c.getPara("user.username"));
+            User u = User.dao.findFirstBy("`user`.username=?", c.getPara("user.username"));
             if (!ValidateUtils.me().isNullOrEmpty(u)) addError("usernameMsg", "用户名已经存在");
 
             boolean firstnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.first_name"));

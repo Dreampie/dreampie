@@ -27,14 +27,14 @@ import java.util.List;
 
 public class MarbleRippleFilterFactory extends RippleFilterFactory {
 
-	protected MarbleImageOp marble = new MarbleImageOp();
+    protected MarbleImageOp marble = new MarbleImageOp();
 
-	@Override
-	protected List<BufferedImageOp> getPreRippleFilters() {
-		List<BufferedImageOp> list = new ArrayList<BufferedImageOp>();
-		list.add(marble);
-		return list;
-	}
-	
+    @Override
+    protected List<BufferedImageOp> getPreRippleFilters() {
+        List<BufferedImageOp> list = new ArrayList<BufferedImageOp>();
+        list.add(marble);
+        return list;
+    }
+
 }
 

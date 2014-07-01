@@ -13,5 +13,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface AXTxConfig {
-    String[] value();		// configName of Config
+    String[] value();        // configName of Config
 }

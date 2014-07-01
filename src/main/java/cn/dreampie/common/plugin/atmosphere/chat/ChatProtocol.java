@@ -15,11 +15,7 @@
  */
 package cn.dreampie.common.plugin.atmosphere.chat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ChatProtocol implements JsonEncoder.Encodable {
 

@@ -1,7 +1,5 @@
 package cn.dreampie.common.web.handler;
 
-import com.jfinal.handler.Handler;
-import com.jfinal.kit.StrKit;
 import com.jfinal.render.RenderFactory;
 
 import javax.servlet.http.HttpServletRequest;
