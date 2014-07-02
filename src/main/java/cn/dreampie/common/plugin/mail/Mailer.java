@@ -22,11 +22,22 @@ public class Mailer {
         return mailer;
     }
 
-    public void sendHtml(final String subject, final String recipient, final String body) {
-        sendHtml(subject, recipient, body, null);
+    /**
+     * @param subject    主题
+     * @param body       内容
+     * @param recipients 收件人
+     */
+    public void sendHtml(final String subject, final String body, final String... recipients) {
+        sendHtml(subject, body, null, recipients);
     }
 
-    public void sendHtml(final String subject, final String recipient, final String body, final EmailAttachment attachment) {
+    /**
+     * @param subject    主题
+     * @param body       内容
+     * @param attachment 附件
+     * @param recipients 收件人
+     */
+    public void sendHtml(final String subject, final String body, final EmailAttachment attachment, final String... recipients) {
 
         Akka.system().scheduler().scheduleOnce(Duration.create(1000, TimeUnit.MILLISECONDS),
                 new Runnable() {
@@ -48,7 +59,7 @@ public class Mailer {
                         try {
                             htmlEmail.setFrom(mailerConf.getFrom(), mailerConf.getName());
                             htmlEmail.setSubject(subject);
-                            htmlEmail.addTo(recipient);
+                            htmlEmail.addTo(recipients);
                             htmlEmail.setHtmlMsg(body);
                             // set the alternative message
                             htmlEmail.setTextMsg("Your email client does not support HTML messages");
@@ -63,7 +74,12 @@ public class Mailer {
         );
     }
 
-    public void sendText(final String subject, final String recipient, final String body) {
+    /**
+     * @param subject    主题
+     * @param body       内容
+     * @param recipients 收件人
+     */
+    public void sendText(final String subject, final String body, final String... recipients) {
 
         Akka.system().scheduler().scheduleOnce(Duration.create(1000, TimeUnit.MILLISECONDS),
                 new Runnable() {
@@ -85,7 +101,7 @@ public class Mailer {
                         try {
                             simpleEmail.setFrom(mailerConf.getFrom(), mailerConf.getName());
                             simpleEmail.setSubject(subject);
-                            simpleEmail.addTo(recipient);
+                            simpleEmail.addTo(recipients);
                             simpleEmail.setMsg(body);
                             simpleEmail.send();
                         } catch (EmailException e) {
@@ -96,7 +112,13 @@ public class Mailer {
         );
     }
 
-    public void sendAttachment(final String subject, final String recipient, final String body, final EmailAttachment attachment) {
+    /**
+     * @param subject    主题
+     * @param body       内容
+     * @param attachment 附件
+     * @param recipients 收件人
+     */
+    public void sendAttachment(final String subject, final String body, final EmailAttachment attachment, final String... recipients) {
 
         Akka.system().scheduler().scheduleOnce(Duration.create(1000, TimeUnit.MILLISECONDS),
                 new Runnable() {
@@ -118,7 +140,7 @@ public class Mailer {
                         try {
                             multiPartEmail.setFrom(mailerConf.getFrom(), mailerConf.getName());
                             multiPartEmail.setSubject(subject);
-                            multiPartEmail.addTo(recipient);
+                            multiPartEmail.addTo(recipients);
                             multiPartEmail.setMsg(body);
                             // add the attachment
                             if (!ValidateUtils.me().isNullOrEmpty(attachment))

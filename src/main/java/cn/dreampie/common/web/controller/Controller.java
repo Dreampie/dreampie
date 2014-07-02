@@ -2,6 +2,7 @@ package cn.dreampie.common.web.controller;
 
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
+import cn.dreampie.common.plugin.mail.Mailer;
 import cn.dreampie.common.plugin.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
@@ -37,6 +38,8 @@ public class Controller extends com.jfinal.core.Controller {
 //  @Before(EvictInterceptor.class)
 //  @CacheName("index")
     public void index() {
+        if (getPara(0) != null)
+            Mailer.me().sendHtml("测试", "<h1>Test</h1>", "wangrenhui1990@hotmail.com");
         dynaRender("/page/index.ftl");
     }
 
