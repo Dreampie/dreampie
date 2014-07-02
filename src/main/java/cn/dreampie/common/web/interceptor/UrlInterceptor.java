@@ -27,7 +27,7 @@ public class UrlInterceptor implements Interceptor {
             controller.setAttr("localUri", ai.getActionKey());
         }
         ai.invoke();
-        controller.keepPara("webRootPath","localParas","localUri");
+        controller.keepPara("webRootPath", "localParas", "localUri");
         //i18n
         String tmp = controller.getCookie(Const.I18N_LOCALE);
         String i18n = controller.getRequest().getLocale().toString();

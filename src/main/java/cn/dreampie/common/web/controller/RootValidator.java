@@ -1,5 +1,6 @@
 package cn.dreampie.common.web.controller;
 
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
@@ -8,9 +9,6 @@ import cn.dreampie.function.user.User;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 /**
  * Created by wangrenhui on 14-1-2.
  */
@@ -18,23 +16,6 @@ public class RootValidator {
 
     public static class RegisterEmailValidator extends Validator {
         protected void validate(Controller c) {
-
-
-            boolean firstnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.first_name"));
-            if (firstnameEmpty) addError("firstnameMsg", "名字不能为空");
-
-            boolean lastnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.last_name"));
-            if (lastnameEmpty) addError("lastnameMsg", "姓氏不能为空");
-
-//            try {
-//                if (!firstnameEmpty && c.getPara("user.first_name").getBytes("gbk").length >= 10)
-//                    addError("firstnameMsg", "名字不能多于10位");
-//
-//                if (!lastnameEmpty && c.getPara("user.last_name").getBytes("gbk").length >= 10)
-//                    addError("lastnameMsg", "姓氏不能多于10位");
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
 
 
             boolean emailEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.email"));
@@ -61,6 +42,11 @@ public class RootValidator {
 
     public static class RegisterValidator extends Validator {
         protected void validate(Controller c) {
+            Object tmpU = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
+            if (tmpU == null) {
+                addError("usernameMsg", "邮箱已过期");
+            }
+
             boolean usernameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.username"));
             if (usernameEmpty) addError("usernameMsg", "请输入用户名");
             if (!usernameEmpty && !ValidateUtils.me().isUsername(c.getPara("user.username")))
@@ -78,6 +64,24 @@ public class RootValidator {
             if (repasswordEmpty) addError("repasswordMsg", "请输入重复密码");
             if (!passwordEmpty && !repasswordEmpty && !c.getPara("user.password").equals(c.getPara("repassword")))
                 addError("repasswordMsg", "重复密码不一致");
+
+
+            boolean firstnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.first_name"));
+            if (firstnameEmpty) addError("firstnameMsg", "名字不能为空");
+
+            boolean lastnameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.last_name"));
+            if (lastnameEmpty) addError("lastnameMsg", "姓氏不能为空");
+
+//            try {
+//                if (!firstnameEmpty && c.getPara("user.first_name").getBytes("gbk").length >= 10)
+//                    addError("firstnameMsg", "名字不能多于10位");
+//
+//                if (!lastnameEmpty && c.getPara("user.last_name").getBytes("gbk").length >= 10)
+//                    addError("lastnameMsg", "姓氏不能多于10位");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+
 
             boolean captchaEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("captcha"));
             if (captchaEmpty) addError("captchaMsg", "验证码不能为空");

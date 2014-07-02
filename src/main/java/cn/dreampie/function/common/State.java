@@ -8,6 +8,6 @@ import com.jfinal.ext.plugin.tablebind.TableBind;
  */
 @TableBind(tableName = "com_state")
 public class State extends Model<State> {
-    public static State dao=new State();
+    public static State dao = new State();
 
 }

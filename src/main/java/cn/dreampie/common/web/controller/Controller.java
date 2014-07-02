@@ -11,17 +11,16 @@ import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.thread.ThreadLocalUtil;
+import cn.dreampie.function.user.Token;
 import cn.dreampie.function.user.User;
-import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Before;
-import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.joda.time.DateTime;
 
-import java.io.File;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Controller
@@ -58,13 +57,17 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
     public void toregister() {
-        String code = getPara(0);
-        if (code != null) {
-            String u = getCookie(code);
-            if (u != null) {
-                User regUser = JSON.parseObject(u, User.class);
+        String uuid = getPara(0);
+        if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
+
+            Token token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + new Date() + "' AND is_sign_up = true");
+
+            if (token != null) {
+                User regUser = new User();
+                regUser.set("email", token.get("email"));
                 setAttr("user", regUser);
-                removeCookie(code);
+                token.delete();
+                SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/register.ftl");
             }
         } else
@@ -95,26 +98,35 @@ public class Controller extends com.jfinal.core.Controller {
     public void registerEmail() {
         User regUser = getModel(User.class);
 
-        regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
+        Token token = new Token();
+        token.set("uuid", UUID.randomUUID().toString());
+        token.set("username", regUser.get("email"));
+        DateTime now = DateTime.now();
+        token.set("created_at", now.toDate());
+        token.set("expiration_at", now.plusDays(1).toDate());
+        token.set("is_sign_up", true);
 
-        String emailHash = HasherUtils.me().hash(regUser.getStr("email"), Hasher.DEFAULT).getHashText();
+        if (token.save()) {
+            Mailer.me().sendHtml("Dreampie.cn-梦想派",
+                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/toregister/" + token.get("uuid"))
+                            .getText("mails/register_complete.ftl"), regUser.getStr("email"));
 
-        setCookie(emailHash, JSON.toJSONString(regUser), 20 * 60 * 1000);
-
-        Mailer.me().sendHtml("Dreampie.cn-梦想派",
-                MailerTemplate.me().set("full_name", regUser.get("full_name")).set("safe_url", getAttr("webRootPath") + "/toregister/" + emailHash)
-                        .getText("mails/register_complete.ftl"), regUser.getStr("email"));
-
-        setAttr("user", regUser);
-
-        dynaRender("/view/send_email_notice.ftl");
+            setAttr("user", regUser);
+            dynaRender("/view/send_email_notice.ftl");
+        }
     }
 
     @Before({RootValidator.RegisterValidator.class, Tx.class})
     public void register() {
         User regUser = getModel(User.class);
+        Object u = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
+        regUser.set("email", ((User) u).get("email"));
+
         regUser.set("created_at", new Date());
         regUser.set("providername", "dreampie");
+
+
+        regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
 
         boolean autoLogin = getParaToBoolean("autoLogin");
 

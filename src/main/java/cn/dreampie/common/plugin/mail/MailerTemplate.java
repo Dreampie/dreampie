@@ -1,9 +1,7 @@
 package cn.dreampie.common.plugin.mail;
 
 import com.jfinal.kit.PathKit;
-import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
-import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

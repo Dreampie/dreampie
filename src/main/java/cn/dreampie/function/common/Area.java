@@ -14,7 +14,7 @@ import java.util.List;
 public class Area extends Model<Area> implements TreeNode<Area> {
     private List<Area> children = Lists.newArrayList();
 
-    public static Area dao=new Area();
+    public static Area dao = new Area();
 
     @Override
     public long getId() {

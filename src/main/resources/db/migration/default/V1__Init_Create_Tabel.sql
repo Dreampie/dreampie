@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS sec_token;
 CREATE TABLE sec_token (
   uuid          VARCHAR(255) NOT NULL  COMMENT '用户编码',
   username      VARCHAR(50)  NOT NULL  COMMENT '用户名',
-  created_at    TIMESTAMP    NOT NULL ,
+  created_at    TIMESTAMP    NOT NULL COMMENT '创建时间',
   expiration_at TIMESTAMP    NOT NULL  COMMENT '结束时间',
   is_sign_up    BOOLEAN DEFAULT TRUE  COMMENT '是否是注册'
 );

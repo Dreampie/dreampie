@@ -7,8 +7,6 @@
     <h2 class="form-register-heading">Please write email</h2>
 
     <input name="user.email" value="${(user.email)!}" type="text" maxlength="200" class="form-control email" placeholder="邮箱">
-    <input name="user.last_name" value="${(user.last_name)!}" type="text" maxlength="10" class="form-control last_name" placeholder="姓">
-    <input name="user.first_name" value="${(user.first_name)!}" type="text" maxlength="10" class="form-control fisrt_name" placeholder="名">
     <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码" required><img
         class="captcha"
         src="/patchca?width=119&height=42">
@@ -16,12 +14,6 @@
     <div class="error-box">
         <#if emailMsg??>
             ${emailMsg}<br/>
-        </#if>
-        <#if firstnameMsg??>
-            ${firstnameMsg}<br/>
-        </#if>
-        <#if lastnameMsg??>
-            ${lastnameMsg}<br/>
         </#if>
         <#if captchaMsg??>
         ${captchaMsg}
@@ -36,20 +28,12 @@
         $("#register_email button[type='submit']").click(function () {
             //表单验证
             var registervalid = $.valid('#register_email.form-register', {
-                rules: {"user.username": [
-                    {regex: /^\w{5,18}$/}
-                ], "user.first_name": [
-                    'not_empty', {"max_length": 10}
-                ], "user.last_name": [
-                    'not_empty', {"max_length": 10}
-                ], "user.email": [
+                rules: { "user.email": [
                     'email'
                 ], "captcha": [
                     {regex: /^\d{4}$/}
                 ]},
                 messages: {
-                    "user.first_name": {'not_empty': '名字不能为空', 'max_length': '名字长度不能超过10位'},
-                    "user.last_name": {'not_empty': '姓氏不能为空', 'max_length': '姓氏长度不能超过10位'},
                     "user.email": {'email': '邮箱格式不正确'},
                     "captcha": {'regex': '验证码必须为四位数字'}
                 }, boxer: {exist: true}});
