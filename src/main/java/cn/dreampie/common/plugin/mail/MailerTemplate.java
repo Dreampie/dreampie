@@ -6,6 +6,8 @@ import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +20,13 @@ import java.util.Map;
  * Created by wangrenhui on 2014/7/2.
  */
 public class MailerTemplate {
+    private static Logger logger = LoggerFactory.getLogger(MailerTemplate.class);
 
     private static MailerTemplate mailerTemplate = new MailerTemplate();
     /**
      * 邮件模板的存放位置
      */
-    private static final String TEMPLATE_PATH = "/template/";
+    private static final String TEMPLATE_PATH = "template";
     /**
      * 模板引擎配置
      */
@@ -37,7 +40,8 @@ public class MailerTemplate {
         configuration = new Configuration();
 //        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
         try {
-            configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + TEMPLATE_PATH)));
+            configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator)));
+            logger.debug("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
         } catch (IOException e) {
             e.printStackTrace();
         }
