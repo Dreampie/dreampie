@@ -66,7 +66,7 @@
             });
             //初始化菜单
             $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/},classes: 'mm-white',
-//                dragOpen: true,
+                dragOpen: true,
                 counters: true,
                 searchfield: true,
                 header: {add: true, update: true, title: '菜单'}});
