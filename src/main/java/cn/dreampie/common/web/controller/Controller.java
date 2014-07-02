@@ -14,6 +14,7 @@ import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.route.ControllerBind;
+import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -41,7 +42,9 @@ public class Controller extends com.jfinal.core.Controller {
 //  @CacheName("index")
     public void index() {
         if (getPara(0) != null)
-            Mailer.me().sendHtml("欢迎注册-梦想派", MailerTemplate.me().set("full_name", "梦想派").set("safe_url", "www.drampie.cn").getText("mails"+ File.separator+"/register.ftl"), "wangrenhui1990@hotmail.com");
+            Mailer.me().sendHtml("欢迎注册-梦想派", MailerTemplate.me().set("full_name", "梦想派").set("safe_url", "www.drampie.cn").getText("mails" + File.separator + "/register.ftl"), "wangrenhui1990@hotmail.com");
+        System.out.println(PathKit.getWebRootPath());
+        System.out.println(getRequest().getServletContext().getRealPath("/"));
         dynaRender("/page/index.ftl");
     }
 
