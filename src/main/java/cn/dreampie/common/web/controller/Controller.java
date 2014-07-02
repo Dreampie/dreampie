@@ -99,8 +99,8 @@ public class Controller extends com.jfinal.core.Controller {
 
         SubjectUtils.me().getSession().setAttribute(emailHash, regUser);
 
-        Mailer.me().sendHtml("欢迎注册-梦想派",
-                MailerTemplate.me().set("full_name", regUser.get("full_name")).set("safe_url", getPara("webRootPath") + "/toregister/" + emailHash)
+        Mailer.me().sendHtml("Dreampie.cn-梦想派",
+                MailerTemplate.me().set("full_name", regUser.get("full_name")).set("safe_url", getAttr("webRootPath") + "/toregister/" + emailHash)
                         .getText("mails/register_complete.ftl"), regUser.getStr("email"));
 
         setAttr("user", regUser);

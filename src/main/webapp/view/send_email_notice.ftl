@@ -1,6 +1,6 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="index" html_title=i18n.getText("notice.name")>
-<p>您好,${user.full_name}</p>
+<p class="page-header">您好,${user.full_name}</p>
 
 
 <p>
