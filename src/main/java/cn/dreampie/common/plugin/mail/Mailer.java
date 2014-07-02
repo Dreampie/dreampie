@@ -45,6 +45,7 @@ public class Mailer {
                     public void run() {
                         MailerConf mailerConf = MailerPlugin.mailerConf;
                         HtmlEmail htmlEmail = new HtmlEmail();
+                        htmlEmail.setCharset(mailerConf.getCharset());
                         htmlEmail.setSocketTimeout(mailerConf.getTimeout());
                         htmlEmail.setCharset(mailerConf.getEncode());
                         htmlEmail.setHostName(mailerConf.getHost());
@@ -87,6 +88,7 @@ public class Mailer {
                     public void run() {
                         MailerConf mailerConf = MailerPlugin.mailerConf;
                         SimpleEmail simpleEmail = new SimpleEmail();
+                        simpleEmail.setCharset(mailerConf.getCharset());
                         simpleEmail.setSocketTimeout(mailerConf.getTimeout());
                         simpleEmail.setCharset(mailerConf.getEncode());
                         simpleEmail.setHostName(mailerConf.getHost());
@@ -126,6 +128,7 @@ public class Mailer {
                     public void run() {
                         MailerConf mailerConf = MailerPlugin.mailerConf;
                         MultiPartEmail multiPartEmail = new MultiPartEmail();
+                        multiPartEmail.setCharset(mailerConf.getCharset());
                         multiPartEmail.setSocketTimeout(mailerConf.getTimeout());
                         multiPartEmail.setCharset(mailerConf.getEncode());
                         multiPartEmail.setHostName(mailerConf.getHost());

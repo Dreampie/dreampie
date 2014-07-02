@@ -3,6 +3,7 @@ package cn.dreampie.common.web.controller;
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.config.ReTurnType;
 import cn.dreampie.common.plugin.mail.Mailer;
+import cn.dreampie.common.plugin.mail.MailerTemplate;
 import cn.dreampie.common.plugin.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
@@ -39,7 +40,7 @@ public class Controller extends com.jfinal.core.Controller {
 //  @CacheName("index")
     public void index() {
         if (getPara(0) != null)
-            Mailer.me().sendHtml("测试", "<h1>Test</h1>", "wangrenhui1990@hotmail.com");
+            Mailer.me().sendHtml("欢迎注册-梦想派", MailerTemplate.me().set("full_name", "梦想派").set("safe_url", "www.drampie.cn").getText("mails/register.ftl"), "wangrenhui1990@hotmail.com");
         dynaRender("/page/index.ftl");
     }
 
@@ -98,6 +99,9 @@ public class Controller extends com.jfinal.core.Controller {
 
         if (regUser.save()) {
             regUser.addUserInfo(null).addRole(null);
+            if (ValidateUtils.me().isEmail(regUser.getStr("email"))) {
+//                Mailer.me().sendHtml("欢迎注册-梦想派", "<h1>Test</h1>", regUser.getStr("email"));
+            }
             setAttr("state", "success");
             if (autoLogin) {
                 if (SubjectUtils.me().login(regUser.getStr("username"), passwordInfo.getHashText())) {

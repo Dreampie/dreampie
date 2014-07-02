@@ -4,6 +4,7 @@ package cn.dreampie.common.plugin.mail;
  * Created by wangrenhui on 14-5-6.
  */
 public class MailerConf {
+    private String charset;
     private String host;
     private String sslport;
     private int timeout;
@@ -18,6 +19,7 @@ public class MailerConf {
     private String encode;
 
     public MailerConf(String host, String sslport, int timeout, String port, boolean ssl, boolean tls, boolean debug, String user, String password, String name, String from, String encode) {
+        this.charset = "UTF-8";
         this.host = host;
         this.sslport = sslport;
         this.timeout = timeout;
@@ -30,6 +32,14 @@ public class MailerConf {
         this.name = name;
         this.from = from;
         this.encode = encode;
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
     }
 
     public int getTimeout() {
