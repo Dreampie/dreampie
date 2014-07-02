@@ -3,6 +3,7 @@ package cn.dreampie.common.web.thread;
 import cn.dreampie.common.config.ReTurnType;
 import com.jfinal.log.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,15 @@ public class ThreadLocalUtil {
         if (requestLocal.get() != null) {
             return (HttpSession) ((HttpServletRequest) requestLocal.get())
                     .getSession();
+        } else {
+            return null;
+        }
+    }
+
+    public static ServletContext getServletContex() {
+        if (requestLocal.get() != null) {
+            return (ServletContext) ((HttpServletRequest) requestLocal.get())
+                    .getServletContext();
         } else {
             return null;
         }

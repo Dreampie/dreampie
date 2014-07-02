@@ -1,9 +1,8 @@
 package cn.dreampie.common.plugin.mail;
 
+import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import com.jfinal.kit.PathKit;
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.cache.FileTemplateLoader;
-import freemarker.cache.TemplateLoader;
+import freemarker.cache.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
@@ -26,7 +25,7 @@ public class MailerTemplate {
     /**
      * 邮件模板的存放位置
      */
-    private static final String TEMPLATE_PATH = "template";
+    private static final String TEMPLATE_PATH = "/template/";
     /**
      * 模板引擎配置
      */
@@ -37,7 +36,6 @@ public class MailerTemplate {
     private static Map<Object, Object> parameters;
 
     public static MailerTemplate me() {
-        logger.info(MailerTemplate.class.getClassLoader().getResource("").getPath());
         //初始化参数
         parameters = new HashMap<Object, Object>();
 
@@ -45,8 +43,9 @@ public class MailerTemplate {
             configuration = new Configuration();
 //        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
             try {
-                logger.info("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
-                configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator)));
+                logger.info("template dir:" + PathKit.getWebRootPath() + TEMPLATE_PATH);
+                TemplateLoader[] templateLoaders = new TemplateLoader[]{new WebappTemplateLoader(ThreadLocalUtil.getServletContex(), TEMPLATE_PATH), new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH), new FileTemplateLoader(new File(PathKit.getWebRootPath() + TEMPLATE_PATH))};
+                configuration.setTemplateLoader(new MultiTemplateLoader(templateLoaders));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
