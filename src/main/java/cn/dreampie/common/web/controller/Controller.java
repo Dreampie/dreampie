@@ -41,6 +41,7 @@ public class Controller extends com.jfinal.core.Controller {
 //  @Before(EvictInterceptor.class)
 //  @CacheName("index")
     public void index() {
+        MailerTemplate.me();
         if (getPara(0) != null)
             Mailer.me().sendHtml("欢迎注册-梦想派", MailerTemplate.me().set("full_name", "梦想派").set("safe_url", "www.drampie.cn").getText("mails/register.ftl"), "wangrenhui1990@hotmail.com");
         dynaRender("/page/index.ftl");
