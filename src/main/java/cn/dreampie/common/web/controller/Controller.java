@@ -12,6 +12,7 @@ import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.User;
+import com.alibaba.fastjson.JSON;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.kit.PathKit;
@@ -59,10 +60,11 @@ public class Controller extends com.jfinal.core.Controller {
     public void toregister() {
         String code = getPara(0);
         if (code != null) {
-            Object u = SubjectUtils.me().getSession().getAttribute(code);
+            String u = getCookie(code);
             if (u != null) {
-                User regUser = (User) u;
+                User regUser = JSON.parseObject(u, User.class);
                 setAttr("user", regUser);
+                removeCookie(code);
                 dynaRender("/view/register.ftl");
             }
         } else
@@ -97,7 +99,7 @@ public class Controller extends com.jfinal.core.Controller {
 
         String emailHash = HasherUtils.me().hash(regUser.getStr("email"), Hasher.DEFAULT).getHashText();
 
-        SubjectUtils.me().getSession().setAttribute(emailHash, regUser);
+        setCookie(emailHash, JSON.toJSONString(regUser), 20 * 60 * 1000);
 
         Mailer.me().sendHtml("Dreampie.cn-梦想派",
                 MailerTemplate.me().set("full_name", regUser.get("full_name")).set("safe_url", getAttr("webRootPath") + "/toregister/" + emailHash)
