@@ -1,8 +1,8 @@
-<#include "/page/layout/_layout.ftl"/>
+<#include "/view/layout/_layout.ftl"/>
 <@layout activebar="center" html_title="个人中心">
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
-<script type="text/javascript" src="<@resource.static/>/libs/masonry/js/masonry.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/masonry/js/masonry.min.js"></script>
 <div class="page-header">
     <h1>通讯录</h1>
 </div>

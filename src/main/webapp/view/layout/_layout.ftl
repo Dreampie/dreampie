@@ -16,32 +16,32 @@
     <!--google站长验证-->
     <meta name="google-site-verification" content="ALViN24w3GrrIVAL-93BULRE99fdlBXw0V8QSXvSs7E"/>
     <!-- 最新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap.min.css" media="screen"/>
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap-theme.min.css" media="screen"/>
+    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>
 
-    <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/font-awesome.min.css">
 
     <!--messenger-->
-    <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/messenger.css" media="screen"/>
-    <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/messenger-theme-block.css" media="screen"/>
+    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/messenger.css" media="screen"/>
+    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/messenger-theme-block.css" media="screen"/>
     <!--[if lte IE 7]>
-    <link rel="stylesheet" href="a<@resource.static/>/libs/bootstrap/css/font-awesome-ie7.min.css">
+    <link rel="stylesheet" href="a<@resource.static/>/lib/bootstrap/css/font-awesome-ie7.min.css">
     <![endif]-->
     <!-- bsie css 补丁文件 -->
     <!-- bsie 额外的 css 补丁文件 -->
     <!--[if lte IE 7]>
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/bootstrap/css/bootstrap-ie.css"/>
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/bootstrap/css/ie.css"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/lib/bootstrap/css/bootstrap-ie.css"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/lib/bootstrap/css/ie.css"/>
     <![endif]-->
     <!--自定义样式-->
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/layout/_layout.css"/>
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/libs/mmenu/css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/lib/mmenu/css/jquery.mmenu.all.css"/>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript" src="<@resource.static/>/libs/mmenu/js/jquery.hammer.min.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/lib/mmenu/js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="<@resource.static/>/lib/mmenu/js/jquery.hammer.min.js"></script>
 
 <#-- base href="${CPATH}" / -->
     <script type="text/javascript">
@@ -78,7 +78,7 @@
                 header: {add: true, update: true, title: '<@shiro.principal property="full_name"/>'}});
         });
     </script>
-    <link rel="shortcut icon" href="<@resource.static/>/images/favicon.ico"/>
+    <link rel="shortcut icon" href="<@resource.static/>/image/favicon.ico"/>
     <title>${html_title}</title>
 </head>
 <body>
@@ -104,7 +104,7 @@
             </li>
             <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
         </@shiro.authenticated>
-        <li><a target="_blank" href="/page/demo/chat.html">聊天demo</a></li>
+        <li><a target="_blank" href="/view/demo/chat.html">聊天demo</a></li>
     </ul>
 </nav>
 
@@ -121,7 +121,7 @@
                         </a></li>
                 </ul>
                 <a href="/">
-                    <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+                    <img src="/image/logo.png" style="height: 48px;*height:50px" alt=""/>
                 </a>
                 <ul class="nav fright">
                     <li>
@@ -140,7 +140,7 @@
                     </li>
                 </ul>
                 <a style="padding: 0px" href="/">
-                    <img src="/images/logo.png" style="height: 48px;*height:50px" alt=""/>
+                    <img src="/image/logo.png" style="height: 48px;*height:50px" alt=""/>
                 </a>
                 <ul class="navbar-right nav navbar-nav">
                     <li>
@@ -200,19 +200,21 @@ $(function () {
 </script>
 <![endif]-->
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrapx-clickover.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrapx-clickover.js"></script>
 <!-- bsie js patch, it will only execute in IE6 -->
 <!--[if lte IE 7]>
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-ie.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap-ie.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/selectivizr-min.js"></script>
 <![endif]-->
 <!--messager-->
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/messenger.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/messenger.min.js"></script>
 <!--maxlength-->
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-maxlength.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap-maxlength.js"></script>
 <!--全局js-->
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_layout.js"></script>
+<!--url param-->
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery.query.js"></script>
 <!--i18n-->
 <#--<script type="text/javascript" language="JavaScript" src="<@resource.static/>/javascript/jquery.i18n.properties-min-1.0.9.js"></script>-->
 <!--幕布实现的js-->

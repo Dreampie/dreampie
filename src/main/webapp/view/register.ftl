@@ -1,10 +1,12 @@
-<#include "/page/layout/_layout.ftl"/>
+<#include "/view/layout/_layout.ftl"/>
 <@layout activebar="toregister" html_title=i18n.getText("register.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/register.css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <form class="form-horizontal form-register" id="register" role="form" method="post" action="/register" autocomplete="off">
   <h2 class="form-register-heading">Please register</h2>
+
+  ${(user.full_name)!} - ${(user.email)!}
 
   <input name="user.username" value="${(user.username)!}" type="text" maxlength="18" class="form-control username" placeholder="账户" required autofocus>
   <input name="user.password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码" required>
@@ -25,15 +27,6 @@
     </#if>
     <#if repasswordMsg??>
     ${repasswordMsg}<br/>
-    </#if>
-    <#if emailMsg??>
-    ${emailMsg}<br/>
-    </#if>
-    <#if firstnameMsg??>
-    ${firstnameMsg}<br/>
-    </#if>
-    <#if lastnameMsg??>
-    ${lastnameMsg}<br/>
     </#if>
     <#if captchaMsg??>
     ${captchaMsg}

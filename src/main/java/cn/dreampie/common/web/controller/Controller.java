@@ -41,7 +41,7 @@ public class Controller extends com.jfinal.core.Controller {
 //  @Before(EvictInterceptor.class)
 //  @CacheName("index")
     public void index() {
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
 
@@ -53,11 +53,20 @@ public class Controller extends com.jfinal.core.Controller {
         if (subject != null && subject.getPrincipal() != null) {
             subject.logout();
         }
-        dynaRender("/page/login.ftl");
+        dynaRender("/view/login.ftl");
     }
 
     public void toregister() {
-        dynaRender("/page/register.ftl");
+        String code = getPara(0);
+        if (code != null) {
+            Object u = SubjectUtils.me().getSession().getAttribute(code);
+            if (u != null) {
+                User regUser = (User) u;
+                setAttr("user", regUser);
+                dynaRender("/view/register.ftl");
+            }
+        } else
+            dynaRender("/view/register_email.ftl");
     }
 
     /**
@@ -80,6 +89,25 @@ public class Controller extends com.jfinal.core.Controller {
         render(new PatchcaRender(minnum, maxnum, width, height));
     }
 
+    @Before({RootValidator.RegisterEmailValidator.class, Tx.class})
+    public void registerEmail() {
+        User regUser = getModel(User.class);
+
+        regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
+
+        String emailHash = HasherUtils.me().hash(regUser.getStr("email"), Hasher.DEFAULT).getHashText();
+
+        SubjectUtils.me().getSession().setAttribute(emailHash, regUser);
+
+        Mailer.me().sendHtml("欢迎注册-梦想派",
+                MailerTemplate.me().set("full_name", regUser.get("full_name")).set("safe_url", getPara("webRootPath") + "/toregister/" + emailHash)
+                        .getText("mails/register_complete.ftl"), regUser.getStr("email"));
+
+        setAttr("user", regUser);
+
+        dynaRender("/view/send_email_notice.ftl");
+    }
+
     @Before({RootValidator.RegisterValidator.class, Tx.class})
     public void register() {
         User regUser = getModel(User.class);
@@ -88,10 +116,6 @@ public class Controller extends com.jfinal.core.Controller {
 
         boolean autoLogin = getParaToBoolean("autoLogin");
 
-        if (!ValidateUtils.me().isNullOrEmpty(regUser.get("first_name")) || !ValidateUtils.me().isNullOrEmpty(regUser.get("last_name"))) {
-            regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
-        }
-
         HasherInfo passwordInfo = HasherUtils.me().hash(regUser.getStr("password"), Hasher.DEFAULT);
         regUser.set("password", passwordInfo.getHashResult());
         regUser.set("hasher", passwordInfo.getHasher().value());
@@ -99,21 +123,18 @@ public class Controller extends com.jfinal.core.Controller {
 
         if (regUser.save()) {
             regUser.addUserInfo(null).addRole(null);
-            if (ValidateUtils.me().isEmail(regUser.getStr("email"))) {
-                Mailer.me().sendHtml("欢迎注册-梦想派", MailerTemplate.me().set("full_name", "梦想派").set("safe_url", "www.drampie.cn").getText("mails/register.ftl"), regUser.getStr("email"));
-            }
             setAttr("state", "success");
             if (autoLogin) {
                 if (SubjectUtils.me().login(regUser.getStr("username"), passwordInfo.getHashText())) {
                     //添加到session
                     SubjectUtils.me().getSession().setAttribute(AppConstants.CURRENT_USER, regUser);
-                    dynaRender("/page/index.ftl");
+                    dynaRender("/view/index.ftl");
                 } else
-                    dynaRender("/page/login.ftl");
+                    dynaRender("/view/login.ftl");
             }
         } else {
             setAttr("state", "failure");
-            dynaRender("/page/register.ftl");
+            dynaRender("/view/register.ftl");
         }
     }
 

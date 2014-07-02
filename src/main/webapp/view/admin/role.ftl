@@ -1,5 +1,5 @@
-<#include "/page/layout/_layout.ftl"/>
-<#include "/page/layout/_treenav.ftl" />
+<#include "/view/layout/_layout.ftl"/>
+<#include "/view/layout/_treenav.ftl" />
 <@layout activebar="role" html_title=i18n.getText("role.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/layout/_treenav.css" type="text/css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_treenav.js"></script>

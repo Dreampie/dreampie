@@ -1,7 +1,7 @@
-<#include "/page/layout/_layout.ftl"/>
+<#include "/view/layout/_layout.ftl"/>
 <@layout activebar="index" html_title=i18n.getText("index.name")>
-<link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap-tour.min.css"/>
-<script type="text/javascript" src="<@resource.static/>/libs/bootstrap/js/bootstrap-tour.min.js"></script>
+<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-tour.min.css"/>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap-tour.min.js"></script>
 <h1><@shiro.guest>Hello guest!</@shiro.guest>
     <@shiro.hasRole name="user">Hello user!</@shiro.hasRole>
     <@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>

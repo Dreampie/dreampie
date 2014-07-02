@@ -14,18 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 public class UrlInterceptor implements Interceptor {
     @Override
     public void intercept(ActionInvocation ai) {
-        ai.invoke();
         Controller controller = ai.getController();
         HttpServletRequest request = controller.getRequest();
         //webRoot
         controller.setAttr("webRootPath", request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath());
+
         if (!ThreadLocalUtil.isAjax()) {
             //local 数据
             controller.setAttr("localParas", request.getQueryString());
             controller.setAttr("localUri", ai.getActionKey());
         }
+        ai.invoke();
+        controller.keepPara("webRootPath","localParas","localUri");
         //i18n
         String tmp = controller.getCookie(Const.I18N_LOCALE);
         String i18n = controller.getRequest().getLocale().toString();

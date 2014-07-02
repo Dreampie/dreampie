@@ -11,13 +11,13 @@ import com.jfinal.plugin.ehcache.CacheName;
 public class StateController extends Controller {
 
     public void index() {
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
         setAttr("states", State.dao.findBy("`state`.deleted_at is NULL"));
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
@@ -27,6 +27,6 @@ public class StateController extends Controller {
         if (!ValidateUtils.me().isNullOrEmpty(type) && !ValidateUtils.me().isNullOrEmpty(value) && ValidateUtils.me().isPositiveNumber(value)) {
             setAttr("state", State.dao.findFirstBy("`state`.type=? AND `state`.value=?", type, value));
         }
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 }

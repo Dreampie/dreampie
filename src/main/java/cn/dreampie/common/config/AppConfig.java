@@ -59,10 +59,10 @@ public class AppConfig extends JFinalConfig {
         Logger.setLoggerFactory(new Slf4jLogFactory());
         constants.setErrorRenderFactory(new JsonErrorRenderFactory());
         constants.setI18n("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
-        constants.setError401View("/page/login.ftl");
-        constants.setError403View("/page/layout/403.ftl");
-        constants.setError404View("/page/layout/404.ftl");
-        constants.setError500View("/page/layout/500.ftl");
+        constants.setError401View("/view/login.ftl");
+        constants.setError403View("/view/layout/403.ftl");
+        constants.setError404View("/view/layout/404.ftl");
+        constants.setError500View("/view/layout/500.ftl");
     }
 
     /**
@@ -150,7 +150,7 @@ public class AppConfig extends JFinalConfig {
      * 配置处理器
      */
     public void configHandler(Handlers handlers) {
-//        handlers.add(new FakeStaticHandler("/page", ".ftl", "/page/layout/", new String[]{"/javascript/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
+//        handlers.add(new FakeStaticHandler("/page", ".ftl", "/view/layout/", new String[]{"/javascript/", "/images/", "/css/", "/libs/"},new String[]{"/im/"}));
         handlers.add(new FakeStaticHandler());
         handlers.add(new AccessDeniedHandler("/**/*.ftl"));
         handlers.add(new ResourceHandler("/javascript/**", "/images/**", "/css/**", "/libs/**", "/**/*.html"));

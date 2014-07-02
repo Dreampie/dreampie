@@ -10,23 +10,23 @@ import com.jfinal.plugin.ehcache.CacheName;
 public class AreaController extends Controller {
 
     public void index() {
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void own() {
         setAttr("areas", Area.dao.paginateBy(getParaToInt(0, 1), 15, "`area`.deleted_at is NULL"));
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void whole() {
         setAttr("areas", Area.dao.findBy("`area`.deleted_at is NULL"));
-        dynaRender("/page/index.ftl");
+        dynaRender("/view/index.ftl");
     }
 
     public void children() {
         setAttr("areas", Area.dao.findBy("`area`.deleted_at is NULL AND `area`.pid =" + getParaToInt(0, 1)));
-        dynaRender("/page/area/index.ftl");
+        dynaRender("/view/area/index.ftl");
     }
 }

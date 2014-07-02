@@ -17,7 +17,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 public class UserController extends Controller {
 
     public void index() {
-        dynaRender("/page/user/index.ftl");
+        dynaRender("/view/user/index.ftl");
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
@@ -37,7 +37,7 @@ public class UserController extends Controller {
             setAttr("state", "success");
         } else
             setAttr("state", "failure");
-        dynaRender("/page/user/center.ftl");
+        dynaRender("/view/user/center.ftl");
     }
 
     public void center() {
@@ -45,6 +45,6 @@ public class UserController extends Controller {
         if (!ValidateUtils.me().isNullOrEmpty(user)) {
             setAttr("user", user);
         }
-        dynaRender("/page/user/center.ftl");
+        dynaRender("/view/user/center.ftl");
     }
 }

@@ -1,4 +1,4 @@
-<#include "/page/layout/_layout.ftl"/>
+<#include "/view/layout/_layout.ftl"/>
 <@layout activebar="index" html_title="首页">
 <h1>Admin User </h1>
 <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
@@ -9,7 +9,7 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
-            <img data-src="holder.js/1140x500/auto/#777:#777" alt="900x500" src="/images/carousel_base.png">
+            <img data-src="holder.js/1140x500/auto/#777:#777" alt="900x500" src="/image/carousel_base.png">
 
             <div class="carousel-caption">
                 <h3>First slide label</h3>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="item">
-            <img data-src="holder.js/1140x500/auto/#666:#666" alt="900x500" src="/images/carousel_base.png">
+            <img data-src="holder.js/1140x500/auto/#666:#666" alt="900x500" src="/image/carousel_base.png">
 
             <div class="carousel-caption">
                 <h3>Second slide label</h3>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="item">
-            <img data-src="holder.js/1140x500/auto/#555:#5555" alt="900x500" src="/images/carousel_base.png">
+            <img data-src="holder.js/1140x500/auto/#555:#5555" alt="900x500" src="/image/carousel_base.png">
 
             <div class="carousel-caption">
                 <h3>Third slide label</h3>
