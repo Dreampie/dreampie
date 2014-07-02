@@ -1,12 +1,11 @@
 package cn.dreampie.common.plugin.mail;
 
-import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import com.jfinal.kit.PathKit;
-import freemarker.cache.*;
+import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.FileTemplateLoader;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,13 +18,12 @@ import java.util.Map;
  * Created by wangrenhui on 2014/7/2.
  */
 public class MailerTemplate {
-    private static Logger logger = LoggerFactory.getLogger(MailerTemplate.class);
 
     private static MailerTemplate mailerTemplate = new MailerTemplate();
     /**
      * 邮件模板的存放位置
      */
-    private static final String TEMPLATE_PATH = "/templates/";
+    private static final String TEMPLATE_PATH = "/template/";
     /**
      * 模板引擎配置
      */
@@ -35,26 +33,21 @@ public class MailerTemplate {
      */
     private static Map<Object, Object> parameters;
 
+    static {
+        configuration = new Configuration();
+//        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
+        try {
+            configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + TEMPLATE_PATH)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        configuration.setEncoding(Locale.getDefault(), "UTF-8");
+        configuration.setDateFormat("yyyy-MM-dd HH:mm:ss");
+    }
+
     public static MailerTemplate me() {
         //初始化参数
         parameters = new HashMap<Object, Object>();
-
-        if (configuration == null) {
-            configuration = new Configuration();
-//
-//            try {
-            ClassTemplateLoader ctl = new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
-//                logger.info("template dir:" + PathKit.getWebRootPath() + TEMPLATE_PATH);new WebappTemplateLoader(ThreadLocalUtil.getServletContex(), TEMPLATE_PATH), new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH),
-//                TemplateLoader[] templateLoaders = new TemplateLoader[]{new FileTemplateLoader()};
-//                configuration.setTemplateLoader(new MultiTemplateLoader(templateLoaders));
-//                configuration.setDirectoryForTemplateLoading(new File(PathKit.getWebRootPath() + TEMPLATE_PATH));
-            configuration.setTemplateLoader(ctl);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-            configuration.setEncoding(Locale.getDefault(), "UTF-8");
-            configuration.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        }
         return mailerTemplate;
     }
 
