@@ -41,15 +41,17 @@ public class MailerTemplate {
 
         if (configuration == null) {
             configuration = new Configuration();
-//        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
-            try {
+//
+//            try {
+            ClassTemplateLoader ctl = new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
 //                logger.info("template dir:" + PathKit.getWebRootPath() + TEMPLATE_PATH);new WebappTemplateLoader(ThreadLocalUtil.getServletContex(), TEMPLATE_PATH), new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH),
 //                TemplateLoader[] templateLoaders = new TemplateLoader[]{new FileTemplateLoader()};
 //                configuration.setTemplateLoader(new MultiTemplateLoader(templateLoaders));
-                configuration.setDirectoryForTemplateLoading(new File(PathKit.getWebRootPath() + TEMPLATE_PATH));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+//                configuration.setDirectoryForTemplateLoading(new File(PathKit.getWebRootPath() + TEMPLATE_PATH));
+            configuration.setTemplateLoader(ctl);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
             configuration.setEncoding(Locale.getDefault(), "UTF-8");
             configuration.setDateFormat("yyyy-MM-dd HH:mm:ss");
         }
