@@ -37,6 +37,7 @@ public class MailerTemplate {
     private static Map<Object, Object> parameters;
 
     public static MailerTemplate me() {
+        logger.info(MailerTemplate.class.getClassLoader().getResource("").getPath());
         //初始化参数
         parameters = new HashMap<Object, Object>();
 
