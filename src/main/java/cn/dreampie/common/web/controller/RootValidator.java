@@ -45,6 +45,7 @@ public class RootValidator {
             Object tmpU = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
             if (tmpU == null) {
                 addError("usernameMsg", "邮箱已过期");
+                c.setAttr("back", "/view/register_email.ftl");
             }
 
             boolean usernameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.username"));
@@ -83,9 +84,9 @@ public class RootValidator {
 //            }
 
 
-            boolean captchaEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("captcha"));
-            if (captchaEmpty) addError("captchaMsg", "验证码不能为空");
-            if (!captchaEmpty && !SubjectUtils.me().doCaptcha(c.getPara("captcha"))) addError("captchaMsg", "验证码验证失败");
+//            boolean captchaEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("captcha"));
+//            if (captchaEmpty) addError("captchaMsg", "验证码不能为空");
+//            if (!captchaEmpty && !SubjectUtils.me().doCaptcha(c.getPara("captcha"))) addError("captchaMsg", "验证码验证失败");
         }
 
         protected void handleError(Controller c) {
@@ -95,7 +96,7 @@ public class RootValidator {
             if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
                 c.renderJson();
             else
-                c.render("/view/register.ftl");
+                c.render(c.getAttr("back") != null ? c.getAttr("back").toString() : "/view/register.ftl");
         }
     }
 }

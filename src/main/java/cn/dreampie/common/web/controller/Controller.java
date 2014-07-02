@@ -65,10 +65,12 @@ public class Controller extends com.jfinal.core.Controller {
             if (token != null) {
                 User regUser = new User();
                 regUser.set("email", token.get("email"));
+                regUser.set("email", "wangrenhui1990@hotmail.com");
                 setAttr("user", regUser);
                 token.delete();
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/register.ftl");
+                return;
             }
         }
 
@@ -121,6 +123,7 @@ public class Controller extends com.jfinal.core.Controller {
     public void register() {
         User regUser = getModel(User.class);
         Object u = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
+
         regUser.set("email", ((User) u).get("email"));
 
         regUser.set("created_at", new Date());
@@ -129,7 +132,7 @@ public class Controller extends com.jfinal.core.Controller {
 
         regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
 
-        boolean autoLogin = getParaToBoolean("autoLogin");
+        boolean autoLogin = getParaToBoolean("autoLogin") == null ? false : getParaToBoolean("autoLogin");
 
         HasherInfo passwordInfo = HasherUtils.me().hash(regUser.getStr("password"), Hasher.DEFAULT);
         regUser.set("password", passwordInfo.getHashResult());
@@ -144,13 +147,16 @@ public class Controller extends com.jfinal.core.Controller {
                     //添加到session
                     SubjectUtils.me().getSession().setAttribute(AppConstants.CURRENT_USER, regUser);
                     dynaRender("/view/index.ftl");
-                } else
-                    dynaRender("/view/login.ftl");
+                    return;
+                }
             }
         } else {
             setAttr("state", "failure");
             dynaRender("/view/register.ftl");
+            return;
         }
+
+        dynaRender("/view/login.ftl");
     }
 
 }
