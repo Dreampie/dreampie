@@ -37,21 +37,25 @@ public class MailerTemplate {
     private static Map<Object, Object> parameters;
 
     static {
-        configuration = new Configuration();
-//        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
-        try {
-            configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator)));
-            logger.info("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        configuration.setEncoding(Locale.getDefault(), "UTF-8");
-        configuration.setDateFormat("yyyy-MM-dd HH:mm:ss");
+
     }
 
     public static MailerTemplate me() {
         //初始化参数
         parameters = new HashMap<Object, Object>();
+
+        if (configuration == null) {
+            configuration = new Configuration();
+//        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
+            try {
+                configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator)));
+                logger.info("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            configuration.setEncoding(Locale.getDefault(), "UTF-8");
+            configuration.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
         return mailerTemplate;
     }
 
