@@ -41,7 +41,7 @@ public class MailerTemplate {
 //        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
         try {
             configuration.setTemplateLoader(new FileTemplateLoader(new File(PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator)));
-            logger.debug("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
+            logger.info("template dir:" + PathKit.getWebRootPath() + File.separator + TEMPLATE_PATH + File.separator);
         } catch (IOException e) {
             e.printStackTrace();
         }
