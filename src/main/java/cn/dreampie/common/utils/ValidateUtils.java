@@ -438,5 +438,6 @@ public class ValidateUtils {
 //    } else {
 //      System.out.print("false");
 //    }
+        System.out.println("UUID:" + ValidateUtils.me().isUUID("ee706ee9-1658-43d0-bc1f-2db23cab4ab2"));
     }
 }

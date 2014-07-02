@@ -57,7 +57,7 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
     public void toregister() {
-        String uuid = getPara(0);
+        String uuid = getPara("code");
         if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
 
             Token token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + new Date() + "' AND is_sign_up = true");
@@ -70,8 +70,9 @@ public class Controller extends com.jfinal.core.Controller {
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/register.ftl");
             }
-        } else
-            dynaRender("/view/register_email.ftl");
+        }
+
+        dynaRender("/view/register_email.ftl");
     }
 
     /**
@@ -108,7 +109,7 @@ public class Controller extends com.jfinal.core.Controller {
 
         if (token.save()) {
             Mailer.me().sendHtml("Dreampie.cn-梦想派",
-                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/toregister/" + token.get("uuid"))
+                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/toregister?code=" + token.get("uuid"))
                             .getText("mails/register_complete.ftl"), regUser.getStr("email"));
 
             setAttr("user", regUser);

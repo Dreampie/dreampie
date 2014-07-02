@@ -18,7 +18,7 @@ public class UrlInterceptor implements Interceptor {
         HttpServletRequest request = controller.getRequest();
         //webRoot
         controller.setAttr("webRootPath", request.getScheme() + "://"
-                + request.getServerName() + ":" + request.getServerPort()
+                + request.getServerName() + (request.getServerPort() == 80 ? "" : ":" + request.getServerPort())
                 + request.getContextPath());
 
         if (!ThreadLocalUtil.isAjax()) {
