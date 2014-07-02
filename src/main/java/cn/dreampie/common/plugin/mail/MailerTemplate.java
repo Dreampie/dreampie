@@ -25,7 +25,7 @@ public class MailerTemplate {
     /**
      * 邮件模板的存放位置
      */
-    private static final String TEMPLATE_PATH = "/template/";
+    private static final String TEMPLATE_PATH = "/templates/";
     /**
      * 模板引擎配置
      */
@@ -43,8 +43,8 @@ public class MailerTemplate {
             configuration = new Configuration();
 //        ClassTemplateLoader ctl= new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH);
             try {
-                logger.info("template dir:" + PathKit.getWebRootPath() + TEMPLATE_PATH);
-                TemplateLoader[] templateLoaders = new TemplateLoader[]{new WebappTemplateLoader(ThreadLocalUtil.getServletContex(), TEMPLATE_PATH), new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH), new FileTemplateLoader(new File(PathKit.getWebRootPath() + TEMPLATE_PATH))};
+//                logger.info("template dir:" + PathKit.getWebRootPath() + TEMPLATE_PATH);new WebappTemplateLoader(ThreadLocalUtil.getServletContex(), TEMPLATE_PATH), new ClassTemplateLoader(MailerTemplate.class, TEMPLATE_PATH),
+                TemplateLoader[] templateLoaders = new TemplateLoader[]{ new FileTemplateLoader(new File(PathKit.getWebRootPath() + TEMPLATE_PATH))};
                 configuration.setTemplateLoader(new MultiTemplateLoader(templateLoaders));
             } catch (IOException e) {
                 throw new RuntimeException(e);
