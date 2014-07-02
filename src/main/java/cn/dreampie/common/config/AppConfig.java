@@ -99,7 +99,7 @@ public class AppConfig extends JFinalConfig {
         AutoMultiSourceTableBindPlugin tableBindDefault = new AutoMultiSourceTableBindPlugin(druidDefault, SimpleNameStyles.LOWER);
         tableBindDefault.setContainerFactory(new CaseInsensitiveContainerFactory(true)); //忽略字段大小写
 //    tableBindDefault.addExcludePaths("cn.dreampie.function.shop");
-        tableBindDefault.setShowSql(true);
+        tableBindDefault.setShowSql(getPropertyToBoolean("devMode", false));
         plugins.add(tableBindDefault);
 
         //第二数据源
@@ -115,7 +115,7 @@ public class AppConfig extends JFinalConfig {
 //    AutoMultiSourceTableBindPlugin tableBindShop = new AutoMultiSourceTableBindPlugin(AppConstants.SHOP_DATESOURCE, druidShop, SimpleNameStyles.LOWER);
 //    tableBindShop.setContainerFactory(new CaseInsensitiveContainerFactory(true)); //忽略字段大小写
 //    tableBindShop.addIncludePaths("cn.dreampie.function.shop");
-//    tableBindShop.setShowSql(true);
+//    tableBindShop.setShowSql(getPropertyToBoolean("devMode", false));
 //    plugins.add(tableBindShop);
 
 
