@@ -4,7 +4,7 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="minimal-ui,width=device-width, initial-scale=1.0, user-scalable = no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no,minimal-ui"/>
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1">
     <meta name="copyright" content="Copyright 梦想派(追梦派)官方网站">
@@ -12,9 +12,9 @@
     <meta name="keywords" content="梦想,追梦,梦想派,追梦派,梦想派官方,梦想派官网,追梦派官方，追梦派官网">
     <meta name="description" content="梦想派(追梦派)是一个开源集成框架，用户可以依赖该框架构建输入自己开源网站！">
     <!--百度站长验证-->
-    <meta name="baidu-site-verification" content="ejR7RPMvau" />
+    <meta name="baidu-site-verification" content="ejR7RPMvau"/>
     <!--google站长验证-->
-    <meta name="google-site-verification" content="ALViN24w3GrrIVAL-93BULRE99fdlBXw0V8QSXvSs7E" />
+    <meta name="google-site-verification" content="ALViN24w3GrrIVAL-93BULRE99fdlBXw0V8QSXvSs7E"/>
     <!-- 最新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="<@resource.static/>/libs/bootstrap/css/bootstrap.min.css" media="screen"/>
 
@@ -51,7 +51,7 @@
                 $.reHeight = function () {
                     var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
 //                    h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
-                    h =  $(".footer-main").outerHeight() + 35,
+                    h = $(".footer-main").outerHeight() + 35,
                             _fn = function (h) {
 //                                console.log(h);
                                 $(".container-main").eq(0).css("min-height", h + "px");
@@ -65,7 +65,7 @@
                 $.reHeight();
             });
             //初始化菜单
-            $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/},classes: 'mm-white',
+            $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/}, classes: 'mm-white',
                 dragOpen: true,
                 counters: true,
                 searchfield: true,
@@ -89,23 +89,23 @@
     </ul>
 </nav>
 <nav id="menu-right" class="mm-menu mm-offcanvas">
-<ul>
-    <@shiro.notAuthenticated>
-        <li class="<#if activebar == 'toregister'> Selected </#if>">
-            <a id="toregister" class=""
-               href="/toregister">${i18n.getText("user.register")}</a></li>
-        <li class="<#if activebar == 'tologin'> Selected </#if>">
-            <a id="tologin" class=""
-               href="/tologin">${i18n.getText("user.login")}</a></li>
-    </@shiro.notAuthenticated>
-    <@shiro.authenticated>
-        <li class="<#if activebar == 'center'> Selected </#if>"><a
-                href="/user/center">${i18n.getText("user.center")}</a>
-        </li>
-        <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
-    </@shiro.authenticated>
-    <li><a target="_blank" href="/page/demo/chat.html">聊天demo</a></li>
-</ul>
+    <ul>
+        <@shiro.notAuthenticated>
+            <li class="<#if activebar == 'toregister'> Selected </#if>">
+                <a id="toregister" class=""
+                   href="/toregister">${i18n.getText("user.register")}</a></li>
+            <li class="<#if activebar == 'tologin'> Selected </#if>">
+                <a id="tologin" class=""
+                   href="/tologin">${i18n.getText("user.login")}</a></li>
+        </@shiro.notAuthenticated>
+        <@shiro.authenticated>
+            <li class="<#if activebar == 'center'> Selected </#if>"><a
+                    href="/user/center">${i18n.getText("user.center")}</a>
+            </li>
+            <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
+        </@shiro.authenticated>
+        <li><a target="_blank" href="/page/demo/chat.html">聊天demo</a></li>
+    </ul>
 </nav>
 
 <!--container-->
@@ -133,7 +133,8 @@
             <div class="header-default" role="navigation">
                 <ul class=" navbar-left nav navbar-nav">
                     <li>
-                        <a id="menubtn" class="menu-btn tour-tour-element tour-tour-0-element tour-step-backdrop" href="#menu-left">
+                        <a id="menubtn" class="menu-btn tour-tour-element tour-tour-0-element tour-step-backdrop"
+                           href="#menu-left">
                             <span class="glyphicon glyphicon-th-large"></span>
                         </a>
                     </li>
@@ -143,7 +144,8 @@
                 </a>
                 <ul class="navbar-right nav navbar-nav">
                     <li>
-                        <a id="userbtn" class="menu-btn tour-tour-element tour-tour-1-element tour-step-backdrop" href="#menu-right">
+                        <a id="userbtn" class="menu-btn tour-tour-element tour-tour-1-element tour-step-backdrop"
+                           href="#menu-right">
                             <span class="glyphicon glyphicon-user"
                                   style="<@shiro.notAuthenticated>color: lightgray;</@shiro.notAuthenticated>"></span>
                         </a>
@@ -163,6 +165,7 @@
     <div class="footer footer-main">
         <div class="container-fluid">
             <p>${i18n.getText("webapp.copyright")}</p>
+
             <p>
                 <a href="http://www.miibeian.gov.cn/"
                    target="_blank">${i18n.getText("webapp.gov")}</a>
