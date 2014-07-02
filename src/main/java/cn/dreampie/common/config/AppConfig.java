@@ -78,15 +78,6 @@ public class AppConfig extends JFinalConfig {
      * 配置插件
      */
     public void configPlugin(Plugins plugins) {
-
-        //akka异步执行插件
-        plugins.add(new AkkaPlugin());
-
-        //emailer插件
-        plugins.add(new MailerPlugin());
-
-        //数据库版本控制插件
-        plugins.add(new FlywayPlugin());
         //配置druid连接池
         DruidXAPlugin druidDefault = new DruidXAPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
         // StatFilter提供JDBC层的统计信息
@@ -131,6 +122,12 @@ public class AppConfig extends JFinalConfig {
         plugins.add(new EhCachePlugin());
         //shiro权限框架
         plugins.add(new ShiroPlugin(routes, new MyJdbcAuthzService()));
+        //akka异步执行插件
+        plugins.add(new AkkaPlugin());
+        //数据库版本控制插件
+        plugins.add(new FlywayPlugin());
+        //emailer插件
+        plugins.add(new MailerPlugin());
         //quartz
 //    plugins.add(new QuartzPlugin());
 
