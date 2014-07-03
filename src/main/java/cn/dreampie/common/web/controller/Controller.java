@@ -79,7 +79,7 @@ public class Controller extends com.jfinal.core.Controller {
                 User regUser = new User();
                 regUser.set("email", token.get("username"));
                 setAttr("email", regUser.get("email"));
-                token.delete();
+                token.deleteBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/signup.ftl");
                 return;
