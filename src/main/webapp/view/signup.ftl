@@ -1,11 +1,11 @@
 <#include "/view/layout/_layout.ftl"/>
-<@layout activebar="toregister" html_title=i18n.getText("register.name")>
-<link rel="stylesheet" href="<@resource.static/>/css/register.css"/>
+<@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
+<link rel="stylesheet" href="<@resource.static/>/css/signup.css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
-<form class="form-horizontal form-register" id="register" role="form" method="post" action="/register" autocomplete="off">
-  <h2 class="form-register-heading">Please register</h2>
-
+<form class="form-horizontal form-signup" id="signup" role="form" method="post" action="/signup" autocomplete="off">
+  <h2 class="form-signup-heading">Please Signup</h2>
+  <p>${(email)!}</p>
   <input name="user.username" value="${(user.username)!}" type="text" maxlength="18" class="form-control username" placeholder="账户" required autofocus>
   <input name="user.password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码" required>
   <input name="repassword" value="" type="password" maxlength="18" class="form-control password" placeholder="重复密码" required>
@@ -37,10 +37,10 @@
 </@layout>
 <script type="text/javascript">
   $(function () {
-    var registerform = $("#register.form-horizontal");
-    $("#register button[type='submit']").click(function () {
+    var signupform = $("#signup.form-horizontal");
+    $("#signup button[type='submit']").click(function () {
       //表单验证
-      var registervalid = $.valid('#register.form-register', {
+      var signupvalid = $.valid('#signup.form-signup', {
         rules: {"user.username": [
           {regex: /^\w{5,18}$/}
         ], "user.first_name": [
@@ -59,7 +59,7 @@
           "user.password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
           "repassword": {'matches': '重复密码不匹配'}
         }, boxer: {exist: true}});
-      if (registervalid.validate()) {
+      if (signupvalid.validate()) {
         return true;
       }
       return false;

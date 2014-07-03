@@ -4,7 +4,10 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no,minimal-ui"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable = no,minimal-ui"/>
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!--IE兼容模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1">
     <meta name="copyright" content="Copyright 梦想派(追梦派)官方网站">
@@ -91,9 +94,9 @@
 <nav id="menu-right" class="mm-menu mm-offcanvas">
     <ul>
         <@shiro.notAuthenticated>
-            <li class="<#if activebar == 'toregister'> Selected </#if>">
-                <a id="toregister" class=""
-                   href="/toregister">${i18n.getText("user.register")}</a></li>
+            <li class="<#if activebar == 'tosignup'> Selected </#if>">
+                <a id="tosignup" class=""
+                   href="/tosignup">${i18n.getText("user.signup")}</a></li>
             <li class="<#if activebar == 'tologin'> Selected </#if>">
                 <a id="tologin" class=""
                    href="/tologin">${i18n.getText("user.login")}</a></li>

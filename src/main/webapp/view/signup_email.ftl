@@ -1,10 +1,10 @@
 <#include "/view/layout/_layout.ftl"/>
-<@layout activebar="toregister" html_title=i18n.getText("register.name")>
-<link rel="stylesheet" href="<@resource.static/>/css/register.css"/>
+<@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
+<link rel="stylesheet" href="<@resource.static/>/css/signup.css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
-<form class="form-horizontal form-register" id="register_email" role="form" method="post" action="/registerEmail" autocomplete="off">
-    <h2 class="form-register-heading">Please write email</h2>
+<form class="form-horizontal form-signup" id="signup_email" role="form" method="post" action="/signupEmail" autocomplete="off">
+    <h2 class="form-signup-heading">Please write email</h2>
 
     <input name="user.email" value="${(user.email)!}" type="text" maxlength="200" class="form-control email" placeholder="邮箱">
     <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码" required><img
@@ -24,10 +24,10 @@
 </@layout>
 <script type="text/javascript">
     $(function () {
-        var registerform = $("#register_email.form-horizontal");
-        $("#register_email button[type='submit']").click(function () {
+        var signupform = $("#signup_email.form-horizontal");
+        $("#signup_email button[type='submit']").click(function () {
             //表单验证
-            var registervalid = $.valid('#register_email.form-register', {
+            var signupvalid = $.valid('#signup_email.form-signup', {
                 rules: { "user.email": [
                     'email'
                 ], "captcha": [
@@ -37,7 +37,7 @@
                     "user.email": {'email': '邮箱格式不正确'},
                     "captcha": {'regex': '验证码必须为四位数字'}
                 }, boxer: {exist: true}});
-            if (registervalid.validate()) {
+            if (signupvalid.validate()) {
                 return true;
             }
             return false;

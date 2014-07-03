@@ -36,16 +36,19 @@ public class RootValidator {
             if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
                 c.renderJson();
             else
-                c.render("/view/register_email.ftl");
+                c.render("/view/signup_email.ftl");
         }
     }
 
     public static class RegisterValidator extends Validator {
         protected void validate(Controller c) {
             Object tmpU = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
+            //ValidateUtils.me().isEmail(((User) tmpU).getStr("email"))
             if (tmpU == null) {
                 addError("usernameMsg", "邮箱已过期");
-                c.setAttr("back", "/view/register_email.ftl");
+                c.setAttr("back", "/view/signup_email.ftl");
+            } else {
+                c.setAttr("email", ((User) tmpU).get("email"));
             }
 
             boolean usernameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.username"));
@@ -91,12 +94,13 @@ public class RootValidator {
 
         protected void handleError(Controller c) {
             c.keepModel(User.class);
+            c.setAttr("email", c.getAttr("email"));
             c.setAttr("state", "failure");
 
             if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
                 c.renderJson();
             else
-                c.render(c.getAttr("back") != null ? c.getAttr("back").toString() : "/view/register.ftl");
+                c.render(c.getAttr("back") != null ? c.getAttr("back").toString() : "/view/signup.ftl");
         }
     }
 }

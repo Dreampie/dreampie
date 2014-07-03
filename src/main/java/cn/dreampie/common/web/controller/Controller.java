@@ -9,6 +9,7 @@ import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
 import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.utils.SubjectUtils;
+import cn.dreampie.common.utils.TimeUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.Token;
@@ -56,25 +57,36 @@ public class Controller extends com.jfinal.core.Controller {
         dynaRender("/view/login.ftl");
     }
 
-    public void toregister() {
+    public void tosignup() {
         String uuid = getPara("code");
         if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
 
-            Token token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + new Date() + "' AND is_sign_up = true");
 
+            Token token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND is_sign_up = true");
+//            if (token == null) {
+//                Token stoken = new Token();
+//                stoken.set("uuid", uuid);
+//                stoken.set("username", "wangrenhui1990@hotmail.com");
+//                DateTime now = DateTime.now();
+//                stoken.set("created_at", now.toDate());
+//                stoken.set("expiration_at", now.plusDays(1).toDate());
+//                stoken.set("is_sign_up", true);
+//                if (stoken.save()) {
+//                    token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND is_sign_up = true");
+//                }
+//            }
             if (token != null) {
                 User regUser = new User();
-                regUser.set("email", token.get("email"));
-                regUser.set("email", "wangrenhui1990@hotmail.com");
-                setAttr("user", regUser);
+                regUser.set("email", token.get("username"));
+                setAttr("email", regUser.get("email"));
                 token.delete();
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
-                dynaRender("/view/register.ftl");
+                dynaRender("/view/signup.ftl");
                 return;
             }
         }
 
-        dynaRender("/view/register_email.ftl");
+        dynaRender("/view/signup_email.ftl");
     }
 
     /**
@@ -98,7 +110,7 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
     @Before({RootValidator.RegisterEmailValidator.class, Tx.class})
-    public void registerEmail() {
+    public void signupEmail() {
         User regUser = getModel(User.class);
 
         Token token = new Token();
@@ -111,8 +123,8 @@ public class Controller extends com.jfinal.core.Controller {
 
         if (token.save()) {
             Mailer.me().sendHtml("Dreampie.cn-梦想派",
-                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/toregister?code=" + token.get("uuid"))
-                            .getText("mails/register_complete.ftl"), regUser.getStr("email"));
+                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/tosignup?code=" + token.get("uuid"))
+                            .getText("mails/signup_email.ftl"), regUser.getStr("email"));
 
             setAttr("user", regUser);
             dynaRender("/view/send_email_notice.ftl");
@@ -120,12 +132,12 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
     @Before({RootValidator.RegisterValidator.class, Tx.class})
-    public void register() {
+    public void signup() {
         User regUser = getModel(User.class);
-        Object u = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
+//        Object u = SubjectUtils.me().getSession().getAttribute(AppConstants.TEMP_USER);
 
-        regUser.set("email", ((User) u).get("email"));
-
+//        regUser.set("email", ((User) u).get("email"));
+        regUser.set("email", getAttr("email"));
         regUser.set("created_at", new Date());
         regUser.set("providername", "dreampie");
 
@@ -151,7 +163,7 @@ public class Controller extends com.jfinal.core.Controller {
             }
         } else {
             setAttr("state", "failure");
-            dynaRender("/view/register.ftl");
+            dynaRender("/view/signup.ftl");
             return;
         }
 

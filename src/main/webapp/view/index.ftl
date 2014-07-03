@@ -2,9 +2,10 @@
 <@layout activebar="index" html_title=i18n.getText("index.name")>
 <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-tour.min.css"/>
 <script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap-tour.min.js"></script>
-<h1><@shiro.guest>Hello guest!</@shiro.guest>
-    <@shiro.hasRole name="user">Hello user!</@shiro.hasRole>
-    <@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>
+<#--<h1><@shiro.guest>Hello guest!</@shiro.guest>-->
+    <#--<@shiro.hasRole name="user">Hello user!</@shiro.hasRole>-->
+    <#--<@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>-->
+<h1>欢迎访问梦想派-Dreampie</h1>
 <div id="carousel-index" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carousel-index" data-slide-to="0" class="active"></li>
