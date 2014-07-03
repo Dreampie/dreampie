@@ -59,8 +59,14 @@ public class Role extends Model<Role> implements TreeNode<Role> {
         return this;
     }
 
-    public List<Role> findByUser(String where, Object... paras) {
-        List<Role> result = find(getSelectSql() + SqlKit.sql("role.findByUserExceptSelect") + blank + getWhere(where), paras);
+    public List<Role> findUserBy(String where, Object... paras) {
+        List<Role> result = find(getSelectSql() + SqlKit.sql("role.findUserByExceptSelect") + blank + getWhere(where), paras);
         return result;
     }
+
+    public List<Role> findChildrenById(String where, Object... paras) {
+        List<Role> result = find(getSelectSql() + SqlKit.sql("role.findChildrenByExceptSelect") + blank + getWhere(where), paras);
+        return result;
+    }
+
 }

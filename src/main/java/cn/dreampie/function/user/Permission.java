@@ -38,7 +38,7 @@ public class Permission extends Model<Permission> implements TreeNode<Permission
 
     public List<Permission> findByRole(String where, Object... paras) {
 
-        List<Permission> result = find(getSelectSql() + SqlKit.sql("permission.findByRoleExceptSelect") + blank + getWhere(where), paras);
+        List<Permission> result = find(getSelectSql() + SqlKit.sql("permission.findRoleByExceptSelect") + blank + getWhere(where), paras);
         return result;
     }
 }

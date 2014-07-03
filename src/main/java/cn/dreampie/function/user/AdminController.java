@@ -2,16 +2,22 @@ package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.ehcache.CacheNameRemove;
+import cn.dreampie.common.utils.SortUtils;
+import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeUtils;
 import cn.dreampie.common.web.controller.Controller;
+import cn.dreampie.function.common.State;
 import com.google.common.collect.Lists;
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangrenhui on 14-1-3.
@@ -19,6 +25,64 @@ import java.util.List;
 public class AdminController extends Controller {
     public void index() {
         dynaRender("/view/admin/index.ftl");
+    }
+
+
+    public void user() {
+        User user = SubjectUtils.me().getUser();
+        keepPara("user_search");
+
+        //查询当前用户的角色
+        UserRole userRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + user.get("id"));
+        //当前用户的子集角色
+        List<Role> roles = Role.dao.findChildrenById("`role`.deleted_at is null", userRole.get("role_id"));
+        String roleIds = "";
+        if (roles != null) {
+            int size = roles.size();
+            int i = 0;
+            for (Role role : roles) {
+                roleIds += role.get("id");
+                if (i < size - 1) {
+                    roleIds += ",";
+                }
+                i++;
+            }
+        }
+        //只能查询当前用户以下的角色
+        String where = " `user`.id <> " + user.get("id") + " AND `userRole`.role_id in (" + roleIds + ")";
+        String user_search = getPara("user_search");
+        if (!ValidateUtils.me().isNullOrEmpty(user_search)) {
+            where += " AND (INSTR(`user`.username,'" + user_search + "')>0 OR  INSTR(`user`.full_name,'" + user_search + "')>0 "
+                    + "OR  INSTR(`user`.mobile,'" + user_search + "')>0 OR  INSTR(`province`.name,'" + user_search + "')>0 "
+                    + "OR  INSTR(`city`.name,'" + user_search + "')>0 OR  INSTR(`county`.name,'" + user_search + "')>0 "
+                    + "OR INSTR(`userInfo`.street,'" + user_search + "')>0 OR INSTR(`userInfo`.zip_code,'" + user_search + "')>0) ";
+        }
+//        String start_at = getPara("start_at");
+//        if (ValidateUtils.me().isDateTime(start_at)) {
+//            where += " AND `user`.created_at >= '" + start_at + "'";
+//        }
+//
+//        String end_at = getPara("end_time");
+//        if (ValidateUtils.me().isDateTime(end_at)) {
+//            where += " AND `user`.created_at <= '" + end_at + "'";
+//        }
+//
+//        Boolean deleted = getParaToBoolean("deleted");
+//        if (!ValidateUtils.me().isNullOrEmpty(deleted) && deleted) {
+//            where += " AND `user`.deleted_at is not null";
+//        } else {
+//            where += " AND `user`.deleted_at is null";
+//        }
+
+
+        Page<User> users = User.dao.paginateInfoBy(getParaToInt(0, 1), getParaToInt(1, 15), where);
+        Map userGroup = SortUtils.me().sort(users.getList(), "last_name");
+
+        setAttr("roles", roles);
+        setAttr("users", users);
+        setAttr("userGroup", userGroup);
+        setAttr("userStates", State.dao.findBy("`state`.type='user.state'"));
+        dynaRender("/view/admin/user.ftl");
     }
 
     @CacheName(AppConstants.DEFAULT_CACHENAME)

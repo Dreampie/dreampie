@@ -5,6 +5,7 @@ import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.Permission;
 import cn.dreampie.function.user.Role;
 import cn.dreampie.function.user.User;
+import cn.dreampie.function.user.UserRole;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -79,7 +80,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
             //判断用户是否可用
             if (user.getDate("deleted_at") == null) {
                 //遍历角色
-                roles = Role.dao.findByUser("", user.getLong("id"));
+                roles = Role.dao.findUserBy("", user.getLong("id"));
 //        }
             }
         }

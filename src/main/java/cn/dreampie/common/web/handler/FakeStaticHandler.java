@@ -17,7 +17,7 @@ public class FakeStaticHandler extends Handler {
 
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-        target = target.replace(";JESSIONID", "?JESSIONID");
+        target = target.replace(";JSESSIONID", "?JSESSIONID");
 
         //i18n不支持json
         if (!ThreadLocalUtil.isJson())

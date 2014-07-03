@@ -1,8 +1,10 @@
 package cn.dreampie.function.user;
 
+import cn.dreampie.common.plugin.sqlinxml.SqlKit;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.model.Model;
 import com.jfinal.ext.plugin.tablebind.TableBind;
+import com.jfinal.plugin.activerecord.Page;
 
 import java.util.Date;
 
@@ -36,4 +38,14 @@ public class User extends Model<User> {
         userRole.save();
         return this;
     }
+
+    public Role getRole() {
+        return Role.dao.findById(UserRole.dao.findFirstBy("`userRole`.user_id=" + this.get("id")).get("role_id"));
+    }
+
+    public Page<User> paginateInfoBy(int pageNumber, int pageSize, String where, Object... paras) {
+        Page<User> result = dao.paginate(pageNumber, pageSize, SqlKit.sql("user.findInfoBySelect"), SqlKit.sql("user.findInfoByExceptSelect") + getWhere(where), paras);
+        return result;
+    }
+
 }

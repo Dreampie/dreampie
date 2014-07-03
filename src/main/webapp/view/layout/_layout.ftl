@@ -106,6 +106,12 @@
                     href="/user/center">${i18n.getText("user.center")}</a>
             </li>
             <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
+            <@shiro.hasPermission name="P_USER">
+                <li><a href="/admin/user">${i18n.getText("admin.user")}</a></li>
+            </@shiro.hasPermission>
+            <@shiro.hasPermission name="P_ROLE">
+                <li><a href="/admin/role">${i18n.getText("admin.role")}</a></li>
+            </@shiro.hasPermission>
         </@shiro.authenticated>
         <li><a target="_blank" href="/view/demo/chat.html">聊天demo</a></li>
     </ul>

@@ -27,6 +27,11 @@ CREATE TABLE sec_user_info (
   user_id    BIGINT    NOT NULL  COMMENT '用户id',
   creator_id BIGINT  COMMENT '创建者id',
   gender     INT DEFAULT 0  COMMENT '性别0男，1女',
+  province_id BIGINT  COMMENT '省id',
+  city_id  BIGINT  COMMENT '市id',
+  county_id  BIGINT  COMMENT '县id',
+  street VARCHAR(500)  COMMENT '街道',
+  zip_code VARCHAR(50)  COMMENT '邮编',
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP
@@ -47,12 +52,6 @@ CREATE TABLE sec_role (
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP
 );
-
-INSERT INTO sec_role(id,name, value, intro, pid,left_code,right_code,created_at)
-VALUES (sec_role_id_seq.nextval,'超级管理员','R_ADMIN','',0,1,8, current_timestamp),
-        (sec_role_id_seq.nextval,'系统管理员','R_MANAGER','',1,2,7,current_timestamp),
-        (sec_role_id_seq.nextval,'会员','R_MEMBER','',2,3,4,current_timestamp),
-        (sec_role_id_seq.nextval,'普通用户','R_USER','',2,5,6,current_timestamp);
 
 DROP TABLE IF EXISTS sec_user_role;
 DROP SEQUENCE IF EXISTS sec_user_role_id_seq;
@@ -80,12 +79,6 @@ CREATE TABLE sec_permission (
   deleted_at TIMESTAMP
 );
 
-INSERT INTO sec_permission(id, name, value, url, intro,pid,left_code,right_code, created_at)
-VALUES (sec_permission_id_seq.nextval,'超级管理员目录','P_D_ADMIN','/admin/**','',0,1,4,current_timestamp),
-        (sec_permission_id_seq.nextval,'角色权限管理','P_ROLE','/admin/role/**','',1,2,3,current_timestamp),
-        (sec_permission_id_seq.nextval,'管理员目录','P_D_MANAGER','/manager/**','',0,5,6,current_timestamp),
-        (sec_permission_id_seq.nextval,'会员目录','P_D_MEMBER','/member/**','',0,7,8,current_timestamp),
-        (sec_permission_id_seq.nextval,'普通用户目录','P_D_USER','/user/**','',0,9,10,current_timestamp);
 
 DROP TABLE IF EXISTS sec_role_permission;
 DROP SEQUENCE IF EXISTS sec_role_permission_id_seq;
@@ -95,12 +88,6 @@ CREATE TABLE sec_role_permission (
   role_id       BIGINT NOT NULL,
   permission_id BIGINT NOT NULL
 );
-
-INSERT INTO sec_role_permission(id,role_id, permission_id)
-VALUES (sec_role_permission_id_seq.nextval,1,1),(sec_role_permission_id_seq.nextval,1,2),(sec_role_permission_id_seq.nextval,1,3),(sec_role_permission_id_seq.nextval,1,4),(sec_role_permission_id_seq.nextval,1,5),
-        (sec_role_permission_id_seq.nextval,2,3),(sec_role_permission_id_seq.nextval,2,4),(sec_role_permission_id_seq.nextval,2,5),
-        (sec_role_permission_id_seq.nextval,3,4),
-        (sec_role_permission_id_seq.nextval,4,5);
 
 DROP TABLE IF EXISTS sec_token;
 CREATE TABLE sec_token (
@@ -135,9 +122,11 @@ CREATE TABLE com_state (
   id            BIGINT NOT NULL DEFAULT NEXTVAL('com_state_id_seq') PRIMARY KEY,
   name VARCHAR(45) DEFAULT NULL COMMENT '状态名称',
   value INT(11) DEFAULT '0' COMMENT '状态值',
-  describe TEXT COMMENT '描述',
+  intro TEXT COMMENT '简介',
   type VARCHAR(45) DEFAULT NULL COMMENT '状态类型',
   created_at TIMESTAMP   NOT NULL,
   updated_at TIMESTAMP,
   deleted_at TIMESTAMP
   );
+
+

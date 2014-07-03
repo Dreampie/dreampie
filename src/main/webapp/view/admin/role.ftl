@@ -1,6 +1,6 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_treenav.ftl" />
-<@layout activebar="role" html_title=i18n.getText("role.name")>
+<@layout activebar="role" html_title=i18n.getText("admin.role")>
 <link rel="stylesheet" href="<@resource.static/>/css/layout/_treenav.css" type="text/css"/>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_treenav.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_pagination.js"></script>

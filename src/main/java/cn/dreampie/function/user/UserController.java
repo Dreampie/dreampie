@@ -20,6 +20,7 @@ public class UserController extends Controller {
         dynaRender("/view/user/index.ftl");
     }
 
+
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({UserValidator.UserUpdatePwdValidator.class, Tx.class})
     public void updatePwd() {
