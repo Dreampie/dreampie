@@ -42,11 +42,10 @@
                         <tbody>
                             <#if users?? && users?size gt 0>
                                 <#list userGroup.keySet() as wordkey>
-                                <tr>
-                                    <td colspan="7">Group ${wordkey}</td>
-                                </tr>
                                     <#if userGroup.get(wordkey)?? && userGroup.get(wordkey)?size gt 0>
-                                    1
+                                    <tr>
+                                        <td colspan="7">Group ${wordkey}</td>
+                                    </tr>
                                         <#list userGroup.get(wordkey) as user>
                                         <tr>
                                             <td>${user.id}</td>

@@ -287,7 +287,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 }
 
 .mm-fixed-top {
-    z-index: 9999;
+    z-index: 99;
     border-radius: 0px;
     position: fixed;
     width: 100%;
