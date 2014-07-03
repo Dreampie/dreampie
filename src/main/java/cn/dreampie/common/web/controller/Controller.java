@@ -129,7 +129,6 @@ public class Controller extends com.jfinal.core.Controller {
         regUser.set("created_at", new Date());
         regUser.set("providername", "dreampie");
 
-
         regUser.set("full_name", regUser.get("first_name") + "·" + regUser.get("last_name"));
 
         boolean autoLogin = getParaToBoolean("autoLogin") == null ? false : getParaToBoolean("autoLogin");
