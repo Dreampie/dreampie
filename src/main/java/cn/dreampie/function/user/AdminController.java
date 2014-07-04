@@ -55,7 +55,8 @@ public class AdminController extends Controller {
             where += " AND (INSTR(`user`.username,'" + user_search + "')>0 OR  INSTR(`user`.full_name,'" + user_search + "')>0 "
                     + "OR  INSTR(`user`.mobile,'" + user_search + "')>0 OR  INSTR(`province`.name,'" + user_search + "')>0 "
                     + "OR  INSTR(`city`.name,'" + user_search + "')>0 OR  INSTR(`county`.name,'" + user_search + "')>0 "
-                    + "OR INSTR(`userInfo`.street,'" + user_search + "')>0 OR INSTR(`userInfo`.zip_code,'" + user_search + "')>0) ";
+                    + "OR INSTR(`userInfo`.street,'" + user_search + "')>0 OR INSTR(`userInfo`.zip_code,'" + user_search + "')>0 "
+                    + "OR INSTR(`user`.created_at,'" + user_search + "')>0) ";
         }
 //        String start_at = getPara("start_at");
 //        if (ValidateUtils.me().isDateTime(start_at)) {

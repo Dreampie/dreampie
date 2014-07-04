@@ -32,9 +32,9 @@ VALUES (sec_user_id_seq.nextval,'admin','dreampie','wangrenhui1990@gmail.com','1
        (sec_user_id_seq.nextval,'liujintong','dreampie','wangrenhui1990@hotmail.com','18511400502','$shiro1$SHA-256$500000$ZMhNGAcL3HbpTbNXzxxT1Q==$wRi5AF6BK/1FsQdvISIY1lJ9Rm/aekBoChjunVsqkUU=','default_hasher','','','金彤','刘','金彤·刘',current_timestamp);
 
 --create user_info--
-INSERT INTO sec_user_info(id, user_id, creator_id, gender, created_at)
-VALUES (sec_user_info_id_seq.nextval,1,0,0,current_timestamp),
-       (sec_user_info_id_seq.nextval,2,0,0,current_timestamp);
+INSERT INTO sec_user_info(id, user_id, creator_id, gender,province_id,city_id,county_id,street,created_at)
+VALUES (sec_user_info_id_seq.nextval,1,0,0,1,2,3,'人民大学',current_timestamp),
+       (sec_user_info_id_seq.nextval,2,0,0,1,2,3,'人民大学',current_timestamp);
 
 --create user_role--
 INSERT INTO sec_user_role(id, user_id, role_id)

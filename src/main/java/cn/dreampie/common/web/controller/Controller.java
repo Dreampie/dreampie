@@ -84,7 +84,6 @@ public class Controller extends com.jfinal.core.Controller {
                 User regUser = new User();
                 regUser.set("email", token.get("username"));
                 setAttr("email", regUser.get("email"));
-                token.dropBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/signup.ftl");
                 return;
@@ -157,6 +156,8 @@ public class Controller extends com.jfinal.core.Controller {
         regUser.set("salt", passwordInfo.getSalt());
 
         if (regUser.save()) {
+            //删除token
+            Token.dao.dropBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
             regUser.addUserInfo(null).addRole(null);
             setAttr("state", "success");
             if (autoLogin) {

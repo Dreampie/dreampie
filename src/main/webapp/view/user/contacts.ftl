@@ -8,9 +8,9 @@
     <div class="col-md-12">
         <p>
 
-        <form id="user_search" class="form-inline" role="form" action="/admin/user" method="get">
+        <form id="user_search" class="form-inline" role="form" action="/user/contacts" method="get">
             <div class="form-group">
-                <label class="sr-only" for="user_search">用户名，姓名，电话，地址等</label>
+                <label class="sr-only" for="user_search">姓名，电话，地址等</label>
                 <input type="text" class="form-control" id="user_search" maxlength="8" name="user_search"
                        value="${(user_search)!}" placeholder="关键字"/>
 
@@ -21,79 +21,66 @@
         </p>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-12" role="main">
-        <div class="panel panel-default">
-            <div class="panel-heading">用户</div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th width="4%">编号</th>
-                            <th width="10%">用户名/角色</th>
-                            <th width="18%">姓名/地址</th>
-                            <th width="15%">电话</th>
-                            <th width="20%">使用时间</th>
-                            <th width="9%">状态</th>
-                            <th width="12%">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <#if users?? && users?size gt 0>
-                                <#list userGroup.keySet() as wordkey>
-                                    <#if userGroup.get(wordkey)?? && userGroup.get(wordkey)?size gt 0>
-                                    <tr>
-                                        <td colspan="7">Group ${wordkey}</td>
-                                    </tr>
-                                        <#list userGroup.get(wordkey) as user>
-                                        <tr>
-                                            <td>${user.id}</td>
-                                            <td>${(user.username)!}
-                                                <#if roles?? && roles?size gt 0>
-                                                    <#list roles as role>
-                                                        <#if role.id==user.role_id>
-                                                            <hr style="margin: 1px;border-top: 1px solid #BBB754 !important;"/>
-                                                            <span style="font-size: 11px;">${role.name}</span>
-                                                        </#if>
-                                                    </#list>
-                                                </#if>
-                                            </td>
-                                            <td>${(user.full_name)!}
-                                                <hr style="margin: 1px;border-top: 1px solid #BBB754 !important;"/>
-                                            ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
-                                                <hr style="margin: 1px;border-top: 1px solid #BBB754 !important;"/>
-                                            ${(user.street)!}
-                                            </td>
-                                            <td>${(user.mobile)!}</td>
-                                            <td>${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}</td>
-                                            <td>
-                                                <#if user.deleted_at??>
-                                                    已删除
-                                                <#else>
-                                                    在使用
-                                                </#if>
-                                            </td>
-                                            <td>
-                                                &nbsp;&nbsp;<a class="btn btn-primary operate" data-toggle="modal"
-                                                               href="#user_update" userid="${user.id}"
-                                                               roleid="${user.role_id}"
-                                                               username="${user.username}"
-                                                               userdeleted="${(user.deleted_at)!}">修改</a>
-                                            </td>
-                                        </tr>
-                                        </#list>
-                                    </#if>
-                                </#list>
-                            </#if>
-                        </tbody>
-                    </table>
-                    <#if users?? && users?size gt 0>
-                        <@paginate currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
-                    </#if>
+
+    <#if users?? && users?size gt 0>
+        <#list userGroup.keySet() as wordkey>
+            <#if userGroup.get(wordkey)?? && userGroup.get(wordkey)?size gt 0>
+                <div class="container-fluid">
+                    Group ${wordkey}
                 </div>
-            </div>
-        </div>
+                <#list userGroup.get(wordkey) as user>
+                    <div class="col-sm-4 col-md-2" style="text-align: center;">
+                        <div class="thumbnail">
+                            <div>
+                                <a href="javascript:void(0);" title="${(user.full_name)!}" target="_blank">
+                                    <#if !user.avatar_url?? || user.avatar_url==''>
+                                        <#assign avatar_url='/image/avatar.jpg'/>
+                                    </#if>
+                                    <img class="img-circle lazy" style="width: 120px;"
+                                         src="${avatar_url!user.avatar_url}"
+                                         data-src="${avatar_url!user.avatar_url}">
+                                </a>
+                            </div>
+                            <div class="caption">
+                                <h3>
+                                    <a href="" title="${(user.full_name)!}" target="_blank">${(user.full_name)!}
+                                    </a>
+                                </h3>
+
+                                <p>
+                                    <small><span style="font-size: 11px;">
+                                            <#if user.gender??>
+                                                <#if user.gender==0>
+                                                    男
+                                                <#elseif user.gender==1>
+                                                    女
+                                                </#if>
+                                            </#if></span>
+                                    </small>
+                                    <br/>
+                                ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
+                                    &nbsp;
+                                ${(user.street)!}
+                                    <br/>
+                                ${(user.mobile)!}
+                                    <br/>
+                                ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </#list>
+            </#if>
+        </#list>
+    </#if>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-4 ">
+        <#if users?? && users?size gt 0>
+        <@paginate currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
+    </#if>
     </div>
 </div>
 </@layout>
