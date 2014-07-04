@@ -66,7 +66,7 @@ public class Controller extends com.jfinal.core.Controller {
 //            if (token == null) {
 //                Token stoken = new Token();
 //                stoken.set("uuid", uuid);
-//                stoken.set("username", "wangrenhui1990@hotmail.com");
+//                stoken.set("username", "302509116@qq.com");
 //                DateTime now = DateTime.now();
 //                stoken.set("created_at", now.toDate());
 //                stoken.set("expiration_at", now.plusDays(1).toDate());
@@ -79,7 +79,7 @@ public class Controller extends com.jfinal.core.Controller {
                 User regUser = new User();
                 regUser.set("email", token.get("username"));
                 setAttr("email", regUser.get("email"));
-                token.deleteBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
+                token.dropBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
                 SubjectUtils.me().getSession().setAttribute(AppConstants.TEMP_USER, regUser);
                 dynaRender("/view/signup.ftl");
                 return;
