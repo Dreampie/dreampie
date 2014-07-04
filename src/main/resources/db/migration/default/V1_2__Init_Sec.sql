@@ -2,25 +2,28 @@
 
 INSERT INTO sec_role(id,name, value, intro, pid,left_code,right_code,created_at)
 VALUES (sec_role_id_seq.nextval,'超级管理员','R_ADMIN','',0,1,8, current_timestamp),
-        (sec_role_id_seq.nextval,'系统管理员','R_MANAGER','',1,2,7,current_timestamp),
-        (sec_role_id_seq.nextval,'会员','R_MEMBER','',2,3,4,current_timestamp),
-        (sec_role_id_seq.nextval,'普通用户','R_USER','',2,5,6,current_timestamp);
+       (sec_role_id_seq.nextval,'系统管理员','R_MANAGER','',1,2,7,current_timestamp),
+       (sec_role_id_seq.nextval,'会员','R_MEMBER','',2,3,4,current_timestamp),
+       (sec_role_id_seq.nextval,'普通用户','R_USER','',2,5,6,current_timestamp);
 
 --create permission--
 INSERT INTO sec_permission(id, name, value, url, intro,pid,left_code,right_code, created_at)
 VALUES (sec_permission_id_seq.nextval,'超级管理员目录','P_D_ADMIN','/admin/**','',0,1,6,current_timestamp),
-        (sec_permission_id_seq.nextval,'角色权限管理','P_ROLE','/admin/role/**','',1,2,3,current_timestamp),
-        (sec_permission_id_seq.nextval,'用户管理','P_USER','/admin/user/**','',1,4,5,current_timestamp),
-        (sec_permission_id_seq.nextval,'管理员目录','P_D_MANAGER','/manager/**','',0,7,8,current_timestamp),
-        (sec_permission_id_seq.nextval,'会员目录','P_D_MEMBER','/member/**','',0,9,10,current_timestamp),
-        (sec_permission_id_seq.nextval,'普通用户目录','P_D_USER','/user/**','',0,11,12,current_timestamp);
+       (sec_permission_id_seq.nextval,'角色权限管理','P_ROLE','/admin/role/**','',1,2,3,current_timestamp),
+       (sec_permission_id_seq.nextval,'用户管理','P_USER','/admin/user/**','',1,4,5,current_timestamp),
+       (sec_permission_id_seq.nextval,'管理员目录','P_D_MANAGER','/manager/**','',0,7,8,current_timestamp),
+       (sec_permission_id_seq.nextval,'会员目录','P_D_MEMBER','/member/**','',0,9,10,current_timestamp),
+       (sec_permission_id_seq.nextval,'普通用户目录','P_D_USER','/user/**','',0,11,12,current_timestamp);
 
 
 INSERT INTO sec_role_permission(id,role_id, permission_id)
-VALUES (sec_role_permission_id_seq.nextval,1,1),(sec_role_permission_id_seq.nextval,1,2),(sec_role_permission_id_seq.nextval,1,3),(sec_role_permission_id_seq.nextval,1,4),(sec_role_permission_id_seq.nextval,1,5),(sec_role_permission_id_seq.nextval,1,6),
-        (sec_role_permission_id_seq.nextval,2,3),(sec_role_permission_id_seq.nextval,2,4),(sec_role_permission_id_seq.nextval,2,5),(sec_role_permission_id_seq.nextval,2,6),
-        (sec_role_permission_id_seq.nextval,3,4),
-        (sec_role_permission_id_seq.nextval,4,5);
+VALUES (sec_role_permission_id_seq.nextval,1,1),(sec_role_permission_id_seq.nextval,1,2),
+       (sec_role_permission_id_seq.nextval,1,3),(sec_role_permission_id_seq.nextval,1,4),
+       (sec_role_permission_id_seq.nextval,1,5),(sec_role_permission_id_seq.nextval,1,6),
+       (sec_role_permission_id_seq.nextval,2,3),(sec_role_permission_id_seq.nextval,2,4),
+       (sec_role_permission_id_seq.nextval,2,5),(sec_role_permission_id_seq.nextval,2,6),
+       (sec_role_permission_id_seq.nextval,3,5),
+       (sec_role_permission_id_seq.nextval,4,6);
 
 
 --create  admin--

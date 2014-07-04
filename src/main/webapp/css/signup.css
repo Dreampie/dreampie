@@ -76,7 +76,9 @@
 
 .form-signup .captcha {
     /*margin-top: -1px;*/
-    margin-left: -1px;
+    /*margin-left: -1px;*/
+    width: 40%;
+    height: 44px;
     vertical-align: top;
     border: 1px solid #ccc;
     border-bottom-right-radius: 4px;
