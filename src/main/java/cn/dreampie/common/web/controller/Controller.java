@@ -19,6 +19,8 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.UUID;
@@ -27,6 +29,8 @@ import java.util.UUID;
  * Controller
  */
 public class Controller extends com.jfinal.core.Controller {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     public void dynaRender(String view) {
         if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
@@ -76,6 +80,7 @@ public class Controller extends com.jfinal.core.Controller {
 //                }
 //            }
             if (token != null) {
+                logger.info("tosignup:" + token.getStr("username") + ":" + token.getStr("uuid"));
                 User regUser = new User();
                 regUser.set("email", token.get("username"));
                 setAttr("email", regUser.get("email"));
@@ -122,6 +127,7 @@ public class Controller extends com.jfinal.core.Controller {
         token.set("is_sign_up", true);
 
         if (token.save()) {
+            logger.info("signupEmail:" + token.getStr("username") + ":" + token.getStr("uuid"));
             Mailer.me().sendHtml("Dreampie.cn-梦想派",
                     MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/tosignup?code=" + token.get("uuid"))
                             .getText("mails/signup_email.ftl"), regUser.getStr("email"));
