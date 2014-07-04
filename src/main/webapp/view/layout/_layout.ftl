@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap.min.css" media="screen"/>
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>
+    <#--<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>-->
 
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/font-awesome.min.css">
 

@@ -66,7 +66,7 @@
                                             ${(user.address)!}
                                             </td>
                                             <td>${(user.mobile)!}</td>
-                                            <td>${(user.create_at)!}</td>
+                                            <td>${(user.created_at)!}</td>
                                             <td>
                                                 <#if user.deleted_at??>
                                                     已删除
