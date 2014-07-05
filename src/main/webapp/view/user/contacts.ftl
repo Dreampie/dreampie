@@ -74,6 +74,8 @@
                             ${(user.mobile)!}
                                 <br/>
                             ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
+                                <br/>
+                            ${(user.intro)!}
                             </div>
                         </div>
                     </div>
