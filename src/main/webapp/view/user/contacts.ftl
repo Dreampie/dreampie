@@ -13,12 +13,12 @@
                        style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
                 <input name="user_search" type="text" value="${(user_search)!}" placeholder="姓名，电话，地址等" class="form-control tt-query"
                        required="" autocomplete="off"
-                       spellcheck="false"
+                       spellcheck="false" maxlength="20"
                        dir="auto" style="/* position: relative; */vertical-align: top;background-color: transparent;">
                 <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
             </span>
             <button type="submit" class="glyphicon glyphicon-search search"></button>
-            <#--<div class="error-box">${user_searchMsg!}</div>-->
+        <#--<div class="error-box">${user_searchMsg!}</div>-->
         </form>
 
     <#--<form id="user_search" class="form-inline" role="form" action="/user/contacts" method="get">-->
