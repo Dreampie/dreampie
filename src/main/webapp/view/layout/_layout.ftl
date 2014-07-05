@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap.min.css" media="screen"/>
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <#--<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>-->
+<#--<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>-->
 
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/font-awesome.min.css">
 
@@ -105,12 +105,14 @@
             <li class="<#if activebar == 'center'> Selected </#if>"><a
                     href="/user/center">${i18n.getText("user.center")}</a>
             </li>
-            <li><a href="/user/contacts">${i18n.getText("user.contacts")}</a></li>
+            <li class="<#if activebar == 'contacts'> Selected </#if>">
+                <a href="/user/contacts">${i18n.getText("user.contacts")}</a></li>
             <@shiro.hasPermission name="P_USER">
                 <li><a href="/admin/user">${i18n.getText("admin.user")}</a></li>
             </@shiro.hasPermission>
             <@shiro.hasPermission name="P_ROLE">
-                <li><a href="/admin/role">${i18n.getText("admin.role")}</a></li>
+                <li class="<#if activebar == 'role'> Selected </#if>">
+                    <a href="/admin/role">${i18n.getText("admin.role")}</a></li>
             </@shiro.hasPermission>
             <li><a href="/logout">${i18n.getText("user.logout")}</a></li>
         </@shiro.authenticated>

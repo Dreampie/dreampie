@@ -5,20 +5,32 @@
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <div class="row">
-    <div class="col-md-12">
-        <p>
-
-        <form id="user_search" class="form-inline" role="form" action="/admin/user" method="get">
-            <div class="form-group">
-                <label class="sr-only" for="user_search">用户名，姓名，电话，地址等</label>
-                <input type="text" class="form-control" id="user_search" maxlength="8" name="user_search"
-                       value="${(user_search)!}" placeholder="关键字"/>
-
-            </div>
-
-            <button type="submit" class="btn btn-default search">搜索</button>
+    <div class="col-md-4 searchline">
+        <form id="user_search" class="searchbar " role="form" action="/admin/user" method="get" data-view="searchbar" data-classname="col-sm-4"
+              data-inputclass="form-control" data-placeholder="用户名，姓名，电话，地址等">
+            <span class="twitter-typeahead" style=" position: relative; ">
+                <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
+                       style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
+                <input name="user_search" type="text" value="${(user_search)!}" placeholder="用户名，姓名，电话，地址等" class="form-control tt-query"
+                       required="" autocomplete="off"
+                       spellcheck="false" maxlength="8"
+                       dir="auto" style="/* position: relative; */vertical-align: top;background-color: transparent;">
+                <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+            </span>
+            <button type="submit" class="glyphicon glyphicon-search search"></button>
+            <#--<div class="error-box">${user_searchMsg!}</div>-->
         </form>
-        </p>
+
+    <#--<form id="user_search" class="form-inline" role="form" action="/admin/user" method="get">
+        <div class="form-group">
+            <label class="sr-only" for="user_search">用户名，姓名，电话，地址等</label>
+            <input type="text" class="form-control" id="user_search" maxlength="8" name="user_search"
+                   value="${(user_search)!}" placeholder="关键字"/>
+
+        </div>
+
+        <button type="submit" class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索</button>
+    </form>-->
     </div>
 </div>
 <div class="row">
@@ -63,7 +75,7 @@
                                                 <hr style="margin: 1px;border-top: 1px solid #BBB754 !important;"/>
                                             ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
                                                 <hr style="margin: 1px;border-top: 1px solid #BBB754 !important;"/>
-                                            ${(user.street)!}
+                                            ${(user.address)!}
                                             </td>
                                             <td>${(user.mobile)!}</td>
                                             <td>${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}</td>
@@ -88,10 +100,11 @@
                             </#if>
                         </tbody>
                     </table>
-                    <#if users?? && users?size gt 0>
-                        <@paginate currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
-                    </#if>
                 </div>
+
+                <#if users?? && users?size gt 0>
+                    <@paginate currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
+                </#if>
             </div>
         </div>
     </div>
@@ -212,11 +225,11 @@
     </div>
     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
-        $("#user_search.form button.search").click(function () {
-            //表单验证
-//            var ordervalid = $.valid('#user_search', {
+//        $("#user_search.form button.search").click(function () {
+//            //表单验证
+//            var searchvalid = $.valid('#user_search', {
 //                wrapper: "div.form-group",
 //                rules: {"user_search": [
 //                    "not_empty"
@@ -225,11 +238,11 @@
 //                    "user_search": {'not_empty': '搜索框不能为空'}
 //                }});
 //
-//            if (ordervalid.validate()) {
-            return true;
+//            if (searchvalid.validate()) {
+//                return true;
 //            }
 //            return false;
-        });
+//        });
 
         $("#autoA").click(function () {
             var randPwd = randomNum(5);

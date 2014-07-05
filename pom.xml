@@ -70,7 +70,6 @@
     </dependencyManagement>
 
 
-
     <dependencies>
         <!--junit测试-->
         <dependency>
@@ -179,22 +178,6 @@
                 <exclusion>
                     <artifactId>poi</artifactId>
                     <groupId>org.apache.poi</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jetty-server</artifactId>
-                    <groupId>com.jfinal</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jetty-server</artifactId>
-                    <groupId>com.jfinal</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jetty-server</artifactId>
-                    <groupId>com.jfinal</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jetty-server</artifactId>
-                    <groupId>com.jfinal</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>jetty-server</artifactId>
@@ -378,33 +361,33 @@
 
         <!--workflow-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-flow</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-flow</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-flow-builder</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-flow-builder</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-bpmn2</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-bpmn2</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-persistence-jpa</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-persistence-jpa</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-human-task-core</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-human-task-core</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-runtime-manager</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-runtime-manager</artifactId>-->
         <!--</dependency>-->
         <!--&lt;!&ndash; test dependencies &ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>org.jbpm</groupId>-->
-            <!--<artifactId>jbpm-test</artifactId>-->
+        <!--<groupId>org.jbpm</groupId>-->
+        <!--<artifactId>jbpm-test</artifactId>-->
         <!--</dependency>-->
 
         <!--jetty server-->

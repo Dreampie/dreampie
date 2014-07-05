@@ -1,24 +1,36 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_pagination.ftl" />
-<@layout activebar="user" html_title=i18n.getText("admin.user")>
+<@layout activebar="contacts" html_title=i18n.getText("user.contacts")>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <div class="row">
-    <div class="col-md-12">
-        <p>
-
-        <form id="user_search" class="form-inline" role="form" action="/user/contacts" method="get">
-            <div class="form-group">
-                <label class="sr-only" for="user_search">姓名，电话，地址等</label>
-                <input type="text" class="form-control" id="user_search" maxlength="8" name="user_search"
-                       value="${(user_search)!}" placeholder="关键字"/>
-
-            </div>
-
-            <button type="submit" class="btn btn-default search">搜索</button>
+    <div class="col-md-4 searchline">
+        <form id="user_search" class="searchbar " role="form" action="/user/contacts" method="get" data-view="searchbar" data-classname="col-sm-4"
+              data-inputclass="form-control" data-placeholder="姓名，电话，地址等">
+            <span style=" position: relative; ">
+                <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
+                       style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
+                <input name="user_search" type="text" value="${(user_search)!}" placeholder="姓名，电话，地址等" class="form-control tt-query"
+                       required="" autocomplete="off"
+                       spellcheck="false"
+                       dir="auto" style="/* position: relative; */vertical-align: top;background-color: transparent;">
+                <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+            </span>
+            <button type="submit" class="glyphicon glyphicon-search search"></button>
+            <#--<div class="error-box">${user_searchMsg!}</div>-->
         </form>
-        </p>
+
+    <#--<form id="user_search" class="form-inline" role="form" action="/user/contacts" method="get">-->
+    <#--<div class="form-group">-->
+    <#--<label class="sr-only" for="user_search">姓名，电话，地址等</label>-->
+    <#--<input type="text" class="form-control" id="user_search" maxlength="8" name="user_search"-->
+    <#--value="${(user_search)!}" placeholder="关键字"/>-->
+
+    <#--</div>-->
+
+    <#--<button type="submit" class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索</button>-->
+    <#--</form>-->
     </div>
 </div>
 
@@ -31,43 +43,37 @@
                     Group ${wordkey}
                 </div>
                 <#list userGroup.get(wordkey) as user>
-                    <div class="col-sm-4 col-md-2" style="text-align: center;">
-                        <div class="thumbnail">
-                            <div>
-                                <a href="javascript:void(0);" title="${(user.full_name)!}" target="_blank">
-                                    <#if !user.avatar_url?? || user.avatar_url==''>
-                                        <#assign avatar_url='/image/avatar.jpg'/>
-                                    </#if>
-                                    <img class="img-circle lazy" style="width: 120px;"
-                                         src="${avatar_url!user.avatar_url}"
-                                         data-src="${avatar_url!user.avatar_url}">
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <h3>
-                                    <a href="" title="${(user.full_name)!}" target="_blank">${(user.full_name)!}
-                                    </a>
-                                </h3>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="media thumbnail">
+                            <a class="pull-left" href="#">
+                                <#if !user.avatar_url?? || user.avatar_url==''>
+                                    <#assign avatar_url='/image/avatar.jpg'/>
+                                </#if>
+                                <img class="media-object lazy" style="width: 120px;"
+                                     src="${avatar_url!user.avatar_url}"
+                                     data-src="${avatar_url!user.avatar_url}">
+                            </a>
 
-                                <p>
+                            <div class="media-body">
+                                <h4 class="media-heading">${(user.full_name)!}
                                     <small><span style="font-size: 11px;">
-                                            <#if user.gender??>
-                                                <#if user.gender==0>
-                                                    男
-                                                <#elseif user.gender==1>
-                                                    女
-                                                </#if>
-                                            </#if></span>
+                                        <#if user.gender??>
+                                            <#if user.gender==0>
+                                                男
+                                            <#elseif user.gender==1>
+                                                女
+                                            </#if>
+                                        </#if></span>
                                     </small>
-                                    <br/>
-                                ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
-                                    &nbsp;
-                                ${(user.street)!}
-                                    <br/>
-                                ${(user.mobile)!}
-                                    <br/>
-                                ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
-                                </p>
+                                </h4>
+                                <br/>
+                            ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
+                                <br/>
+                            ${(user.street)!}
+                                <br/>
+                            ${(user.mobile)!}
+                                <br/>
+                            ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
                             </div>
                         </div>
                     </div>
@@ -199,11 +205,11 @@
     </div>
     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
-        $("#user_search.form button.search").click(function () {
-            //表单验证
-//            var ordervalid = $.valid('#user_search', {
+//        $("#user_search.form button.search").click(function () {
+//            //表单验证
+//            var searchvalid = $.valid('#user_search', {
 //                wrapper: "div.form-group",
 //                rules: {"user_search": [
 //                    "not_empty"
@@ -212,11 +218,11 @@
 //                    "user_search": {'not_empty': '搜索框不能为空'}
 //                }});
 //
-//            if (ordervalid.validate()) {
-            return true;
+//            if (searchvalid.validate()) {
+//                return true;
 //            }
 //            return false;
-        });
+//        });
 
         $("#autoA").click(function () {
             var randPwd = randomNum(5);

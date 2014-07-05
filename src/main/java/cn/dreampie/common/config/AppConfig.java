@@ -52,7 +52,7 @@ public class AppConfig extends JFinalConfig {
     public void configConstant(Constants constants) {
         loadPropertyFile("application.properties");
         constants.setDevMode(getPropertyToBoolean("devMode", false));
-//    constants.setEncoding("UTF-8");
+        constants.setEncoding("UTF-8");
 //        I18N.init("messages", Locale.CHINA, Const.DEFAULT_I18N_MAX_AGE_OF_COOKIE);
 
         //set log to slf4j
