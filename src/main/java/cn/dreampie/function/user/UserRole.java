@@ -14,6 +14,11 @@ import java.util.List;
 public class UserRole extends Model<UserRole> {
     public static UserRole dao = new UserRole();
 
+    public Role getRole() {
+        return Role.dao.findById(this.get("role_id"));
+    }
+
+
     public List<String> findUserIds(String where, Object... paras) {
         List<String> result = Db.query("SELECT DISTINCT `userRole`.user_id " + SqlKit.sql("userRole.findByExceptSelect") + " " + getWhere(where), paras);
         return result;

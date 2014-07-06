@@ -62,7 +62,7 @@ public class Controller extends com.jfinal.core.Controller {
     }
 
     public void tosignup() {
-        String uuid = getPara("code");
+        String uuid = getPara("token");
         if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
 
 
@@ -128,7 +128,7 @@ public class Controller extends com.jfinal.core.Controller {
         if (token.save()) {
             logger.info("signupEmail:" + token.getStr("username") + ":" + token.getStr("uuid"));
             Mailer.me().sendHtml("Dreampie.cn-梦想派",
-                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/tosignup?code=" + token.get("uuid"))
+                    MailerTemplate.me().set("full_name", "先生/女士").set("safe_url", getAttr("webRootPath") + "/tosignup?token=" + token.get("uuid"))
                             .getText("mails/signup_email.ftl"), regUser.getStr("email"));
 
             setAttr("user", regUser);

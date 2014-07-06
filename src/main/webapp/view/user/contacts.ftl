@@ -44,7 +44,7 @@
                 </div>
                 <#list userGroup.get(wordkey) as user>
                     <div class="col-sm-6 col-md-4">
-                        <div class="media thumbnail">
+                        <div class="media thumbnail user">
                             <a class="pull-left" href="#">
                                 <#if !user.avatar_url?? || user.avatar_url==''>
                                     <#assign avatar_url='/image/avatar.jpg'/>
@@ -54,28 +54,37 @@
                                      data-src="${avatar_url!user.avatar_url}">
                             </a>
 
-                            <div class="media-body">
+                            <div class="media-body f12" style="word-wrap: break-word；word-break:break-all;">
                                 <h4 class="media-heading">${(user.full_name)!}
+                                    <br/>
                                     <small><span style="font-size: 11px;">
-                                        <#if user.gender??>
-                                            <#if user.gender==0>
-                                                男
-                                            <#elseif user.gender==1>
-                                                女
-                                            </#if>
-                                        </#if></span>
+                                        ${(user.username)!}&nbsp;
+                                            <#if user.gender??>
+                                                <#if user.gender==0>
+                                                    男
+                                                <#elseif user.gender==1>
+                                                    女
+                                                </#if>
+                                            </#if><br/>
+                                        ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}&nbsp;${(user.street)!}
+                                    </span>
                                     </small>
                                 </h4>
-                                <br/>
-                            ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
-                                <br/>
-                            ${(user.street)!}
+                            ${(user.intro)!}
                                 <br/>
                             ${(user.mobile)!}
                                 <br/>
+                            ${(user.email)!}
+                                <br/>
                             ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
                                 <br/>
-                            ${(user.intro)!}
+                                <#assign username=user.full_name+"("+user.username+")"/>
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#del_user"
+                                        contactsid="${user.id}" username="${username}">删除
+                                </button>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#upd_intro"
+                                        contactsid="${user.id}" username="${username}" intro="${user.intro}">备注
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -94,110 +103,66 @@
 </@layout>
 
 <!-- Modal -->
-<div class="modal fade" id="user_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="del_user" tabindex="-1" role="dialog" aria-labelledby="del_userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">修改</h4>
+                <h4 class="modal-title" id="del_userModalLabel">删除</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" action="/user/update">
-                    <input type="hidden" name="user.id" value="">
-                    <input type="hidden" name="user.username" value="">
+                <form class="form-horizontal" role="form" action="/user/deleteContacts">
+                    <input type="hidden" name="contacts.id" value="">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">账户:</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 textright">账户:</label>
 
-                                <div class="col-sm-9" name="user"></div>
-                            </div>
-                        </div>
+                        <div class="col-sm-9" name="username"></div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">姓名:</label>
-
-                                <div class="col-sm-9" name="name"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">密码:</label>
-
-                                <div class="col-sm-9" name="password">
-
-
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a id="writeA" href="#write" data-toggle="tab">自定义输入</a></li>
-                                        <li><a id="autoA" href="#auto" data-toggle="tab">自动生成</a></li>
-                                    </ul>
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade in active" id="write">
-                                            <input type="password" style="margin-top: 15px;" class="form-control"
-                                                   maxlength="200"
-                                                   name="user.password"
-                                                   value="${(user.password)!}" placeholder="密码">
-
-                                            <input type="password" style="margin-top: 15px;"
-                                                   class="form-control"
-                                                   maxlength="200"
-                                                   name="repassword"
-                                                   value="${(repassword)!}"
-                                                   placeholder="重复密码">
-
-
-                                        </div>
-                                        <div class="tab-pane fade" id="auto">
-                                            <div style="margin-top: 15px;">
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <#if roles?? && roles?size gt 0>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">角色:</label>
-
-                                <div class="col-sm-9" name="role">
-                                    <div class="btn-group">
-                                        <input type="hidden" class="selection" name="role_id"
-                                               value="${(user.role_id)!}">
-                                        <button class="btn btn-default dropdown-toggle" type="button"
-                                                data-toggle="dropdown">
-                                            <span class="selection">角色</span> <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <#list roles as role>
-                                                <li><a href="#" value="${role.id}">${role.name}</a>
-                                                </li>
-                                            </#list>
-                                            <li class="divider"></li>
-                                            <li><a href="#" value="">取消</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </#if>
                     <div class="error-box"></div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary update" data-loading-text="正在保存..."
+                <button type="button" class="btn btn-primary del_user" data-loading-text="正在删除..."
+                        data-complete-text="删除成功!">删除
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="upd_intro" tabindex="-1" role="dialog" aria-labelledby="upd_introModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="upd_introModalLabel">修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" action="/user/updateIntro">
+                    <input type="hidden" name="contacts.id" value="">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 textright">账户:</label>
+
+                        <div class="col-sm-9" name="username"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注:</label>
+
+                        <div class="col-sm-9" name="role">
+                            <textarea name="contacts.intro" class="form-control" rows="3" placeholder="备注"></textarea>
+                        </div>
+                    </div>
+                    <div class="error-box"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary upd_intro" data-loading-text="正在保存..."
                         data-complete-text="保存成功!">保存
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -225,81 +190,99 @@
 //            }
 //            return false;
 //        });
+        $("div.user button").click(function () {
+            var opbtn = $(this);
+            var del_user = "#del_user";
+            var upd_intro = "#upd_intro";
+            //装配数据
+            $("div.modal div[name='username']").text(opbtn.attr("username"));
+            if (opbtn.attr("data-target") == del_user) {
+                $(del_user + " input[name='contacts.id']").val(opbtn.attr("contactsid"));
+            } else if (opbtn.attr("data-target") == upd_intro) {
+                $(upd_intro + " input[name='contacts.id']").val(opbtn.attr("contactsid"));
+                $(upd_intro + " textarea[name='contacts.intro']").val(opbtn.attr("intro"));
+            }
 
-        $("#autoA").click(function () {
-            var randPwd = randomNum(5);
-            $("#user_update").find("#auto span").text(randPwd);
-            $("#user_update").find("input[name='user.password']").val(randPwd);
-            $("#user_update").find("input[name='repassword']").val(randPwd);
         });
 
-        $("#writeA").click(function () {
-            $("#user_update").find("#auto span").text("");
-            $("#user_update").find("input[name='user.password']").val("");
-            $("#user_update").find("input[name='repassword']").val("");
-        });
-        //详情
-        $("a.operate").click(function () {
-            var href = $(this).attr("href");
-            var id = $(this).attr("userid");
-            var roleId = $(this).attr("roleid");
-            $(href).find("input[name='user.id']").val(id);
-            $(href).find("input[name='user.username']").val($(this).attr("user"));
-            $(href).find("div[name='user']").text($(this).attr("user"));
-            $(href).find("div[name='name']").text($(this).attr("username"));
-            var roleDiv = $(href).find("div[name='role']");
+        //删除用户
+        var del_userbtn = $("#del_user.modal button.del_user");
+        del_userbtn.click(function () {
+            var btn = $(this);
+            var form = $("#del_user.modal form");
+            //表单验证
+            var del_uservalid = $.valid('#del_user.modal form', {
+                wrapper: "div.form-group",
+                rules: {
+                    "contacts.id": [
+                        {regex: /^\d+$/}
+                    ]},
+                messages: {
+                    "contacts.id": {'regex': '联系人参数异常'}
+                }, boxer: {exist: true}});
 
-            roleDiv.find("input.selection").val(roleId);
-            roleDiv.find("span.selection").text(roleDiv.find("li>a[value='" + roleId + "']").text());
-
-            $(href).find("#auto span").text("");
-            $(href).find("input[name='user.password']").val("");
-            $(href).find("input[name='repassword']").val("");
-//
-            var updatebtn = $(href).find("button.update");
-            updatebtn.click(function () {
-                var btn = $(this);
-                var form = $("#user_update.modal").find("form");
-                //表单验证
-                var uservalid = $.valid('#user_update.modal form', {
-                    wrapper: "div.form-group",
-                    rules: {"user.password": [
-                        {regex: /^(\w{5,18})?$/}
-                    ],
-                        "repassword": [
-                            {matches: 'user.password'}
-                        ],
-                        "role_id": [
-                            {regex: /^(\d+)?$/}
-                        ]},
-                    messages: {
-                        "user.password": {'regex': '密码为英文字母 、数字和下划线长度为5-18'},
-                        "repassword": {'matches': '重复密码不一致'},
-                        "role_id": {'regex': '角色必须选择'}
-                    }, boxer: {exist: true}});
-
-                if (uservalid.validate()) {
-                    $.post("/user/update", form.serialize(), function (data) {
-                        if (data.state == "success") {
-                            btn.button('complete');
-                            setTimeout(function () {
-                                btn.button('reset');
-                                window.location.reload();
-                            }, 1000)
-                        } else {
-                            var errors = "";
-                            errors = checkError(errors, data.username_idMsg);
-                            errors = checkError(errors, data.username_userMsg);
-                            errors = checkError(errors, data.username_passwordMsg);
-                            errors = checkError(errors, data.repasswordMsg);
-                            errors = checkError(errors, data.role_idMsg);
-                            form.find("div.error-box").html(errors);
+            if (del_uservalid.validate()) {
+                btn.button('loading');
+                $.post("/user/deleteContacts", form.serialize(), function (data) {
+                    if (data.state == "success") {
+                        btn.button('complete');
+                        setTimeout(function () {
                             btn.button('reset');
-                        }
-                    }, "json");
-                }
-            });
+                            window.location.reload();
+                        }, 1000)
+                    } else {
+                        var errors = "";
+                        errors = checkError(errors, data.idMsg);
+                        form.find("div.error-box").html(errors);
+                        btn.button('reset');
+                    }
+                }, "json").error(function () {
+                    btn.button('reset');
+                });
+            }
         });
+
+        //修改备注
+        var upd_introbtn = $("#upd_intro.modal button.upd_intro");
+        upd_introbtn.click(function () {
+            var btn = $(this);
+            var form = $("#upd_intro.modal form");
+            //表单验证
+            var upd_introvalid = $.valid('#upd_intro.modal form', {
+                wrapper: "div.form-group",
+                rules: {
+                    "contacts.id": [
+                        {regex: /^\d+$/}
+                    ], "contacts.intro": [
+                        {regex: /^[\s\S]{3,240}$/}
+                    ]},
+                messages: {
+                    "contacts.id": {'regex': '联系人参数异常'},
+                    "contacts.intro": {'regex': '备注长度为3-240个字符'}
+                }, boxer: {exist: true}});
+
+            if (upd_introvalid.validate()) {
+                btn.button('loading');
+                $.post("/user/updateIntro", form.serialize(), function (data) {
+                    if (data.state == "success") {
+                        btn.button('complete');
+                        setTimeout(function () {
+                            btn.button('reset');
+                            window.location.reload();
+                        }, 1000)
+                    } else {
+                        var errors = "";
+                        errors = checkError(errors, data.idMsg);
+                        errors = checkError(errors, data.introMsg);
+                        form.find("div.error-box").html(errors);
+                        btn.button('reset');
+                    }
+                }, "json").error(function () {
+                    btn.button('reset');
+                });
+            }
+        });
+
         function checkError(errorStr, errorMsg) {
             if (typeof(errorMsg) != 'undefined' && errorMsg != 'undefined') {
                 if (errorStr != "") {

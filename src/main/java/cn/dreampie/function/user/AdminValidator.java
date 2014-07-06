@@ -14,12 +14,155 @@ import java.util.List;
  */
 public class AdminValidator {
 
+    public static class deleteUserValidator extends Validator {
+
+        @Override
+        protected void validate(Controller c) {
+
+            boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.id"));
+            if (idEmpty) addError("user_idMsg", "账户参数异常");
+            if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("user.id")))
+                addError("user_idMsg", "账户参数异常");
+
+            User u = User.dao.findFirstBy("`user`.id=" + c.getPara("user.id"));
+            if (ValidateUtils.me().isNullOrEmpty(u))
+                addError("user_idMsg", "账户不存在");
+
+            if (!ValidateUtils.me().isNullOrEmpty(u)) {
+                UserRole uRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + u.get("id"));
+
+                User user = SubjectUtils.me().getUser();
+
+                //查询当前用户的角色
+                UserRole userRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + user.get("id"));
+                //当前用户的子集角色
+                List<Long> roleIds = Role.dao.findChildrenIdsById("`role`.deleted_at is null", userRole.get("role_id"));
+
+                if (!roleIds.contains(uRole.getLong("role_id"))) {
+                    addError("user_idMsg", "没有删除该用户的权限");
+                }
+
+            }
+        }
+
+        @Override
+        protected void handleError(Controller c) {
+            c.keepModel(User.class);
+            c.keepPara();
+            c.setAttr("state", "failure");
+            if (ThreadLocalUtil.isJson())
+                c.renderJson();
+            else
+                c.forwardAction("/admin/user?" + c.getRequest().getQueryString());
+        }
+    }
+
+    public static class UpdateRoleValidator extends Validator {
+
+        @Override
+        protected void validate(Controller c) {
+
+            boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("userRole.user_id"));
+            if (idEmpty) addError("user_idMsg", "账户参数异常");
+            if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("userRole.user_id")))
+                addError("user_idMsg", "账户参数异常");
+
+            if (ValidateUtils.me().isNullOrEmpty(User.dao.findFirstBy("`user`.id=" + c.getPara("userRole.user_id"))))
+                addError("user_idMsg", "账户不存在");
+
+            boolean roleidEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("userRole.role_id"));
+            if (roleidEmpty) addError("role_idMsg", "请选择一个角色");
+            if (!roleidEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("userRole.role_id")))
+                addError("role_idMsg", "角色参数异常");
+
+            if (!roleidEmpty) {
+                Role newRole = Role.dao.findFirstBy("`role`.id='" + c.getPara("userRole.role_id") + "'");
+                if (ValidateUtils.me().isNullOrEmpty(newRole)) {
+                    addError("role_idMsg", "角色不存在");
+                } else {
+                    User user = SubjectUtils.me().getUser();
+
+                    //查询当前用户的角色
+                    UserRole userRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + user.get("id"));
+                    //当前用户的子集角色
+                    List<Long> roleIds = Role.dao.findChildrenIdsById("`role`.deleted_at is null", userRole.get("role_id"));
+
+                    if (!roleIds.contains(newRole.getLong("id"))) {
+                        addError("role_idMsg", "没有修改该角色的权限");
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void handleError(Controller c) {
+            c.keepModel(UserRole.class);
+            c.keepPara();
+            c.setAttr("state", "failure");
+            if (ThreadLocalUtil.isJson())
+                c.renderJson();
+            else
+                c.forwardAction("/admin/user?" + c.getRequest().getQueryString());
+        }
+    }
+
+    public static class UpdatePwdValidator extends Validator {
+        protected void validate(Controller c) {
+            boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.id"));
+            if (idEmpty) addError("user_idMsg", "账户参数异常");
+            if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("user.id")))
+                addError("user_idMsg", "账户参数异常");
+
+            User u = User.dao.findFirstBy("`user`.id=" + c.getPara("user.id"));
+            if (ValidateUtils.me().isNullOrEmpty(u))
+                addError("user_idMsg", "账户不存在");
+
+            if (!ValidateUtils.me().isNullOrEmpty(u)) {
+                UserRole uRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + u.get("id"));
+
+                User user = SubjectUtils.me().getUser();
+
+                //查询当前用户的角色
+                UserRole userRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + user.get("id"));
+                //当前用户的子集角色
+                List<Long> roleIds = Role.dao.findChildrenIdsById("`role`.deleted_at is null", userRole.get("role_id"));
+
+                if (!roleIds.contains(uRole.getLong("role_id"))) {
+                    addError("user_idMsg", "没有修改该用户的权限");
+                }
+
+            }
+
+            boolean passwordEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("user.password"));
+            if (passwordEmpty) addError("user_passwordMsg", "密码不能为空");
+            if (!passwordEmpty && !ValidateUtils.me().isPassword(c.getPara("user.password")))
+                addError("user_passwordMsg", "密码为英文字母 、数字和下划线长度为5-18");
+
+        }
+
+        protected void handleError(Controller c) {
+            c.keepModel(User.class);
+            c.keepPara();
+            c.setAttr("state", "failure");
+            if (ThreadLocalUtil.isJson())
+                c.renderJson();
+            else
+                c.forwardAction("/admin/user?" + c.getRequest().getQueryString());
+        }
+    }
+
     public static class RoleUpdateValidator extends Validator {
         protected void validate(Controller c) {
             boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.id"));
-            if (idEmpty) addError("role_idMsg", "id不能为空");
+            if (idEmpty) addError("role_idMsg", "角色编号异常");
             if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("role.id")))
-                addError("role_idMsg", "id必须为整数");
+                addError("role_idMsg", "角色编号异常");
+
+            if (!idEmpty) {
+                if (ValidateUtils.me().isNullOrEmpty(Role.dao.findFirstBy("`role`.id='" + c.getPara("role.id") + "'"))) {
+                    addError("role_idMsg", "角色不存在");
+                }
+            }
 
             boolean nameEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.name"));
             if (nameEmpty) addError("role_nameMsg", "角色名称不能为空");
@@ -98,9 +241,9 @@ public class AdminValidator {
 
         protected void validate(Controller c) {
             boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.id"));
-            if (idEmpty) addError("role_idMsg", "角色id不能为空");
+            if (idEmpty) addError("role_idMsg", "角色参数异常");
             boolean idNum = ValidateUtils.me().isPositiveNumber(c.getPara("role.id"));
-            if (!idEmpty && !idNum) addError("role_idMsg", "角色id必须为正整数");
+            if (!idEmpty && !idNum) addError("role_idMsg", "角色参数异常");
             if (!idEmpty && idNum) {
                 Role role = Role.dao.findById(c.getPara("role.id"));
                 if (ValidateUtils.me().isNullOrEmpty(role)) addError("role_idMsg", "角色不存在");
@@ -124,9 +267,9 @@ public class AdminValidator {
 
         protected void validate(Controller c) {
             boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("role.id"));
-            if (idEmpty) addError("role_idMsg", "角色id不能为空");
+            if (idEmpty) addError("role_idMsg", "角色参数异常");
             boolean idNum = ValidateUtils.me().isPositiveNumber(c.getPara("role.id"));
-            if (!idEmpty && !idNum) addError("role_idMsg", "角色id必须为正整数");
+            if (!idEmpty && !idNum) addError("role_idMsg", "角色参数异常");
             if (!idEmpty && idNum) {
                 Role role = Role.dao.findById(c.getPara("role.id"));
                 boolean roleEmpty = ValidateUtils.me().isNullOrEmpty(role);
@@ -140,9 +283,9 @@ public class AdminValidator {
                         long childrenCount = Role.dao.countBy("`role`.pid=" + c.getPara("role.id"));
                         if (childrenCount > 0) addError("role_idMsg", "删除当前角色，必须先删除子角色");
 
-                        List<String> accountIds = UserRole.dao.findUserIds("`userRole`.role_id=" + c.getPara("role.id"));
-                        boolean accountIdsEmpty = ValidateUtils.me().isNullOrEmpty(accountIds);
-                        if (!accountIdsEmpty) addError("role_idMsg", "该角色下有用户存在");
+                        List<String> userIds = UserRole.dao.findUserIds("`userRole`.role_id=" + c.getPara("role.id"));
+                        boolean userIdsEmpty = ValidateUtils.me().isNullOrEmpty(userIds);
+                        if (!userIdsEmpty) addError("role_idMsg", "该角色下有用户存在");
                     }
                 }
             }

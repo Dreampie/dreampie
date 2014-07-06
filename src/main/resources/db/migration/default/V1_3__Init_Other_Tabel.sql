@@ -7,8 +7,7 @@ CREATE TABLE contacts (
   link_id BIGINT    NOT NULL  COMMENT '联系人id',
   intro TEXT COMMENT '简介',
   created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP,
-  deleted_at TIMESTAMP
+  updated_at TIMESTAMP
 );
 
 INSERT INTO contacts(id,user_id,link_id,intro,created_at)

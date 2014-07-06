@@ -2,6 +2,9 @@ package cn.dreampie.function.user;
 
 import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.ehcache.CacheNameRemove;
+import cn.dreampie.common.plugin.shiro.hasher.Hasher;
+import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
+import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
 import cn.dreampie.common.utils.SortUtils;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
@@ -56,7 +59,7 @@ public class AdminController extends Controller {
                     + "OR  INSTR(`user`.mobile,'" + user_search + "')>0 OR  INSTR(`province`.name,'" + user_search + "')>0 "
                     + "OR  INSTR(`city`.name,'" + user_search + "')>0 OR  INSTR(`county`.name,'" + user_search + "')>0 "
                     + "OR INSTR(`userInfo`.street,'" + user_search + "')>0 OR INSTR(`userInfo`.zip_code,'" + user_search + "')>0 "
-                    + "OR INSTR(`user`.created_at,'" + user_search + "')>0) ";
+                    + "OR INSTR(`user`.created_at,'" + user_search + "')>0 OR INSTR(`user`.email,'" + user_search + "')>0) ";
         }
 //        String start_at = getPara("start_at");
 //        if (ValidateUtils.me().isDateTime(start_at)) {
@@ -76,7 +79,7 @@ public class AdminController extends Controller {
 //        }
 
 
-        Page<User> users = User.dao.paginateInfoBy(getParaToInt(0, 1), getParaToInt(1, 15), where);
+        Page<User> users = User.dao.paginateInfoBy(getParaToInt(0, 1), getParaToInt("pageSize", 15), where);
         Map userGroup = SortUtils.me().sort(users.getList(), "last_name");
 
         setAttr("roles", roles);
@@ -86,11 +89,88 @@ public class AdminController extends Controller {
         dynaRender("/view/admin/user.ftl");
     }
 
+    @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
+    @Before({AdminValidator.deleteUserValidator.class, Tx.class})
+    public void deleteUser() {
+        keepModel(User.class);
+        User user = getModel(User.class);
+
+        if (user.getDate("deleted_at") != null) {
+            user.set("deleted_at", new Date());
+        } else {
+            user.set("deleted_at", null);
+        }
+
+        if (user.update())
+            setAttr("state", "success");
+        else
+            setAttr("state", "failure");
+        dynaRender("/view/admin/user.ftl");
+    }
+
+
+    @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
+    @Before({AdminValidator.UpdateRoleValidator.class, Tx.class})
+    public void updateRole() {
+        keepModel(UserRole.class);
+        UserRole userRole = getModel(UserRole.class);
+
+        boolean result = true;
+        List<UserRole> aroles = UserRole.dao.findBy("`userRole`.user_id=" + userRole.get("user_id"));
+        boolean mustAdd = true;
+        if (!ValidateUtils.me().isNullOrEmpty(aroles)) {
+            //delete
+            for (UserRole ar : aroles) {
+                if (ar.get("role_id") != userRole.get("role_id")) {
+                    ar.delete();
+                } else {
+                    mustAdd = false;
+                }
+            }
+        }
+        //add
+        if (mustAdd) {
+            result = result && userRole.save();
+        }
+
+
+        if (result)
+            setAttr("state", "success");
+        else
+            setAttr("state", "failure");
+        dynaRender("/view/admin/user.ftl");
+    }
+
+    @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
+    @Before({AdminValidator.UpdatePwdValidator.class, Tx.class})
+    public void updatePwd() {
+        keepModel(User.class);
+        User user = getModel(User.class);
+        HasherInfo passwordInfo = HasherUtils.me().hash(user.getStr("password"), Hasher.DEFAULT);
+        user.set("password", passwordInfo.getHashResult());
+        user.set("hasher", passwordInfo.getHasher().value());
+        user.set("salt", passwordInfo.getSalt());
+
+        if (user.update()) {
+            setAttr("state", "success");
+        } else
+            setAttr("state", "failure");
+        dynaRender("/view/admin/user.ftl");
+    }
+
     @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void role() {
-        List<Role> roles = Role.dao.findBy("`role`.deleted_at is NULL");
+        User user = SubjectUtils.me().getUser();
+        keepPara("user_search");
+
+        //查询当前用户的角色
+        UserRole userRole = UserRole.dao.findFirstBy("`userRole`.user_id=" + user.get("id"));
+        //当前用户的子集角色
+        List<Role> roles = Role.dao.findChildrenById("`role`.deleted_at is null", userRole.get("role_id"));
+        roles.add(0, user.getRole());
         if (!ValidateUtils.me().isNullOrEmpty(roles))
-            setAttr("role", roles.get(0));
+            setAttr("role", user.getRole());
+
 
         List<Permission> authories = Permission.dao.findBy("`permission`.deleted_at is NULL");
         setAttr("rolestree", TreeUtils.toTree(roles));
@@ -111,7 +191,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.RoleSaveValidator.class, Tx.class})
-    public void saveRole() {
+    public void roleSave() {
         Role role = getModel(Role.class);
         Role parent = null;
         if (role.getParentId() == 0) {
@@ -141,7 +221,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.RoleUpdateValidator.class, Tx.class})
-    public void updateRole() {
+    public void roleUpdate() {
         Role role = getModel(Role.class);
         if (ValidateUtils.me().isNullOrEmpty(role.get("pid"))) {
             role.remove("pid");
@@ -157,7 +237,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.RoleDeleteValidator.class, Tx.class})
-    public void dropRole() {
+    public void roleDrop() {
 
         Integer id = getParaToInt("role.id");
         Role role = Role.dao.findById(id);
@@ -182,7 +262,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.PermSaveValidator.class, Tx.class})
-    public void savePerm() {
+    public void permSave() {
         Permission permission = getModel(Permission.class);
         Permission parent = null;
         if (permission.getParentId() == 0) {
@@ -213,7 +293,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.PermUpdateValidator.class, Tx.class})
-    public void updatePerm() {
+    public void permUpdate() {
         Permission permission = getModel(Permission.class);
         if (ValidateUtils.me().isNullOrEmpty(permission.get("pid"))) {
             permission.remove("pid");
@@ -229,7 +309,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.PermDeleteValidator.class, Tx.class})
-    public void dropPerm() {
+    public void permDrop() {
 
         Integer id = getParaToInt("permission.id");
         Permission permission = Permission.dao.findById(id);
@@ -252,7 +332,7 @@ public class AdminController extends Controller {
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
     @Before({AdminValidator.RolePermsValidator.class, Tx.class})
-    public void addPerms() {
+    public void permsAdd() {
         String[] idsPara = getParaValues("permission.id");
         Integer roleId = getParaToInt("role.id");
         //需要添加的权限

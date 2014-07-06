@@ -1,6 +1,7 @@
 package cn.dreampie.common.plugin.shiro;
 
 import cn.dreampie.common.config.AppConstants;
+import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.Permission;
 import cn.dreampie.function.user.Role;
@@ -41,11 +42,11 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //    } else {
         String username = userToken.getUsername();
         if (ValidateUtils.me().isEmail(username)) {
-            user = User.dao.findFirstBy(" `user`.email =?", username);
+            user = User.dao.findFirstBy(" `user`.email =? AND `user`.deleted_at is null", username);
         } else if (ValidateUtils.me().isMobile(username)) {
-            user = User.dao.findFirstBy(" `user`.mobile =?", username);
+            user = User.dao.findFirstBy(" `user`.mobile =? AND `user`.deleted_at is null", username);
         } else {
-            user = User.dao.findFirstBy(" `user`.username =?", username);
+            user = User.dao.findFirstBy(" `user`.username =? AND `user`.deleted_at is null", username);
         }
         if (user != null) {
             Session session = SecurityUtils.getSubject().getSession();
@@ -75,14 +76,13 @@ public class MyJdbcRealm extends AuthorizingRealm {
 //      //遍历角色
 //      roles = Role.me().findByRoleKey(MyAnonymousFilter.getRole());
 //    } else {
-        User user = User.dao.findFirstBy(" `user`.username =?", loginName);
+        User user = User.dao.findFirstBy(" `user`.username =? AND `user`.deleted_at is null", loginName);
         if (user != null) {
-            //判断用户是否可用
-            if (user.getDate("deleted_at") == null) {
-                //遍历角色
-                roles = Role.dao.findUserBy("", user.getLong("id"));
+            //遍历角色
+            roles = Role.dao.findUserBy("", user.getLong("id"));
 //        }
-            }
+        } else {
+            SubjectUtils.me().getSubject().logout();
         }
 
         loadRole(roleSet, permissionSet, roles);

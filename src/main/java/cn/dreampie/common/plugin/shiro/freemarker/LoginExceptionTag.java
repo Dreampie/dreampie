@@ -52,11 +52,11 @@ public class LoginExceptionTag extends SecureTag {
                 if (value.equalsIgnoreCase("UnknownUserException")) {
                     result = "账户验证失败或已被禁用!";
                 } else if (value.equalsIgnoreCase("IncorrectCredentialsException")) {
-                    result = "账户密码验证失败!";
+                    result = "账户验证失败或已被禁用!";
                 } else if (value.equalsIgnoreCase("IncorrectCaptchaException")) {
                     result = "验证码验证失败!";
                 } else {
-                    result = "账户或密码验证失败 !";
+                    result = "账户验证失败或已被禁用!";
                 }
             }
         } else {

@@ -8,12 +8,77 @@ import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
+import java.util.List;
+
 /**
  * Created by wangrenhui on 2014/6/10.
  */
 public class UserValidator {
 
-    public static class UserUpdatePwdValidator extends Validator {
+    public static class deleteContactsValidator extends Validator {
+
+        @Override
+        protected void validate(Controller c) {
+
+            boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("contacts.id"));
+            if (idEmpty) addError("idMsg", "联系人参数异常");
+            if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("contacts.id")))
+                addError("idMsg", "联系人参数异常");
+            if (!idEmpty) {
+                Contacts con = Contacts.dao.findById(c.getPara("contacts.id"));
+                if (ValidateUtils.me().isNullOrEmpty(con))
+                    addError("idMsg", "联系人不存在");
+            }
+
+        }
+
+        @Override
+        protected void handleError(Controller c) {
+            c.keepModel(Contacts.class);
+            c.keepPara();
+            c.setAttr("state", "failure");
+            if (ThreadLocalUtil.isJson())
+                c.renderJson();
+            else
+                c.forwardAction("/user/contacts?" + c.getRequest().getQueryString());
+        }
+    }
+
+    public static class UpdateIntroValidator extends Validator {
+
+        @Override
+        protected void validate(Controller c) {
+
+            boolean idEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("contacts.id"));
+            if (idEmpty) addError("idMsg", "联系人参数异常");
+            if (!idEmpty && !ValidateUtils.me().isPositiveNumber(c.getPara("contacts.id")))
+                addError("idMsg", "联系人参数异常");
+            if (!idEmpty) {
+                Contacts con = Contacts.dao.findById(c.getPara("contacts.id"));
+                if (ValidateUtils.me().isNullOrEmpty(con))
+                    addError("idMsg", "联系人不存在");
+            }
+            boolean introEmpty = ValidateUtils.me().isNullOrEmpty(c.getPara("contacts.intro"));
+            if (introEmpty) addError("introMsg", "备注不能为空");
+            if (!introEmpty && !ValidateUtils.me().isLength(c.getPara("contacts.intro"), 3, 240))
+                addError("introMsg", "备注长度为3-240个字符");
+
+        }
+
+        @Override
+        protected void handleError(Controller c) {
+            c.keepModel(Contacts.class);
+            c.keepPara();
+            c.setAttr("state", "failure");
+            if (ThreadLocalUtil.isJson())
+                c.renderJson();
+            else
+                c.forwardAction("/user/contacts?" + c.getRequest().getQueryString());
+        }
+    }
+
+
+    public static class UpdatePwdValidator extends Validator {
 
         @Override
         protected void validate(Controller c) {

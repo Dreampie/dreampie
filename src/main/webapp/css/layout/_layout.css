@@ -11,12 +11,16 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
-.navbar-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20
+.f10 {
+    font-size: 10px !important;
+}
+
+.f12 {
+    font-size: 12px !important;
+}
+
+.f14 {
+    font-size: 14px !important;
 }
 
 .navbar-nav {
@@ -29,33 +33,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 
 .navbar-right {
     padding-right: 15px;
-}
-
-@media screen and (min-width: 768px) {
-    .navbar-wrapper.affix {
-        position: fixed;
-        margin-top: 0
-    }
-
-    .navbar-wrapper.affix > .container {
-        width: 100%;
-        padding-left: 0;
-        padding-right: 0
-    }
-
-    .navbar-wrapper.affix .navbar {
-        border-radius: 0
-    }
-}
-
-.navbar-wrapper .container {
-    padding-left: 0;
-    padding-right: 0
-}
-
-.navbar-wrapper .navbar {
-    padding-left: 15px;
-    padding-right: 15px
 }
 
 @media (min-width: 768px) {
@@ -77,6 +54,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     }
 }
 
+/*-----------*/
 .carousel-caption {
     z-index: 10;
     bottom: 40px;
@@ -152,16 +130,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
 }
 
-.subhead {
-    padding-top: 80px;
-    padding-bottom: 20px;
-    color: #fff;
-    background-repeat: repeat-x;
-    background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
-    background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
-    background-image: linear-gradient(45deg, #020031, #6d3353)
-}
-
 @media screen and (min-width: 768px) {
     .masthead h1 {
         font-size: 90px
@@ -182,46 +150,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     }
 }
 
-.bc-social {
-    padding: 15px 0;
-    text-align: center;
-    background-color: #f5f5f5;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #ddd
-}
-
-.bc-social-buttons {
-    margin-left: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    list-style: none
-}
-
-.bc-social-buttons li {
-    display: inline-block;
-    padding: 5px 8px;
-    line-height: 1;
-    font-size: 16px
-}
-
 @media (min-width: 768px) {
-    .navbar-wrapper {
-        margin-top: 20px
-    }
-
-    .navbar-wrapper .container {
-        padding-left: 15px;
-        padding-right: 15px
-    }
-
-    .navbar-wrapper .navbar {
-        padding-left: 0;
-        padding-right: 0
-    }
-
-    .navbar-wrapper .navbar {
-        border-radius: 4px
-    }
 
     .carousel-caption p {
         margin-bottom: 20px;
@@ -230,6 +159,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     }
 }
 
+.carousel-indicators li {
+    *display: inline; /* 只有ie6和ie7识别*/
+    zoom: 1; /* 触发ie6和ie7下的haslayout */
+    *text-indent: 0; /*解决ie6indent问题*/
+    filter: alpha(opacity=20);
+}
+
+/*-------------------*/
 .container-main {
     /*background-color: #fff;*/
     border: 1px #ddd;
@@ -269,13 +206,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     height: 38px;
     width: 38px;
     background: url("../../image/layout/top.png") no-repeat
-}
-
-.carousel-indicators li {
-    *display: inline; /* 只有ie6和ie7识别*/
-    zoom: 1; /* 触发ie6和ie7下的haslayout */
-    *text-indent: 0; /*解决ie6indent问题*/
-    filter: alpha(opacity=20);
 }
 
 .dropdown-menu .divider {
@@ -517,6 +447,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
 
 .fright {
     float: right;
+}
+
+.textright{
+    text-align: right;
 }
 
 .mm-search input {

@@ -2,7 +2,8 @@
 <sqlRoot>
 
     <sqlGroup name="contacts">
-        <sql id="findInfoBySelect">SELECT `contacts`.*,`user`.last_name last_name,`user`.full_name full_name,`user`.mobile mobile,
+        <sql id="findInfoBySelect">SELECT `contacts`.*,`user`.username username,`user`.email email,
+            `user`.last_name last_name,`user`.full_name full_name,`user`.mobile mobile,
             `userInfo`.street street,`userInfo`.gender gender,
             `userInfo`.zip_code zip_code,`province`.name province,`city`.name city,`county`.name
             county

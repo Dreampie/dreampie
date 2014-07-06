@@ -5,6 +5,7 @@ import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.utils.tree.TreeNode;
 import cn.dreampie.common.web.model.Model;
 import com.jfinal.ext.plugin.tablebind.TableBind;
+import com.jfinal.plugin.activerecord.Db;
 
 import java.util.List;
 
@@ -66,6 +67,11 @@ public class Role extends Model<Role> implements TreeNode<Role> {
 
     public List<Role> findChildrenById(String where, Object... paras) {
         List<Role> result = find(getSelectSql() + SqlKit.sql("role.findChildrenByExceptSelect") + blank + getWhere(where), paras);
+        return result;
+    }
+
+    public List<Long> findChildrenIdsById(String where, Object... paras) {
+        List<Long> result = Db.query("SELECT `role`.id " + SqlKit.sql("role.findChildrenByExceptSelect") + blank + getWhere(where), paras);
         return result;
     }
 

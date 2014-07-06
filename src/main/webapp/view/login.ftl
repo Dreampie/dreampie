@@ -6,7 +6,8 @@
 
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input name="username" value="<@shiro.loginUsername/>" type="text" maxlength="50" class="form-control username"
+    <input name="username" value="<@shiro.loginUsername/>"  AQDERTYU type="text" maxlength="50" class="form-control username"
+
            placeholder="账户/邮箱/手机" required autofocus>
     <input name="password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码"
            required>

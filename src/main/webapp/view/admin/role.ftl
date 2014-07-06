@@ -409,7 +409,7 @@ $(function () {
 
             //添加
             if (operate == "save") {
-                $.post("/admin/saveRole", form.serialize(), function (data) {
+                $.post("/admin/roleSave", form.serialize(), function (data) {
                     if (data.state == "success") {
                         btn.button('complete');
                         setTimeout(function () {
@@ -428,7 +428,7 @@ $(function () {
                 }, "json");
             }//更新
             else {
-                $.post("/admin/updateRole", form.serialize(), function (data) {
+                $.post("/admin/roleUpdate", form.serialize(), function (data) {
                     if (data.state == "success") {
                         btn.button('complete');
                         setTimeout(function () {
@@ -510,7 +510,7 @@ $(function () {
 
             //添加
             if (operate == "save") {
-                $.post("/admin/savePerm", form.serialize(), function (data) {
+                $.post("/admin/permSave", form.serialize(), function (data) {
                     if (data.state == "success") {
                         btn.button('complete');
                         setTimeout(function () {
@@ -530,7 +530,7 @@ $(function () {
                 }, "json");
             }//更新
             else {
-                $.post("/admin/updatePerm", form.serialize(), function (data) {
+                $.post("/admin/permUpdate", form.serialize(), function (data) {
                     if (data.state == "success") {
                         btn.button('complete');
                         setTimeout(function () {
@@ -557,7 +557,7 @@ $(function () {
         var form = $("#delete.modal").find("form");
         var forInp = form.find("input[name='for']").val();
         if (forInp == "role") {
-            $.post("/admin/dropRole", form.serialize(), function (data) {
+            $.post("/admin/roleDrop", form.serialize(), function (data) {
                 if (data.state == "success") {
                     btn.button('complete');
                     setTimeout(function () {
@@ -572,7 +572,7 @@ $(function () {
                 }
             }, "json");
         } else {
-            $.post("/admin/dropPerm", form.serialize(), function (data) {
+            $.post("/admin/permDrop", form.serialize(), function (data) {
                 if (data.state == "success") {
                     btn.button('complete');
                     setTimeout(function () {
@@ -593,7 +593,7 @@ $(function () {
     $("#role_perms").find("button.save").click(function () {
         var btn = $(this);
         var form = $("#role_perms");
-        $.post("/admin/addPerms", form.serialize(), function (data) {
+        $.post("/admin/permsAdd", form.serialize(), function (data) {
             if (data.state == "success") {
                 btn.button('complete');
                 setTimeout(function () {

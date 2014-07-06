@@ -58,7 +58,7 @@ public class UserController extends Controller {
 //        }
 
 
-        Page<Contacts> contacts = Contacts.dao.paginateInfoBy(getParaToInt(0, 1), getParaToInt(1, 15), where);
+        Page<Contacts> contacts = Contacts.dao.paginateInfoBy(getParaToInt(0, 1), getParaToInt("pageSize", 15), where);
         Map userGroup = SortUtils.me().sort(contacts.getList(), "last_name");
 
         setAttr("users", contacts);
@@ -68,7 +68,35 @@ public class UserController extends Controller {
     }
 
     @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
-    @Before({UserValidator.UserUpdatePwdValidator.class, Tx.class})
+    @Before({UserValidator.deleteContactsValidator.class, Tx.class})
+    public void deleteContacts() {
+        keepModel(Contacts.class);
+        Contacts contacts = getModel(Contacts.class);
+
+        if (contacts.delete())
+            setAttr("state", "success");
+        else
+            setAttr("state", "failure");
+        dynaRender("/view/user/contacts.ftl");
+    }
+
+
+    @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
+    @Before({UserValidator.UpdateIntroValidator.class, Tx.class})
+    public void updateIntro() {
+        keepModel(Contacts.class);
+        Contacts contacts = getModel(Contacts.class);
+
+        if (contacts.update())
+            setAttr("state", "success");
+        else
+            setAttr("state", "failure");
+        dynaRender("/view/user/contacts.ftl");
+    }
+
+
+    @CacheNameRemove(name = AppConstants.DEFAULT_CACHENAME)
+    @Before({UserValidator.UpdatePwdValidator.class, Tx.class})
     public void updatePwd() {
         keepModel(User.class);
         User upUser = getModel(User.class);

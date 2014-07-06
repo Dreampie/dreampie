@@ -237,6 +237,9 @@ $(function () {
 <!--延迟加载图片-->
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.unveil.min.js"></script>
 
+<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-tour.min.css"/>
+<script type="text/javascript" src="<@resource.static/>/lib/bootstrap/js/bootstrap-tour.min.js"></script>
+
 <!--[if lt IE 9]>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/ie8-responsive-file-warning.js"></script>
 <![endif]-->
@@ -313,6 +316,42 @@ $(function () {
                     showCloseButton: true
                 });
             });
+            //教程提示
+            var tour = new Tour({
+//            onStart: function() {
+//                return $demo.addClass("disabled", true);
+//            },
+//            onEnd: function() {
+//                return $demo.removeClass("disabled", true);
+//            },
+                debug: false,
+                template: "<div class='popover tour' style='max-width: 400px;'><div class='arrow'>" +
+                        "</div><h3 class='popover-title'></h3><div class='popover-content'></div>" +
+                        "<div class='popover-navigation' style='min-width: 260px;'><button class='btn btn-primary btn-sm' data-role='prev'>上一步</button>" +
+                        "<span data-role='separator'>&nbsp;&nbsp;&nbsp;&nbsp;</span>" +
+                        "<button class='btn btn-primary btn-sm' data-role='next'>下一步</button>" +
+                        "<button class='btn btn-info btn-sm' data-role='end'>退出</button></div></div>",
+                steps: [
+                    {
+                        path: "",
+                        element: "#menubtn",
+                        placement: "bottom",
+                        title: "欢迎来到Dreampie",
+                        content: "点击该按钮访问菜单.",
+                        backdrop: false,
+                        reflex: true
+                    },
+                    {
+                        path: "",
+                        element: "#userbtn",
+                        placement: "bottom",
+                        title: "欢迎来到Dreampie",
+                        content: "点击该按钮可以访问用户信息.",
+                        backdrop: false,
+                        reflex: true
+                    }
+                ]
+            }).init().start();
         });
     }(jQuery)
 </script>
