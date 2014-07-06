@@ -9,7 +9,7 @@
     <input name="username" value="<@shiro.loginUsername/>"  AQDERTYU type="text" maxlength="50" class="form-control username"
 
            placeholder="账户/邮箱/手机" required autofocus>
-    <input name="password" value="" type="password" maxlength="18" class="form-control password" placeholder="密码"
+    <input name="password" value="" type="password" maxlength="100" class="form-control password" placeholder="密码"
            required>
     <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码"
            required><img
@@ -39,7 +39,7 @@
                     {regex: /^\w{5,18}$/},'mobile','email'
                 ], */
                     "username": ['not_empty'], "password": [
-                        {regex: /^\w{5,18}$/}
+                        {regex: /^\w{5,100}$/}
                     ], "captcha": [
                         {regex: /^\d{4}$/}
                     ]},

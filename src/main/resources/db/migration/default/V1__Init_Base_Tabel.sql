@@ -92,7 +92,7 @@ CREATE TABLE sec_role_permission (
 DROP TABLE IF EXISTS sec_token;
 CREATE TABLE sec_token (
   uuid          VARCHAR(255) NOT NULL  COMMENT '用户编码',
-  username      VARCHAR(50)  NOT NULL  COMMENT '用户名',
+  username      VARCHAR(255)  NOT NULL  COMMENT '用户名',
   created_at    TIMESTAMP    NOT NULL COMMENT '创建时间',
   expiration_at TIMESTAMP    NOT NULL  COMMENT '结束时间',
   used_to    INT NOT NULL  COMMENT '0是注册，1是手机验证'
