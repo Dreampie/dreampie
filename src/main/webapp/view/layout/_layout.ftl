@@ -105,8 +105,12 @@
             <li class="<#if activebar == 'center'> Selected </#if>"><a
                     href="/user/center">${i18n.getText("user.center")}</a>
             </li>
-            <li class="<#if activebar == 'contacts'> Selected </#if>">
-                <a href="/user/contacts">${i18n.getText("user.contacts")}</a></li>
+            <li class="<#if activebar == 'following'> Selected </#if>">
+                <a href="/user/following">${i18n.getText("user.following")}</a></li>
+            <li class="<#if activebar == 'follower'> Selected </#if>">
+                <a href="/user/follower">${i18n.getText("user.follower")}</a></li>
+            <li class="<#if activebar == 'search'> Selected </#if>">
+                <a href="/user/search">${i18n.getText("user.search")}</a></li>
             <@shiro.hasPermission name="P_USER">
                 <li><a href="/admin/user">${i18n.getText("admin.user")}</a></li>
             </@shiro.hasPermission>
@@ -176,11 +180,11 @@
     <!-- Site footer -->
     <div class="footer footer-main">
         <div class="container-fluid">
-            <p>${i18n.getText("webapp.copyright")}</p>
+            <p>${i18n.getText("app.copyright")}</p>
 
             <p>
                 <a href="http://www.miibeian.gov.cn/"
-                   target="_blank">${i18n.getText("webapp.gov")}</a>
+                   target="_blank">${i18n.getText("app.gov")}</a>
             </p>
         </div>
     </div>
@@ -198,7 +202,7 @@
       ${i18n.getText("browser.suport.tip")}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">${i18n.getText("webapp.close")}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">${i18n.getText("app.close")}</button>
       </div>
     </div>
   </div>
@@ -352,6 +356,7 @@ $(function () {
                     }
                 ]
             }).init().start();
+
         });
     }(jQuery)
 </script>

@@ -31,16 +31,13 @@ import java.util.Arrays;
 class RoleAuthzHandler extends AbstractAuthzHandler {
 
     private final Annotation annotation;
-    private final String jdbcRole;
 
     public RoleAuthzHandler(Annotation annotation) {
         this.annotation = annotation;
-        this.jdbcRole = null;
     }
 
     public RoleAuthzHandler(String jdbcRole) {
         this.annotation = null;
-        this.jdbcRole = jdbcRole;
     }
 
     @Override
@@ -48,10 +45,6 @@ class RoleAuthzHandler extends AbstractAuthzHandler {
 
         Subject subject = getSubject();
 
-        //从数据库加载的配置权限
-        if (jdbcRole != null) {
-            subject.checkRole(jdbcRole);
-        }
         if (!(annotation instanceof RequiresRoles)) return;
         RequiresRoles rrAnnotation = (RequiresRoles) annotation;
         String[] roles = rrAnnotation.value();

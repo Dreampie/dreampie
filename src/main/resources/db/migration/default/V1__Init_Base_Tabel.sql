@@ -95,7 +95,7 @@ CREATE TABLE sec_token (
   username      VARCHAR(50)  NOT NULL  COMMENT '用户名',
   created_at    TIMESTAMP    NOT NULL COMMENT '创建时间',
   expiration_at TIMESTAMP    NOT NULL  COMMENT '结束时间',
-  is_sign_up    BOOLEAN DEFAULT TRUE  COMMENT '是否是注册'
+  used_to    INT NOT NULL  COMMENT '0是注册，1是手机验证'
 );
 
 DROP TABLE IF EXISTS com_area;
@@ -105,7 +105,7 @@ CREATE TABLE com_area (
   id            BIGINT NOT NULL DEFAULT NEXTVAL('com_area_id_seq') PRIMARY KEY,
   name VARCHAR(50) DEFAULT '' COMMENT '地区名称',
   pinyin VARCHAR(100) DEFAULT '' COMMENT '拼音',
-  pid INT(11) DEFAULT '0' COMMENT '父级编号',
+  pid BIGINT DEFAULT '0' COMMENT '父级编号',
   area_code VARCHAR(6) DEFAULT NULL,
   zip_code VARCHAR(6) DEFAULT NULL COMMENT '邮编',
   left_code BIGINT DEFAULT '0' COMMENT '左编码',
@@ -121,7 +121,7 @@ CREATE SEQUENCE com_state_id_seq START WITH 1;
 CREATE TABLE com_state (
   id            BIGINT NOT NULL DEFAULT NEXTVAL('com_state_id_seq') PRIMARY KEY,
   name VARCHAR(45) DEFAULT NULL COMMENT '状态名称',
-  value INT(11) DEFAULT '0' COMMENT '状态值',
+  value INT DEFAULT '0' COMMENT '状态值',
   intro TEXT COMMENT '简介',
   type VARCHAR(45) DEFAULT NULL COMMENT '状态类型',
   created_at TIMESTAMP   NOT NULL,

@@ -29,25 +29,19 @@ import java.lang.annotation.Annotation;
  */
 class PermissionAuthzHandler extends AbstractAuthzHandler {
     private final Annotation annotation;
-    private final String jdbcPermission;
 
     public PermissionAuthzHandler(Annotation annotation) {
         this.annotation = annotation;
-        this.jdbcPermission = null;
     }
 
     public PermissionAuthzHandler(String jdbcPermission) {
         this.annotation = null;
-        this.jdbcPermission = jdbcPermission;
     }
 
     @Override
     public void assertAuthorized() throws AuthorizationException {
         Subject subject = getSubject();
-        //数据库权限
-        if (jdbcPermission != null) {
-            subject.checkPermission(jdbcPermission);
-        }
+
         if (!(annotation instanceof RequiresPermissions))
             return;
 

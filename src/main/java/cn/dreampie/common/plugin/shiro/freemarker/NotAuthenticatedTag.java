@@ -22,7 +22,7 @@ public class NotAuthenticatedTag extends SecureTag {
 
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
-        if (getSubject() == null || !getSubject().isAuthenticated()) {
+        if (getSubject() == null || (!getSubject().isAuthenticated() && !getSubject().isRemembered())) {
             log.debug("Subject does not exist or is not authenticated.  Tag body will be evaluated.");
             renderBody(env, body);
         } else {

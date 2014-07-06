@@ -8,6 +8,7 @@ import cn.dreampie.common.plugin.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
 import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
+import cn.dreampie.common.utils.SortUtils;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.TimeUtils;
 import cn.dreampie.common.utils.ValidateUtils;
@@ -15,6 +16,7 @@ import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.Token;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -23,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -54,10 +57,6 @@ public class Controller extends com.jfinal.core.Controller {
      * 登录页
      */
     public void tologin() {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null && subject.getPrincipal() != null) {
-            subject.logout();
-        }
         dynaRender("/view/login.ftl");
     }
 
@@ -66,7 +65,7 @@ public class Controller extends com.jfinal.core.Controller {
         if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
 
 
-            Token token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND is_sign_up = true");
+            Token token = Token.dao.findFirstBy("`token`.uuid='" + uuid + "'  AND `token`.expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND `token`.used_to＝0");
 //            if (token == null) {
 //                Token stoken = new Token();
 //                stoken.set("uuid", uuid);
@@ -74,9 +73,9 @@ public class Controller extends com.jfinal.core.Controller {
 //                DateTime now = DateTime.now();
 //                stoken.set("created_at", now.toDate());
 //                stoken.set("expiration_at", now.plusDays(1).toDate());
-//                stoken.set("is_sign_up", true);
+//                stoken.set("used_to", 0);
 //                if (stoken.save()) {
-//                    token = Token.dao.findFirstBy("uuid='" + uuid + "'  AND expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND is_sign_up = true");
+//                    token = Token.dao.findFirstBy("`token`.uuid='" + uuid + "'  AND `token`.expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND `token`.used_to = 0");
 //                }
 //            }
             if (token != null) {
@@ -123,7 +122,7 @@ public class Controller extends com.jfinal.core.Controller {
         DateTime now = DateTime.now();
         token.set("created_at", now.toDate());
         token.set("expiration_at", now.plusDays(1).toDate());
-        token.set("is_sign_up", true);
+        token.set("used_to", 0);
 
         if (token.save()) {
             logger.info("signupEmail:" + token.getStr("username") + ":" + token.getStr("uuid"));
@@ -157,7 +156,7 @@ public class Controller extends com.jfinal.core.Controller {
 
         if (regUser.save()) {
             //删除token
-            Token.dao.dropBy("username='" + regUser.get("email") + "' AND is_sign_up = true");
+            Token.dao.dropBy("username='" + regUser.get("email") + "' AND used_to＝0");
             regUser.addUserInfo(null).addRole(null);
             setAttr("state", "success");
             if (autoLogin) {
@@ -176,5 +175,6 @@ public class Controller extends com.jfinal.core.Controller {
 
         dynaRender("/view/login.ftl");
     }
+
 
 }

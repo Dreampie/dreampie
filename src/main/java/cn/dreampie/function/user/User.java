@@ -1,6 +1,7 @@
 package cn.dreampie.function.user;
 
 import cn.dreampie.common.plugin.sqlinxml.SqlKit;
+import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.common.web.model.Model;
 import com.jfinal.ext.plugin.tablebind.TableBind;
@@ -38,6 +39,26 @@ public class User extends Model<User> {
         userRole.save();
         return this;
     }
+
+    public boolean getFollowed() {
+        if (getFollowing() != null) {
+            this.put("followed", true);
+        } else
+            this.put("followed", false);
+        return this.get("followed");
+    }
+
+    public Follower getFollowing() {
+        User user = SubjectUtils.me().getUser();
+        if (this.get("following") == null) {
+            Follower following = Follower.dao.findFirstBy("`follower`.user_id =" + user.get("id") + " AND `follower`.link_id =" + this.get("id"));
+            if (following != null) {
+                this.put("following", following);
+            }
+        }
+        return this.get("following");
+    }
+
 
     public Role getRole() {
         return Role.dao.findById(UserRole.dao.findFirstBy("`userRole`.user_id=" + this.get("id")).get("role_id"));

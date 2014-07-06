@@ -52,8 +52,13 @@ public class SubjectUtils {
     }
 
     public boolean login(String username, String password) {
+        return login(username, password, false);
+    }
+
+    public boolean login(String username, String password, boolean rememberMe) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
+            token.setRememberMe(rememberMe);
             SecurityUtils.getSubject().login(token);
             Session session = getSession();
             session.setAttribute(AppConstants.CURRENT_USER, User.dao.findBy("username=?", username));

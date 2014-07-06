@@ -64,6 +64,19 @@ $(function () {
         });
     }
 })
+
+
+// ajax  error
+function checkError(errorStr, errorMsg) {
+    if (typeof(errorMsg) != 'undefined' && errorMsg != 'undefined') {
+        if (errorStr != "") {
+            errorStr += "<br/>";
+        }
+        return errorStr += errorMsg;
+    } else {
+        return errorStr;
+    }
+}
 /**
  * 格式化金额
  * @param number

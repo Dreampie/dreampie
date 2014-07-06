@@ -18,7 +18,7 @@
 
     <div class="error-box"></div>
     <label class="checkbox">
-        <input type="checkbox" name="rememberMe" value="remember-me"> Remember me
+        <input type="checkbox" name="rememberMe" value="true"> Remember me
     </label>
 
     <@shiro.isLoginFailure name="shiroLoginFailure">

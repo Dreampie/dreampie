@@ -15,11 +15,15 @@
  */
 package cn.dreampie.common.plugin.shiro.plugin;
 
+import cn.dreampie.common.config.AppConstants;
 import cn.dreampie.common.utils.SubjectUtils;
+import cn.dreampie.function.user.User;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +52,7 @@ public class ShiroInterceptor implements Interceptor {
      * @return
      */
     private boolean assertNoAuthorized(ActionInvocation ai, List<AuthzHandler> ahs) {
+
         // 存在访问控制处理器。
         if (ahs != null && ahs.size() > 0) {
 
@@ -55,6 +60,21 @@ public class ShiroInterceptor implements Interceptor {
             if (!SubjectUtils.me().wasLogin()) {
                 WebUtils.saveRequest(ai.getController().getRequest());
             }
+
+            //rememberMe自动登录
+            Subject subject = SubjectUtils.me().getSubject();
+            if (!subject.isAuthenticated() && subject.isRemembered()) {
+                Object principal = subject.getPrincipal();
+                Session session = SubjectUtils.me().getSession();
+                if (null != principal) {
+                    if (session.getAttribute(AppConstants.CURRENT_USER) == null) {
+                        session.setAttribute(AppConstants.CURRENT_USER, (User) principal);
+                    }
+                } else {
+                    SubjectUtils.me().getSubject().logout();
+                }
+            }
+
             try {
                 // 执行权限检查。
                 for (AuthzHandler ah : ahs) {

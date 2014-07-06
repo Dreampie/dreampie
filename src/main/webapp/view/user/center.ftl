@@ -108,16 +108,5 @@
                 }, "json");
             }
         });
-
-        function checkError(errorStr, errorMsg) {
-            if (typeof(errorMsg) != 'undefined' && errorMsg != 'undefined') {
-                if (errorStr != "") {
-                    errorStr += "<br/>";
-                }
-                return errorStr += errorMsg;
-            } else {
-                return errorStr;
-            }
-        }
     });
 </script>

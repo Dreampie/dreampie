@@ -114,7 +114,7 @@
 <div class="row">
     <div class="col-sm-6 col-md-4 ">
         <#if users?? && users?size gt 0>
-        <@paginate currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
+        <@pagination currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
     </#if>
     </div>
 </div>
@@ -458,15 +458,6 @@
             }
         });
 
-        function checkError(errorStr, errorMsg) {
-            if (typeof(errorMsg) != 'undefined' && errorMsg != 'undefined') {
-                if (errorStr != "") {
-                    errorStr += "<br/>";
-                }
-                return errorStr += errorMsg;
-            } else {
-                return errorStr;
-            }
-        }
+
     })
 </script>
