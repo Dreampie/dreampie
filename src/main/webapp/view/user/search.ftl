@@ -5,16 +5,19 @@
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="row">
     <div class="col-md-4 searchline">
-        <form id="user_search" class="searchbar " role="form" action="/user/search" method="get" data-view="searchbar" data-classname="col-sm-4"
+        <form id="user_search" class="searchbar " role="form" action="/user/search" method="get" data-view="searchbar"
+              data-classname="col-sm-4"
               data-inputclass="form-control" data-placeholder="姓名，电话，地址等">
             <span style=" position: relative; ">
                 <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
                        style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
-                <input name="user_search" type="text" value="${(user_search)!}" placeholder="姓名，电话，地址等" class="form-control tt-query"
+                <input name="user_search" type="text" value="${(user_search)!}" placeholder="姓名，电话，地址等"
+                       class="form-control tt-query"
                        required="" autocomplete="off"
                        spellcheck="false" maxlength="20"
                        dir="auto" style="/* position: relative; */vertical-align: top;background-color: transparent;">
-                <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+                <span class="tt-dropdown-menu"
+                      style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
             </span>
             <button type="submit" class="glyphicon glyphicon-search search"></button>
         <#--<div class="error-box">${user_searchMsg!}</div>-->
@@ -62,13 +65,16 @@
                                 </h4>
                                 <#assign username=user.full_name+"("+user.username+")"/>
                                 <#if user.followed?? && user.followed?string('true','false')=='true'>
-                                    ${(user.mobile)!}
+                                ${(user.following.intro)!}
                                     <br/>
-                                    ${(user.email)!}
+                                ${(user.mobile)!}
                                     <br/>
-                                    ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
+                                ${(user.email)!}
                                     <br/>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#del_following"
+                                ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
+                                    <br/>
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#del_following"
                                             followerid="${user.following.id}" username="${username}">取消
                                     </button>
                                 <#else>
@@ -81,9 +87,10 @@
                                     ${user.email?substring(0,2)+"***"+user.email?substring(ixe)}
                                     </#if>
                                     <br/>
-                                    ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
+                                ${(user.created_at?string('yyyy-MM-dd HH:mm:ss'))!}
                                     <br/>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#add_following"
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#add_following"
                                             linkid="${user.id}" username="${username}">关注
                                     </button>
                                 </#if>
