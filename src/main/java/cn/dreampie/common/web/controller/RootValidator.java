@@ -33,7 +33,7 @@ public class RootValidator {
             c.keepModel(User.class);
             c.setAttr("state", "failure");
 
-            if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
+            if (ThreadLocalUtil.isJson())
                 c.renderJson();
             else
                 c.render("/view/signup_email.ftl");

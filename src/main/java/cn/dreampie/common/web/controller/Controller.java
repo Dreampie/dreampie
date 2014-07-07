@@ -1,14 +1,12 @@
 package cn.dreampie.common.web.controller;
 
 import cn.dreampie.common.config.AppConstants;
-import cn.dreampie.common.config.ReTurnType;
 import cn.dreampie.common.plugin.mail.Mailer;
 import cn.dreampie.common.plugin.mail.MailerTemplate;
 import cn.dreampie.common.plugin.patchca.PatchcaRender;
 import cn.dreampie.common.plugin.shiro.hasher.Hasher;
 import cn.dreampie.common.plugin.shiro.hasher.HasherInfo;
 import cn.dreampie.common.plugin.shiro.hasher.HasherUtils;
-import cn.dreampie.common.utils.SortUtils;
 import cn.dreampie.common.utils.SubjectUtils;
 import cn.dreampie.common.utils.TimeUtils;
 import cn.dreampie.common.utils.ValidateUtils;
@@ -16,16 +14,12 @@ import cn.dreampie.common.web.thread.ThreadLocalUtil;
 import cn.dreampie.function.user.Token;
 import cn.dreampie.function.user.User;
 import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -36,7 +30,7 @@ public class Controller extends com.jfinal.core.Controller {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     public void dynaRender(String view) {
-        if (ThreadLocalUtil.returnType() == ReTurnType.JSON)
+        if (ThreadLocalUtil.isJson())
             super.renderJson();
         else
             super.render(view);
