@@ -28,6 +28,7 @@ import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 
@@ -100,24 +101,9 @@ public class AppConfig extends JFinalConfig {
         tableBindDefault.setContainerFactory(new CaseInsensitiveContainerFactory(true)); //忽略字段大小写
 //    tableBindDefault.addExcludePaths("cn.dreampie.function.shop");
         tableBindDefault.setShowSql(getPropertyToBoolean("devMode", false));
+        //非mysql的数据库方言
+        tableBindDefault.setDialect(new AnsiSqlDialect());
         plugins.add(tableBindDefault);
-
-        //第二数据源
-//    DruidPlugin druidShop = new DruidPlugin(getProperty("db.shop.url"), getProperty("db.shop.user"), getProperty("db.shop.password"), getProperty("db.shop.driver"));
-//    // StatFilter提供JDBC层的统计信息
-//    druidShop.addFilter(new StatFilter());
-//    // WallFilter的功能是防御SQL注入攻击
-//    WallFilter wallShop = new WallFilter();
-//    wallShop.setDbType("mysql");
-//    druidShop.addFilter(wallShop);
-//    plugins.add(druidShop);
-//
-//    AutoMultiSourceTableBindPlugin tableBindShop = new AutoMultiSourceTableBindPlugin(AppConstants.SHOP_DATESOURCE, druidShop, SimpleNameStyles.LOWER);
-//    tableBindShop.setContainerFactory(new CaseInsensitiveContainerFactory(true)); //忽略字段大小写
-//    tableBindShop.addIncludePaths("cn.dreampie.function.shop");
-//    tableBindShop.setShowSql(getPropertyToBoolean("devMode", false));
-//    plugins.add(tableBindShop);
-
 
         //sql语句plugin
         plugins.add(new SqlInXmlPlugin());

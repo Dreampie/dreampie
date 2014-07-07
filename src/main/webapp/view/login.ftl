@@ -17,9 +17,12 @@
         src="/patchca?width=119&height=42&time=${.now?long}">
 
     <div class="error-box"></div>
-    <label class="checkbox">
-        <input type="checkbox" name="rememberMe" value="true"> Remember me
-    </label>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="rememberMe" value="true"> Remember me
+        </label>
+    </div>
 
     <@shiro.isLoginFailure name="shiroLoginFailure">
         <div class="alert alert-danger" style="background-image: none;">
