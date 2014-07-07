@@ -1,8 +1,9 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="index" html_title=i18n.getText("index.name")>
 <#--<h1><@shiro.guest>Hello guest!</@shiro.guest>-->
-    <#--<@shiro.hasRole name="user">Hello user!</@shiro.hasRole>-->
-    <#--<@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>-->
+<#--<@shiro.hasRole name="user">Hello user!</@shiro.hasRole>-->
+<#--<@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>-->
+
 <h1>欢迎访问梦想派-Dreampie</h1>
 <div id="carousel-index" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -49,7 +50,7 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
         $('.carousel').carousel({
             interval: 2000
@@ -57,4 +58,42 @@
 
     });
 </script>
+
+富文本编辑器
+<!-- include (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+<link rel="stylesheet" type="text/css" href="<@resource.static/>/lib/codemirror/lib/codemirror.css">
+<link rel="stylesheet" type="text/css" href="<@resource.static/>/lib/codemirror/theme/monokai.css">
+<script type="text/javascript" src="<@resource.static/>/lib/codemirror/lib/codemirror.min.js"></script>
+<script type="text/javascript" src="<@resource.static/>/lib/codemirror/mode/xml/xml.js"></script>
+
+
+<!-- include summernote css/js-->
+<link href="<@resource.static/>/lib/summernote/css/summernote.css" rel="stylesheet">
+<script src="<@resource.static/>/lib/summernote/js/summernote.min.js"></script>
+<!-- include summernote-ko-KR -->
+<script src="<@resource.static/>/lib/summernote/lang/summernote-zh-CN.js"></script>
+<div class="summernote">Hello Summernote</div>
+<script type="text/javascript">
+    $(function () {
+        $('.summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true,
+            lang: 'zh-CN', // default: 'en-US'
+            codemirror: { // codemirror options
+                theme: 'monokai'
+            }
+        });
+    });
+</script>
+
+代码高亮
+<link href="<@resource.static/>/lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="<@resource.static/>/lib/google-code-prettify/prettify.js"></script>
+<pre class="prettyprint linenums">
+    &lt;link href="<@resource.static/>/lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/&gt;
+    &lt;script type="text/javascript" src="<@resource.static/>/lib/google-code-prettify/prettify.js"&gt;&lt;/script&gt;
+</pre>
+
 </@layout>

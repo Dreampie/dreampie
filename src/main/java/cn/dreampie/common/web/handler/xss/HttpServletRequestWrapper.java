@@ -86,7 +86,6 @@ public class HttpServletRequestWrapper extends javax.servlet.http.HttpServletReq
             return text;
         } else {
             value = escapeHtml(value);
-            value = escapeScript(value);
         }
         return value;
     }

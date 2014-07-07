@@ -29,6 +29,7 @@ import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 
@@ -83,7 +84,7 @@ public class AppConfig extends JFinalConfig {
         //数据库版本控制插件
         plugins.add(new FlywayPlugin());
         //配置druid连接池
-        DruidXAPlugin druidDefault = new DruidXAPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
+        DruidPlugin druidDefault = new DruidPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
         // StatFilter提供JDBC层的统计信息
         druidDefault.addFilter(new StatFilter());
         // WallFilter的功能是防御SQL注入攻击

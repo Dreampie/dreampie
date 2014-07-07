@@ -24,13 +24,13 @@
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
 <#--<link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/bootstrap-theme.min.css" media="screen"/>-->
 
-    <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<@resource.static/>/lib/fontawesome/css/font-awesome.min.css">
 
     <!--messenger-->
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/messenger.css" media="screen"/>
     <link rel="stylesheet" href="<@resource.static/>/lib/bootstrap/css/messenger-theme-block.css" media="screen"/>
     <!--[if lte IE 7]>
-    <link rel="stylesheet" href="a<@resource.static/>/lib/bootstrap/css/font-awesome-ie7.min.css">
+    <link rel="stylesheet" href="a<@resource.static/>/lib/fontawesome/css/font-awesome-ie7.min.css">
     <![endif]-->
     <!-- bsie css 补丁文件 -->
     <!-- bsie 额外的 css 补丁文件 -->

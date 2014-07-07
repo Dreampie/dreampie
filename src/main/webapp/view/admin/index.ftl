@@ -43,7 +43,7 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
         $('.carousel').carousel({
             interval: 2000

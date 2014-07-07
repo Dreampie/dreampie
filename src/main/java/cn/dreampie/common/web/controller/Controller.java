@@ -58,8 +58,7 @@ public class Controller extends com.jfinal.core.Controller {
         String uuid = getPara("token");
         if (uuid != null && ValidateUtils.me().isUUID(uuid)) {
 
-
-            Token token = Token.dao.findFirstBy("`token`.uuid='" + uuid + "'  AND `token`.expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND `token`.used_to＝0");
+            Token token = Token.dao.findFirstBy("`token`.uuid='" + uuid + "' AND `token`.expiration_at>'" + TimeUtils.me().toString(DateTime.now()) + "' AND `token`.used_to=0");
 //            if (token == null) {
 //                Token stoken = new Token();
 //                stoken.set("uuid", uuid);

@@ -54,7 +54,7 @@
 </div>
 </@layout>
 
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
         $('#addressBook').masonry({
             columnWidth: 200,

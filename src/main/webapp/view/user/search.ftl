@@ -112,7 +112,7 @@
 <#include "/view/user/_add_following_modal.ftl" />
 <#include "/view/user/_del_following_modal.ftl" />
 
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
         $("div.user button").click(function () {
             var opbtn = $(this);

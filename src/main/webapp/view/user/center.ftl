@@ -62,7 +62,7 @@
 </div>
 </@layout>
 
-<script type="application/javascript">
+<script type="text/javascript">
     $(function () {
         $("#update_pwd button.save").click(function () {
 
