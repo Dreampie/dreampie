@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="../fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/summernote.css" rel="stylesheet">
+    <script type="text/javascript" src="../../javascript/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- include (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+    <link rel="stylesheet" type="text/css" href="../codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="../codemirror/theme/monokai.css">
+    <script type="text/javascript" src="../codemirror/lib/codemirror.min.js"></script>
+    <script type="text/javascript" src="../codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="../codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="../codemirror/mode/css/css.js"></script>
+    <script type="text/javascript" src="../codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+    <script type="text/javascript" src="js/summernote.min.js"></script>
+    <!-- include summernote-ko-KR -->
+    <script src="lang/summernote-zh-CN.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var myCodeMirror = CodeMirror(document.body);
+            $('.summernote').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true,
+                lang: 'zh-CN', // default: 'en-US'
+                codemirror: { // codemirror options
+                    theme: 'monokai'
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div class="summernote">Hello Summernote</div>
+<pre data-lang="javascript" class="cm-s-default">
+    &lt;script src="lib/codemirror.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="../lib/codemirror.css"&gt;
+    &lt;script src="mode/javascript/javascript.js"&gt;&lt;/script&gt;
+</pre>
+</body>
+</html>

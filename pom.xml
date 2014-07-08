@@ -396,6 +396,154 @@
         <!--<artifactId>jetty-server</artifactId>-->
         <!--<version>${jetty.version}</version>-->
         <!--</dependency>-->
+
+
+        <!--webjars-->
+        <!--atmosphere 通信-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-atmosphere</artifactId>
+            <version>2.1.6</version>
+        </dependency>
+        <!--jquery-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>1.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-form</artifactId>
+            <version>3.28.0-2013.02.06-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui-touch-punch</artifactId>
+            <version>0.2.3-2</version>
+        </dependency>
+        <!--JSON js-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>json3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-cookie</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <!--js mvc-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>backbonejs</artifactId>
+            <version>1.1.2-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>underscorejs</artifactId>
+            <version>1.6.0-3</version>
+        </dependency>
+        <!--bootstrap 模板-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-datepicker</artifactId>
+            <version>1.3.0-2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bootstrap</artifactId>
+                    <groupId>org.webjars</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--字体-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bootstrap</artifactId>
+                    <groupId>org.webjars</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--代码高亮-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>codemirror</artifactId>
+            <version>4.3</version>
+        </dependency>
+        <!--图表-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>highcharts</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <!--高亮代码-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>prettify</artifactId>
+            <version>4-Mar-2013</version>
+        </dependency>
+        <!--流程图-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jsplumb</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <!--瀑布流-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>masonry</artifactId>
+            <version>3.1.5</version>
+        </dependency>
+        <!--视频播放器-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>video-js</artifactId>
+            <version>4.6.3</version>
+        </dependency>
+        <!--按需加载js-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>requirejs</artifactId>
+            <version>2.1.14-1</version>
+        </dependency>
+        <!-- 让IE6-8 支持 CSS3 Media Query-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>respond</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+        <!--让IE6~8支持CSS3伪类和属性选择器-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>selectivizr</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <!-- 让IE系列支持HTML5标签-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>html5shiv</artifactId>
+            <version>3.7.2</version>
+        </dependency>
+        <!-- 缩略图占位插件-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>holderjs</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 
 

@@ -1,7 +1,7 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tologin" html_title=i18n.getText("login.name")>
-<link rel="stylesheet" href="<@resource.static/>/css/login.css"/>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<link rel="stylesheet" href="<@resource.static/>/css/app/login.css"/>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">

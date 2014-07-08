@@ -1,6 +1,6 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="center" html_title="个人中心">
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="page-header">
     <h1>个人中心</h1>

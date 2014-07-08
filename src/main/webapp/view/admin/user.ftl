@@ -1,7 +1,7 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_pagination.ftl" />
 <@layout activebar="user" html_title=i18n.getText("admin.user")>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <div class="row">

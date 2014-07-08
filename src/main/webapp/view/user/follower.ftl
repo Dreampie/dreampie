@@ -1,7 +1,7 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_pagination.ftl" />
 <@layout activebar="follower" html_title=i18n.getText("user.follower")>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <div class="row">

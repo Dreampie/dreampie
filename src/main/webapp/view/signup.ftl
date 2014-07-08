@@ -1,7 +1,7 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
-<link rel="stylesheet" href="<@resource.static/>/css/signup.css"/>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/jquery.form.js"></script>
+<link rel="stylesheet" href="<@resource.static/>/css/app/signup.css"/>
+<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <form class="form-horizontal form-signup" id="signup" role="form" method="post" action="/signup" autocomplete="off">
   <h2 class="form-signup-heading">Please Signup</h2>

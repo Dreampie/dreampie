@@ -26,8 +26,8 @@ public class CommonFilter extends HttpFilter {
      */
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        request.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
-        response.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
+//        request.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
+//        response.setCharacterEncoding(AppConstants.DEFAULT_ENCODING);
 
 //    response.setHeader("Access-Control-Allow-Origin", "http://" + request.getServerName());
 //    response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
