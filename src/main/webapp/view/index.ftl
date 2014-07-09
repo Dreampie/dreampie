@@ -51,11 +51,13 @@
     </a>
 </div>
 <script type="text/javascript">
-    require(["jquery"], function ($) {
-        $(function () {
-            $('.carousel').carousel({
-                interval: 2000
-            })
+    require(["../javascript/app"], function () {
+        require(["_layout"], function () {
+            $(function () {
+                $('.carousel').carousel({
+                    interval: 2000
+                })
+            });
         });
     });
 </script>
@@ -63,18 +65,21 @@
 富文本编辑器
 <!-- include summernote cs/js-->
 <div class="summernote">Hello Summernote</div>
+<link rel="stylesheet" type="text/css" href="<@resource.static/>/webjars/codemirror/4.3/lib/codemirror.css"/>
 <script type="text/javascript">
-    require(["jquery"], function ($) {
-        $(function () {
-            $('.summernote').summernote({
-                height: 300,                 // set editor height
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,             // set maximum height of editor
-                focus: true,
-                lang: 'zh-CN', // default: 'en-US'
-                codemirror: { // codemirror options
-                    theme: 'monokai'
-                }
+    require(["../javascript/app"], function () {
+        require(["_layout",'summernote','summernote-zh-CN','codemirror'], function () {
+            $(function () {
+                $('.summernote').summernote({
+                    height: 300,                 // set editor height
+                    minHeight: null,             // set minimum height of editor
+                    maxHeight: null,             // set maximum height of editor
+                    focus: true,
+                    lang: 'zh-CN', // default: 'en-US'
+                    codemirror: { // codemirror options
+                        theme: 'monokai'
+                    }
+                });
             });
         });
     });

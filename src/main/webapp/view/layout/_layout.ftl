@@ -29,18 +29,18 @@
     <link rel="stylesheet" href="<@resource.static/>/javascript/lib/bootstrap/css/messenger.css" media="screen"/>
     <link rel="stylesheet" href="<@resource.static/>/javascript/lib/bootstrap/css/messenger-theme-block.css"
           media="screen"/>
-
+    <!--滑动布局-->
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/javascript/lib/mmenu/css/jquery.mmenu.all.css"/>
     <!--自定义样式-->
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/app/main/_layout.css"/>
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/javascript/lib/mmenu/css/jquery.mmenu.all.css"/>
 
-    <script data-main="<@resource.static/>/javascript/app" src="/webjars/requirejs/2.1.14/require.min.js"></script>
+    <script src="<@resource.static/>/webjars/requirejs/2.1.14/require.min.js"></script>
 <#-- base href="${CPATH}" / -->
     <script type="text/javascript">
-        require(["jquery"], function ($) {
-            $(function () {
-                //初始化高度
-                ~(function (window, document, $) {
+        require(['../../javascript/app'], function () {
+            require(['_layout'], function () {
+                $(function () {
+                    //初始化高度
                     $.reHeight = function () {
                         var height = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
 //                    h = $(".header-main").outerHeight() + $(".footer-main").outerHeight() + 35,
@@ -52,23 +52,23 @@
                         _fn(height - h);
                     }
                     $.reHeight();
-                })(window, document, $);
 
-                $(window).resize(function () {
-                    $.reHeight();
+                    $(window).resize(function () {
+                        $.reHeight();
+                    });
+                    //初始化菜单
+                    $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/}, classes: 'mm-white',
+                        dragOpen: true,
+                        counters: true,
+                        searchfield: true,
+                        header: {add: true, update: true, title: '菜单'}});
+
+                    $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-white',
+                        dragOpen: true,
+                        counters: true,
+                        searchfield: true,
+                        header: {add: true, update: true, title: '<@shiro.principal property="full_name"/>'}});
                 });
-                //初始化菜单
-                $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/}, classes: 'mm-white',
-                    dragOpen: true,
-                    counters: true,
-                    searchfield: true,
-                    header: {add: true, update: true, title: '菜单'}});
-
-                $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-white',
-                    dragOpen: true,
-                    counters: true,
-                    searchfield: true,
-                    header: {add: true, update: true, title: '<@shiro.principal property="full_name"/>'}});
             });
         });
     </script>
@@ -199,10 +199,12 @@
 </div>
 <script type="text/javascript">
 $(function () {
- require("jquery", function ($) {
+require(['../../javascript/app'], function () {
+            require(['_layout'], function () {
   if (!$.support.leadingWhitespace) {
     $('#b_support_alert').modal();
   }
+  });
   });
 })
 </script>
@@ -212,103 +214,104 @@ $(function () {
     /**
      * make elements in container el to be compatible with IE6
      */
-    require(["jquery"], function ($) {
-        $(function () {
-            /*  $(".navbar").scrollHide({
-                animation: 'fade'// Fade, slide, none
-              });*/
-            // IE10 viewport hack for Surface/desktop Windows 8 bug
-            //
-            // See Getting Started docs for more information
-            if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-                var msViewportStyle = document.createElement("style");
-                msViewportStyle.appendChild(
-                        document.createTextNode(
-                                "@-ms-viewport{width:auto!important}"
-                        )
-                );
-                document.getElementsByTagName("head")[0].
-                        appendChild(msViewportStyle);
-            }
+    require(['../../javascript/app'], function () {
+        require(['_layout'], function () {
+            $(function () {
+                /*  $(".navbar").scrollHide({
+                    animation: 'fade'// Fade, slide, none
+                  });*/
+                // IE10 viewport hack for Surface/desktop Windows 8 bug
+                //
+                // See Getting Started docs for more information
+                if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                    var msViewportStyle = document.createElement("style");
+                    msViewportStyle.appendChild(
+                            document.createTextNode(
+                                    "@-ms-viewport{width:auto!important}"
+                            )
+                    );
+                    document.getElementsByTagName("head")[0].
+                            appendChild(msViewportStyle);
+                }
 
-            $("img.lazy").unveil();
+                $("img.lazy").unveil();
 
-            $.scrollUp({
-                scrollName: 'scrollUp', // Element ID
-                topDistance: '300', // Distance from top before showing element (px)
-                topSpeed: 300, // Speed back to top (ms)
-                animation: 'fade', // Fade, slide, none
-                animationInSpeed: 200, // Animation in speed (ms)
-                animationOutSpeed: 200, // Animation out speed (ms)
-                scrollText: '', // Text for element
-                activeOverlay: false  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-            });
-            //消息插件
-            Messenger.options = {
-                extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
-                theme: 'block'
-            };
-            var messenger;
-            var errormessenger;
-            $(document).ajaxStart(function (e) {
-                messenger = Messenger().post({
-                    message: '正在执行请求,请稍后...',
-                    type: 'info',
-                    showCloseButton: true
+                $.scrollUp({
+                    scrollName: 'scrollUp', // Element ID
+                    topDistance: '300', // Distance from top before showing element (px)
+                    topSpeed: 300, // Speed back to top (ms)
+                    animation: 'fade', // Fade, slide, none
+                    animationInSpeed: 200, // Animation in speed (ms)
+                    animationOutSpeed: 200, // Animation out speed (ms)
+                    scrollText: '', // Text for element
+                    activeOverlay: false  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
                 });
-            }).ajaxComplete(function (e) {
-                messenger.hide();
-            }).ajaxSuccess(function (e) {
-                messenger.update("已完成请求,正在加载...");
-            }).ajaxError(function (event, xhr, options, exc) {
-                var msg = "服务器未响应!";
-                if ($.trim(exc) == 'Unauthorized') msg = "没有权限访问或没有登录!";
-                if ($.trim(exc) == 'Not Found') msg = "访问内容找不到了!";
-                if ($.trim(exc) == 'Server Error') msg = "服务异常!";
-                if ($.trim(exc) == 'Forbidden') msg = "拒绝访问!";
-                errormessenger = Messenger().post({
-                    message: msg,
-                    type: 'error',
-                    showCloseButton: true
+                //消息插件
+                Messenger.options = {
+                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+                    theme: 'block'
+                };
+                var messenger;
+                var errormessenger;
+                $(document).ajaxStart(function (e) {
+                    messenger = Messenger().post({
+                        message: '正在执行请求,请稍后...',
+                        type: 'info',
+                        showCloseButton: true
+                    });
+                }).ajaxComplete(function (e) {
+                    messenger.hide();
+                }).ajaxSuccess(function (e) {
+                    messenger.update("已完成请求,正在加载...");
+                }).ajaxError(function (event, xhr, options, exc) {
+                    var msg = "服务器未响应!";
+                    if ($.trim(exc) == 'Unauthorized') msg = "没有权限访问或没有登录!";
+                    if ($.trim(exc) == 'Not Found') msg = "访问内容找不到了!";
+                    if ($.trim(exc) == 'Server Error') msg = "服务异常!";
+                    if ($.trim(exc) == 'Forbidden') msg = "拒绝访问!";
+                    errormessenger = Messenger().post({
+                        message: msg,
+                        type: 'error',
+                        showCloseButton: true
+                    });
                 });
-            });
-            //教程提示
-            var tour = new Tour({
+                //教程提示
+                var tour = new Tour({
 //            onStart: function() {
 //                return $demo.addClass("disabled", true);
 //            },
 //            onEnd: function() {
 //                return $demo.removeClass("disabled", true);
 //            },
-                debug: false,
-                template: "<div class='popover tour' style='max-width: 400px;'><div class='arrow'>" +
-                        "</div><h3 class='popover-title'></h3><div class='popover-content'></div>" +
-                        "<div class='popover-navigation' style='min-width: 260px;'><button class='btn btn-primary btn-sm' data-role='prev'>上一步</button>" +
-                        "<span data-role='separator'>&nbsp;&nbsp;&nbsp;&nbsp;</span>" +
-                        "<button class='btn btn-primary btn-sm' data-role='next'>下一步</button>" +
-                        "<button class='btn btn-info btn-sm' data-role='end'>退出</button></div></div>",
-                steps: [
-                    {
-                        path: "",
-                        element: "#menubtn",
-                        placement: "bottom",
-                        title: "欢迎来到Dreampie",
-                        content: "点击该按钮访问菜单.",
-                        backdrop: false,
-                        reflex: true
-                    },
-                    {
-                        path: "",
-                        element: "#userbtn",
-                        placement: "bottom",
-                        title: "欢迎来到Dreampie",
-                        content: "点击该按钮可以访问用户信息.",
-                        backdrop: false,
-                        reflex: true
-                    }
-                ]
-            }).init().start();
-
+                    debug: false,
+                    template: "<div class='popover tour' style='max-width: 400px;'><div class='arrow'>" +
+                            "</div><h3 class='popover-title'></h3><div class='popover-content'></div>" +
+                            "<div class='popover-navigation' style='min-width: 260px;'><button class='btn btn-primary btn-sm' data-role='prev'>上一步</button>" +
+                            "<span data-role='separator'>&nbsp;&nbsp;&nbsp;&nbsp;</span>" +
+                            "<button class='btn btn-primary btn-sm' data-role='next'>下一步</button>" +
+                            "<button class='btn btn-info btn-sm' data-role='end'>退出</button></div></div>",
+                    steps: [
+                        {
+                            path: "",
+                            element: "#menubtn",
+                            placement: "bottom",
+                            title: "欢迎来到Dreampie",
+                            content: "点击该按钮访问菜单.",
+                            backdrop: false,
+                            reflex: true
+                        },
+                        {
+                            path: "",
+                            element: "#userbtn",
+                            placement: "bottom",
+                            title: "欢迎来到Dreampie",
+                            content: "点击该按钮可以访问用户信息.",
+                            backdrop: false,
+                            reflex: true
+                        }
+                    ]
+                }).init().start();
+            });
         });
     });
 </script>
