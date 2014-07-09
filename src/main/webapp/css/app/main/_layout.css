@@ -205,7 +205,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     right: 20px;
     height: 38px;
     width: 38px;
-    background: url("../../../image/layout/top.png") no-repeat
+    background: url("../../../image/app/main/top.png") no-repeat
 }
 
 .dropdown-menu .divider {

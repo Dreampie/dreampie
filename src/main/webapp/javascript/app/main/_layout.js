@@ -1,77 +1,75 @@
-//var _layoutlibs = ["jquery", "jquery.query", "jquery.scrollUp", "jquery.unveil", "jquery.ba-resize", "mmenu", "bootstrap", "bootstrap-messager", "bootstrap-maxlength", "bootstrap-tour", "ie8-responsive-file-warning"];
-//require(_layoutlibs);
-//define(_layoutlibs, function () {
-    //the jquery.js
-    $(function () {
-        //下拉菜单回显数据
-        $(".dropdown-menu li.checked").each(function () {
-            $(this).parents(".btn-group").find('span.selection').text($(this).text());
-            $(this).parents(".btn-group").find('input.selection').val($(this).find("a").attr("value"));
-        });
-
-        $(".dropdown-menu li a").click(function () {
-            $(this).parents(".btn-group").find('span.selection').text($(this).text());
-            $(this).parents(".btn-group").find('input.selection').val($(this).attr("value"));
-        });
-        //长度限制
-        if ($("form input[type!='button'][type!='submit']").length > 0) {
-            $("form input[type!='button'][type!='submit']").maxlength({
-                alwaysShow: true
-            });
-        }
-        if ($("form textarea").length > 0) {
-            $("form textarea").maxlength({
-                alwaysShow: true
-            });
-        }
-        //时间控件
-        if ($('.form_datetime').length > 0) {
-            $('.form_datetime').datetimepicker({
-                language: 'zh-CN',
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                showMeridian: 1
-            });
-        }
-        //验证码
-        if ($("img.captcha").length > 0) {
-            $("img.captcha").click(function () {
-                var img = $(this);
-                var query = $.query().load(img.attr("src"));
-                img.attr("src", query.set("time", new Date().getTime()));
-            });
-        }
-        if ($("input[name='captcha']").length > 0) {
-            $("input[name='captcha']").focus(function () {
-                var now = new Date().getTime();
-                var img = $("img.captcha");
-                var query = $.query().load(img.attr("src"));
-                var before = Number(query.get("time"));
-                before = before <= 0 ? now : before;
-                if (now - before > 300000) {
-                    $("img.captcha").click();
-                }
-            });
-        }
-
-        //输入金额
-        if ($('input.checkMoney').length > 0) {
-            $("input.checkMoney").each(function () {
-                onlyMoney($(this));
-            });
-        }
-
-        //输入数字
-        if ($('input.checkNum').length > 0) {
-            $("input.checkNum").each(function () {
-                onlyNum($(this));
-            });
-        }
+//require(['app'], function () {
+//the jquery.js
+$(function () {
+    //下拉菜单回显数据
+    $(".dropdown-menu li.checked").each(function () {
+        $(this).parents(".btn-group").find('span.selection').text($(this).text());
+        $(this).parents(".btn-group").find('input.selection').val($(this).find("a").attr("value"));
     });
+
+    $(".dropdown-menu li a").click(function () {
+        $(this).parents(".btn-group").find('span.selection').text($(this).text());
+        $(this).parents(".btn-group").find('input.selection').val($(this).attr("value"));
+    });
+    //长度限制
+    if ($("form input[type!='button'][type!='submit']").length > 0) {
+        $("form input[type!='button'][type!='submit']").maxlength({
+            alwaysShow: true
+        });
+    }
+    if ($("form textarea").length > 0) {
+        $("form textarea").maxlength({
+            alwaysShow: true
+        });
+    }
+    //时间控件
+    if ($('.form_datetime').length > 0) {
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+    }
+    //验证码
+    if ($("img.captcha").length > 0) {
+        $("img.captcha").click(function () {
+            var img = $(this);
+            var query = $.query().load(img.attr("src"));
+            img.attr("src", query.set("time", new Date().getTime()));
+        });
+    }
+    if ($("input[name='captcha']").length > 0) {
+        $("input[name='captcha']").focus(function () {
+            var now = new Date().getTime();
+            var img = $("img.captcha");
+            var query = $.query().load(img.attr("src"));
+            var before = Number(query.get("time"));
+            before = before <= 0 ? now : before;
+            if (now - before > 300000) {
+                $("img.captcha").click();
+            }
+        });
+    }
+
+    //输入金额
+    if ($('input.checkMoney').length > 0) {
+        $("input.checkMoney").each(function () {
+            onlyMoney($(this));
+        });
+    }
+
+    //输入数字
+    if ($('input.checkNum').length > 0) {
+        $("input.checkNum").each(function () {
+            onlyNum($(this));
+        });
+    }
+});
 //});
 
 
