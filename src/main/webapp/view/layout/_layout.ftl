@@ -32,7 +32,7 @@
     <!--滑动布局-->
     <link rel="stylesheet" type="text/css" href="<@resource.static/>/javascript/lib/mmenu/css/jquery.mmenu.all.css"/>
     <!--自定义样式-->
-    <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/app/main/_layout.css"/>
+    <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/app/_layout.css"/>
 
     <script src="<@resource.static/>/webjars/requirejs/2.1.14/require.min.js"></script>
 <#-- base href="${CPATH}" / -->

@@ -38,7 +38,7 @@
                         <div class="media thumbnail user">
                             <a class="pull-left" href="#">
                                 <#if !user.avatar_url?? || user.avatar_url==''>
-                                    <#assign avatar_url='/image/avatar.jpg'/>
+                                    <#assign avatar_url='/image/app/main/avatar.jpg'/>
                                 </#if>
                                 <img class="media-object lazy" style="width: 120px;"
                                      src="${avatar_url!user.avatar_url}"

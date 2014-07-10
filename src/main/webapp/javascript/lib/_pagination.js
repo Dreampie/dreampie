@@ -115,12 +115,16 @@ jQuery.fn.pagination = function (maxentries, opts) {
             }
             // Generate starting points
             if (interval[0] > 1 && opts.num_edge_entries > 0) {
-                var end = Math.min(opts.num_edge_entries, interval[0] == opts.num_edge_entries ? interval[0] - 1 : interval[0]);
+
+                var end = Math.min(opts.num_edge_entries, interval[0]);
+                if (opts.num_edge_entries == interval[0]) {
+                    end--;
+                }
                 for (var i = 1; i <= end; i++) {
                     appendItem(i);
                 }
                 if (opts.num_edge_entries + 1 < interval[0] && opts.ellipse_text) {
-                    jQuery("<li><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
+                    jQuery("<li class='disabled'><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
                 }
             }
             // Generate interval links
@@ -130,9 +134,12 @@ jQuery.fn.pagination = function (maxentries, opts) {
             // Generate ending points
             if (interval[1] < np && opts.num_edge_entries > 0) {
                 if (np - opts.num_edge_entries > interval[1] && opts.ellipse_text) {
-                    jQuery("<li><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
+                    jQuery("<li  class='disabled'><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
                 }
-                var begin = Math.max(np + 1 - opts.num_edge_entries, interval[1] == np + 1 - opts.num_edge_entries ? interval[1] + 1 : interval[1]);
+                var begin = Math.max(np + 1 - opts.num_edge_entries, interval[1]);
+                if (np + 1 - opts.num_edge_entries == interval[1]) {
+                    begin++;
+                }
                 for (var i = begin; i <= np; i++) {
                     appendItem(i);
                 }

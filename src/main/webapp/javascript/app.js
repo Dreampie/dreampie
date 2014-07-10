@@ -30,7 +30,18 @@ requirejs.config({
         'json3': 'webjars/json3/3.3.2/json3.min',
         'backbone': 'webjars/backbonejs/1.1.2/backbone-min',
         'underscore': 'webjars/underscorejs/1.6.0/underscore-min',
-        '_layout': 'javascript/app/main/_layout'
+        'backbone-localstorage': 'webjars/backbone-localstorage/1.1.0/backbone.localstorage-min',
+        'requirejs-text': 'webjars/requirejs-text/2.0.10/text',
+        '_pagination': 'javascript/lib/_pagination',
+        '_treenav': 'javascript/lib/_treenav',
+        '_valid': 'javascript/lib/_valid',
+        '_areaTag': 'javascript/lib/_areaTag',
+        '_layout': 'javascript/app/_layout',
+        '_main': 'javascript/app/_main',
+        '_main_views': 'javascript/app/view/_views',
+        'user_models': 'javascript/app/user/model/models',
+        'user_collections': 'javascript/app/user/collection/collections',
+        'user_views': 'javascript/app/user/view/views'
     },
     'shim': {
         'backbone': {
@@ -58,8 +69,17 @@ requirejs.config({
         'jquery-scrollUp': ['jquery'],
         'jquery-unveil': ['jquery'],
         'jquery-ba-resize': ['jquery'],
+        '_pagination': ['jquery'],
+        '_treenav': ['jquery'],
+        '_valid': ['jquery'],
+        '_areaTag': ['jquery'],
         '_layout': ['jquery', 'jquery-query', 'jquery-scrollUp', 'jquery-unveil', 'jquery-ba-resize', 'jquery-mmenu',
-            'bootstrap', 'bootstrap-messager', 'bootstrap-maxlength', 'bootstrap-tour', 'ie8-responsive-file-warning']
+            'bootstrap', 'bootstrap-messager', 'bootstrap-maxlength', 'bootstrap-tour', 'ie8-responsive-file-warning'],
+        '_main_views': '_main',
+        'user_models': '_main',
+        'user_collections': '_main',
+        'user_views': '_main',
+        '_main': ['jquery', 'backbone', 'underscore']
     }
 });
 

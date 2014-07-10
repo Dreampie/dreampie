@@ -96,7 +96,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     right: 0;
     bottom: 0;
     left: 0;
-    background: url(../../../image/app/main/bs-docs-masthead-pattern.png) repeat center center;
+    background: url(../../image/app/bs-docs-masthead-pattern.png) repeat center center;
     opacity: .4
 }
 
@@ -205,7 +205,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
     right: 20px;
     height: 38px;
     width: 38px;
-    background: url("../../../image/app/main/top.png") no-repeat
+    background: url("../../image/app/top.png") no-repeat
 }
 
 .dropdown-menu .divider {
