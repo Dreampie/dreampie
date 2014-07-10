@@ -9,8 +9,8 @@
         require(['../../javascript/app'], function () {
             require(['_layout', '_pagination'], function () {
                 $(function () {
-                    var pageOpt = {'link_to': "#", 'items_per_page': 10, 'prev_text': "<<", 'next_text': ">>", 'num_display_entries': 2, 'num_edge_entries': 2};
-                    $("#pagination").pagination(100, pageOpt);
+                    var pageOpt = {'link_to': "#", 'items_per_page': 10, 'prev_text': "<<", 'next_text': ">>", 'num_display_entries':2, 'num_edge_entries': 4};
+                    $("#pagination").pagination(200, pageOpt);
                 });
             });
         });

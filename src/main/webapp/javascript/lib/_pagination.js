@@ -11,9 +11,9 @@
 jQuery.fn.pagination = function (maxentries, opts) {
     opts = jQuery.extend({
         items_per_page: 10,
-        num_display_entries: 10,
+        num_display_entries: 10,//分隔符中间显分页数  不包含当前页  奇数向上取整
         current_page: 1,
-        num_edge_entries: 0,
+        num_edge_entries: 0,//起始点和结束点  显示分页数
         link_to: "#",
         prev_text: "Prev",
         next_text: "Next",
@@ -41,10 +41,10 @@ jQuery.fn.pagination = function (maxentries, opts) {
          */
         function getInterval() {
             var ne_half = Math.ceil(opts.num_display_entries / 2);
-            var np = numPages();
+            var np = numPages() + 1;
             var upper_limit = np - opts.num_display_entries;
-            var start = current_page > ne_half ? Math.max(Math.min(current_page - ne_half, upper_limit), 1) : 1;
-            var end = current_page > ne_half ? Math.min(current_page + ne_half, np) : Math.min(opts.num_display_entries, np);
+            var start = current_page > ne_half ? Math.max(Math.min((current_page - ne_half) < (np - opts.num_edge_entries) ? (current_page - ne_half) : (np - opts.num_edge_entries), upper_limit), 1) : 1;
+            var end = current_page > ne_half ? Math.min((current_page + 1 + ne_half) > (1 + opts.num_edge_entries) ? (current_page + 1 + ne_half) : (1 + opts.num_edge_entries), np) : Math.min(1 + opts.num_edge_entries, np);
             return [start, end];
         }
 
@@ -73,7 +73,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
         function drawLinks() {
             panel.empty();
             var interval = getInterval();
-            var np = numPages();
+            var np = numPages() + 1;
             // This helper function returns a handler function that calls pageSelected with the right page_id
             var getClickHandler = function (page_id) {
                 return function (evt) {
@@ -104,6 +104,12 @@ jQuery.fn.pagination = function (maxentries, opts) {
                 lir.append(lnk);
                 panel.append(lir);
             }
+            // Generate a range of numeric links
+            var appendRange = function (start, end, appendopts) {
+                for (var i = start; i < end; i++) {
+                    appendItem(i, appendopts);
+                }
+            }
             // Generate "Previous"-Link
             if (opts.prev_text && (current_page >= 1 || opts.prev_show_always)) {
 //				appendItem(current_page-1,{text:opts.prev_text, classes:"prev"});
@@ -114,36 +120,32 @@ jQuery.fn.pagination = function (maxentries, opts) {
                 }
             }
             // Generate starting points
-            if (interval[0] > 1 && opts.num_edge_entries > 0) {
+            if (interval[0] > 0 && opts.num_edge_entries > 0) {
 
-                var end = Math.min(opts.num_edge_entries, interval[0]);
-                if (opts.num_edge_entries == interval[0]) {
-                    end--;
-                }
-                for (var i = 1; i <= end; i++) {
-                    appendItem(i);
-                }
+                var end = Math.min(opts.num_edge_entries + 1, interval[0]);
+                appendRange(1, end);
+//                for (var i = 1; i < end; i++) {
+//                    appendItem(i);
+//                }
                 if (opts.num_edge_entries + 1 < interval[0] && opts.ellipse_text) {
                     jQuery("<li class='disabled'><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
                 }
             }
             // Generate interval links
-            for (var i = interval[0]; i <= interval[1]; i++) {
-                appendItem(i);
-            }
+//            for (var i = interval[0]; i <= interval[1]; i++) {
+//                appendItem(i);
+//            }
+            appendRange(interval[0], interval[1]);
             // Generate ending points
             if (interval[1] < np && opts.num_edge_entries > 0) {
                 if (np - opts.num_edge_entries > interval[1] && opts.ellipse_text) {
                     jQuery("<li  class='disabled'><a href='javascript:void(0);'>" + opts.ellipse_text + "</a></li>").appendTo(panel);
                 }
-                var begin = Math.max(np + 1 - opts.num_edge_entries, interval[1]);
-                if (np + 1 - opts.num_edge_entries == interval[1]) {
-                    begin++;
-                }
-                for (var i = begin; i <= np; i++) {
-                    appendItem(i);
-                }
-
+                var begin = Math.max(np - opts.num_edge_entries, interval[1]);
+//                for (var i = begin; i <= np; i++) {
+//                    appendItem(i);
+//                }
+                appendRange(begin, np);
             }
             // Generate "Next"-Link
             if (opts.next_text && (current_page <= np || opts.next_show_always)) {
