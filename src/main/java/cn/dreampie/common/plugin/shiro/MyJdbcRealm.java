@@ -6,7 +6,6 @@ import cn.dreampie.common.utils.ValidateUtils;
 import cn.dreampie.function.user.Permission;
 import cn.dreampie.function.user.Role;
 import cn.dreampie.function.user.User;
-import cn.dreampie.function.user.UserRole;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

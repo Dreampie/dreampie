@@ -86,9 +86,9 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
     /**
      * Execute the MOJO.
      *
-     * @throws cn.dreampie.common.plugin.coffeescript.compiler.CoffeeScriptException if something unexpected occurs.
+     * @throws cn.dreampie.common.plugin.coffeescript.compiler.CoffeeException if something unexpected occurs.
      */
-    public void execute() throws CoffeeScriptException {
+    public void execute() throws CoffeeException {
         if (logger.isDebugEnabled()) {
             logger.debug("sourceDirectory = " + sourceDirectory);
             logger.debug("outputDirectory = " + outputDirectory);
@@ -106,7 +106,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         }
     }
 
-    private void executeInternal() throws CoffeeScriptException {
+    private void executeInternal() throws CoffeeException {
         long start = System.currentTimeMillis();
 
         String[] files = getIncludedFiles();
@@ -142,7 +142,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         }
     }
 
-    private void compileIfChanged(String[] files, Object coffeeCompiler) throws CoffeeScriptException {
+    private void compileIfChanged(String[] files, Object coffeeCompiler) throws CoffeeException {
 
         for (String file : files) {
             File input = new File(sourceDirectory, file);
@@ -156,7 +156,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
             File output = new File(outputDirectory, file.replace(".less", ".css"));
 
             if (!output.getParentFile().exists() && !output.getParentFile().mkdirs()) {
-                throw new CoffeeScriptException("Cannot create output directory " + output.getParentFile());
+                throw new CoffeeException("Cannot create output directory " + output.getParentFile());
             }
 
             try {
@@ -174,30 +174,28 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
                 }
             } catch (IOException e) {
                 buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
-                throw new CoffeeScriptException("Error while compiling COFFEE source: " + file, e);
-            } catch (CoffeeScriptException e) {
+                throw new CoffeeException("Error while compiling COFFEE source: " + file, e);
+            } catch (CoffeeException e) {
                 String message = e.getMessage();
                 if (StringUtils.isEmpty(message)) {
                     message = "Error compiling COFFEE source";
                 }
                 buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
-                throw new CoffeeScriptException("Error while compiling COFFEE source: " + file, e);
+                throw new CoffeeException("Error while compiling COFFEE source: " + file, e);
             }
         }
 
     }
 
-    private Object initCoffeeCompiler() throws CoffeeScriptException {
+    private Object initCoffeeCompiler() throws CoffeeException {
 
         CoffeeCompiler coffeeCompiler = new CoffeeCompiler();
-        coffeeCompiler.setCompress(compress);
         coffeeCompiler.setEncoding(encoding);
         if (coffeeJs != null) {
             try {
                 coffeeCompiler.setCoffeeJs(coffeeJs.toURI().toURL());
             } catch (MalformedURLException e) {
-                throw new CoffeeScriptException(
-                        "Error while loading COFFEE JavaScript: " + coffeeJs.getAbsolutePath(), e);
+                throw new CoffeeException("Error while loading COFFEE JavaScript: " + coffeeJs.getAbsolutePath(), e);
             }
         }
         return coffeeCompiler;

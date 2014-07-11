@@ -1,5 +1,6 @@
 package cn.dreampie.common.plugin.lesscss;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
@@ -44,9 +45,14 @@ public class LessCssPlugin implements IPlugin {
         return false;
     }
 
-    public static void main(String[] args) throws LessException {
+    public static void main(String[] args) throws LessException, IOException {
         LessCompiler lessCompiler = new LessCompiler(Arrays.asList("--relative-urls", "--strict-math=on"));
         String css = lessCompiler.compile("@color: #4D926F; #header { color: @color; }");
+//        System.out.println(css);
+
+
+        lessCompiler = new LessCompiler(Arrays.asList("--relative-urls", "--strict-math=on"));
+        css = lessCompiler.compile(new File(PathKit.getWebRootPath()+"/src/main/webapp/css/app/main.less"));
         System.out.println(css);
     }
 }
