@@ -1,4 +1,4 @@
-package cn.dreampie.common.web.resource;
+package cn.dreampie.common.web.resource.freemarker;
 
 import freemarker.template.SimpleHash;
 

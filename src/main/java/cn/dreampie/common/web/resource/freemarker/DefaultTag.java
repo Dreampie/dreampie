@@ -1,4 +1,4 @@
-package cn.dreampie.common.web.resource;
+package cn.dreampie.common.web.resource.freemarker;
 
 import freemarker.core.Environment;
 import freemarker.template.*;

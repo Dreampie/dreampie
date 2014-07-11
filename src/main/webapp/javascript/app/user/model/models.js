@@ -2,6 +2,7 @@
  * Created by wangrenhui on 14-7-10.
  */
 App.Models.User = Backbone.Model.extend({
+    urlRoot: "/user",
     defaults: {
         name: ""
     },

@@ -1,0 +1,24 @@
+@import 'layout/_reset.less';
+@import 'layout/_mate.less';
+@import 'layout/_theme.less';
+
+// ----------------------- MAIN STYLES
+body {
+  background: @mainBackground;
+  color: @mainColor;
+  font: @defaultFont;
+  //  -webkit-font-smoothing: antialised;
+  //  -webkit-user-select: none;
+  margin-top: 60px;
+  line-height: @defaultLineHeight;
+}
+
+a {
+  color: @links;
+  text-decoration: none;
+  padding: 12px 0 12px 0;
+  float: @rightFloat;
+  &:hover {
+    color: @linksHover;
+  }
+}

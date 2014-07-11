@@ -2,17 +2,29 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link rel="stylesheet/less" type="text/css" href="../css/app/main.less">
     <script data-main="/javascript/app" src="/webjars/requirejs/2.1.14/require.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript">
+        require(['../javascript/app'], function () {
+            require(['_layout'], function () {
+                App.initialize();
+            });
+        });
+    </script>
+    <![endif]-->
     <title>Backbone</title>
     <script type="text/javascript">
         require(['../javascript/app'], function () {
-            require(['_main'], function () {
+            require(['_main', 'less'], function () {
                 App.initialize();
             });
         });
     </script>
 </head>
 <body>
+<a href="index.html">test</a>
 <script id="indexTemplate" type="text/template">
     <%= name %>
 </script>

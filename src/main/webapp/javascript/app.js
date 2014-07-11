@@ -33,6 +33,8 @@ requirejs.config({
         'backbone-localstorage': 'webjars/backbone-localstorage/1.1.0/backbone.localstorage-min',
         'requirejs-text': 'webjars/requirejs-text/2.0.10/text',
         'jquery-atmosphere': 'jquery/jquery.atmosphere-min',
+        'coffee-script': 'webjars/coffee-script/1.7.1/coffee-script.min',
+        'less': 'webjars/less/1.7.3/less.min',
         '_pagination': 'javascript/lib/_pagination',
         '_treenav': 'javascript/lib/_treenav',
         '_valid': 'javascript/lib/_valid',
