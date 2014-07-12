@@ -103,7 +103,11 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         }
 
         if (!skip) {
-            executeInternal();
+            new Thread(){
+                public void run(){
+                    executeInternal();
+                }
+            }.start();
         } else {
             logger.info("Skipping plugin execution per configuration");
         }

@@ -18,7 +18,7 @@ package cn.dreampie.common.plugin.coffeescript.compiler;
 
 import org.mozilla.javascript.JavaScriptException;
 
-public class CoffeeException extends Exception {
+public class CoffeeException extends RuntimeException {
 
     CoffeeException(JavaScriptException e) {
         super(e.getValue().toString(), e);

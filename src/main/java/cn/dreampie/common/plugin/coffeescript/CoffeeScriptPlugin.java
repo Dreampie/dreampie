@@ -27,7 +27,7 @@ public class CoffeeScriptPlugin implements IPlugin {
         coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
         coffeeScriptCompiler.setForce(true);
         coffeeScriptCompiler.setArgs("--bare");
-        coffeeScriptCompiler.setWatch(false);
+        coffeeScriptCompiler.setWatch(true);
         try {
             coffeeScriptCompiler.execute();
         } catch (CoffeeException e) {

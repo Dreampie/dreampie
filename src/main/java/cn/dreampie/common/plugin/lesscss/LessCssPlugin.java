@@ -29,7 +29,7 @@ public class LessCssPlugin implements IPlugin {
         lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
         lessCssCompiler.setForce(true);
         lessCssCompiler.setCompress(true);
-        lessCssCompiler.setWatch(false);
+        lessCssCompiler.setWatch(true);
         try {
             lessCssCompiler.execute();
         } catch (LessCssException e) {
