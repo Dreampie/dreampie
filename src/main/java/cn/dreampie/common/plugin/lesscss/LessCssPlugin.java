@@ -1,11 +1,14 @@
 package cn.dreampie.common.plugin.lesscss;
 
+import cn.dreampie.common.plugin.lesscss.compiler.LessCssCompiler;
+import cn.dreampie.common.plugin.lesscss.compiler.LessCssException;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.plexus.build.incremental.ThreadBuildContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,24 +23,19 @@ public class LessCssPlugin implements IPlugin {
 
     @Override
     public boolean start() {
-
-        // Instantiate the LESS compiler
-// LessCompiler lessCompiler = new LessCompiler();
-
-// Instantiate the LESS compiler with some compiler options
-        LessCompiler lessCompiler = new LessCompiler(Arrays.asList("--relative-urls", "--strict-math=on"));
-// Compile LESS input string to CSS output string
-//String css = lessCompiler.compile("@color: #4D926F; #header { color: @color; }");
-
-// Or compile LESS input file to CSS output file
+        LessCssCompiler lessCssCompiler = new LessCssCompiler();
+        lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
+        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
+        lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
+        lessCssCompiler.setForce(true);
+        lessCssCompiler.setCompress(true);
+        lessCssCompiler.setWatch(false);
         try {
-            lessCompiler.compile(new File("main.less"), new File("main.css"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LessException e) {
+            lessCssCompiler.execute();
+        } catch (LessCssException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -52,7 +50,16 @@ public class LessCssPlugin implements IPlugin {
 
 
         lessCompiler = new LessCompiler(Arrays.asList("--relative-urls", "--strict-math=on"));
-        css = lessCompiler.compile(new File(PathKit.getWebRootPath()+"/src/main/webapp/css/app/main.less"));
+        css = lessCompiler.compile(new File(PathKit.getWebRootPath() + "/src/main/webapp/css/app/main.less"));
         System.out.println(css);
+
+        LessCssCompiler lessCssCompiler = new LessCssCompiler();
+        lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
+        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/src/main/webapp/css/"));
+        lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
+        lessCssCompiler.setForce(true);
+        lessCssCompiler.setCompress(true);
+        lessCssCompiler.setWatch(true);
+        lessCssCompiler.execute();
     }
 }

@@ -402,9 +402,19 @@
             <version>1.7R4</version>
         </dependency>
         <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-container-default</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.sonatype.plexus</groupId>
             <artifactId>plexus-build-api</artifactId>
             <version>0.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>3.0.17</version>
         </dependency>
         <dependency>
             <groupId>org.lesscss</groupId>
@@ -412,9 +422,9 @@
             <version>1.7.0.1.1</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>com.google.code.maven-play-plugin.com.github.yeungda.jcoffeescript</groupId>-->
-            <!--<artifactId>jcoffeescript</artifactId>-->
-            <!--<version>1.0</version>-->
+        <!--<groupId>com.google.code.maven-play-plugin.com.github.yeungda.jcoffeescript</groupId>-->
+        <!--<artifactId>jcoffeescript</artifactId>-->
+        <!--<version>1.0</version>-->
         <!--</dependency>-->
 
         <!--webjars-->

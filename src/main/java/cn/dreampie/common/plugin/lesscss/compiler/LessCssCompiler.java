@@ -16,10 +16,10 @@ import java.util.Arrays;
 /**
  * Created by wangrenhui on 2014/7/11.
  */
-public class LessCssCompiler extends AbstractLessCss{
+public class LessCssCompiler extends AbstractLessCss {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     /**
      * The directory for compiled CSS stylesheets.
      *
@@ -40,14 +40,14 @@ public class LessCssCompiler extends AbstractLessCss{
      *
      * @parameter expression="${lesscss.watch}" default-value="false"
      */
-    protected boolean watch=false;
+    protected boolean watch = false;
 
     /**
      * When <code>true</code> the plugin will watch for changes in LESS files and compile if it detects one.
      *
      * @parameter expression="${lesscss.watchInterval}" default-value="1000"
      */
-    private int watchInterval=1000;
+    private int watchInterval = 1000;
 
     /**
      * The character encoding the LESS compiler will use for writing the CSS stylesheets.
@@ -89,8 +89,7 @@ public class LessCssCompiler extends AbstractLessCss{
     /**
      * Execute the MOJO.
      *
-     * @throws LessCssException
-     *             if something unexpected occurs.
+     * @throws LessCssException if something unexpected occurs.
      */
     public void execute() throws LessCssException {
         if (logger.isDebugEnabled()) {
@@ -103,7 +102,7 @@ public class LessCssCompiler extends AbstractLessCss{
             logger.debug("skip = " + skip);
         }
 
-        if(!skip){
+        if (!skip) {
             executeInternal();
         } else {
             logger.info("Skipping plugin execution per configuration");
@@ -123,14 +122,14 @@ public class LessCssCompiler extends AbstractLessCss{
             }
 
             Object lessCompiler = initLessCompiler();
-            if (watch){
-                logger.info("Watching "+sourceDirectory);
-                if (force){
-                    force=false;
+            if (watch) {
+                logger.info("Watching " + sourceDirectory);
+                if (force) {
+                    force = false;
                     logger.info("Disabled the 'force' flag in watch mode.");
                 }
                 Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-                while (watch && !Thread.currentThread().isInterrupted()){
+                while (watch && !Thread.currentThread().isInterrupted()) {
                     compileIfChanged(files, lessCompiler);
                     try {
                         Thread.sleep(watchInterval);
@@ -153,7 +152,7 @@ public class LessCssCompiler extends AbstractLessCss{
 
                 buildContext.removeMessages(input);
 
-                if(outputFileFormat != null){
+                if (outputFileFormat != null) {
                     file = outputFileFormat.replaceAll(FILE_NAME_FORMAT_PARAMETER_REGEX, file.replace(".less", ""));
                 }
 
@@ -174,9 +173,8 @@ public class LessCssCompiler extends AbstractLessCss{
                             ((NodeJsLessCssCompiler) lessCompiler).compile(lessSource, output, force);
                         }
                         buildContext.refresh(output);
-                        logger.info("Finished compilation to "+outputDirectory+" in " + (System.currentTimeMillis() - compilationStarted) + " ms");
-                    }
-                    else if (!watch) {
+                        logger.info("Finished compilation to " + outputDirectory + " in " + (System.currentTimeMillis() - compilationStarted) + " ms");
+                    } else if (!watch) {
                         logger.info("Bypassing LESS source: " + file + " (not modified)");
                     }
                 } catch (IOException e) {
@@ -228,5 +226,78 @@ public class LessCssCompiler extends AbstractLessCss{
             }
             return lessCompiler;
         }
+    }
+
+
+    public File getOutputDirectory() {
+        return outputDirectory;
+    }
+
+    public void setOutputDirectory(File outputDirectory) {
+        this.outputDirectory = outputDirectory;
+    }
+
+    public boolean isCompress() {
+        return compress;
+    }
+
+    public void setCompress(boolean compress) {
+        this.compress = compress;
+    }
+
+    public boolean isWatch() {
+        return watch;
+    }
+
+    public void setWatch(boolean watch) {
+        this.watch = watch;
+    }
+
+    public int getWatchInterval() {
+        return watchInterval;
+    }
+
+    public void setWatchInterval(int watchInterval) {
+        this.watchInterval = watchInterval;
+    }
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
+    }
+
+    public boolean isForce() {
+        return force;
+    }
+
+    public void setForce(boolean force) {
+        this.force = force;
+    }
+
+    public File getLessJs() {
+        return lessJs;
+    }
+
+    public void setLessJs(File lessJs) {
+        this.lessJs = lessJs;
+    }
+
+    public String getNodeExecutable() {
+        return nodeExecutable;
+    }
+
+    public void setNodeExecutable(String nodeExecutable) {
+        this.nodeExecutable = nodeExecutable;
+    }
+
+    public String getOutputFileFormat() {
+        return outputFileFormat;
+    }
+
+    public void setOutputFileFormat(String outputFileFormat) {
+        this.outputFileFormat = outputFileFormat;
     }
 }

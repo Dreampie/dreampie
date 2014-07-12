@@ -207,7 +207,7 @@ public class CoffeeCompiler {
      * @throws IOException If the COFFEE file cannot be read or the output file cannot be written.
      */
     public void compile(CoffeeSource input, File output, boolean force) throws IOException, CoffeeException {
-        if (force || !output.exists() || output.lastModified() < input.getLastModifiedIncludingImports()) {
+        if (force || (!output.exists() && output.createNewFile()) || output.lastModified() < input.getLastModifiedIncludingImports()) {
             String data = compile(input);
             FileUtils.writeStringToFile(output, data, encoding);
         }
@@ -247,12 +247,20 @@ public class CoffeeCompiler {
         }
     }
 
-    private List<Option> readOptionsFrom(String[] args) {
+    private List<Option> readOptionsFrom(String... args) {
         optionArgs = new LinkedList<Option>();
 
         if (args.length == 1 && args[0].equals("--bare")) {
             optionArgs.add(Option.BARE);
         }
         return optionArgs;
+    }
+
+    public List<Option> getOptionArgs() {
+        return optionArgs;
+    }
+
+    public void setOptionArgs(String... args) {
+        this.optionArgs = readOptionsFrom(args);
     }
 }

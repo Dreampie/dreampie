@@ -10,35 +10,37 @@ import java.io.File;
  */
 public class AbstractCoffeeScript {
 
-    /** @component */
+    /**
+     * @component
+     */
     protected BuildContext buildContext;
 
     /**
-     * The source directory containing the LESS sources.
+     * The source directory containing the COFFEE sources.
      *
-     * @parameter expression="${lesscss.sourceDirectory}" default-value="${project.basedir}/src/main/less"
+     * @parameter expression="${coffeescript.sourceDirectory}" default-value="${project.basedir}/src/main/coffee"
      * @required
      */
     protected File sourceDirectory;
 
     /**
-     * List of files to include. Specified as fileset patterns which are relative to the source directory. Default value is: { "**\/*.less" }
+     * List of files to include. Specified as fileset patterns which are relative to the source directory. Default value is: { "**\/*.coffee" }
      *
      * @parameter
      */
-    protected String[] includes = new String[] { "**/*.coffee" };
+    protected String[] includes = new String[]{"**/*.coffee"};
 
     /**
      * List of files to exclude. Specified as fileset patterns which are relative to the source directory.
      *
      * @parameter
      */
-    protected String[] excludes = new String[] {};
+    protected String[] excludes = new String[]{};
 
     /**
-     * Scans for the LESS sources that should be compiled.
+     * Scans for the COFFEE sources that should be compiled.
      *
-     * @return The list of LESS sources.
+     * @return The list of COFFEE sources.
      */
     protected String[] getIncludedFiles() {
         Scanner scanner = buildContext.newScanner(sourceDirectory, true);
@@ -52,7 +54,47 @@ public class AbstractCoffeeScript {
      * Whether to skip plugin execution.
      * This makes the build more controllable from profiles.
      *
-     * @parameter expression="${lesscss.skip}" default-value="false"
+     * @parameter expression="${coffeescript.skip}" default-value="false"
      */
     protected boolean skip;
+
+    public BuildContext getBuildContext() {
+        return buildContext;
+    }
+
+    public void setBuildContext(BuildContext buildContext) {
+        this.buildContext = buildContext;
+    }
+
+    public File getSourceDirectory() {
+        return sourceDirectory;
+    }
+
+    public void setSourceDirectory(File sourceDirectory) {
+        this.sourceDirectory = sourceDirectory;
+    }
+
+    public String[] getIncludes() {
+        return includes;
+    }
+
+    public void setIncludes(String[] includes) {
+        this.includes = includes;
+    }
+
+    public String[] getExcludes() {
+        return excludes;
+    }
+
+    public void setExcludes(String[] excludes) {
+        this.excludes = excludes;
+    }
+
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
 }

@@ -1,1 +1,1 @@
-alert "Hello CoffeeScript!"
+alert "Hello CoffeeScript! it's ok."

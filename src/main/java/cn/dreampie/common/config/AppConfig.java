@@ -2,7 +2,9 @@ package cn.dreampie.common.config;
 
 import cn.dreampie.common.log.Slf4jLogFactory;
 import cn.dreampie.common.plugin.akka.AkkaPlugin;
+import cn.dreampie.common.plugin.coffeescript.CoffeeScriptPlugin;
 import cn.dreampie.common.plugin.db.FlywayPlugin;
+import cn.dreampie.common.plugin.lesscss.LessCssPlugin;
 import cn.dreampie.common.plugin.mail.MailerPlugin;
 import cn.dreampie.common.plugin.shiro.MyJdbcAuthzService;
 import cn.dreampie.common.plugin.shiro.freemarker.ShiroTags;
@@ -117,6 +119,9 @@ public class AppConfig extends JFinalConfig {
         plugins.add(new MailerPlugin());
         //quartz
 //    plugins.add(new QuartzPlugin());
+        plugins.add(new CoffeeScriptPlugin());
+
+        plugins.add(new LessCssPlugin());
 
     }
 

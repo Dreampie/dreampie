@@ -2,10 +2,13 @@ package cn.dreampie.common.plugin.coffeescript;
 
 import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeCompiler;
 import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeException;
+import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeScriptCompiler;
+import cn.dreampie.common.plugin.coffeescript.compiler.Option;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.plexus.build.incremental.ThreadBuildContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,24 +21,19 @@ public class CoffeeScriptPlugin implements IPlugin {
 
     @Override
     public boolean start() {
-
-        // Instantiate the COFFEE compiler
-// CoffeeCompiler coffeeCompiler = new CoffeeCompiler();
-
-// Instantiate the COFFEE compiler with some compiler options
-        CoffeeCompiler coffeeCompiler = new CoffeeCompiler();
-// Compile COFFEE input string to CSS output string
-//String css = coffeeCompiler.compile("@color: #4D926F; #header { color: @color; }");
-
-// Or compile COFFEE input file to CSS output file
+        CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
+        coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
+        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
+        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
+        coffeeScriptCompiler.setForce(true);
+        coffeeScriptCompiler.setArgs("--bare");
+        coffeeScriptCompiler.setWatch(false);
         try {
-            coffeeCompiler.compile(new File("main.less"), new File("main.css"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            coffeeScriptCompiler.execute();
         } catch (CoffeeException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -49,7 +47,16 @@ public class CoffeeScriptPlugin implements IPlugin {
 //        System.out.println(js);
 
         coffeeCompiler = new CoffeeCompiler();
-        js = coffeeCompiler.compile(new File(PathKit.getWebRootPath()+"/src/main/webapp/javascript/app/main.coffee"));
-        System.out.println(js);
+        js = coffeeCompiler.compile(new File(PathKit.getWebRootPath() + "/src/main/webapp/javascript/app/main.coffee"));
+//        System.out.println(js);
+
+        CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
+        coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
+        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/src/main/webapp/javascript/"));
+        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
+        coffeeScriptCompiler.setForce(true);
+        coffeeScriptCompiler.setArgs("--bare");
+        coffeeScriptCompiler.setWatch(true);
+        coffeeScriptCompiler.execute();
     }
 }
