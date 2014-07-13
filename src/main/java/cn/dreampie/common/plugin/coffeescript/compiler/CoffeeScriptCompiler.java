@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by wangrenhui on 2014/7/11.
@@ -86,6 +84,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
     private static final String FILE_NAME_FORMAT_PARAMETER_REGEX = "\\{fileName\\}";
 
     private String[] args;
+
     /**
      * Execute the MOJO.
      *
@@ -103,8 +102,8 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         }
 
         if (!skip) {
-            new Thread(){
-                public void run(){
+            new Thread() {
+                public void run() {
                     executeInternal();
                 }
             }.start();
@@ -138,7 +137,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
                     try {
                         Thread.sleep(watchInterval);
                     } catch (InterruptedException e) {
-                        System.out.println("interrupted");
+                        logger.error("interrupted");
                     }
                 }
             } else {
@@ -180,14 +179,14 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
                     logger.info("Bypassing COFFEE source: " + file + " (not modified)");
                 }
             } catch (IOException e) {
-                buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
+//                buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
                 throw new CoffeeException("Error while compiling COFFEE source: " + file, e);
             } catch (CoffeeException e) {
                 String message = e.getMessage();
                 if (StringUtils.isEmpty(message)) {
                     message = "Error compiling COFFEE source";
                 }
-                buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
+//                buildContext.addMessage(input, 0, 0, "Error compiling COFFEE source", BuildContext.SEVERITY_ERROR, e);
                 throw new CoffeeException("Error while compiling COFFEE source: " + file, e);
             }
         }
@@ -282,7 +281,7 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         this.outputFileFormat = outputFileFormat;
     }
 
-    public void setArgs(String...args) {
+    public void setArgs(String... args) {
         this.args = args;
     }
 }

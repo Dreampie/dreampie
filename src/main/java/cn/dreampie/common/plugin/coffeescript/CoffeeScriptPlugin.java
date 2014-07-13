@@ -3,13 +3,11 @@ package cn.dreampie.common.plugin.coffeescript;
 import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeCompiler;
 import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeException;
 import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeScriptCompiler;
-import cn.dreampie.common.plugin.coffeescript.compiler.Option;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.plexus.build.incremental.ThreadBuildContext;
-import org.webjars.WebJarAssetLocator;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,13 +24,11 @@ public class CoffeeScriptPlugin implements IPlugin {
         coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
         coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
         coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
-        coffeeScriptCompiler.setForce(true);
+//        coffeeScriptCompiler.setForce(true);
+//        coffeeScriptCompiler.setCompress(true);
+        coffeeScriptCompiler.setCoffeeJs(new File(PathKit.getRootClassPath() + "/libs/coffee-script-1.7.1.min.js"));
         coffeeScriptCompiler.setArgs("--bare");
         coffeeScriptCompiler.setWatch(true);
-        WebJarAssetLocator locator = new WebJarAssetLocator();
-        String fullPathToCoffeejs = locator.getFullPath("coffee-script.min.js");
-        logger.info("coffee parent:" + fullPathToCoffeejs);
-        coffeeScriptCompiler.setCoffeeJs(new File(fullPathToCoffeejs));
         try {
             coffeeScriptCompiler.execute();
         } catch (CoffeeException e) {

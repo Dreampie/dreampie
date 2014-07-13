@@ -122,7 +122,7 @@ public class ClassSearcherExt {
 
     private List<String> includeJars = Lists.newArrayList();
 
-    private String libDir = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
+    private String libDir = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "libs";
 
     private Class target;
 

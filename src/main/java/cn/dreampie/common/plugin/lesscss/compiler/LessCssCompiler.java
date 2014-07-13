@@ -138,7 +138,7 @@ public class LessCssCompiler extends AbstractLessCss {
                     try {
                         Thread.sleep(watchInterval);
                     } catch (InterruptedException e) {
-                        System.out.println("interrupted");
+                        logger.error("interrupted");
                     }
                 }
             } else {
@@ -182,17 +182,17 @@ public class LessCssCompiler extends AbstractLessCss {
                         logger.info("Bypassing LESS source: " + file + " (not modified)");
                     }
                 } catch (IOException e) {
-                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
+//                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
                     throw new LessCssException("Error while compiling LESS source: " + file, e);
                 } catch (LessException e) {
                     String message = e.getMessage();
                     if (StringUtils.isEmpty(message)) {
                         message = "Error compiling LESS source";
                     }
-                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
+//                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
                     throw new LessCssException("Error while compiling LESS source: " + file, e);
                 } catch (InterruptedException e) {
-                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
+//                    buildContext.addMessage(input, 0, 0, "Error compiling LESS source", BuildContext.SEVERITY_ERROR, e);
                     throw new LessCssException("Error while compiling LESS source: " + file, e);
                 }
             }

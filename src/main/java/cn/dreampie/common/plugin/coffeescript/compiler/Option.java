@@ -17,5 +17,5 @@
 package cn.dreampie.common.plugin.coffeescript.compiler;
 
 public enum Option {
-    BARE
+    BARE, COMPRESS
 }

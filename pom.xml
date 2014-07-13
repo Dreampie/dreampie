@@ -421,6 +421,12 @@
             <artifactId>lesscss</artifactId>
             <version>1.7.0.1.1</version>
         </dependency>
+        <!--ui compress-->
+        <!--<dependency>-->
+        <!--<groupId>com.yahoo.platform.yui</groupId>-->
+        <!--<artifactId>yuicompressor</artifactId>-->
+        <!--<version>2.4.7</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>com.google.code.maven-play-plugin.com.github.yeungda.jcoffeescript</groupId>-->
         <!--<artifactId>jcoffeescript</artifactId>-->

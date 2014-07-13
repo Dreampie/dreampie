@@ -28,12 +28,8 @@ public class LessCssPlugin implements IPlugin {
         lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
         lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
         lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
-        lessCssCompiler.setForce(true);
-        lessCssCompiler.setCompress(true);
-        WebJarAssetLocator locator = new WebJarAssetLocator();
-        String fullPathToLessjs = locator.getFullPath("less.min.js");
-        logger.info("less parent:" + fullPathToLessjs);
-        lessCssCompiler.setLessJs(new File(fullPathToLessjs));
+//        lessCssCompiler.setForce(true);
+//        lessCssCompiler.setCompress(true);
         lessCssCompiler.setWatch(true);
         try {
             lessCssCompiler.execute();

@@ -32,9 +32,10 @@ import java.util.List;
 public class CoffeeCompiler {
     private static Logger logger = LoggerFactory.getLogger(CoffeeCompiler.class);
 
-    private URL coffeeJs = CoffeeCompiler.class.getClassLoader().getResource("META-INF/coffee-script.min.js");
+    private URL coffeeJs = CoffeeCompiler.class.getClassLoader().getResource("/libs/coffee-script-1.7.1.min.js");
     private List<Option> optionArgs = Collections.emptyList();
     private String encoding = null;
+    private Boolean compress = null;
 
     private Scriptable globalScope;
     private Options options;
@@ -64,6 +65,26 @@ public class CoffeeCompiler {
      */
     public synchronized void setCoffeeJs(URL coffeeJs) {
         this.coffeeJs = coffeeJs;
+    }
+
+    /**
+     * Returns whether the compiler will compress the CSS.
+     *
+     * @return Whether the compiler will compress the CSS.
+     */
+    public boolean isCompress() {
+        return (compress != null && compress.booleanValue()) ||
+                optionArgs.contains(Option.COMPRESS);
+    }
+
+    /**
+     * Sets the compiler to compress the CSS.
+     * Must be set before {@link #init()} is called.
+     *
+     * @param compress If <code>true</code>, sets the compiler to compress the CSS.
+     */
+    public synchronized void setCompress(boolean compress) {
+        this.compress = compress;
     }
 
     /**
@@ -135,6 +156,7 @@ public class CoffeeCompiler {
             compileScope.setParentScope(globalScope);
             compileScope.put("coffeeScriptSource", compileScope, coffeeScriptSource);
             try {
+
                 return (String) context.evaluateString(compileScope, String.format("CoffeeScript.compile(coffeeScriptSource, %s);", options.toJavaScript()),
                         name, 0, null);
             } catch (JavaScriptException e) {
