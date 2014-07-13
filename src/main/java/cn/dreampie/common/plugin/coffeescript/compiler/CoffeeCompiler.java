@@ -32,7 +32,7 @@ import java.util.List;
 public class CoffeeCompiler {
     private static Logger logger = LoggerFactory.getLogger(CoffeeCompiler.class);
 
-    private URL coffeeJs = CoffeeCompiler.class.getClassLoader().getResource("coffee-script-1.7.1.min.js");
+    private URL coffeeJs = CoffeeCompiler.class.getClassLoader().getResource("META-INF/coffee-script.min.js");
     private List<Option> optionArgs = Collections.emptyList();
     private String encoding = null;
 

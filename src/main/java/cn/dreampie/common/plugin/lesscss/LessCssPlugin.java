@@ -9,6 +9,7 @@ import org.lesscss.LessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.plexus.build.incremental.ThreadBuildContext;
+import org.webjars.WebJarAssetLocator;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +30,10 @@ public class LessCssPlugin implements IPlugin {
         lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
         lessCssCompiler.setForce(true);
         lessCssCompiler.setCompress(true);
+        WebJarAssetLocator locator = new WebJarAssetLocator();
+        String fullPathToLessjs = locator.getFullPath("less.min.js");
+        logger.info("less parent:" + fullPathToLessjs);
+        lessCssCompiler.setLessJs(new File(fullPathToLessjs));
         lessCssCompiler.setWatch(true);
         try {
             lessCssCompiler.execute();

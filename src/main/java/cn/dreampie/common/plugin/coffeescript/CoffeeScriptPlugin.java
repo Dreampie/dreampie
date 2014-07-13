@@ -9,6 +9,7 @@ import com.jfinal.plugin.IPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.plexus.build.incremental.ThreadBuildContext;
+import org.webjars.WebJarAssetLocator;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,10 @@ public class CoffeeScriptPlugin implements IPlugin {
         coffeeScriptCompiler.setForce(true);
         coffeeScriptCompiler.setArgs("--bare");
         coffeeScriptCompiler.setWatch(true);
+        WebJarAssetLocator locator = new WebJarAssetLocator();
+        String fullPathToCoffeejs = locator.getFullPath("coffee-script.min.js");
+        logger.info("coffee parent:" + fullPathToCoffeejs);
+        coffeeScriptCompiler.setCoffeeJs(new File(fullPathToCoffeejs));
         try {
             coffeeScriptCompiler.execute();
         } catch (CoffeeException e) {
