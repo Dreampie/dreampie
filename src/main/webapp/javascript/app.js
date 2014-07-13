@@ -22,7 +22,7 @@ requirejs.config({
         'bootstrap-tour': 'javascript/lib/bootstrap/js/bootstrap-tour.min',
         'bootstrapx-clickover': 'javascript/lib/bootstrap/js/bootstrap-clickover.min',
         'ie8-responsive-file-warning': 'javascript/lib/ie8-responsive-file-warning',
-        'jquery-mmenu': 'javascript/lib/mmenu/js/jquery.mmenu.min',
+        'jquery-mmenu': 'javascript/lib/mmenu/js/jquery.mmenu.min.all',
         'jquery-hammer': 'javascript/lib/mmenu/js/jquery.hammer.min',
         'summernote': 'javascript/lib/summernote/js/summernote.min',
         'summernote-zh-CN': 'javascript/lib/summernote/lang/summernote-zh-CN',

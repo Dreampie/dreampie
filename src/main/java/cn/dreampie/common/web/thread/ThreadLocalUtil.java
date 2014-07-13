@@ -77,8 +77,8 @@ public class ThreadLocalUtil {
 
     public static boolean isAjax() {
         HttpServletRequest request = getRequest();
-        String header = request.getHeader("X-Requested-With");
-        if (request != null && ("XMLHttpRequest").equalsIgnoreCase(header)) {
+        
+        if (request != null && ("XMLHttpRequest").equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
             return true;
         }
         return false;
