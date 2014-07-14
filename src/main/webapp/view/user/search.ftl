@@ -1,8 +1,6 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_pagination.ftl" />
 <@layout activebar="search" html_title=i18n.getText("app.search")>
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="row">
     <div class="col-md-4 searchline">
         <form id="user_search" class="searchbar " role="form" action="/user/search" method="get" data-view="searchbar"
@@ -38,7 +36,7 @@
                         <div class="media thumbnail user">
                             <a class="pull-left" href="#">
                                 <#if !user.avatar_url?? || user.avatar_url==''>
-                                    <#assign avatar_url='/image/app/main/avatar.jpg'/>
+                                    <#assign avatar_url='/image/app/avatar.jpg'/>
                                 </#if>
                                 <img class="media-object lazy" style="width: 120px;"
                                      src="${avatar_url!user.avatar_url}"
@@ -113,21 +111,23 @@
 <#include "/view/user/_del_following_modal.ftl" />
 
 <script type="text/javascript">
-    $(function () {
-        $("div.user button").click(function () {
-            var opbtn = $(this);
-            var add_following = "#add_following";
-            var del_following = "#del_following";
-            //装配数据
-            $("div.modal div[name='username']").text(opbtn.attr("username"));
-            if (opbtn.attr("data-target") == add_following) {
-                $(add_following + " input[name='follower.link_id']").val(opbtn.attr("linkid"));
-            } else if (opbtn.attr("data-target") == del_following) {
-                $(del_following + " input[name='follower.id']").val(opbtn.attr("followerid"));
-            }
+    require(['../../javascript/app'], function () {
+        require(['jquery'], function () {
+            $(function () {
+                $("div.user button").click(function () {
+                    var opbtn = $(this);
+                    var add_following = "#add_following";
+                    var del_following = "#del_following";
+                    //装配数据
+                    $("div.modal div[name='username']").text(opbtn.attr("username"));
+                    if (opbtn.attr("data-target") == add_following) {
+                        $(add_following + " input[name='follower.link_id']").val(opbtn.attr("linkid"));
+                    } else if (opbtn.attr("data-target") == del_following) {
+                        $(del_following + " input[name='follower.id']").val(opbtn.attr("followerid"));
+                    }
 
+                });
+            });
         });
-
-
     });
 </script>

@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class CoffeeScriptCompiler extends AbstractCoffeeScript {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-
+    private CoffeeCompiler coffeeCompiler;
     /**
      * The directory for compiled CSS stylesheets.
      *
@@ -104,7 +104,24 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         if (!skip) {
             new Thread() {
                 public void run() {
-                    executeInternal();
+                    if (watch) {
+                        logger.info("Watching " + sourceDirectory);
+                        if (force) {
+                            force = false;
+                            logger.info("Disabled the 'force' flag in watch mode.");
+                        }
+                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+                        while (watch && !Thread.currentThread().isInterrupted()) {
+                            executeInternal();
+                            try {
+                                Thread.sleep(watchInterval);
+                            } catch (InterruptedException e) {
+                                logger.error("interrupted");
+                            }
+                        }
+                    } else {
+                        executeInternal();
+                    }
                 }
             }.start();
         } else {
@@ -125,26 +142,26 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
             }
 
             Object coffeeCompiler = initCoffeeCompiler();
-            if (watch) {
-                logger.info("Watching " + sourceDirectory);
-                if (force) {
-                    force = false;
-                    logger.info("Disabled the 'force' flag in watch mode.");
-                }
-                Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-                while (watch && !Thread.currentThread().isInterrupted()) {
-                    compileIfChanged(files, coffeeCompiler);
-                    try {
-                        Thread.sleep(watchInterval);
-                    } catch (InterruptedException e) {
-                        logger.error("interrupted");
-                    }
-                }
-            } else {
-                compileIfChanged(files, coffeeCompiler);
-            }
+//            if (watch) {
+//                logger.info("Watching " + sourceDirectory);
+//                if (force) {
+//                    force = false;
+//                    logger.info("Disabled the 'force' flag in watch mode.");
+//                }
+//                Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+//                while (watch && !Thread.currentThread().isInterrupted()) {
+//                    compileIfChanged(files, coffeeCompiler);
+//                    try {
+//                        Thread.sleep(watchInterval);
+//                    } catch (InterruptedException e) {
+//                        logger.error("interrupted");
+//                    }
+//                }
+//            } else {
+            compileIfChanged(files, coffeeCompiler);
+//            }
 
-            logger.info("Complete Coffee compile job finished in " + (System.currentTimeMillis() - start) + " ms");
+//            logger.info("Complete Coffee compile job finished in " + (System.currentTimeMillis() - start) + " ms");
         }
     }
 
@@ -195,15 +212,18 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
 
     private Object initCoffeeCompiler() throws CoffeeException {
 
-        CoffeeCompiler coffeeCompiler = new CoffeeCompiler();
-        coffeeCompiler.setEncoding(encoding);
-        coffeeCompiler.setOptionArgs(this.args);
-        if (coffeeJs != null) {
-            try {
-                coffeeCompiler.setCoffeeJs(coffeeJs.toURI().toURL());
-            } catch (MalformedURLException e) {
-                throw new CoffeeException("Error while loading COFFEE JavaScript: " + coffeeJs.getAbsolutePath(), e);
+        if (coffeeCompiler == null) {
+            CoffeeCompiler newCoffeeCompiler = new CoffeeCompiler();
+            newCoffeeCompiler.setEncoding(encoding);
+            newCoffeeCompiler.setOptionArgs(this.args);
+            if (coffeeJs != null) {
+                try {
+                    newCoffeeCompiler.setCoffeeJs(coffeeJs.toURI().toURL());
+                } catch (MalformedURLException e) {
+                    throw new CoffeeException("Error while loading COFFEE JavaScript: " + coffeeJs.getAbsolutePath(), e);
+                }
             }
+            coffeeCompiler = newCoffeeCompiler;
         }
         return coffeeCompiler;
 

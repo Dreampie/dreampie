@@ -1,6 +1,6 @@
-
 <!-- Modal -->
-<div class="modal fade" id="upd_intro" tabindex="-1" role="dialog" aria-labelledby="upd_introModalLabel" aria-hidden="true">
+<div class="modal fade" id="upd_intro" tabindex="-1" role="dialog" aria-labelledby="upd_introModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,50 +39,50 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    $(function () {
+    require(['../../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
+                //修改备注
+                var upd_introbtn = $("#upd_intro.modal button.upd_intro");
+                upd_introbtn.click(function () {
+                    var btn = $(this);
+                    var form = $("#upd_intro.modal form");
+                    //表单验证
+                    var upd_introvalid = $.valid('#upd_intro.modal form', {
+                        wrapper: "div.form-group",
+                        rules: {
+                            "follower.id": [
+                                {regex: /^\d+$/}
+                            ], "follower.intro": [
+                                {regex: /^[\s\S]{3,240}$/}
+                            ]},
+                        messages: {
+                            "follower.id": {'regex': '联系人参数异常'},
+                            "follower.intro": {'regex': '备注长度为3-240个字符'}
+                        }, boxer: {exist: true}});
 
-
-
-        //修改备注
-        var upd_introbtn = $("#upd_intro.modal button.upd_intro");
-        upd_introbtn.click(function () {
-            var btn = $(this);
-            var form = $("#upd_intro.modal form");
-            //表单验证
-            var upd_introvalid = $.valid('#upd_intro.modal form', {
-                wrapper: "div.form-group",
-                rules: {
-                    "follower.id": [
-                        {regex: /^\d+$/}
-                    ], "follower.intro": [
-                        {regex: /^[\s\S]{3,240}$/}
-                    ]},
-                messages: {
-                    "follower.id": {'regex': '联系人参数异常'},
-                    "follower.intro": {'regex': '备注长度为3-240个字符'}
-                }, boxer: {exist: true}});
-
-            if (upd_introvalid.validate()) {
-                btn.button('loading');
-                $.post("/user/updateIntro", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
+                    if (upd_introvalid.validate()) {
+                        btn.button('loading');
+                        $.post("/user/updateIntro", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.idMsg);
+                                errors = checkError(errors, data.introMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json").error(function () {
                             btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.idMsg);
-                        errors = checkError(errors, data.introMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
+                        });
                     }
-                }, "json").error(function () {
-                    btn.button('reset');
                 });
-            }
+            });
         });
-
-    })
+    });
 </script>

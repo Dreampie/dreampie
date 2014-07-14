@@ -1,12 +1,11 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tologin" html_title=i18n.getText("login.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/app/login.css"/>
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input name="username" value="<@shiro.loginUsername/>"  AQDERTYU type="text" maxlength="50" class="form-control username"
+    <input name="username" value="<@shiro.loginUsername/>" AQDERTYU type="text" maxlength="50"
+           class="form-control username"
 
            placeholder="账户/邮箱/手机" required autofocus>
     <input name="password" value="" type="password" maxlength="100" class="form-control password" placeholder="密码"
@@ -33,30 +32,34 @@
 </form>
 </@layout>
 <script type="text/javascript">
-    $(function () {
-        var signinform = $("#signin.form-signin");
-        $("#signin button[type='submit']").click(function () {
-            //表单验证
-            var signinvalid = $.valid('#signin.form-signin', {
-                rules: {/*"username": [
+    require(['../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
+                var signinform = $("#signin.form-signin");
+                $("#signin button[type='submit']").click(function () {
+                    //表单验证
+                    var signinvalid = $.valid('#signin.form-signin', {
+                        rules: {/*"username": [
                     {regex: /^\w{5,18}$/},'mobile','email'
                 ], */
-                    "username": ['not_empty'], "password": [
-                        {regex: /^\w{5,100}$/}
-                    ], "captcha": [
-                        {regex: /^\d{4}$/}
-                    ]},
-                messages: {
-                    /* "username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线','mobile':'手机号格式不正确','email':'邮箱格式不正确'},*/
-                    "username": {'not_empty': '用户名不能为空'},
-                    "password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
-                    "captcha": {'regex': '验证码必须为四位数字'}
-                }, boxer: {exist: true}});
+                            "username": ['not_empty'], "password": [
+                                {regex: /^\w{5,100}$/}
+                            ], "captcha": [
+                                {regex: /^\d{4}$/}
+                            ]},
+                        messages: {
+                            /* "username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线','mobile':'手机号格式不正确','email':'邮箱格式不正确'},*/
+                            "username": {'not_empty': '用户名不能为空'},
+                            "password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
+                            "captcha": {'regex': '验证码必须为四位数字'}
+                        }, boxer: {exist: true}});
 
-            if (signinvalid.validate()) {
-                return true;
-            }
-            return false;
+                    if (signinvalid.validate()) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
         });
-    })
+    });
 </script>

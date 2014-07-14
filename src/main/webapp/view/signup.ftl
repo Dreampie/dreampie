@@ -1,8 +1,6 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/app/signup.css"/>
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <form class="form-horizontal form-signup" id="signup" role="form" method="post" action="/signup" autocomplete="off">
   <h2 class="form-signup-heading">Please Signup</h2>
   <p>${(email)!}</p>
@@ -36,33 +34,37 @@
 </form>
 </@layout>
 <script type="text/javascript">
-  $(function () {
-    var signupform = $("#signup.form-horizontal");
-    $("#signup button[type='submit']").click(function () {
-      //表单验证
-      var signupvalid = $.valid('#signup.form-signup', {
-        rules: {"user.username": [
-          {regex: /^\w{5,18}$/}
-        ], "user.first_name": [
-            'not_empty',{"max_length": 10}
-        ], "user.last_name": [
-            'not_empty',{"max_length": 10}
-        ], "user.password": [
-          {regex: /^\w{5,18}$/}
-        ], "repassword": [
-          {matches: 'user.password'}
-        ]},
-        messages: {
-          "user.username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线'},
-          "user.first_name": {'not_empty': '名字不能为空','max_length': '名字长度不能超过10位'},
-          "user.last_name": {'not_empty': '姓氏不能为空','max_length': '姓氏长度不能超过10位'},
-          "user.password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
-          "repassword": {'matches': '重复密码不匹配'}
-        }, boxer: {exist: true}});
-      if (signupvalid.validate()) {
-        return true;
-      }
-      return false;
+    require(['../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
+                var signupform = $("#signup.form-horizontal");
+                $("#signup button[type='submit']").click(function () {
+                    //表单验证
+                    var signupvalid = $.valid('#signup.form-signup', {
+                        rules: {"user.username": [
+                            {regex: /^\w{5,18}$/}
+                        ], "user.first_name": [
+                            'not_empty', {"max_length": 10}
+                        ], "user.last_name": [
+                            'not_empty', {"max_length": 10}
+                        ], "user.password": [
+                            {regex: /^\w{5,18}$/}
+                        ], "repassword": [
+                            {matches: 'user.password'}
+                        ]},
+                        messages: {
+                            "user.username": {'regex': '用户名必须为5-18位英文字母 、数字和下划线'},
+                            "user.first_name": {'not_empty': '名字不能为空', 'max_length': '名字长度不能超过10位'},
+                            "user.last_name": {'not_empty': '姓氏不能为空', 'max_length': '姓氏长度不能超过10位'},
+                            "user.password": {'regex': '密码必须为5-18位英文字母 、数字和下划线'},
+                            "repassword": {'matches': '重复密码不匹配'}
+                        }, boxer: {exist: true}});
+                    if (signupvalid.validate()) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
+        });
     });
-  })
 </script>

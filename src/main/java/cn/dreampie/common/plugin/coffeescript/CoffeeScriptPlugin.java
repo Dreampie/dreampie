@@ -22,8 +22,8 @@ public class CoffeeScriptPlugin implements IPlugin {
     public boolean start() {
         CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
         coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
-        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
-        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
+        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
+        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
 //        coffeeScriptCompiler.setForce(true);
 //        coffeeScriptCompiler.setCompress(true);
         coffeeScriptCompiler.setCoffeeJs(new File(PathKit.getRootClassPath() + "/libs/coffee-script-1.7.1.min.js"));
@@ -54,7 +54,7 @@ public class CoffeeScriptPlugin implements IPlugin {
         CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
         coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
         coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/src/main/webapp/javascript/"));
-        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
+//        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/javascript/"));
         coffeeScriptCompiler.setForce(true);
         coffeeScriptCompiler.setArgs("--bare");
         coffeeScriptCompiler.setWatch(true);

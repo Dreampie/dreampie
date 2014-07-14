@@ -44,10 +44,14 @@
     </a>
 </div>
 <script type="text/javascript">
-    $(function () {
-        $('.carousel').carousel({
-            interval: 2000
-        })
+    require(['../../javascript/app'], function () {
+        require(['bootstrap'], function () {
+            $(function () {
+                $('.carousel').carousel({
+                    interval: 2000
+                })
+            });
+        });
     });
 </script>
 </@layout>

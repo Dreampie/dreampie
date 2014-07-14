@@ -1,0 +1,110 @@
+.carousel-caption {
+  z-index: 10;
+  bottom: 40px;
+  left: 15%;
+  right: 15%
+}
+
+.carousel .item {
+  height: 460px;
+  background-color: #777
+}
+
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 460px
+}
+
+.carousel .masthead-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 460px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+  background-repeat: repeat-x;
+  background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
+  background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+  background-image: linear-gradient(45deg, #020031, #6d3353)
+}
+
+.carousel .masthead-bg:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../../image/app/bs-docs-masthead-pattern.png) repeat center center;
+  opacity: .4
+}
+
+.masthead h1 {
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -2px;
+  font-weight: bold
+}
+
+.masthead h2 {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 1.25
+}
+
+.masthead .bs3-link {
+  margin-top: 20px
+}
+
+.masthead .bs2-link {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out
+}
+
+.masthead .bs2-link:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
+}
+
+@media screen and (min-width: 768px) {
+  .masthead h1 {
+    font-size: 90px
+  }
+
+  .masthead h2 {
+    font-size: 24px
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .masthead h1 {
+    font-size: 100px
+  }
+
+  .masthead h2 {
+    font-size: 30px
+  }
+}
+
+@media (min-width: 768px) {
+
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4
+  }
+}
+
+.carousel-indicators li {
+  *display: inline; /* 只有ie6和ie7识别*/
+  zoom: 1; /* 触发ie6和ie7下的haslayout */
+  *text-indent: 0; /*解决ie6indent问题*/
+  filter: alpha(opacity=20);
+}

@@ -1,0 +1,62 @@
+@import 'layout/_reset.less';
+@import 'layout/_mate.less';
+@import 'layout/_theme.less';
+//main css
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    font-size: @lgFontSize;
+    height: 44px;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin .password {
+    border-radius: 0;
+}
+
+.form-signin .username {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-signin .patchca {
+    margin-top: -1px;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 60%;
+    display: inline;
+}
+
+.form-signin .captcha {
+    width: 40%;
+    height: 44px;
+    margin-top: -1px;
+    /*margin-left: -1px;*/
+    vertical-align: top;
+    border: @captchaBorder;
+    border-bottom-right-radius: @defaultBorderRadius;
+}

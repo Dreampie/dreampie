@@ -1,0 +1,110 @@
+@import '../layout/_reset.less';
+@import '../layout/_mate.less';
+@import '../layout/_theme.less';
+//main css
+.article{
+  background-color: @defaultBackgroundColor;
+}
+
+.data-article {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 100px;
+  left: -20px;
+  top: -20px;
+  color: #fff;
+  padding-top: 10px;
+  span.month {
+    margin: 0px;
+  }
+  span.day {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: -5px;
+  }
+  span.month, span.day {
+    text-align: center;
+    display: block;
+  }
+}
+
+.article-stick {
+  position: absolute;
+  top: -10px;
+  right: 5%;
+  font-size: 40px;
+  color: #d9534f;
+}
+
+.alert-zan {
+  color: #666;
+  background-color: #f6f6f6;
+  border: @defaultBorder;
+}
+
+/*文章－标题*/
+.title-article {
+  padding: 20px 15px 0px 15px;
+}
+
+.title-article h1 {
+  font-size: 32px;
+  margin: 0 auto;
+  text-align: center;
+  a {
+    color: #3d4450;
+
+    &:hover {
+      color: #d9534f;
+      text-decoration: none;
+    }
+  }
+
+}
+
+/*文章－标签*/
+.label {
+  margin-right: 5px;
+}
+
+.label-zan {
+  background-color: #3d4450;
+  &:hover {
+    background-color: #d9534f;
+  }
+}
+
+.tag-article {
+  text-align: center;
+  line-height: 24px;
+  margin: 20px;
+  a{
+    color: #fff;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+/*文章－内容*/
+.centent-article .thumbnail {
+  margin-bottom: 20px;
+}
+
+/*文章图片*/
+.centent-article img {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+/*文章－更多*/
+.btn-danger .badge {
+  background-color: #FFF;
+  color: #d9534f;
+  padding: 2px 5px;
+  margin-left: 3px;
+}

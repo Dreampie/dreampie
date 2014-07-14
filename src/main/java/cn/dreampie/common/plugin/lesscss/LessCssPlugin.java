@@ -26,8 +26,8 @@ public class LessCssPlugin implements IPlugin {
     public boolean start() {
         LessCssCompiler lessCssCompiler = new LessCssCompiler();
         lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
-        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath()));
-        lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
+        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/css/"));
+        lessCssCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/css/"));
 //        lessCssCompiler.setForce(true);
 //        lessCssCompiler.setCompress(true);
         lessCssCompiler.setWatch(true);
@@ -51,12 +51,12 @@ public class LessCssPlugin implements IPlugin {
 
 
         lessCompiler = new LessCompiler(Arrays.asList("--relative-urls", "--strict-math=on"));
-        css = lessCompiler.compile(new File(PathKit.getWebRootPath() + "/src/main/webapp/css/app/main.less"));
+        css = lessCompiler.compile(new File(PathKit.getWebRootPath() + "/src/main/webapp/css/app/_layout.less"));
         System.out.println(css);
 
         LessCssCompiler lessCssCompiler = new LessCssCompiler();
         lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
-        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/src/main/webapp/css/"));
+        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/css/"));
         lessCssCompiler.setOutputDirectory(new File(PathKit.getRootClassPath() + "/css/"));
         lessCssCompiler.setForce(true);
         lessCssCompiler.setCompress(true);

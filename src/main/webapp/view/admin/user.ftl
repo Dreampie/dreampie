@@ -1,21 +1,22 @@
 <#include "/view/layout/_layout.ftl"/>
 <#include "/view/layout/_pagination.ftl" />
 <@layout activebar="user" html_title=i18n.getText("admin.user")>
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 
 <div class="row">
     <div class="col-md-4 searchline">
-        <form id="user_search" class="searchbar " role="form" action="/admin/user" method="get" data-view="searchbar" data-classname="col-sm-4"
+        <form id="user_search" class="searchbar " role="form" action="/admin/user" method="get" data-view="searchbar"
+              data-classname="col-sm-4"
               data-inputclass="form-control" data-placeholder="用户名，姓名，电话，地址等">
             <span class="twitter-typeahead" style=" position: relative; ">
                 <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
                        style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
-                <input name="user_search" type="text" value="${(user_search)!}" placeholder="用户名，姓名，电话，地址等" class="form-control tt-query"
+                <input name="user_search" type="text" value="${(user_search)!}" placeholder="用户名，姓名，电话，地址等"
+                       class="form-control tt-query"
                        required="" autocomplete="off"
                        spellcheck="false" maxlength="20"
                        dir="auto" style="/* position: relative; */vertical-align: top;background-color: transparent;">
-                <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+                <span class="tt-dropdown-menu"
+                      style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
             </span>
             <button type="submit" class="glyphicon glyphicon-search search"></button>
         <#--<div class="error-box">${user_searchMsg!}</div>-->
@@ -76,7 +77,8 @@
                                                     女
                                                 </#if>
                                             </#if><br/>
-                                        ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}&nbsp;${(user.street)!}
+                                        ${(user.province)!}&nbsp;${(user.city)!}&nbsp;${(user.county)!}
+                                            &nbsp;${(user.street)!}
                                     </span>
                                     </small>
 
@@ -88,19 +90,23 @@
                                 <br/>
                                 <#assign username=user.full_name+"("+user.username+")"/>
                                 <#if user.deleted_at??>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#del_user"
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#del_user"
                                             userid="${user.id}" username="${username}" deletedat="">启用
                                     </button>
                                 <#else>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#del_user"
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#del_user"
                                             userid="${user.id}" username="${username}" deletedat="${.now}">删除
                                     </button>
                                 </#if>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#upd_role"
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal"
+                                        data-target="#upd_role"
                                         userid="${user.id}" username="${username}" roleid="${user.role_id}"
                                         rolename="${rolename}">角色
                                 </button>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#upd_pwd"
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal"
+                                        data-target="#upd_pwd"
                                         userid="${user.id}" username="${username}">密码
                                 </button>
                             </div>
@@ -121,7 +127,8 @@
 </@layout>
 
 <!-- Modal -->
-<div class="modal fade" id="del_user" tabindex="-1" role="dialog" aria-labelledby="del_userModalLabel" aria-hidden="true">
+<div class="modal fade" id="del_user" tabindex="-1" role="dialog" aria-labelledby="del_userModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -154,7 +161,8 @@
 </div><!-- /.modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="upd_role" tabindex="-1" role="dialog" aria-labelledby="upd_roleModalLabel" aria-hidden="true">
+<div class="modal fade" id="upd_role" tabindex="-1" role="dialog" aria-labelledby="upd_roleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -279,7 +287,9 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    $(function () {
+    require(['../../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
 //        $("#user_search.form button.search").click(function () {
 //            //表单验证
 //            var searchvalid = $.valid('#user_search', {
@@ -296,168 +306,168 @@
 //            }
 //            return false;
 //        });
-        //自动生产密码
-        $("#autoA").click(function () {
-            var upd_pwd = "#upd_pwd";
-            var randPwd = randomNum(5);
-            $(upd_pwd + " #auto span").text(randPwd);
-            $(upd_pwd + " input[name='user.password']").val(randPwd);
-            $(upd_pwd + " input[name='repassword']").val(randPwd);
-        });
-
-        $("#writeA").click(function () {
-            var upd_pwd = "#upd_pwd";
-            $(upd_pwd + " #auto span").text("");
-            $(upd_pwd + " input[name='user.password']").val("");
-            $(upd_pwd + " input[name='repassword']").val("");
-        });
-
-        $("div.user button").click(function () {
-            var opbtn = $(this);
-            var del_user = "#del_user";
-            var upd_role = "#upd_role";
-            var upd_pwd = "#upd_pwd";
-            //装配数据
-            $("div.modal div[name='username']").text(opbtn.attr("username"));
-            if (opbtn.attr("data-target") == del_user) {
-                $(del_user + " input[name='user.id']").val(opbtn.attr("userid"));
-                $(del_user + " input[name='user.deleted_at']").val(opbtn.attr("deletedat"));
-                var optext = $.trim(opbtn.text());
-                $("#del_userModalLabel").text(optext);
-                $(del_user + " button.del_user").text(optext);
-                $(del_user + " button.del_user").attr("data-loading-text", "正在" + optext + "...");
-                $(del_user + " button.del_user").attr("data-complete-text", optext + "成功");
-            } else if (opbtn.attr("data-target") == upd_role) {
-                $(upd_role + " input[name='userRole.user_id']").val(opbtn.attr("userid"));
-                $(upd_role + " input[name='userRole.role_id']").val(opbtn.attr("roleid"));
-                $(upd_role + " div.btn-group span.selection").text(opbtn.attr("rolename"));
-            } else if (opbtn.attr("data-target") == upd_pwd) {
-                $(upd_pwd + " input[name='user.id']").val(opbtn.attr("userid"));
-
-            }
-
-        });
-
-        //删除用户
-        var del_userbtn = $("#del_user.modal button.del_user");
-        del_userbtn.click(function () {
-            var btn = $(this);
-            var form = $("#del_user.modal form");
-            //表单验证
-            var del_uservalid = $.valid('#del_user.modal form', {
-                wrapper: "div.form-group",
-                rules: {
-                    "user.id": [
-                        {regex: /^\d+$/}
-                    ]},
-                messages: {
-                    "user.id": {'regex': '账号参数异常'}
-                }, boxer: {exist: true}});
-
-            if (del_uservalid.validate()) {
-                btn.button('loading');
-                $.post("/admin/deleteUser", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
-                            btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.user_idMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
-                    }
-                }, "json").error(function () {
-                    btn.button('reset');
+                //自动生产密码
+                $("#autoA").click(function () {
+                    var upd_pwd = "#upd_pwd";
+                    var randPwd = randomNum(5);
+                    $(upd_pwd + " #auto span").text(randPwd);
+                    $(upd_pwd + " input[name='user.password']").val(randPwd);
+                    $(upd_pwd + " input[name='repassword']").val(randPwd);
                 });
-            }
-        });
 
-        //修改角色
-        var upd_rolebtn = $("#upd_role.modal button.upd_role");
-        upd_rolebtn.click(function () {
-            var btn = $(this);
-            var form = $("#upd_role.modal form");
-            //表单验证
-            var upd_rolevalid = $.valid('#upd_role.modal form', {
-                wrapper: "div.form-group",
-                rules: {
-                    "userRole.user_id": [
-                        {regex: /^\d+$/}
-                    ], "userRole.role_id": [
-                        {regex: /^\d+$/}
-                    ]},
-                messages: {
-                    "userRole.user_id": {'regex': '账号参数异常'},
-                    "userRole.role_id": {'regex': '角色参数异常'}
-                }, boxer: {exist: true}});
-
-            if (upd_rolevalid.validate()) {
-                btn.button('loading');
-                $.post("/admin/updateRole", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
-                            btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.user_idMsg);
-                        errors = checkError(errors, data.role_idMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
-                    }
-                }, "json").error(function () {
-                    btn.button('reset');
+                $("#writeA").click(function () {
+                    var upd_pwd = "#upd_pwd";
+                    $(upd_pwd + " #auto span").text("");
+                    $(upd_pwd + " input[name='user.password']").val("");
+                    $(upd_pwd + " input[name='repassword']").val("");
                 });
-            }
-        });
-        //修改密码
-        var upd_pwdbtn = $("#upd_pwd.modal button.upd_pwd");
-        upd_pwdbtn.click(function () {
-            var btn = $(this);
-            var form = $("#upd_pwd.modal form");
-            //表单验证
-            var upd_pwdvalid = $.valid('#upd_pwd.modal form', {
-                wrapper: "div.form-group",
-                rules: {"user.id": [
-                    {regex: /^\d+$/}
-                ], "user.password": [
-                    {regex: /^(\w{5,18})?$/}
-                ], "repassword": [
-                    {matches: 'user.password'}
-                ]},
-                messages: {
-                    "user.id": {'regex': '账号参数异常'},
-                    "user.password": {'regex': '密码为英文字母 、数字和下划线长度为5-18'},
-                    "repassword": {'matches': '重复密码不一致'}
-                }, boxer: {exist: true}});
 
-            if (upd_pwdvalid.validate()) {
-                btn.button('loading');
-                $.post("/admin/updatePwd", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
-                            btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.user_idMsg);
-                        errors = checkError(errors, data.user_passwordMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
+                $("div.user button").click(function () {
+                    var opbtn = $(this);
+                    var del_user = "#del_user";
+                    var upd_role = "#upd_role";
+                    var upd_pwd = "#upd_pwd";
+                    //装配数据
+                    $("div.modal div[name='username']").text(opbtn.attr("username"));
+                    if (opbtn.attr("data-target") == del_user) {
+                        $(del_user + " input[name='user.id']").val(opbtn.attr("userid"));
+                        $(del_user + " input[name='user.deleted_at']").val(opbtn.attr("deletedat"));
+                        var optext = $.trim(opbtn.text());
+                        $("#del_userModalLabel").text(optext);
+                        $(del_user + " button.del_user").text(optext);
+                        $(del_user + " button.del_user").attr("data-loading-text", "正在" + optext + "...");
+                        $(del_user + " button.del_user").attr("data-complete-text", optext + "成功");
+                    } else if (opbtn.attr("data-target") == upd_role) {
+                        $(upd_role + " input[name='userRole.user_id']").val(opbtn.attr("userid"));
+                        $(upd_role + " input[name='userRole.role_id']").val(opbtn.attr("roleid"));
+                        $(upd_role + " div.btn-group span.selection").text(opbtn.attr("rolename"));
+                    } else if (opbtn.attr("data-target") == upd_pwd) {
+                        $(upd_pwd + " input[name='user.id']").val(opbtn.attr("userid"));
+
                     }
-                }, "json").error(function () {
-                    btn.button('reset');
+
                 });
-            }
+
+                //删除用户
+                var del_userbtn = $("#del_user.modal button.del_user");
+                del_userbtn.click(function () {
+                    var btn = $(this);
+                    var form = $("#del_user.modal form");
+                    //表单验证
+                    var del_uservalid = $.valid('#del_user.modal form', {
+                        wrapper: "div.form-group",
+                        rules: {
+                            "user.id": [
+                                {regex: /^\d+$/}
+                            ]},
+                        messages: {
+                            "user.id": {'regex': '账号参数异常'}
+                        }, boxer: {exist: true}});
+
+                    if (del_uservalid.validate()) {
+                        btn.button('loading');
+                        $.post("/admin/deleteUser", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.user_idMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json").error(function () {
+                            btn.button('reset');
+                        });
+                    }
+                });
+
+                //修改角色
+                var upd_rolebtn = $("#upd_role.modal button.upd_role");
+                upd_rolebtn.click(function () {
+                    var btn = $(this);
+                    var form = $("#upd_role.modal form");
+                    //表单验证
+                    var upd_rolevalid = $.valid('#upd_role.modal form', {
+                        wrapper: "div.form-group",
+                        rules: {
+                            "userRole.user_id": [
+                                {regex: /^\d+$/}
+                            ], "userRole.role_id": [
+                                {regex: /^\d+$/}
+                            ]},
+                        messages: {
+                            "userRole.user_id": {'regex': '账号参数异常'},
+                            "userRole.role_id": {'regex': '角色参数异常'}
+                        }, boxer: {exist: true}});
+
+                    if (upd_rolevalid.validate()) {
+                        btn.button('loading');
+                        $.post("/admin/updateRole", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.user_idMsg);
+                                errors = checkError(errors, data.role_idMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json").error(function () {
+                            btn.button('reset');
+                        });
+                    }
+                });
+                //修改密码
+                var upd_pwdbtn = $("#upd_pwd.modal button.upd_pwd");
+                upd_pwdbtn.click(function () {
+                    var btn = $(this);
+                    var form = $("#upd_pwd.modal form");
+                    //表单验证
+                    var upd_pwdvalid = $.valid('#upd_pwd.modal form', {
+                        wrapper: "div.form-group",
+                        rules: {"user.id": [
+                            {regex: /^\d+$/}
+                        ], "user.password": [
+                            {regex: /^(\w{5,18})?$/}
+                        ], "repassword": [
+                            {matches: 'user.password'}
+                        ]},
+                        messages: {
+                            "user.id": {'regex': '账号参数异常'},
+                            "user.password": {'regex': '密码为英文字母 、数字和下划线长度为5-18'},
+                            "repassword": {'matches': '重复密码不一致'}
+                        }, boxer: {exist: true}});
+
+                    if (upd_pwdvalid.validate()) {
+                        btn.button('loading');
+                        $.post("/admin/updatePwd", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.user_idMsg);
+                                errors = checkError(errors, data.user_passwordMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json").error(function () {
+                            btn.button('reset');
+                        });
+                    }
+                });
+            });
         });
-
-
-    })
+    });
 </script>

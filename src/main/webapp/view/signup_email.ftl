@@ -1,19 +1,20 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/app/signup.css"/>
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
-<form class="form-horizontal form-signup" id="signup_email" role="form" method="post" action="/signupEmail" autocomplete="off">
+<form class="form-horizontal form-signup" id="signup_email" role="form" method="post" action="/signupEmail"
+      autocomplete="off">
     <h2 class="form-signup-heading">Please write email</h2>
 
-    <input name="user.email" value="${(user.email)!}" type="text" maxlength="200" class="form-control email" placeholder="邮箱">
-    <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码" required><img
+    <input name="user.email" value="${(user.email)!}" type="text" maxlength="200" class="form-control email"
+           placeholder="邮箱">
+    <input type="text" name="captcha" value="" class="form-control patchca" maxlength="4" placeholder="验证码"
+           required><img
         class="captcha"
         src="/patchca?width=119&height=42">
 
     <div class="error-box">
         <#if emailMsg??>
-            ${emailMsg}<br/>
+        ${emailMsg}<br/>
         </#if>
         <#if captchaMsg??>
         ${captchaMsg}
@@ -23,24 +24,28 @@
 </form>
 </@layout>
 <script type="text/javascript">
-    $(function () {
-        var signupform = $("#signup_email.form-horizontal");
-        $("#signup_email button[type='submit']").click(function () {
-            //表单验证
-            var signupvalid = $.valid('#signup_email.form-signup', {
-                rules: { "user.email": [
-                    'email'
-                ], "captcha": [
-                    {regex: /^\d{4}$/}
-                ]},
-                messages: {
-                    "user.email": {'email': '邮箱格式不正确'},
-                    "captcha": {'regex': '验证码必须为四位数字'}
-                }, boxer: {exist: true}});
-            if (signupvalid.validate()) {
-                return true;
-            }
-            return false;
+    require(['../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
+                var signupform = $("#signup_email.form-horizontal");
+                $("#signup_email button[type='submit']").click(function () {
+                    //表单验证
+                    var signupvalid = $.valid('#signup_email.form-signup', {
+                        rules: { "user.email": [
+                            'email'
+                        ], "captcha": [
+                            {regex: /^\d{4}$/}
+                        ]},
+                        messages: {
+                            "user.email": {'email': '邮箱格式不正确'},
+                            "captcha": {'regex': '验证码必须为四位数字'}
+                        }, boxer: {exist: true}});
+                    if (signupvalid.validate()) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
         });
-    })
+    });
 </script>

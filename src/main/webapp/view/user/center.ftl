@@ -1,7 +1,5 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="center" html_title="个人中心">
-<script type="text/javascript" src="<@resource.static/>/javascript/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<@resource.static/>/javascript/layout/_valid.js"></script>
 <div class="page-header">
     <h1>个人中心</h1>
 </div>
@@ -63,50 +61,54 @@
 </@layout>
 
 <script type="text/javascript">
-    $(function () {
-        $("#update_pwd button.save").click(function () {
+    require(['../../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
+                $("#update_pwd button.save").click(function () {
 
-            var btn = $(this);
-            var form = $("#update_pwd");
-            //表单验证
-            var uservalid = $.valid('#update_pwd', {
-                wrapper: "div.form-group",
-                rules: {
-                    "oldpassword": [
-                        'not_empty', {regex: /^(\w{5,18})?$/}
-                    ],
-                    "user.password": [
-                        'not_empty', {regex: /^(\w{5,18})?$/}
-                    ],
-                    "repassword": [
-                        {matches: 'user.password'}
-                    ]},
-                messages: {
-                    "oldpassword": {not_empty: '原始密码不能为空', 'regex': '密码为英文字母 、数字和下划线长度为5-18'},
-                    "user.password": {not_empty: '密码不能为空', 'regex': '密码为英文字母 、数字和下划线长度为5-18'},
-                    "repassword": {'matches': '重复密码不一致'}
-                }, boxer: {exist: true}});
+                    var btn = $(this);
+                    var form = $("#update_pwd");
+                    //表单验证
+                    var uservalid = $.valid('#update_pwd', {
+                        wrapper: "div.form-group",
+                        rules: {
+                            "oldpassword": [
+                                'not_empty', {regex: /^(\w{5,18})?$/}
+                            ],
+                            "user.password": [
+                                'not_empty', {regex: /^(\w{5,18})?$/}
+                            ],
+                            "repassword": [
+                                {matches: 'user.password'}
+                            ]},
+                        messages: {
+                            "oldpassword": {not_empty: '原始密码不能为空', 'regex': '密码为英文字母 、数字和下划线长度为5-18'},
+                            "user.password": {not_empty: '密码不能为空', 'regex': '密码为英文字母 、数字和下划线长度为5-18'},
+                            "repassword": {'matches': '重复密码不一致'}
+                        }, boxer: {exist: true}});
 
-            if (uservalid.validate()) {
-                $.post("/user/updatePwd", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
-                            btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.user_idMsg);
-                        errors = checkError(errors, data.user_usernameMsg);
-                        errors = checkError(errors, data.user_oldpasswordMsg);
-                        errors = checkError(errors, data.user_passwordMsg);
-                        errors = checkError(errors, data.repasswordMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
+                    if (uservalid.validate()) {
+                        $.post("/user/updatePwd", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.user_idMsg);
+                                errors = checkError(errors, data.user_usernameMsg);
+                                errors = checkError(errors, data.user_oldpasswordMsg);
+                                errors = checkError(errors, data.user_passwordMsg);
+                                errors = checkError(errors, data.repasswordMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json");
                     }
-                }, "json");
-            }
+                });
+            });
         });
     });
 </script>

@@ -20,6 +20,7 @@ public class LessCssCompiler extends AbstractLessCss {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    private Object lessCompiler;
     /**
      * The directory for compiled CSS stylesheets.
      *
@@ -103,9 +104,27 @@ public class LessCssCompiler extends AbstractLessCss {
         }
 
         if (!skip) {
-            new Thread(){
-                public void run(){
-                    executeInternal();
+            new Thread() {
+                public void run() {
+
+                    if (watch) {
+                        logger.info("Watching " + sourceDirectory);
+                        if (force) {
+                            force = false;
+                            logger.info("Disabled the 'force' flag in watch mode.");
+                        }
+                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+                        while (watch && !Thread.currentThread().isInterrupted()) {
+                            executeInternal();
+                            try {
+                                Thread.sleep(watchInterval);
+                            } catch (InterruptedException e) {
+                                logger.error("interrupted");
+                            }
+                        }
+                    } else {
+                        executeInternal();
+                    }
                 }
             }.start();
         } else {
@@ -126,26 +145,26 @@ public class LessCssCompiler extends AbstractLessCss {
             }
 
             Object lessCompiler = initLessCompiler();
-            if (watch) {
-                logger.info("Watching " + sourceDirectory);
-                if (force) {
-                    force = false;
-                    logger.info("Disabled the 'force' flag in watch mode.");
-                }
-                Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-                while (watch && !Thread.currentThread().isInterrupted()) {
-                    compileIfChanged(files, lessCompiler);
-                    try {
-                        Thread.sleep(watchInterval);
-                    } catch (InterruptedException e) {
-                        logger.error("interrupted");
-                    }
-                }
-            } else {
-                compileIfChanged(files, lessCompiler);
-            }
+//            if (watch) {
+//                logger.info("Watching " + sourceDirectory);
+//                if (force) {
+//                    force = false;
+//                    logger.info("Disabled the 'force' flag in watch mode.");
+//                }
+//                Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+//                while (watch && !Thread.currentThread().isInterrupted()) {
+//                    compileIfChanged(files, lessCompiler);
+//                    try {
+//                        Thread.sleep(watchInterval);
+//                    } catch (InterruptedException e) {
+//                        logger.error("interrupted");
+//                    }
+//                }
+//            } else {
+            compileIfChanged(files, lessCompiler);
+//            }
 
-            logger.info("Complete Less compile job finished in " + (System.currentTimeMillis() - start) + " ms");
+//            logger.info("Complete Less compile job finished in " + (System.currentTimeMillis() - start) + " ms");
         }
     }
 
@@ -204,32 +223,35 @@ public class LessCssCompiler extends AbstractLessCss {
     }
 
     private Object initLessCompiler() throws LessCssException {
-        if (nodeExecutable != null) {
-            NodeJsLessCssCompiler lessCompiler;
-            try {
-                lessCompiler = new NodeJsLessCssCompiler(nodeExecutable, compress, encoding, logger);
-            } catch (IOException e) {
-                throw new LessCssException(e.getMessage(), e);
-            }
-            if (lessJs != null) {
-                throw new LessCssException(
-                        "Custom LESS JavaScript is not currently supported when using nodeExecutable");
-            }
-            return lessCompiler;
-        } else {
-            LessCompiler lessCompiler = new LessCompiler();
-            lessCompiler.setCompress(compress);
-            lessCompiler.setEncoding(encoding);
-            if (lessJs != null) {
+        if (lessCompiler == null) {
+            if (nodeExecutable != null) {
+                NodeJsLessCssCompiler nodeJsLessCssCompiler;
                 try {
-                    lessCompiler.setLessJs(lessJs.toURI().toURL());
-                } catch (MalformedURLException e) {
-                    throw new LessCssException(
-                            "Error while loading LESS JavaScript: " + lessJs.getAbsolutePath(), e);
+                    nodeJsLessCssCompiler = new NodeJsLessCssCompiler(nodeExecutable, compress, encoding, logger);
+                } catch (IOException e) {
+                    throw new LessCssException(e.getMessage(), e);
                 }
+                if (lessJs != null) {
+                    throw new LessCssException(
+                            "Custom LESS JavaScript is not currently supported when using nodeExecutable");
+                }
+                lessCompiler = nodeJsLessCssCompiler;
+            } else {
+                LessCompiler newLessCompiler = new LessCompiler();
+                newLessCompiler.setCompress(compress);
+                newLessCompiler.setEncoding(encoding);
+                if (lessJs != null) {
+                    try {
+                        newLessCompiler.setLessJs(lessJs.toURI().toURL());
+                    } catch (MalformedURLException e) {
+                        throw new LessCssException(
+                                "Error while loading LESS JavaScript: " + lessJs.getAbsolutePath(), e);
+                    }
+                }
+                lessCompiler = newLessCompiler;
             }
-            return lessCompiler;
         }
+        return lessCompiler;
     }
 
 

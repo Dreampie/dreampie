@@ -79,6 +79,7 @@
 <nav id="menu-left" class="mm-menu mm-offcanvas">
     <ul>
         <li class="<#if activebar == 'index'> Selected </#if>"><a href="/">首页</a></li>
+        <li class="<#if activebar == 'blog'> Selected </#if>"><a href="/blog">博客</a></li>
     </ul>
 </nav>
 <nav id="menu-right" class="mm-menu mm-offcanvas">
@@ -164,6 +165,33 @@
 
     <!--页面内容-->
     <div id="content" class="container-fluid main container-main">
+
+        <!--[if lte IE 7]>
+        <div id="ie-warning" class="alert alert-danger fade out">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <i class="fa fa-warning"></i> 请注意，Dreampie并不支持低于IE8的浏览器，为了获得最佳效果，请下载最新的浏览器，推荐下载
+            <a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank"><i class="fa fa-compass"></i> Chrome</a>
+            <a href="http://www.firefox.com.cn/download/" target="_blank"><i class="fa fa-compass"></i> Firefox</a>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                require(['../../javascript/app'], function () {
+                    require(['jquery'], function () {
+                        if (!$.support.leadingWhitespace) {
+                            $('#ie-warning').removeClass("out");
+                            $('#ie-warning').addClass("in");
+                        }
+                    });
+                });
+            })
+        </script>
+        <![endif]-->
+
+        <div class="well fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            欢迎使用由 <a target="_blank" href="http://www.bootcss.com/">Bootstrap</a> 提供的 <strong>主题</strong>，如有问题可以查看Bootstrap官网的<a target="_blank" href="http://blog.bootcss.com/">Blog</a>内容,除主题之外的其他问题联系
+            <a target="_blank" href="https://github.com/Dreampie/dreampie">Dreampie</a> <i class="fa fa-smile-o"></i>
+        </div>
         <#nested>
     </div>
 
@@ -180,35 +208,6 @@
     </div>
 </div>
 <!-- /container -->
-<!--[if lte IE 7]>
-<div class="modal fade" id="b_support_alert" tabindex="-1" role="dialog" aria-labelledby="b_support_alertModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="b_support_alertModalLabel">${i18n.getText("browser.suport.title")}</h4>
-      </div>
-      <div class="modal-body">
-      ${i18n.getText("browser.suport.tip")}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">${i18n.getText("app.close")}</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-$(function () {
-require(['../../javascript/app'], function () {
-            require(['_layout'], function () {
-  if (!$.support.leadingWhitespace) {
-    $('#b_support_alert').modal();
-  }
-  });
-  });
-})
-</script>
-<![endif]-->
 
 <script type="text/javascript">
     /**

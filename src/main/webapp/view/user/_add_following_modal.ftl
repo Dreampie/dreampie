@@ -1,6 +1,6 @@
-
 <!-- Modal -->
-<div class="modal fade" id="add_following" tabindex="-1" role="dialog" aria-labelledby="add_followingModalLabel" aria-hidden="true">
+<div class="modal fade" id="add_following" tabindex="-1" role="dialog" aria-labelledby="add_followingModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -40,44 +40,47 @@
 
 
 <script type="text/javascript">
-    $(function () {
+    require(['../../javascript/app'], function () {
+        require(['_valid'], function () {
+            $(function () {
 
-        //关注用户
-        var add_followingbtn = $("#add_following.modal button.add_following");
-        add_followingbtn.click(function () {
-            var btn = $(this);
-            var form = $("#add_following.modal form");
-            //表单验证
-            var add_followingvalid = $.valid('#add_following.modal form', {
-                wrapper: "div.form-group",
-                rules: {
-                    "follower.id": [
-                        {regex: /^\d+$/}
-                    ]},
-                messages: {
-                    "follower.id": {'regex': '联系人参数异常'}
-                }, boxer: {exist: true}});
+                //关注用户
+                var add_followingbtn = $("#add_following.modal button.add_following");
+                add_followingbtn.click(function () {
+                    var btn = $(this);
+                    var form = $("#add_following.modal form");
+                    //表单验证
+                    var add_followingvalid = $.valid('#add_following.modal form', {
+                        wrapper: "div.form-group",
+                        rules: {
+                            "follower.id": [
+                                {regex: /^\d+$/}
+                            ]},
+                        messages: {
+                            "follower.id": {'regex': '联系人参数异常'}
+                        }, boxer: {exist: true}});
 
-            if (add_followingvalid.validate()) {
-                btn.button('loading');
-                $.post("/user/addFollowing", form.serialize(), function (data) {
-                    if (data.state == "success") {
-                        btn.button('complete');
-                        setTimeout(function () {
+                    if (add_followingvalid.validate()) {
+                        btn.button('loading');
+                        $.post("/user/addFollowing", form.serialize(), function (data) {
+                            if (data.state == "success") {
+                                btn.button('complete');
+                                setTimeout(function () {
+                                    btn.button('reset');
+                                    window.location.reload();
+                                }, 1000)
+                            } else {
+                                var errors = "";
+                                errors = checkError(errors, data.idMsg);
+                                form.find("div.error-box").html(errors);
+                                btn.button('reset');
+                            }
+                        }, "json").error(function () {
                             btn.button('reset');
-                            window.location.reload();
-                        }, 1000)
-                    } else {
-                        var errors = "";
-                        errors = checkError(errors, data.idMsg);
-                        form.find("div.error-box").html(errors);
-                        btn.button('reset');
+                        });
                     }
-                }, "json").error(function () {
-                    btn.button('reset');
                 });
-            }
+            });
         });
-
-    })
+    });
 </script>
