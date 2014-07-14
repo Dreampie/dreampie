@@ -7,6 +7,28 @@
 <#--<@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>-->
 
 <h1>欢迎访问梦想派-Dreampie</h1>
+
+<script type="text/javascript">
+    require(['../javascript/app'], function () {
+        require(['blog_views'], function () {
+            blogs = new App.Models.Blogs();
+//            blogs.fetch();
+            blogsView=new App.Views.Blogs().renew();
+        });
+    });
+</script>
+<!--backbone-->
+<a href="/#/blog">blogs backbone demo</a>
+<div id="main"></div>
+<script type="text/template" id="main_blogs">
+    <% blogs.each(function(blog) { %>
+    <%= blog.get("id") %>
+    <%= blog.get("title") %>
+    <%= blog.get("body") %>
+    <%});%>
+</script>
+<!--backbone-->
+
 <div id="carousel-index" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carousel-index" data-slide-to="0" class="active"></li>
@@ -53,8 +75,8 @@
     </a>
 </div>
 <script type="text/javascript">
-    require(["../javascript/app"], function () {
-        require(["_layout"], function () {
+    require(['../javascript/app'], function () {
+        require(['_layout'], function () {
             $(function () {
                 $('.carousel').carousel({
                     interval: 2000
@@ -64,30 +86,30 @@
     });
 </script>
 
-富文本编辑器
-<!-- include summernote cs/js-->
-<div class="summernote">Hello Summernote</div>
-<link rel="stylesheet" type="text/css" href="<@resource.static/>/webjars/codemirror/4.3/lib/codemirror.css"/>
-<script type="text/javascript">
-    require(["../javascript/app"], function () {
-        require(["_layout",'summernote','summernote-zh-CN','codemirror'], function () {
-            $(function () {
-                $('.summernote').summernote({
-                    height: 300,                 // set editor height
-                    minHeight: null,             // set minimum height of editor
-                    maxHeight: null,             // set maximum height of editor
-                    focus: true,
-                    lang: 'zh-CN', // default: 'en-US'
-                    codemirror: { // codemirror options
-                        theme: 'monokai'
-                    }
-                });
-            });
+<#--富文本编辑器-->
+<#--<!-- include summernote cs/js&ndash;&gt;-->
+<#--<div class="summernote">Hello Summernote</div>-->
+<#--<link rel="stylesheet" type="text/css" href="<@resource.static/>/webjars/codemirror/4.3/lib/codemirror.css"/>-->
+<#--<script type="text/javascript">-->
+    <#--require(['../javascript/app'], function () {-->
+        <#--require(['_layout', 'summernote', 'summernote-zh-CN', 'codemirror'], function () {-->
+            <#--$(function () {-->
+                <#--$('.summernote').summernote({-->
+                    <#--height: 300,                 // set editor height-->
+                    <#--minHeight: null,             // set minimum height of editor-->
+                    <#--maxHeight: null,             // set maximum height of editor-->
+                    <#--focus: true,-->
+                    <#--lang: 'zh-CN', // default: 'en-US'-->
+                    <#--codemirror: { // codemirror options-->
+                        <#--theme: 'monokai'-->
+                    <#--}-->
+                <#--});-->
+            <#--});-->
 
-            
-        });
-    });
-</script>
+
+        <#--});-->
+    <#--});-->
+<#--</script>-->
 
 代码高亮
 <pre>

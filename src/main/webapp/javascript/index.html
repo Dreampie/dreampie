@@ -7,7 +7,7 @@
 
     <!--[if lt IE 9]>
     <script type="text/javascript">
-        require(['../javascript/app'], function () {
+        require(['app'], function () {
             require(['_layout'], function () {
                 App.initialize();
             });
@@ -16,15 +16,14 @@
     <![endif]-->
     <title>Backbone</title>
     <script type="text/javascript">
-        require(['../javascript/app'], function () {
-            require(['_main', 'less'], function () {
+        require(['app'], function () {
+            require(['_main'], function () {
                 App.initialize();
             });
         });
     </script>
 </head>
 <body>
-<a href="index.html">test</a>
 <script id="indexTemplate" type="text/template">
     <%= name %>
 </script>

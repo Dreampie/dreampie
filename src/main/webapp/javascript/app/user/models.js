@@ -21,3 +21,8 @@ App.Models.User = Backbone.Model.extend({
         console.log("changed");
     }
 });
+
+
+App.Collections.Users = Backbone.Collection.extend({
+    model: App.Models.User
+});

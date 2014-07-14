@@ -39,6 +39,9 @@ CREATE TABLE blog (
   deleted_at TIMESTAMP
 );
 
+INSERT INTO blog(id,user_id,tag,title,body,created_at)
+VALUES(blog_id_seq.nextval,1,'测试','测试博客','我是一条测试博客',current_timestamp);
+
 DROP TABLE IF EXISTS blog_reply;
 DROP SEQUENCE IF EXISTS blog_reply_id_seq;
 CREATE SEQUENCE blog_reply_id_seq START WITH 1;
