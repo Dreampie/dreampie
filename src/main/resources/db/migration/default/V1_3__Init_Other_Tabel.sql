@@ -19,7 +19,7 @@ DROP SEQUENCE IF EXISTS blog_id_seq;
 CREATE SEQUENCE blog_id_seq START WITH 1;
 CREATE TABLE blog (
   id   BIGINT  NOT NULL DEFAULT NEXTVAL('blog_id_seq') PRIMARY KEY,
-  user_id BIGINT    NOT NULL  COMMENT '用户id',
+  user_id BIGINT  NOT NULL  COMMENT '用户id',
   top INT NOT NULL DEFAULT 0 COMMENT '0默认，1置顶',
   type INT NOT NULL DEFAULT 1 COMMENT '1文字2音乐3照片4视频5链接 ',
   tag VARCHAR(30) NOT NULL COMMENT '分类',
@@ -27,10 +27,10 @@ CREATE TABLE blog (
   body TEXT NOT NULL COMMENT '内容',
   is_complete INT NOT NULL DEFAULT 0 COMMENT '0发布 1草稿',
   hit_count INT DEFAULT 0 COMMENT '点击量',
-  feed_count INT unsigned NOT NULL DEFAULT 0 COMMENT '动作统计',
-  replay_count INT unsigned NOT NULL DEFAULT 0 COMMENT '评论回复数',
+  feed_count INT NOT NULL DEFAULT 0 COMMENT '动作统计',
+  replay_count INT NOT NULL DEFAULT 0 COMMENT '评论回复数',
   no_reply INT NOT NULL DEFAULT 0 COMMENT '不允许评论',
-  collect_count INT unsigned DEFAULT 0 COMMENT '收藏数',
+  collect_count INT DEFAULT 0 COMMENT '收藏数',
   is_public INT DEFAULT 0 COMMENT '是否公开0完全公开，1好友公开，2私密',
   support_count INT NOT NULL DEFAULT 0 COMMENT '支持数',
   oppose_count INT NOT NULL DEFAULT 0 COMMENT '反对数',
