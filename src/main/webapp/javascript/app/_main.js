@@ -4,15 +4,15 @@
 
 // 这是一个管理着 视图/控制/模型 的全局类
 var App = {
-    Routers: {},
-    Models: {},
-    Views: {},
-    Collections: {},
-    initialize: function () {
-        var router = new App.Routers.Main();
-        Backbone.history.start({pushState: true}); // 要驱动所有的Backbone程序，Backbone.history.start()是必须的。
-    }
-};
+        Routers: {},
+        Models: {},
+        Views: {},
+        Collections: {},
+        initialize: function () {
+            var router = new App.Routers.Main();
+            Backbone.history.start({pushState: true}); // 要驱动所有的Backbone程序，Backbone.history.start()是必须的。
+        }
+    };
 
 App.Routers.Main = Backbone.Router.extend({
     routes: {

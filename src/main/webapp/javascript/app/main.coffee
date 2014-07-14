@@ -1,1 +1,0 @@
-alert "Hello CoffeeScript! it's ok.wang"
