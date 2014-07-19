@@ -1,8 +1,13 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="center" html_title="个人中心">
-<div class="page-header">
-    <h1>通讯录</h1>
-</div>
+
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li class="active">User</li>
+</ol>
+<!-- 面包屑 -->
+
 <style type="text/css">
     .thumbnail {
         width: 30%;

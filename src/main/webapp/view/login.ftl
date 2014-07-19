@@ -2,6 +2,13 @@
 <@layout activebar="tologin" html_title=i18n.getText("login.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/app/login.css"/>
 
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li class="active">Login</li>
+</ol>
+<!-- 面包屑 -->
+
 <form class="form-signin" id="signin" role="form" method="post" action="/login" autocomplete="off">
     <h2 class="form-signin-heading">Please sign in</h2>
     <input name="username" value="<@shiro.loginUsername/>" AQDERTYU type="text" maxlength="50"

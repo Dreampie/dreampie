@@ -2,6 +2,7 @@ package cn.dreampie.common.web.model;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
 
 import java.util.Date;
@@ -12,7 +13,9 @@ import java.util.List;
  */
 public abstract class Model<M extends Model> extends com.jfinal.plugin.activerecord.Model<M> {
 
+    private Table table;
     private String tableName;
+    private String primaryKey;
     private String modelName;
 
     private String selectSql;
@@ -30,6 +33,10 @@ public abstract class Model<M extends Model> extends com.jfinal.plugin.activerec
 
     public List<M> findBy(String where, Object... paras) {
         return find(getSelectSql() + getExceptSelectSql() + getWhere(where), paras);
+    }
+
+    public List<M> findTopBy(int topNumber, String where, Object... paras) {
+        return paginate(1, topNumber, getSelectSql(), getExceptSelectSql() + getWhere(where), paras).getList();
     }
 
     public M findFirstBy(String where, Object... paras) {
@@ -92,11 +99,24 @@ public abstract class Model<M extends Model> extends com.jfinal.plugin.activerec
         return where;
     }
 
+    public Table getTable() {
+        if (table == null) {
+            Class clazz = getClass();
+            table = TableMapping.me().getTable(clazz);
+        }
+        return table;
+    }
+
+    public String getPrimaryKey() {
+        if (primaryKey == null) {
+            primaryKey = getTable().getPrimaryKey();
+        }
+        return primaryKey;
+    }
 
     public String getTableName() {
         if (tableName == null) {
-            Class clazz = getClass();
-            tableName = TableMapping.me().getTable(clazz).getName();
+            tableName = getTable().getName();
         }
         return tableName;
     }
@@ -151,5 +171,18 @@ public abstract class Model<M extends Model> extends com.jfinal.plugin.activerec
             countSql = " SELECT COUNT(*) count FROM " + getTableName() + " `" + getModelName() + "` ";
         }
         return countSql;
+    }
+
+    public String getNextSql(String where) {
+        String nextSql = " WHERE `" + getModelName() + "`." + getPrimaryKey()
+                + "=(SELECT MIN(`_" + getModelName() + "`." + getPrimaryKey() + ") FROM " + getTableName() + " `_" + getModelName() + "`" + getWhere(where) + ")";
+
+        return nextSql;
+    }
+
+    public String getPreviousSql(String where) {
+        String previousSql = " WHERE `" + getModelName() + "`." + getPrimaryKey()
+                + "=(SELECT MAX(`_" + getModelName() + "`." + getPrimaryKey() + ") FROM " + getTableName() + " `_" + getModelName() + "`" + getWhere(where) + ")";
+        return previousSql;
     }
 }

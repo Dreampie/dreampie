@@ -2,6 +2,15 @@
 <#include "/view/layout/_treenav.ftl" />
 <@layout activebar="role" html_title=i18n.getText("admin.role")>
 <link rel="stylesheet" href="<@resource.static/>/css/layout/_treenav.css" type="text/css"/>
+
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li><a title="Go to Admin." href="/admin">Admin</a></li>
+    <li class="active">Role</li>
+</ol>
+<!-- 面包屑 -->
+
 <div class="row">
     <div class="col-md-3">
         <div class="treenav">

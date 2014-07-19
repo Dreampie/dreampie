@@ -14,6 +14,7 @@ CREATE TABLE sec_user (
   first_name   VARCHAR(10)  COMMENT '名字',
   last_name    VARCHAR(10)  COMMENT '姓氏',
   full_name    VARCHAR(20)  COMMENT '全名',
+  department_id BIGINT NOT NULL COMMENT '部门id',
   created_at   TIMESTAMP    NOT NULL,
   updated_at   TIMESTAMP,
   deleted_at   TIMESTAMP

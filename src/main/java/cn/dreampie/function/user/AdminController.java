@@ -30,7 +30,7 @@ public class AdminController extends Controller {
         dynaRender("/view/admin/index.ftl");
     }
 
-
+    @CacheName(AppConstants.DEFAULT_CACHENAME)
     public void user() {
         User user = SubjectUtils.me().getUser();
         keepPara("user_search");

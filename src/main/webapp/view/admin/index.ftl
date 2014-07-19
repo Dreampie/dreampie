@@ -1,5 +1,13 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="index" html_title="首页">
+
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li class="active">Admin</li>
+</ol>
+<!-- 面包屑 -->
+
 <h1>Admin User </h1>
 <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">

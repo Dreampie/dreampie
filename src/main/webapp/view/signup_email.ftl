@@ -1,6 +1,14 @@
 <#include "/view/layout/_layout.ftl"/>
 <@layout activebar="tosignup" html_title=i18n.getText("signup.name")>
 <link rel="stylesheet" href="<@resource.static/>/css/app/signup.css"/>
+
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li class="active">SignupEmail</li>
+</ol>
+<!-- 面包屑 -->
+
 <form class="form-horizontal form-signup" id="signup_email" role="form" method="post" action="/signupEmail"
       autocomplete="off">
     <h2 class="form-signup-heading">Please write email</h2>

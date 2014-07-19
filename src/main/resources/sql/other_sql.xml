@@ -23,5 +23,14 @@
         </sql>
     </sqlGroup>
 
+    <sqlGroup name="blog">
+        <sql id="findInfoBySelect">
+            SELECT `blog`.*,`user`.id user_id,`user`.full_name full_name,`department`.id department_id,`department`.name department_name
+        </sql>
+        <sql id="findInfoByExceptSelect">
+            FROM blog `blog` LEFT JOIN sec_user `user` ON(`blog`.user_id=`user`.id)
+            LEFT JOIN department `department` ON(`user`.department_id=`department`.id)
+        </sql>
+    </sqlGroup>
 
 </sqlRoot>

@@ -2,9 +2,24 @@
 <@layout activebar="index" html_title=i18n.getText("index.name")>
 
 <link rel="stylesheet" type="text/css" href="<@resource.static/>/css/app/_carousel.css"/>
+
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li class="active"><i class="fa fa-home"></i>&nbsp;Dreampie</li>
+</ol>
+<!-- 面包屑 -->
+
+<div class="alert panel fade in">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    欢迎使用由 <a target="_blank" class="alert-link" href="http://www.bootcss.com/">Bootstrap</a> 提供的 <strong>主题</strong>，如有问题可以查看Bootstrap官网的<a class="alert-link" target="_blank" href="http://blog.bootcss.com/">Blog</a>内容,除主题之外的其他问题联系
+    <a target="_blank" class="alert-link" href="https://github.com/Dreampie/dreampie">Dreampie</a> <i class="fa fa-smile-o"></i>
+</div>
+
 <#--<h1><@shiro.guest>Hello guest!</@shiro.guest>-->
 <#--<@shiro.hasRole name="user">Hello user!</@shiro.hasRole>-->
 <#--<@shiro.hasRole name="admin">Hello admin!</@shiro.hasRole></h1>-->
+
+
 
 <h1>欢迎访问梦想派-Dreampie</h1>
 

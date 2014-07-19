@@ -179,10 +179,10 @@
                     <artifactId>poi</artifactId>
                     <groupId>org.apache.poi</groupId>
                 </exclusion>
-                <exclusion>
-                    <artifactId>jetty-server</artifactId>
-                    <groupId>com.jfinal</groupId>
-                </exclusion>
+                <!--<exclusion>-->
+                    <!--<artifactId>jetty-server</artifactId>-->
+                    <!--<groupId>com.jfinal</groupId>-->
+                <!--</exclusion>-->
             </exclusions>
         </dependency>
         <!--<dependency>

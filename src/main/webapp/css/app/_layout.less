@@ -10,7 +10,7 @@ body {
   font-size: @defaultFontSize;
   //  -webkit-font-smoothing: antialised;
   //  -webkit-user-select: none;
-//  line-height: @defaultLineHeight;
+  //  line-height: @defaultLineHeight;
 }
 
 a {
@@ -30,12 +30,18 @@ a {
   font-size: @smFontSize !important;
 }
 
+.navbar-inverse {
+  color: @defaultNavColor !important;
+  background-color: @defaultNavBackgroundColor !important;
+}
+
 .navbar-nav {
   border-left: @defaultBorder;
 }
 
 .navbar-nav a {
-  border-right: @defaultBorder;
+  color: @defaultNavColor !important;
+  border-right: @defaultBorder !important;
 }
 
 .navbar-right {
@@ -92,11 +98,20 @@ a {
 }
 
 #scrollUp {
-  bottom: 20px;
-  right: 20px;
-  height: 38px;
-  width: 38px;
-  background: @scrollUpBackground;
+  font-size: 40px;
+  position: fixed;
+  bottom: 50px;
+  right: 40px;
+  top: auto;
+  display: block;
+  cursor: pointer;
+  z-index: 999;
+  color: #3d4450;
+}
+
+#scrollUp:hover {
+  underl: none;
+  color: #d9534f;
 }
 
 .dropdown-menu .divider {
@@ -184,8 +199,8 @@ a {
 }
 
 .menu-btn:hover, .menu-btn:focus, .menu-btn-hover {
-  background-color: #f5f5f5 !important;
-  color: #555 !important;
+  background-color: @defaultNavBackgroundHoverColor !important;
+//  color: #555 !important;
 }
 
 .triangle {
@@ -359,10 +374,14 @@ a {
   box-shadow: none;
   background-attachment: scroll;
   background-clip: border-box;
-  background-color: rgb(255, 255, 255);
+  background-color: transparent;
   background-image: none;
   background-origin: padding-box;
   background-size: auto;
   background-position: 0% 0%;
   background-repeat: repeat repeat;
+}
+
+.searchline {
+  margin-bottom: 20px;
 }

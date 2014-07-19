@@ -1,29 +1,34 @@
 @import '../layout/_reset.less';
 @import '../layout/_mate.less';
 @import '../layout/_theme.less';
+
 //main css
-.article{
+.article {
   background-color: @defaultBackgroundColor;
+  border-radius: 4px;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 30px;
 }
 
 .data-article {
   background-color: #d9534f;
   border-color: #d43f3a;
   position: absolute;
-  height: 70px;
-  width: 70px;
-  border-radius: 100px;
-  left: -20px;
-  top: -20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  top: -13px;
+  left: -13px;
   color: #fff;
-  padding-top: 10px;
+  padding-top: 3px;
   span.month {
     margin: 0px;
   }
   span.day {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    margin-top: -5px;
+    margin-top: -7px;
   }
   span.month, span.day {
     text-align: center;
@@ -33,16 +38,16 @@
 
 .article-stick {
   position: absolute;
-  top: -10px;
+  top: -13px;
   right: 5%;
   font-size: 40px;
   color: #d9534f;
 }
 
-.alert-zan {
+.alert-article {
   color: #666;
   background-color: #f6f6f6;
-  border: @defaultBorder;
+  //  border: @defaultBorder;
 }
 
 /*文章－标题*/
@@ -54,15 +59,6 @@
   font-size: 32px;
   margin: 0 auto;
   text-align: center;
-  a {
-    color: #3d4450;
-
-    &:hover {
-      color: #d9534f;
-      text-decoration: none;
-    }
-  }
-
 }
 
 /*文章－标签*/
@@ -70,7 +66,7 @@
   margin-right: 5px;
 }
 
-.label-zan {
+.label-support {
   background-color: #3d4450;
   &:hover {
     background-color: #d9534f;
@@ -81,30 +77,76 @@
   text-align: center;
   line-height: 24px;
   margin: 20px;
-  a{
+  a {
     color: #fff;
-    &:hover{
+    &:hover {
       text-decoration: underline;
     }
   }
 }
 
 /*文章－内容*/
-.centent-article .thumbnail {
+.content-article .thumbnail {
   margin-bottom: 20px;
+  padding: 0px !important;
+  border: 1px solid transparent !important;
+  img {
+    border-radius: 4px;
+  }
 }
 
 /*文章图片*/
-.centent-article img {
+.content-article img {
   margin-right: auto;
   margin-left: auto;
   display: block;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 /*文章－更多*/
 .btn-danger .badge {
   background-color: #FFF;
-  color: #d9534f;
+  color: @linksHover;
   padding: 2px 5px;
   margin-left: 3px;
+}
+
+.panel .badge {
+  background: @linksHover;
+}
+
+.panel-heading {
+  color: #ffffff;
+  background: @defaultTitleBackgroundColor;
+}
+
+.panel-toggle, .panel-remove {
+  float: right;
+  margin: 0px 0px 0px 5px;
+  cursor: pointer;
+  &:hover {
+    color: @linksHover;
+  }
+}
+
+.panel.toggled ul.list-group {
+  overflow: hidden;
+  max-height: 0px;
+  width: 100%;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: @linksHover;
+}
+
+.panel.archive > a .panel-heading {
+  border-radius: 3px;
+  background-color: @linksHover;
+}
+
+.panel.archive > a:hover .panel-heading {
+  text-decoration: none !important;
+  background-color: @defaultNavBackgroundColor;
 }

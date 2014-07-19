@@ -57,13 +57,13 @@
                         $.reHeight();
                     });
                     //初始化菜单
-                    $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/}, classes: 'mm-white',
+                    $('nav#menu-left').mmenu({offCanvas: {position: 'left'/*,zposition: "front"*/}, classes: 'mm-light',
                         dragOpen: true,
                         counters: true,
                         searchfield: true,
                         header: {add: true, update: true, title: '菜单'}});
 
-                    $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-white',
+                    $('nav#menu-right').mmenu({offCanvas: {position: 'right'/*,zposition: "front"*/}, classes: 'mm-light',
                         dragOpen: true,
                         counters: true,
                         searchfield: true,
@@ -118,7 +118,7 @@
 <!--container-->
 <div id="page">
     <!--Site header-->
-    <div id="header" class="mm-fixed-top navbar navbar-default headroom header-main">
+    <div id="header" class="mm-fixed-top navbar navbar-inverse header-main">
         <div class="container-fluid">
             <div class="header-sm">
                 <ul class="nav fleft">
@@ -187,11 +187,6 @@
         </script>
         <![endif]-->
 
-        <div class="well fade in">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            欢迎使用由 <a target="_blank" href="http://www.bootcss.com/">Bootstrap</a> 提供的 <strong>主题</strong>，如有问题可以查看Bootstrap官网的<a target="_blank" href="http://blog.bootcss.com/">Blog</a>内容,除主题之外的其他问题联系
-            <a target="_blank" href="https://github.com/Dreampie/dreampie">Dreampie</a> <i class="fa fa-smile-o"></i>
-        </div>
         <#nested>
     </div>
 
@@ -243,7 +238,8 @@
                     animationInSpeed: 200, // Animation in speed (ms)
                     animationOutSpeed: 200, // Animation out speed (ms)
                     scrollText: '', // Text for element
-                    activeOverlay: false  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+                    activeOverlay: false,  // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+                    className:'fa fa-angle-up'//class
                 });
                 //消息插件
                 Messenger.options = {

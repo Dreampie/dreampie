@@ -17,17 +17,17 @@ public class UrlInterceptor implements Interceptor {
         Controller controller = ai.getController();
         HttpServletRequest request = controller.getRequest();
         //webRoot
-        controller.setAttr("webRootPath", request.getScheme() + "://"
+        controller.setAttr("_webRootPath", request.getScheme() + "://"
                 + request.getServerName() + (request.getServerPort() == 80 ? "" : ":" + request.getServerPort())
                 + request.getContextPath());
 
         if (!ThreadLocalUtil.isAjax()) {
             //local 数据
-            controller.setAttr("localParas", request.getQueryString());
-            controller.setAttr("localUri", ai.getActionKey());
+            controller.setAttr("_localParas", request.getQueryString());
+            controller.setAttr("_localUri", ai.getActionKey());
         }
         ai.invoke();
-        controller.keepPara("webRootPath", "localParas", "localUri");
+        controller.keepPara("_webRootPath", "_localParas", "_localUri");
         //i18n
         String tmp = controller.getCookie(Const.I18N_LOCALE);
         String i18n = controller.getRequest().getLocale().toString();

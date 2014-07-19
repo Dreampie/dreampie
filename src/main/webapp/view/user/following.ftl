@@ -2,14 +2,21 @@
 <#include "/view/layout/_pagination.ftl" />
 <@layout activebar="following" html_title=i18n.getText("user.follower")>
 
+<!-- 面包屑 -->
+<ol class="breadcrumb panel">
+    <li><i class="fa fa-home"></i>&nbsp;<a title="Go to Home." href="/">Dreampie</a></li>
+    <li><a title="Go to User." href="/user">User</a></li>
+    <li class="active">Following</li>
+</ol>
+<!-- 面包屑 -->
+
 <div class="row">
     <div class="col-md-4 searchline">
         <form id="user_search" class="searchbar " role="form" action="/user/following" method="get"
               data-view="searchbar" data-classname="col-sm-4"
               data-inputclass="form-control" data-placeholder="姓名，电话，地址等">
             <span style=" position: relative; ">
-                <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
-                       style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background-attachment: scroll; background-clip: border-box; background-color: rgb(255, 255, 255); background-image: none; background-origin: padding-box; background-size: auto; background-position: 0% 0%; background-repeat: repeat repeat;">
+                <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled="" >
                 <input name="user_search" type="text" value="${(user_search)!}" placeholder="姓名，电话，地址等"
                        class="form-control tt-query"
                        spellcheck="false" maxlength="20"
@@ -99,7 +106,7 @@
 <div class="row">
     <div class="col-sm-6 col-md-4 ">
         <#if users?? && users?size gt 0>
-        <@pagination currentPage=users.pageNumber totalPage=users.totalPage actionUrl=localUri urlParas=localParas className="pagination"/>
+        <@pagination currentPage=users.pageNumber totalPage=users.totalPage actionUrl=_localUri urlParas=_localParas className="pagination"/>
     </#if>
     </div>
 </div>
