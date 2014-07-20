@@ -46,6 +46,9 @@
         <hibernate.core.version>4.2.0.Final</hibernate.core.version>
         <btm.version>2.1.4</btm.version>
         <junit.version>4.10</junit.version>
+        <jfinal.version>1.8</jfinal.version>
+        <jfinal-ext.version>3.1.0</jfinal-ext.version>
+        <joda.version>2.3</joda.version>
     </properties>
 
     <dependencyManagement>
@@ -120,12 +123,12 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
-            <version>1.8</version>
+            <version>${jfinal.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal-ext</artifactId>
-            <version>3.1.0</version>
+            <version>${jfinal-ext.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>c3p0</artifactId>
@@ -195,7 +198,7 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.3</version>
+            <version>${joda.version}</version>
         </dependency>
 
         <!--权限-->
