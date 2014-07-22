@@ -2,6 +2,8 @@ package cn.dreampie.common.plugin.lesscss;
 
 import cn.dreampie.common.plugin.lesscss.compiler.LessCssCompiler;
 import cn.dreampie.common.plugin.lesscss.compiler.LessCssException;
+import cn.dreampie.common.plugin.lesscss.compiler.LessExecuteListener;
+import cn.dreampie.common.plugin.lesscss.compiler.LessExecuteThread;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.lesscss.LessCompiler;
@@ -24,18 +26,22 @@ public class LessCssPlugin implements IPlugin {
 
     @Override
     public boolean start() {
-        LessCssCompiler lessCssCompiler = new LessCssCompiler();
-        lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
-        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/css/"));
-        lessCssCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/css/"));
-//        lessCssCompiler.setForce(true);
-//        lessCssCompiler.setCompress(true);
-        lessCssCompiler.setWatch(true);
-        try {
-            lessCssCompiler.execute();
-        } catch (LessCssException e) {
-            e.printStackTrace();
-        }
+//        LessCssCompiler lessCssCompiler = new LessCssCompiler();
+//        lessCssCompiler.setBuildContext(ThreadBuildContext.getContext());
+//        lessCssCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/css/"));
+//        lessCssCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/css/"));
+////        lessCssCompiler.setForce(true);
+////        lessCssCompiler.setCompress(true);
+//        lessCssCompiler.setWatch(true);
+//        try {
+//            lessCssCompiler.execute();
+//        } catch (LessCssException e) {
+//            e.printStackTrace();
+//        }
+        LessExecuteThread run = new LessExecuteThread();
+        LessExecuteListener listen = new LessExecuteListener();
+        run.addObserver(listen);
+        new Thread(run).start();
         return true;
     }
 

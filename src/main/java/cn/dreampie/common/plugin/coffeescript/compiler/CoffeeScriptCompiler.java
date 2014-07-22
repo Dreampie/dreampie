@@ -1,14 +1,17 @@
 package cn.dreampie.common.plugin.coffeescript.compiler;
 
+import cn.dreampie.common.plugin.akka.Akka;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.plexus.build.incremental.BuildContext;
+import scala.concurrent.duration.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wangrenhui on 2014/7/11.
@@ -102,28 +105,30 @@ public class CoffeeScriptCompiler extends AbstractCoffeeScript {
         }
 
         if (!skip) {
-            new Thread() {
-                public void run() {
-                    if (watch) {
-                        logger.info("Watching " + sourceDirectory);
-                        if (force) {
-                            force = false;
-                            logger.info("Disabled the 'force' flag in watch mode.");
-                        }
-                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-                        while (watch && !Thread.currentThread().isInterrupted()) {
-                            executeInternal();
-                            try {
-                                Thread.sleep(watchInterval);
-                            } catch (InterruptedException e) {
-                                logger.error("interrupted");
+//            Akka.system().scheduler().scheduleOnce(Duration.create(watchInterval, TimeUnit.MILLISECONDS),
+//                    new Runnable() {
+//                        @Override
+//                        public void run() {
+                            if (watch) {
+                                logger.info("Watching " + sourceDirectory);
+                                if (force) {
+                                    force = false;
+                                    logger.info("Disabled the 'force' flag in watch mode.");
+                                }
+                                Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+                                while (watch && !Thread.currentThread().isInterrupted()) {
+                                    executeInternal();
+                                    try {
+                                        Thread.sleep(watchInterval);
+                                    } catch (InterruptedException e) {
+                                        logger.error("interrupted");
+                                    }
+                                }
+                            } else {
+                                executeInternal();
                             }
-                        }
-                    } else {
-                        executeInternal();
-                    }
-                }
-            }.start();
+//                        }
+//                    }, Akka.system().dispatcher());
         } else {
             logger.info("Skipping plugin execution per configuration");
         }

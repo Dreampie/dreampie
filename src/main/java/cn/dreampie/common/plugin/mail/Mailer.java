@@ -71,8 +71,7 @@ public class Mailer {
                             e.printStackTrace();
                         }
                     }
-                }, Akka.system().dispatcher()
-        );
+                }, Akka.system().dispatcher());
     }
 
     /**
@@ -110,8 +109,7 @@ public class Mailer {
                             e.printStackTrace();
                         }
                     }
-                }, Akka.system().dispatcher()
-        );
+                }, Akka.system().dispatcher());
     }
 
     /**
@@ -153,7 +151,6 @@ public class Mailer {
                             e.printStackTrace();
                         }
                     }
-                }, Akka.system().dispatcher()
-        );
+                }, Akka.system().dispatcher());
     }
 }

@@ -1,8 +1,6 @@
 package cn.dreampie.common.plugin.coffeescript;
 
-import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeCompiler;
-import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeException;
-import cn.dreampie.common.plugin.coffeescript.compiler.CoffeeScriptCompiler;
+import cn.dreampie.common.plugin.coffeescript.compiler.*;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
 import org.slf4j.Logger;
@@ -20,20 +18,24 @@ public class CoffeeScriptPlugin implements IPlugin {
 
     @Override
     public boolean start() {
-        CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
-        coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
-        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
-        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
-//        coffeeScriptCompiler.setForce(true);
-//        coffeeScriptCompiler.setCompress(true);
-        coffeeScriptCompiler.setCoffeeJs(new File(PathKit.getRootClassPath() + "/libs/coffee-script-1.7.1.min.js"));
-        coffeeScriptCompiler.setArgs("--bare");
-        coffeeScriptCompiler.setWatch(true);
-        try {
-            coffeeScriptCompiler.execute();
-        } catch (CoffeeException e) {
-            e.printStackTrace();
-        }
+//        CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler();
+//        coffeeScriptCompiler.setBuildContext(ThreadBuildContext.getContext());
+//        coffeeScriptCompiler.setSourceDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
+//        coffeeScriptCompiler.setOutputDirectory(new File(PathKit.getWebRootPath() + "/javascript/"));
+////        coffeeScriptCompiler.setForce(true);
+////        coffeeScriptCompiler.setCompress(true);
+//        coffeeScriptCompiler.setCoffeeJs(new File(PathKit.getRootClassPath() + "/libs/coffee-script-1.7.1.min.js"));
+//        coffeeScriptCompiler.setArgs("--bare");
+//        coffeeScriptCompiler.setWatch(true);
+//        try {
+//            coffeeScriptCompiler.execute();
+//        } catch (CoffeeException e) {
+//            e.printStackTrace();
+//        }
+        CoffeeExecuteThread run = new CoffeeExecuteThread();
+        CoffeeExecuteListener listen = new CoffeeExecuteListener();
+        run.addObserver(listen);
+        new Thread(run).start();
         return true;
     }
 
