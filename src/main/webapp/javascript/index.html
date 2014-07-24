@@ -7,25 +7,46 @@
 
     <!--[if lt IE 9]>
     <script type="text/javascript">
-        require(['app'], function () {
-            require(['_layout'], function () {
-                App.initialize();
-            });
-        });
+//        require(['app'], function () {
+//            require(['_layout'], function () {
+////                App.initialize();
+//            });
+//        });
     </script>
     <![endif]-->
     <title>Backbone</title>
     <script type="text/javascript">
+//        require(['app'], function () {
+//            require(['_main'], function () {
+////                App.initialize();
+//            });
+//        });
+
+
         require(['app'], function () {
-            require(['_main'], function () {
-                App.initialize();
+            require(['angularjs'], function () {
+                var myModule=angular.module("Hello",[]);
+                myModule.controller("controller1",['$scope', function Controller1($scope) {
+                    $scope.greeting={
+                        name:'用户1'
+                    };
+                }]);
+
+                myModule.controller("controller2",['$scope', function Controller2($scope) {
+                    $scope.greeting={
+                        name:'用户2'
+                    };
+                }]);
             });
         });
     </script>
 </head>
-<body>
+<body ng-app="Hello">
 <script id="indexTemplate" type="text/template">
     <%= name %>
 </script>
+
+<div ng-controller="controller1"><p>{{greeting.name}},Hello</p></div>
+<div ng-controller="controller2"><p>{{greeting.name}},Hello</p></div>
 </body>
 </html>

@@ -439,6 +439,11 @@
         <!--webjars-->
         <dependency>
             <groupId>org.webjars</groupId>
+            <artifactId>angularjs</artifactId>
+            <version>1.3.0-beta.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
             <version>0.16</version>
         </dependency>

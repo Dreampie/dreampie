@@ -29,6 +29,7 @@ requirejs.config({
         'summernote-zh-CN': 'javascript/lib/summernote/lang/summernote-zh-CN',
         'codemirror': 'webjars/codemirror/4.4/lib/codemirror',
         'json3': 'webjars/json3/3.3.2/json3.min',
+        'angularjs':'webjars/angularjs/1.3.0-beta.15/angular.min',
         'backbone': 'webjars/backbonejs/1.1.2/backbone-min',
         'underscore': 'webjars/underscorejs/1.6.0/underscore-min',
         'backbone-localstorage': 'webjars/backbone-localstorage/1.1.0/backbone.localstorage-min',
