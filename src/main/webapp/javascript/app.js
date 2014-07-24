@@ -27,7 +27,7 @@ requirejs.config({
         'jquery-hammer': 'javascript/lib/mmenu/js/jquery.hammer.min',
         'summernote': 'javascript/lib/summernote/js/summernote.min',
         'summernote-zh-CN': 'javascript/lib/summernote/lang/summernote-zh-CN',
-        'codemirror': 'webjars/codemirror/4.3/lib/codemirror',
+        'codemirror': 'webjars/codemirror/4.4/lib/codemirror',
         'json3': 'webjars/json3/3.3.2/json3.min',
         'backbone': 'webjars/backbonejs/1.1.2/backbone-min',
         'underscore': 'webjars/underscorejs/1.6.0/underscore-min',

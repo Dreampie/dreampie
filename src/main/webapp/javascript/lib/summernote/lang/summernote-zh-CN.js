@@ -38,7 +38,7 @@
         videoLink: '视频链接',
         insert: '插入视频',
         url: '视频地址',
-        providers: '(优酷, Instagram, DailyMotion, Youtube等)'
+        providers: '(优酷, 土豆, Instagram, DailyMotion, Youtube等)'
       },
       table: {
         table: '表格'
@@ -57,7 +57,11 @@
         h4: '标题 4',
         h5: '标题 5',
         h6: '标题 6'
-      },
+      },/*
+        code:{
+            code:'代码',
+            pre: 'Java'
+        },*/
       lists: {
         unordered: '无序列表',
         ordered: '有序列表'
