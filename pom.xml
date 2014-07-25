@@ -183,8 +183,8 @@
                     <groupId>org.apache.poi</groupId>
                 </exclusion>
                 <!--<exclusion>-->
-                    <!--<artifactId>jetty-server</artifactId>-->
-                    <!--<groupId>com.jfinal</groupId>-->
+                <!--<artifactId>jetty-server</artifactId>-->
+                <!--<groupId>com.jfinal</groupId>-->
                 <!--</exclusion>-->
             </exclusions>
         </dependency>
@@ -437,10 +437,21 @@
         <!--</dependency>-->
 
         <!--webjars-->
+        <!--http://angular-ui.github.io/bootstrap/-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>1.3.0-beta.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-ui-bootstrap</artifactId>
+            <version>0.11.0-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-bootstrap-switch</artifactId>
+            <version>0.3.0-alpha.2</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>

@@ -2,41 +2,75 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet/less" type="text/css" href="../css/app/_layout.less">
+    <link href="/webjars/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webjars/bootstrap-datepicker/1.3.0/css/datepicker3.css" rel="stylesheet">
     <script data-main="/javascript/app" src="/webjars/requirejs/2.1.14/require.min.js"></script>
 
     <!--[if lt IE 9]>
     <script type="text/javascript">
-//        require(['app'], function () {
-//            require(['_layout'], function () {
-////                App.initialize();
-//            });
-//        });
+        //        require(['app'], function () {
+        //            require(['_layout'], function () {
+        ////                App.initialize();
+        //            });
+        //        });
     </script>
     <![endif]-->
     <title>Backbone</title>
     <script type="text/javascript">
-//        require(['app'], function () {
-//            require(['_main'], function () {
-////                App.initialize();
-//            });
-//        });
+        //        require(['app'], function () {
+        //            require(['_main'], function () {
+        ////                App.initialize();
+        //            });
+        //        });
 
 
         require(['app'], function () {
+
             require(['angularjs'], function () {
-                var myModule=angular.module("Hello",[]);
-                myModule.controller("controller1",['$scope', function Controller1($scope) {
-                    $scope.greeting={
-                        name:'用户1'
+                var myModule = angular.module("Hello", []);
+                myModule.controller("controller1", ['$scope', function Controller1($scope) {
+                    $scope.greeting = {
+                        name: '用户1',
+                        show: function () {
+                            alert(1);
+                        }
                     };
                 }]);
 
-                myModule.controller("controller2",['$scope', function Controller2($scope) {
-                    $scope.greeting={
-                        name:'用户2'
+                myModule.controller("controller2", ['$scope', function Controller2($scope) {
+                    $scope.greeting = {
+                        name: '用户2'
                     };
                 }]);
+
+                require(['jquery', 'bootstrap-datepicker'],function(){
+                    $(function(){
+                        $(".form_datetime").datepicker({
+                            autoclose: true
+                        });
+
+                        $("#datetime").change(function(){
+                            alert($(this).val());
+                        });
+                    });
+                });
+
+                var directives = angular.module('directives', []);
+
+                directives.directive('datepicker', function () {
+                    return function (scope, element, attrs) {
+                        element.datepicker({
+                            inline: true,
+                            dateFormat: 'dd.mm.yy',
+                            onSelect: function (dateText) {
+                                var modelPath = $(this).attr('ng-model');
+//                                putObject(modelPath, scope, dateText);
+                                scope[modelPath]=dateText;
+                                scope.$apply();
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
@@ -46,7 +80,19 @@
     <%= name %>
 </script>
 
-<div ng-controller="controller1"><p>{{greeting.name}},Hello</p></div>
+<div ng-controller="controller1"><p ng-click="greeting.show()">{{greeting.name}},Hello</p></div>
 <div ng-controller="controller2"><p>{{greeting.name}},Hello</p></div>
+Time:
+<div class="input-group date form_datetime col-sm-3" data-date=""
+     data-date-format="yyyy-MM-dd" >
+    <input class="form-control" size="16" type="text" placeholder="起始时间" datepicker ng-model="datetime"
+           value=""
+           readonly>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+</div>
+<!--<input type="hidden" id="datetime" name="datetime"  ng-model="datetime" value=""/>-->
+<hr>
+It's your time {{datetime || 'World'}}!
 </body>
 </html>
