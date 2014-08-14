@@ -21,3 +21,7 @@ bootstrap前端
 可直接使用mvn jetty：run  使用嵌入式数据库h2，数据库可以自动验证生成初始化数据
 
 如有问题请及时联系我 在线访问：http://www.dreampie.cn
+
+![Left Menu](http://static.oschina.net/uploads/space/2014/0625/152522_gp4j_946569.jpg "Menu")
+
+![Right Menu](http://static.oschina.net/uploads/space/2014/0625/152543_Ezq0_946569.jpg "Menu")
