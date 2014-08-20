@@ -33,6 +33,8 @@
     });
 </script>
 <!--backbone-->
+推荐该项目剥离出的框架 <a href="https://github.com/Dreampie/jfinal-dreampie">jfinal-drampie</a> + <a href="https://github.com/angular/angular.js">angularjs</a>实现的demo：<a href="http://icedog.jd-app.com">icedog</a>
+
 <a href="/#/blog">blogs backbone demo</a>
 <div id="main"></div>
 <script type="text/template" id="main_blogs">
